@@ -35,7 +35,7 @@ def extract_yaml_properties(data, parent_key='', root_info=None, first_add = Tru
                 simple_props.extend(sub_simple)
                 hierarchical_props.extend(sub_hierarchical)
                 hierarchical_props.append(new_key) ## Se agregan los valores despues de la recursión
-                print(f"Evolucion del hierarchical: {hierarchical_props}")
+                #print(f"Evolucion del hierarchical: {hierarchical_props}")
                 key_value_pairs.extend(sub_kv_pairs)
             else:
                 hierarchical_props.append(new_key)
@@ -43,8 +43,10 @@ def extract_yaml_properties(data, parent_key='', root_info=None, first_add = Tru
                 key_value_pairs.append((new_key, value))  # Guardar clave y valor
 
     elif isinstance(data, list):
-        for item in enumerate(data):
-            sub_simple, sub_hierarchical, sub_kv_pairs, _ = extract_yaml_properties(item, f"{parent_key}", root_info, first_add = False) ##f"{parent_key}_{index}"
+        for item in data: ## debug
+            print("ITEMS DEBUG:")
+            print(item)
+            sub_simple, sub_hierarchical, sub_kv_pairs, _ = extract_yaml_properties(item, parent_key, root_info, first_add = False) ##f"{parent_key}_{index}"
             simple_props.extend(sub_simple)
             hierarchical_props.extend(sub_hierarchical)
             key_value_pairs.extend(sub_kv_pairs)
@@ -54,8 +56,8 @@ def extract_yaml_properties(data, parent_key='', root_info=None, first_add = Tru
         prefix = f"{root_info['apiVersion']}_{root_info['kind']}"
         hierarchical_props = [f"{prefix}_{prop}" for prop in hierarchical_props]
         key_value_pairs = [(f"{prefix}_{key}", value) for key, value in key_value_pairs]
-    print(f"Root info: {root_info}")
-    print(f"Listas: {simple_props}  {hierarchical_props}    {key_value_pairs}")
+    #print(f"Root info: {root_info}")
+    #print(f"Listas: {simple_props}  {hierarchical_props}    {key_value_pairs}")
     return simple_props, hierarchical_props, key_value_pairs, root_info
 
 
@@ -99,34 +101,36 @@ def search_features_in_csv(simple_props, hierarchical_props, key_value_pairs, cs
         reader = csv.reader(file)
         for row in reader:
             feature, middle, turned, value = row[0], row[1], row[2], row[3]
-
+            #print(f"VALUE ES: {value}")
             # Filtrar el CSV por apiVersion y kind
-            if root_info['apiVersion'] in feature and root_info['kind'] in feature:
+            if f"_{root_info['apiVersion']}_{root_info['kind']}_" in feature:
 
                 # Buscar coincidencias exactas en la columna 'Midle'
                 for hierarchical_prop in hierarchical_props:
                     #if middle and middle in hierarchical_prop and hierarchical_prop:
-                    if middle.strip() and hierarchical_prop.endswith(middle):
+                    if middle.strip() and hierarchical_prop.endswith(middle): ## si se compara con la herencia omitiendo la version // agregar la version al midle
                         print(f"COINCIDENCIA (Midle): {middle} -> {hierarchical_prop}")
-                        found_features.add(feature)
-                    """else:
-                        print
-                        for simple_prop in simple_props:
-                            if turned and turned == simple_prop:
-                                print(f"COINCIDENCIA (Turned): {turned} -> {simple_prop}")
-                                found_features.add(feature)"""
-
-                # Buscar coincidencias exactas en la columna 'Turned'
-                #for simple_prop in simple_props:
-                #    if turned and turned == simple_prop:
-                #        print(f"COINCIDENCIA (Turned): {turned} -> {simple_prop}")
-                #        found_features.add(feature)
-
+                        found_features.add(feature) ## se añade si coincide el final del Middle con la herencia actual (es similar que el middle + la version de apiVersion)
+                        for key, yaml_value in key_value_pairs:
+                            print("DEBUG: impresion?")
+                            aux_feature = f"{middle}_{yaml_value}"
+                            if value and str(yaml_value) == value:
+                                print(f"Coincidencia del feature-value {feature}")
+                                found_features.add(feature)
+                            else:
+                                print(f"NO HAY COINCIDENCIA {feature}") ### Comprobar coincidencias
+                                continue
+                    #if value and str(yaml_value) == value and middle in hierarchical_prop:
+                    #    print(f"COINCIDENCIA (Value): {value} -> {yaml_value} key:  {key}")
+                    #    found_features.add(feature)
                 # Buscar coincidencias en la columna 'Value' usando los pares clave-valor
-                for key, yaml_value in key_value_pairs:
-                    if value and str(yaml_value) == value:
-                        print(f"COINCIDENCIA (Value): {value} -> {yaml_value} key:  {key}")
-                        found_features.add(feature)
+                """for key, yaml_value in key_value_pairs:
+                    if f"_{root_info['apiVersion']}_{root_info['kind']}_" in feature and hierarchical_prop.endswith(middle):
+                        print(f"Key: {key}  yaml_value: {yaml_value}")
+                        aux_feature = f"{middle}_{yaml_value}"
+                        if str(yaml_value) == value and feature.endswith(aux_feature):
+                            print(f"COINCIDENCIA (Value): {value} -> {yaml_value} key:  {key}")
+                            found_features.add(feature)"""
     print(f"LOS FOUND FEATURES SON: {found_features}")
     return list(found_features)
 
