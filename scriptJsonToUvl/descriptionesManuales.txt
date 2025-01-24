@@ -1762,7 +1762,7 @@ Valores:-
 
 \ Archivo por archivo: Manualmente
 
-\\ Automatizarlo: ¿Cómo hacerlo? --
+\\ Automatizarlo: ¿Cómo hacerlo?
 
 \\\ Generalizar por objetos: Seguir la linea de los objetos mas grandes y mapearlos en profundidad
 
@@ -1872,5 +1872,29 @@ Else de los que no son de tipo string
 
 92.943
 89.844
-
+-------
 + 3.099 lineas agregadas
+
+Ajustar guion en el script para los cardinality
+
+
+Crear script para mapear de los archivos YAML los features involucrados generando listas de features por cada archivo YAML.
+
+Salida esperada:
+[io_k8s_api_core_v1_Service_apiVersion, io_k8s_api_core_v1_Service_kind, io_k8s_api_core_v1_Service_metadata, io_k8s_api_core_v1_Service_metadata_name, io_k8s_api_core_v1_Service_spec, 
+io_k8s_api_core_v1_Service_spec_selector, io_k8s_api_core_v1_Service_spec_selector_KeyMap, io_k8s_api_core_v1_Service_spec_selector_ValueMap, io_k8s_api_core_v1_Service_spec_ports, io_k8s_api_core_v1_Service_spec_ports_protocol,
+ io_k8s_api_core_v1_Service_spec_ports_protocol_TCP, io_k8s_api_core_v1_Service_spec_ports_port, io_k8s_api_core_v1_Service_spec_ports_targetPort, io_k8s_api_core_v1_Service_spec_ports_targetPort_asInteger]
+
+['io_k8s_api_core_v1_Service_apiVersion', 'io_k8s_api_core_v1_Service_metadata', 'io_k8s_api_core_v1_Service_kind', 'io_k8s_api_core_v1_Service_spec', 'io_k8s_api_core_v1_Service_spec_ports', 'io_k8s_api_core_v1_Service_spec_selector',
+ 'io_k8s_api_core_v1_Service_spec_ports_port', 'io_k8s_api_core_v1_Service_spec_ports_targetPort', 'io_k8s_api_core_v1_Service_spec_ports_protocol', 'io_k8s_api_core_v1_Service_metadata_name']
+
+Features encontrados: ['io_k8s_api_core_v1_Service_apiVersion', 'io_k8s_api_core_v1_Service_kind', 'io_k8s_api_core_v1_ServiceList_items_spec_ports_protocol_TCP', 'io_k8s_api_core_v1_Service_spec_ports_protocol', 'io_k8s_api_core_v1_Service_spec_selector', 'io_k8s_api_core_v1_Service_spec', 'io_k8s_api_core_v1_Service_spec_ports_targetPort', 'io_k8s_api_core_v1_ServiceStatus_loadBalancer_ingress_ports_protocol_TCP', 'io_k8s_api_core_v1_ServiceSpec_ports_protocol_TCP', 'io_k8s_api_core_v1_Service_status_loadBalancer_ingress_ports_protocol_TCP', 'io_k8s_api_core_v1_Service_metadata_name', 'io_k8s_api_core_v1_Service_metadata', 
+'io_k8s_api_core_v1_Service_spec_ports_protocol_TCP', 'io_k8s_api_core_v1_ServicePort_protocol_TCP', 'io_k8s_api_core_v1_Service_spec_ports', 'io_k8s_api_core_v1_ServiceList_items_status_loadBalancer_ingress_ports_protocol_TCP', 'io_k8s_api_core_v1_Service_spec_ports_port']
+
+
+['io_k8s_api_core_v1_Service_spec', 'io_k8s_api_core_v1_Service_kind', 'io_k8s_api_core_v1_Service_apiVersion', 'io_k8s_api_core_v1_Service_spec_ports_protocol_TCP', 'io_k8s_api_core_v1_ServiceList_items_status_loadBalancer_ingress_ports_protocol_TCP',
+ 'io_k8s_api_core_v1_ServiceSpec_ports_protocol_TCP', 'io_k8s_api_core_v1_ServiceStatus_loadBalancer_ingress_ports_protocol_TCP', 'io_k8s_api_core_v1_Service_spec_ports', 'io_k8s_api_core_v1_Service_spec_ports_port', 'io_k8s_api_core_v1_Service_metadata',
+ 'io_k8s_api_core_v1_ServiceList_items_spec_ports_protocol_TCP', 'io_k8s_api_core_v1_Service_spec_selector', 'io_k8s_api_core_v1_Service_status_loadBalancer_ingress_ports_protocol_TCP', 'io_k8s_api_core_v1_Service_spec_ports_targetPort',
+  'io_k8s_api_core_v1_ServicePort_protocol_TCP', 'io_k8s_api_core_v1_Service_spec_ports_protocol', 'io_k8s_api_core_v1_Service_metadata_name']
+
+Features encontrados: ['io_k8s_api_core_v1_Service_apiVersion', 'io_k8s_api_core_v1_Service_metadata', 'io_k8s_api_core_v1_Service_spec_ports', 'io_k8s_api_core_v1_Service_spec_selector', 'io_k8s_api_core_v1_Service_kind', 'io_k8s_api_core_v1_Service_spec', 'io_k8s_api_core_v1_Service_metadata_name']
