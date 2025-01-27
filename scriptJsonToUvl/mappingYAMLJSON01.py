@@ -111,32 +111,21 @@ def search_features_in_csv(simple_props, hierarchical_props, key_value_pairs, cs
                     if middle.strip() and hierarchical_prop.endswith(middle): ## si se compara con la herencia omitiendo la version // agregar la version al midle
                         print(f"COINCIDENCIA (Midle): {middle} -> {hierarchical_prop}")
                         found_features.add(feature) ## se añade si coincide el final del Middle con la herencia actual (es similar que el middle + la version de apiVersion)
-                        for key, yaml_value in key_value_pairs:
-                            print("DEBUG: impresion?")
-                            aux_feature = f"{middle}_{yaml_value}"
-                            if value and str(yaml_value) == value:
-                                print(f"Coincidencia del feature-value {feature}")
-                                found_features.add(feature)
-                            else:
-                                print(f"NO HAY COINCIDENCIA {feature}") ### Comprobar coincidencias
-                                continue
-                    #if value and str(yaml_value) == value and middle in hierarchical_prop:
-                    #    print(f"COINCIDENCIA (Value): {value} -> {yaml_value} key:  {key}")
-                    #    found_features.add(feature)
-                # Buscar coincidencias en la columna 'Value' usando los pares clave-valor
-                """for key, yaml_value in key_value_pairs:
-                    if f"_{root_info['apiVersion']}_{root_info['kind']}_" in feature and hierarchical_prop.endswith(middle):
-                        print(f"Key: {key}  yaml_value: {yaml_value}")
-                        aux_feature = f"{middle}_{yaml_value}"
-                        if str(yaml_value) == value and feature.endswith(aux_feature):
-                            print(f"COINCIDENCIA (Value): {value} -> {yaml_value} key:  {key}")
-                            found_features.add(feature)"""
+                    for key, yaml_value in key_value_pairs: # Buscar coincidencias en la columna 'Value' usando los pares clave-valor
+                        if value and str(yaml_value) == value: ### Primera coincidencia: si el valor del yaml coincide con el de la columna value del csv:
+                            aux_hierchical_value_added = f"{key}_{yaml_value}" ## Se agrega el yaml_value manualmente ya que en la herencia no se adjunta el valor de las propiedades yaml
+                            if feature.endswith(aux_hierchical_value_added): ## Quizas se pueda definir mejor la coincidencia pero asi se asegura que el value coincida con el value del yaml
+                                print(f"VALORES DEL VALUE: {value} VALOR DEL YAML: {yaml_value}")
+                                print(f"DEBUG:? {hierarchical_prop}   {feature}   {key}")
+                                found_features.add(feature) ## Se agrega el feature que tambien coincide el yaml
+
     print(f"LOS FOUND FEATURES SON: {found_features}")
     return list(found_features)
 
 
 # Ruta de la carpeta donde están los archivos YAML
-yaml_directory = './generateConfigs/files_yamls/'
+#yaml_directory = './generateConfigs/files_yamls/'
+yaml_directory = './testing-maping/files_yamls/'
 
 # Leer YAMLs y extraer propiedades
 simple_props, hierarchical_props, key_value_pairs, context_info = read_yaml_files_from_directory(yaml_directory)
@@ -147,8 +136,32 @@ print("Pares clave-valor extraídos del YAML:", key_value_pairs)
 print("Contexto de los YAML:", context_info)
 
 # Buscar coincidencias en el CSV basado en apiVersion y kind
-csv_file_path = './generateConfigs/kubernetes_mapping_features_part01.csv'
-for filename, root_info in context_info.items():
+csv_file_path = './testing-maping/kubernetes_mapping_features_part01.csv'
+"""for filename, root_info in context_info.items():
     print(f"\nProcesando archivo: {filename}")
     features_found = search_features_in_csv(simple_props, hierarchical_props, key_value_pairs, csv_file_path, root_info)
-    print("Features encontrados:", features_found)
+    print("Features encontrados:", features_found)"""
+
+
+output_file_path = './testing-maping/output_features.txt'
+
+with open(output_file_path, 'w', encoding='utf-8') as output_file:
+    for filename, root_info in context_info.items():
+        output_file.write(f"Archivo YAML: {filename}\n")
+        output_file.write("=" * 50 + "\n")
+
+        print(f"\nProcesando archivo: {filename}")
+        features_found = search_features_in_csv(simple_props, hierarchical_props, key_value_pairs, csv_file_path, root_info)
+        output_file.write("Features encontrados:\n")
+        if features_found:
+            for feature in features_found:
+                output_file.write(f"- {feature}\n")
+            output_file.write("Lista de features encontrados:\n")
+            output_file.write(str(list(features_found)) + "\n\n")
+        else:
+            output_file.write("No se encontraron features.\n")
+
+        output_file.write("\n\n")  # Espaciado entre archivos
+        print("Features encontrados:", features_found)
+
+print(f"Resultados guardados en: {output_file_path}")

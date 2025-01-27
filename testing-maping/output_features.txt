@@ -1,0 +1,118 @@
+Archivo YAML: example_deployment02.yaml
+==================================================
+Features encontrados:
+- io_k8s_api_apps_v1_Deployment_metadata
+- io_k8s_api_apps_v1_Deployment_apiVersion
+- io_k8s_api_apps_v1_Deployment_spec_template_spec_containers
+- io_k8s_api_apps_v1_Deployment_spec_replicas
+- io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe_httpGet
+- io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_ports_containerPort
+- io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe_httpGet_port
+- io_k8s_api_apps_v1_Deployment_spec_selector
+- io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe
+- io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe_periodSeconds
+- io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe_httpGet
+- io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe_initialDelaySeconds
+- io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_image
+- io_k8s_api_apps_v1_Deployment_spec_template_metadata_labels
+- io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_name
+- io_k8s_api_apps_v1_Deployment_metadata_name
+- io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe_httpGet_path
+- io_k8s_api_apps_v1_Deployment_spec_template
+- io_k8s_api_apps_v1_Deployment_spec
+- io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe_httpGet_path
+- io_k8s_api_apps_v1_Deployment_spec_template_metadata
+- io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe_periodSeconds
+- io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_ports
+- io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe_httpGet_port
+- io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe_initialDelaySeconds
+- io_k8s_api_apps_v1_Deployment_kind
+- io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe
+- io_k8s_api_apps_v1_Deployment_spec_selector_matchLabels
+- io_k8s_api_apps_v1_Deployment_spec_template_spec
+Lista de features encontrados:
+['io_k8s_api_apps_v1_Deployment_metadata', 'io_k8s_api_apps_v1_Deployment_apiVersion', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers', 'io_k8s_api_apps_v1_Deployment_spec_replicas', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe_httpGet', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_ports_containerPort', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe_httpGet_port', 'io_k8s_api_apps_v1_Deployment_spec_selector', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe_periodSeconds', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe_httpGet', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe_initialDelaySeconds', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_image', 'io_k8s_api_apps_v1_Deployment_spec_template_metadata_labels', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_name', 'io_k8s_api_apps_v1_Deployment_metadata_name', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe_httpGet_path', 'io_k8s_api_apps_v1_Deployment_spec_template', 'io_k8s_api_apps_v1_Deployment_spec', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe_httpGet_path', 'io_k8s_api_apps_v1_Deployment_spec_template_metadata', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe_periodSeconds', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_ports', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe_httpGet_port', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe_initialDelaySeconds', 'io_k8s_api_apps_v1_Deployment_kind', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe', 'io_k8s_api_apps_v1_Deployment_spec_selector_matchLabels', 'io_k8s_api_apps_v1_Deployment_spec_template_spec']
+
+
+
+Archivo YAML: example_PersistentVolume.yaml
+==================================================
+Features encontrados:
+- io_k8s_api_core_v1_PersistentVolume_spec_hostPath
+- io_k8s_api_core_v1_PersistentVolume_metadata
+- io_k8s_api_core_v1_PersistentVolume_spec_hostPath_path
+- io_k8s_api_core_v1_PersistentVolume_kind
+- io_k8s_api_core_v1_PersistentVolume_spec_storageClassName
+- io_k8s_api_core_v1_PersistentVolume_spec
+- io_k8s_api_core_v1_PersistentVolume_metadata_labels
+- io_k8s_api_core_v1_PersistentVolume_spec_capacity
+- io_k8s_api_core_v1_PersistentVolume_spec_accessModes
+- io_k8s_api_core_v1_PersistentVolume_apiVersion
+- io_k8s_api_core_v1_PersistentVolume_metadata_name
+Lista de features encontrados:
+['io_k8s_api_core_v1_PersistentVolume_spec_hostPath', 'io_k8s_api_core_v1_PersistentVolume_metadata', 'io_k8s_api_core_v1_PersistentVolume_spec_hostPath_path', 'io_k8s_api_core_v1_PersistentVolume_kind', 'io_k8s_api_core_v1_PersistentVolume_spec_storageClassName', 'io_k8s_api_core_v1_PersistentVolume_spec', 'io_k8s_api_core_v1_PersistentVolume_metadata_labels', 'io_k8s_api_core_v1_PersistentVolume_spec_capacity', 'io_k8s_api_core_v1_PersistentVolume_spec_accessModes', 'io_k8s_api_core_v1_PersistentVolume_apiVersion', 'io_k8s_api_core_v1_PersistentVolume_metadata_name']
+
+
+
+Archivo YAML: example_PersistentVolumeClaim.yaml
+==================================================
+Features encontrados:
+- io_k8s_api_core_v1_PersistentVolumeClaim_metadata_name
+- io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector
+- io_k8s_api_core_v1_PersistentVolumeClaim_spec
+- io_k8s_api_core_v1_PersistentVolumeClaim_spec_volumeMode
+- io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions_key
+- io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions_operator
+- io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions
+- io_k8s_api_core_v1_PersistentVolumeClaim_metadata
+- io_k8s_api_core_v1_PersistentVolumeClaim_apiVersion
+- io_k8s_api_core_v1_PersistentVolumeClaim_spec_resources
+- io_k8s_api_core_v1_PersistentVolumeClaim_spec_resources_requests
+- io_k8s_api_core_v1_PersistentVolumeClaim_spec_accessModes
+- io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions_operator_In
+- io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions_values
+- io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchLabels
+- io_k8s_api_core_v1_PersistentVolumeClaim_kind
+- io_k8s_api_core_v1_PersistentVolumeClaim_spec_storageClassName
+Lista de features encontrados:
+['io_k8s_api_core_v1_PersistentVolumeClaim_metadata_name', 'io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector', 'io_k8s_api_core_v1_PersistentVolumeClaim_spec', 'io_k8s_api_core_v1_PersistentVolumeClaim_spec_volumeMode', 'io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions_key', 'io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions_operator', 'io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions', 'io_k8s_api_core_v1_PersistentVolumeClaim_metadata', 'io_k8s_api_core_v1_PersistentVolumeClaim_apiVersion', 'io_k8s_api_core_v1_PersistentVolumeClaim_spec_resources', 'io_k8s_api_core_v1_PersistentVolumeClaim_spec_resources_requests', 'io_k8s_api_core_v1_PersistentVolumeClaim_spec_accessModes', 'io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions_operator_In', 'io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions_values', 'io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchLabels', 'io_k8s_api_core_v1_PersistentVolumeClaim_kind', 'io_k8s_api_core_v1_PersistentVolumeClaim_spec_storageClassName']
+
+
+
+Archivo YAML: example_pod01.yaml
+==================================================
+Features encontrados:
+- io_k8s_api_core_v1_Pod_metadata_name
+- io_k8s_api_core_v1_Pod_spec_containers_name
+- io_k8s_api_core_v1_Pod_spec_containers_image
+- io_k8s_api_core_v1_Pod_spec_containers_ports_containerPort
+- io_k8s_api_core_v1_Pod_spec
+- io_k8s_api_core_v1_Pod_metadata
+- io_k8s_api_core_v1_Pod_apiVersion
+- io_k8s_api_core_v1_Pod_spec_containers
+- io_k8s_api_core_v1_Pod_spec_containers_ports
+- io_k8s_api_core_v1_Pod_kind
+Lista de features encontrados:
+['io_k8s_api_core_v1_Pod_metadata_name', 'io_k8s_api_core_v1_Pod_spec_containers_name', 'io_k8s_api_core_v1_Pod_spec_containers_image', 'io_k8s_api_core_v1_Pod_spec_containers_ports_containerPort', 'io_k8s_api_core_v1_Pod_spec', 'io_k8s_api_core_v1_Pod_metadata', 'io_k8s_api_core_v1_Pod_apiVersion', 'io_k8s_api_core_v1_Pod_spec_containers', 'io_k8s_api_core_v1_Pod_spec_containers_ports', 'io_k8s_api_core_v1_Pod_kind']
+
+
+
+Archivo YAML: example_service01.yaml
+==================================================
+Features encontrados:
+- io_k8s_api_core_v1_Service_spec_ports
+- io_k8s_api_core_v1_Service_kind
+- io_k8s_api_core_v1_Service_metadata
+- io_k8s_api_core_v1_Service_spec_selector
+- io_k8s_api_core_v1_Service_spec_ports_port
+- io_k8s_api_core_v1_Service_spec_ports_protocol
+- io_k8s_api_core_v1_Service_spec
+- io_k8s_api_core_v1_Service_apiVersion
+- io_k8s_api_core_v1_Service_metadata_name
+- io_k8s_api_core_v1_Service_spec_ports_protocol_TCP
+- io_k8s_api_core_v1_Service_spec_ports_targetPort
+Lista de features encontrados:
+['io_k8s_api_core_v1_Service_spec_ports', 'io_k8s_api_core_v1_Service_kind', 'io_k8s_api_core_v1_Service_metadata', 'io_k8s_api_core_v1_Service_spec_selector', 'io_k8s_api_core_v1_Service_spec_ports_port', 'io_k8s_api_core_v1_Service_spec_ports_protocol', 'io_k8s_api_core_v1_Service_spec', 'io_k8s_api_core_v1_Service_apiVersion', 'io_k8s_api_core_v1_Service_metadata_name', 'io_k8s_api_core_v1_Service_spec_ports_protocol_TCP', 'io_k8s_api_core_v1_Service_spec_ports_targetPort']
+
+
+
