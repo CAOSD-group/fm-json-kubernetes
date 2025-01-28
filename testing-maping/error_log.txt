@@ -1,0 +1,2 @@
+Error de YAML en archivo ./testing-maping/files_yamls/example_deployment01.yaml: mapping values are not allowed here
+  in "./testing-maping/files_yamls/example_deployment01.yaml", line 21, column 16
