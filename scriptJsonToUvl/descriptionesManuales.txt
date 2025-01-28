@@ -1898,3 +1898,70 @@ Features encontrados: ['io_k8s_api_core_v1_Service_apiVersion', 'io_k8s_api_core
   'io_k8s_api_core_v1_ServicePort_protocol_TCP', 'io_k8s_api_core_v1_Service_spec_ports_protocol', 'io_k8s_api_core_v1_Service_metadata_name']
 
 Features encontrados: ['io_k8s_api_core_v1_Service_apiVersion', 'io_k8s_api_core_v1_Service_metadata', 'io_k8s_api_core_v1_Service_spec_ports', 'io_k8s_api_core_v1_Service_spec_selector', 'io_k8s_api_core_v1_Service_kind', 'io_k8s_api_core_v1_Service_spec', 'io_k8s_api_core_v1_Service_metadata_name']
+
+
+Decidir entre las 2 posibles implementaciones del mapeo en JSON:
+
+## Posible implementacion para tener mas detalles sobre las caracteristicas e informacion sobre los features
+{
+  "filename": "example_pod01.yaml",
+  "apiVersion": {
+    "value": "io_k8s_api_core_v1_Pod_apiVersion",
+    "mappedFeature": "feature_01"
+  },
+  "kind": {
+    "value": "io_k8s_api_core_v1_Pod_kind",
+    "mappedFeature": "feature_02"
+  },
+  "metadata": {
+    "value": "io_k8s_api_core_v1_Pod_metadata",
+    "mappedFeature": "feature_03",
+    "name": {
+      "value": "io_k8s_api_core_v1_Pod_metadata_name",
+      "mappedFeature": "feature_04"
+    }
+  },
+  "spec": {
+    "value": "io_k8s_api_core_v1_Pod_spec",
+    "mappedFeature": "feature_05",
+    "containers": [
+      {
+        "value": "io_k8s_api_core_v1_Pod_spec_containers",
+        "mappedFeature": "feature_06",
+        "name": {
+          "value": "io_k8s_api_core_v1_Pod_spec_containers_name",
+          "mappedFeature": "feature_07"
+        },
+        "image": {
+          "value": "io_k8s_api_core_v1_Pod_spec_containers_image",
+          "mappedFeature": "feature_08"
+        },
+        "ports": [
+          {
+            "value": "io_k8s_api_core_v1_Pod_spec_containers_ports",
+            "mappedFeature": "feature_09",
+            "containerPort": {
+              "value": "io_k8s_api_core_v1_Pod_spec_containers_ports_containerPort",
+              "mappedFeature": "feature_10"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+
+## version mas simple en los que se guardaria solo la propiedad del yaml y el feature
+    {
+        "filename": "example_pod01.yaml",
+        "apiVersion": "io_k8s_api_core_v1_Pod_apiVersion",
+        "kind": "io_k8s_api_core_v1_Pod_kind",
+        "metadata": "io_k8s_api_core_v1_Pod_metadata",
+            "metadata_name": "io_k8s_api_core_v1_Pod_metadata_name",
+        "spec": "io_k8s_api_core_v1_Pod_spec",
+            "spec_containers": "io_k8s_api_core_v1_Pod_spec_containers",
+            "spec_containers_name": "io_k8s_api_core_v1_Pod_spec_containers_name",
+            "spec_containers_image": "io_k8s_api_core_v1_Pod_spec_containers_image",
+            "spec_containers_ports": "io_k8s_api_core_v1_Pod_spec_containers_ports",
+            "spec_containers_ports_containerPort": "io_k8s_api_core_v1_Pod_spec_containers_ports_containerPort"
+    },
