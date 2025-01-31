@@ -121,7 +121,7 @@ def search_features_in_csv(simple_props, hierarchical_props, key_value_pairs, cs
 
 
 # Ruta de la carpeta donde están los archivos YAML
-yaml_directory = './testing-maping/files_yamls/'
+yaml_directory = './testing-maping/files_yamls'
 
 # Leer YAMLs y extraer propiedades
 simple_props, hierarchical_props, key_value_pairs, context_info = read_yaml_files_from_directory(yaml_directory)
@@ -149,7 +149,7 @@ for filename, root_info in context_info.items():
     output_data.append(yaml_entry)
 
 # Guardar la salida en JSON
-output_json_path = './testing-maping/output_features.json'
+output_json_path = './testing-maping/output_features02.json'
 
 with open(output_json_path, 'w', encoding='utf-8') as json_file:
     json.dump(output_data, json_file, ensure_ascii=False, indent=4)

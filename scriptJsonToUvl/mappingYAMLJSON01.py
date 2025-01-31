@@ -34,7 +34,10 @@ def extract_yaml_properties(data, parent_key='', root_info=None, first_add = Tru
                 sub_simple, sub_hierarchical, sub_kv_pairs, _ = extract_yaml_properties(value, new_key, root_info, first_add = False)
                 simple_props.extend(sub_simple)
                 hierarchical_props.extend(sub_hierarchical)
-                hierarchical_props.append(new_key) ## Se agregan los valores despues de la recursión
+                if isinstance(new_key, str): ### C
+                    hierarchical_props.append(new_key)
+                    
+                #hierarchical_props.append(new_key) ## Se agregan los valores despues de la recursión
                 #print(f"Evolucion del hierarchical: {hierarchical_props}")
                 key_value_pairs.extend(sub_kv_pairs)
             else:
@@ -69,16 +72,19 @@ def read_yaml_files_from_directory(directory_path):
     all_hierarchical_props = set()
     all_key_value_pairs = set()
     context_info = {}
-    error_log_path = './error_log.txt'
+    error_log_path = './generateConfigs/error_log.txt'
 
     with open(error_log_path, 'w', encoding='utf-8') as error_log:
         for filename in os.listdir(directory_path):
             if filename.endswith(".yaml") or filename.endswith(".yml"):
                 file_path = os.path.join(directory_path, filename)
                 try:
-                    with open(file_path, 'r', encoding='utf-8') as yaml_file:
+                    with open(file_path, 'r', encoding='utf-8', errors='ignore') as yaml_file: ## errors='ignore' ayuda a omitir caracteres problematicos
                         yaml_data = yaml.safe_load(yaml_file)
                         if yaml_data is None:
+                            error_log.write(f"Archivo vacío o no válido: {file_path}\n")
+                            continue
+                        if not yaml_data:
                             error_log.write(f"Archivo vacío o no válido: {file_path}\n")
                             continue
 
@@ -109,15 +115,19 @@ def search_features_in_csv(simple_props, hierarchical_props, key_value_pairs, cs
 
     with open(csv_file, "r", encoding="utf-8") as file:
         reader = csv.reader(file)
+        countAux = 0
         for row in reader:
             feature, middle, turned, value = row[0], row[1], row[2], row[3]
             #print(f"VALUE ES: {value}")
             # Filtrar el CSV por apiVersion y kind
-            if f"_{root_info['apiVersion']}_{root_info['kind']}_" in feature:
-
+            #if f"_{root_info['apiVersion']}_{root_info['kind']}_" in feature:
+            if f"_{root_info.get('apiVersion', 'unknown')}_{root_info.get('kind', 'unknown')}_" in feature:
                 # Buscar coincidencias exactas en la columna 'Midle'
                 for hierarchical_prop in hierarchical_props:
                     #if middle and middle in hierarchical_prop and hierarchical_prop:
+                    if hierarchical_prop is bool:
+                        print("Valores en hierarchical_props:")
+                        print(hierarchical_props)
                     if middle.strip() and hierarchical_prop.endswith(middle): ## si se compara con la herencia omitiendo la version // agregar la version al midle
                         print(f"COINCIDENCIA (Midle): {middle} -> {hierarchical_prop}")
                         found_features.add(feature) ## se añade si coincide el final del Middle con la herencia actual (es similar que el middle + la version de apiVersion)
@@ -128,14 +138,17 @@ def search_features_in_csv(simple_props, hierarchical_props, key_value_pairs, cs
                                 print(f"VALORES DEL VALUE: {value} VALOR DEL YAML: {yaml_value}")
                                 print(f"DEBUG:? {hierarchical_prop}   {feature}   {key}")
                                 found_features.add(feature) ## Se agrega el feature que tambien coincide el yaml
-
+            else:
+                print("El arhivo no tiene kind ni apiVersion")
+                countAux = countAux + 1
+        print(f"El numero de archivos sin kind ni apiVersion son: {countAux}")
     print(f"LOS FOUND FEATURES SON: {found_features}")
     return list(found_features)
 
 
 # Ruta de la carpeta donde están los archivos YAML
-#yaml_directory = './generateConfigs/files_yamls/'
-yaml_directory = './testing-maping/files_yamls/'
+yaml_directory = './generateConfigs/files_yamls'
+#yaml_directory = './testing-maping/files_yamls/'
 
 # Leer YAMLs y extraer propiedades
 simple_props, hierarchical_props, key_value_pairs, context_info = read_yaml_files_from_directory(yaml_directory)
@@ -146,7 +159,8 @@ print("Pares clave-valor extraídos del YAML:", key_value_pairs)
 print("Contexto de los YAML:", context_info)
 
 # Buscar coincidencias en el CSV basado en apiVersion y kind
-csv_file_path = './testing-maping/kubernetes_mapping_features_part01.csv'
+#csv_file_path = './testing-maping/kubernetes_mapping_features_part01.csv'
+csv_file_path = './generateConfigs/kubernetes_mapping_features_part01.csv'
 
 """for filename, root_info in context_info.items():
     print(f"\nProcesando archivo: {filename}")
@@ -154,25 +168,31 @@ csv_file_path = './testing-maping/kubernetes_mapping_features_part01.csv'
     print("Features encontrados:", features_found)"""
 
 
-output_file_path = './testing-maping/output_features.txt'
+#output_file_path = './testing-maping/output_features.txt'
+output_file_path = './generateConfigs/output_features02.txt'
 
 with open(output_file_path, 'w', encoding='utf-8') as output_file:
     for filename, root_info in context_info.items():
-        output_file.write(f"Archivo YAML: {filename}\n")
-        output_file.write("=" * 50 + "\n")
+        try:
+            output_file.write(f"Archivo YAML: {filename}\n")
+            output_file.write("=" * 50 + "\n")
 
-        print(f"\nProcesando archivo: {filename}")
-        features_found = search_features_in_csv(simple_props, hierarchical_props, key_value_pairs, csv_file_path, root_info)
-        output_file.write("Features encontrados:\n")
-        if features_found:
-            for feature in features_found:
-                output_file.write(f"- {feature}\n")
-            output_file.write("Lista de features encontrados:\n")
-            output_file.write(str(list(features_found)) + "\n\n")
-        else:
-            output_file.write("No se encontraron features.\n")
+            print(f"\nProcesando archivo: {filename}")
+            features_found = search_features_in_csv(simple_props, hierarchical_props, key_value_pairs, csv_file_path, root_info)
+            output_file.write("Features encontrados:\n")
+            if features_found:
+                for feature in features_found:
+                    output_file.write(f"- {feature}\n")
+                output_file.write("Lista de features encontrados:\n")
+                output_file.write(str(list(features_found)) + "\n\n")
+            else:
+                output_file.write("No se encontraron features.\n")
+            output_file.write("\n\n")  # Espaciado entre archivos
+            print("Features encontrados:", features_found)
+        except KeyError as e:
+            print(f"Error procesando archivo {filename}: Clave faltante {str(e)}")
+            #error_log.write(f"Error procesando archivo {filename}: Clave faltante {str(e)}\n") ## por si se agrega al archivo de logs
 
-        output_file.write("\n\n")  # Espaciado entre archivos
-        print("Features encontrados:", features_found)
+
 
 print(f"Resultados guardados en: {output_file_path}")
