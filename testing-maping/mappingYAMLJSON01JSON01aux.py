@@ -91,7 +91,7 @@ def search_features_in_csv(hierarchical_props, key_value_pairs, csv_file):
     - Comparación de key_value_pairs con la columna 'Value'
     """
     feature_map = {}
-    print(feature_map)
+    #print(feature_map)
     with open(csv_file, "r", encoding="utf-8") as file:
         reader = csv.reader(file)
         for row in reader:
@@ -102,20 +102,34 @@ def search_features_in_csv(hierarchical_props, key_value_pairs, csv_file):
                 if middle.strip() and middle in hierarchical_prop:
                     feature_map[hierarchical_prop] = feature
                     print(feature)"""
+
             if f"_{root_info.get('apiVersion', 'unknown')}_{root_info.get('kind', 'unknown')}_" in feature:
                 for hierarchical_prop in hierarchical_props:
                     if middle.strip() and hierarchical_prop.endswith(middle):
                         feature_map[hierarchical_prop] = feature ##donde se agrega el key? si solo esta el feature
                         #found_features.append(feature)
-                    for key, yaml_value in key_value_pairs:
+                    
+                    for key, yaml_value in key_value_pairs: 
                         if value and str(yaml_value) == value and feature not in feature_map: ## evitar agregar el mismo feature
                             aux_hierchical_value_added = f"{key}_{yaml_value}" ## Se agrega el yaml_value manualmente ya que en la herencia no se adjunta el valor de las propiedades yaml
-                            print(aux_hierchical_value_added)
+                            #print(aux_hierchical_value_added)
                             if feature.endswith(aux_hierchical_value_added): ## Quizas se pueda definir mejor la coincidencia pero asi se asegura que el value coincida con el value del yaml
                                 #print(f"VALORES DEL VALUE: {value} VALOR DEL YAML: {yaml_value}")
-                                print(f"DEBUG:? {aux_hierchical_value_added}   {feature}   {key}")
+                                #print(f"DEBUG:? {aux_hierchical_value_added}   {feature}   {key}")
                                 feature_map[aux_hierchical_value_added] = feature ## Se agrega el feature que tambien coincide el yaml
                                 continue
+                if value == "-":
+                    print("Array detectado")
+                    #feature_map[feature] = {"feature_type": "array"}
+                    # Generar prefijo con apiVersion y kind si están presentes
+                    """version_kind_prefix = f"{root_info.get('apiVersion', 'unknown')}_{root_info.get('kind', 'unknown')}_"
+                    feature_key = f"{version_kind_prefix}{key}" if key not in feature_map else key
+                    feature_map[feature_key] = {"type": "array", "feature": feature}"""
+                    print("El feature map es:")
+                    print(feature_map)
+                ##feature_map["arr"] = "[]"
+
+                ## Marcar array para agregar a la estructura del yaml_data
                         #feature_map[key] = feature  
                         #and feature not in feature_map[key]
                         #if feature.endswith(aux_hierchical_value_added):
@@ -128,7 +142,7 @@ def search_features_in_csv(hierarchical_props, key_value_pairs, csv_file):
             """for key, yaml_value in key_value_pairs:
                 if value.strip() and str(yaml_value) == value.strip():
                     feature_map[key] = feature"""
-        #print(f"El mapa entero es: {feature_map}")
+        print(f"El mapa entero es: {feature_map}")
     return feature_map
 
 
@@ -140,49 +154,49 @@ def apply_feature_mapping(yaml_data, feature_map, hierarchical_props, auxFeature
     
         new_data = {}
         mapped_key = {}
-        feature_added_value = ""
-        print(f"INICIO MAP {feature_map.items()}")
-        aux_nested = False
+        #print(f"INICIO MAP {feature_map.items()}")
+        feature_nested = {}
+        
+        #aux_nested = False ## añadido dentro del primer bucle
         for key, value in yaml_data.items():
             #print(f"{key}   {value}")
             #print(feature_map.get(value))
-            for key_features, value_features in feature_map.items():
+            aux_key_value = f"{key}_{value}"
+            aux_nested = False ## Se asiga a False dentro del bucle para que no se sobreasigne
+            for key_features, value_features in feature_map.items(): ## O cambiamos los tipo a Type/Value_features
                 #print("iTERACIONES")
-                if key_features.endswith(key) and value_features not in auxFeaturesAddedList:
-                    #print(auxFeaturesAddedList)
+                #print(f"{key}   {value_features}")
+                if key_features.endswith(key) and value_features not in auxFeaturesAddedList: ## Rama para mapear las propiedades sin notaciones especiales
+                    #print(f"{key}   {value_features}")
                     if value_features in auxFeaturesAddedList:
                         print(f"YA ESTOY EN LA LISTA {value_features}")
-                    print(f"{key}   {value_features}")
-                    key = value_features
                     ## Se crea una lista auxiliar con los features ya agregados para no agregar por error un feature ya visto. Hay algunas keys que se llaman igual y se puede dar el caso
                     auxFeaturesAddedList.add(value_features)
-                    continue
-                if value == value_features.split("_")[-1]: ## Probando a agregar un sub-nivel nuevo que represente la seleccion del valor TCP
-                    print(f"Soy un valor del Value: {value_features}")
-                    feature_added_value = value_features
-                    #feature_added_value[value_features] = value
-                    aux_nested = True
-                    #new_data[value_features] = value
-                """else:
-                    feature_added_value = value_features"""
-                #key = value_features
-                #if key_features.endswith(key):
-                #    print("NO HAY NADA?")
-                    #mapped_key = feature_map.get(value_features, key_features)
-            #print(mapped_key)
-            # Si se encontró un feature correspondiente, anidarlo como subestructura
+                    key = value_features                                                                                                                             
+                    continue ### Actualmente no influye
+                ##Probando a agregar un sub-nivel nuevo que represente la seleccion del valor TCP como la diseñada para el modelo del feature
+                elif value == value_features.split("_")[-1] and value_features not in auxFeaturesAddedList: ## and key in value_features #and value_features.endswith(key_features)
+                    if value_features.endswith(key_features): ## Quizas redundante pero puede servir para una mejor comprobación
+                        print(f"VALORES SEGUNDO IF {value_features}  {key_features}     {key}")
+                        print(f"Soy un valor del Value: {value_features}")
+                        feature_nested[value_features] = value
+                        aux_nested = True
+                        auxFeaturesAddedList.add(value_features)
+                    else:
+                        aux_nested  = False
 
-            #else:
             mapped_key = feature_map.get(key, key)
-            new_data[mapped_key] = apply_feature_mapping(value, feature_map, hierarchical_props, auxFeaturesAddedList) if isinstance(value, (dict, list)) else value
-            #if aux_nested: #feature_added_value ### Probando para añadir los features de valores seleccionados (añternatives)
-            #    new_data[feature_added_value] = value
-            #print(mapped_key)
-            #print(f"NEW DATA: {new_data}")
+            if aux_nested: # Probando para añadir los features de valores seleccionados (añternatives)
+                print("HAY ALGUNA REPRESENTACION?¿")
+                print(feature_nested)
+                new_data[mapped_key] = feature_nested
+            else:
+                new_data[mapped_key] = apply_feature_mapping(value, feature_map, hierarchical_props, auxFeaturesAddedList) if isinstance(value, (dict, list)) else value
 
         return new_data
 
     elif isinstance(yaml_data, list):
+        print(f"YAML DATA ELIF {yaml_data}")
         return [apply_feature_mapping(item, feature_map, hierarchical_props, auxFeaturesAddedList) for item in yaml_data]
 
     return yaml_data
