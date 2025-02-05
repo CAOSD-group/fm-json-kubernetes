@@ -110,7 +110,9 @@
                     "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions": [
                         {
                             "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions_key": "environment",
-                            "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions_operator": "In",
+                            "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions_operator": {
+                                "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions_operator_In": "In"
+                            },
                             "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions_values": [
                                 "dev"
                             ]
@@ -161,7 +163,9 @@
                 },
                 "io_k8s_api_core_v1_Service_spec_ports": [
                     {
-                        "io_k8s_api_core_v1_Service_spec_ports_protocol": "TCP",
+                        "io_k8s_api_core_v1_Service_spec_ports_protocol": {
+                            "io_k8s_api_core_v1_Service_spec_ports_protocol_TCP": "TCP"
+                        },
                         "io_k8s_api_core_v1_Service_spec_ports_port": 80,
                         "io_k8s_api_core_v1_Service_spec_ports_targetPort": 9376
                     }
