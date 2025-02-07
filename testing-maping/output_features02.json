@@ -12,15 +12,25 @@
             "io_k8s_api_apps_v1_Deployment_spec": {
                 "io_k8s_api_apps_v1_Deployment_spec_replicas": 3,
                 "io_k8s_api_apps_v1_Deployment_spec_selector": {
-                    "io_k8s_api_apps_v1_Deployment_spec_selector_matchLabels": {
-                        "app": "nginx"
-                    }
+                    "io_k8s_api_apps_v1_Deployment_spec_selector_matchLabels": [
+                        {
+                            "io_k8s_api_apps_v1_Deployment_spec_selector_matchLabels_KeyMap": "app",
+                            "io_k8s_api_apps_v1_Deployment_spec_selector_matchLabels_ValueMap": "nginx"
+                        },
+                        {
+                            "io_k8s_api_apps_v1_Deployment_spec_selector_matchLabels_KeyMap": "web",
+                            "io_k8s_api_apps_v1_Deployment_spec_selector_matchLabels_ValueMap": "exampleweb"
+                        }
+                    ]
                 },
                 "io_k8s_api_apps_v1_Deployment_spec_template": {
                     "io_k8s_api_apps_v1_Deployment_spec_template_metadata": {
-                        "io_k8s_api_apps_v1_Deployment_spec_template_metadata_labels": {
-                            "app": "nginx"
-                        }
+                        "io_k8s_api_apps_v1_Deployment_spec_template_metadata_labels": [
+                            {
+                                "io_k8s_api_apps_v1_Deployment_spec_template_metadata_labels_KeyMap": "app",
+                                "io_k8s_api_apps_v1_Deployment_spec_template_metadata_labels_ValueMap": "nginx"
+                            }
+                        ]
                     },
                     "io_k8s_api_apps_v1_Deployment_spec_template_spec": {
                         "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers": [
@@ -64,15 +74,18 @@
             "io_k8s_api_core_v1_PersistentVolume_kind": "PersistentVolume",
             "io_k8s_api_core_v1_PersistentVolume_metadata": {
                 "io_k8s_api_core_v1_PersistentVolume_metadata_name": "task-pv-volume",
-                "io_k8s_api_core_v1_PersistentVolume_metadata_labels": {
-                    "type": "local"
-                }
+                "io_k8s_api_core_v1_PersistentVolume_metadata_labels": [
+                    {
+                        "io_k8s_api_core_v1_PersistentVolume_metadata_labels_KeyMap": "type",
+                        "io_k8s_api_core_v1_PersistentVolume_metadata_labels_ValueMap": "local"
+                    }
+                ]
             },
             "io_k8s_api_core_v1_PersistentVolume_spec": {
                 "io_k8s_api_core_v1_PersistentVolume_spec_storageClassName": "manual",
-                "io_k8s_api_core_v1_PersistentVolume_spec_capacity": {
-                    "storage": "10Gi"
-                },
+                "io_k8s_api_core_v1_PersistentVolume_spec_capacity": [
+                    "storage"
+                ],
                 "io_k8s_api_core_v1_PersistentVolume_spec_accessModes": [
                     "ReadWriteOnce"
                 ],
@@ -98,15 +111,18 @@
                 ],
                 "io_k8s_api_core_v1_PersistentVolumeClaim_spec_volumeMode": "Filesystem",
                 "io_k8s_api_core_v1_PersistentVolumeClaim_spec_resources": {
-                    "io_k8s_api_core_v1_PersistentVolumeClaim_spec_resources_requests": {
-                        "storage": "8Gi"
-                    }
+                    "io_k8s_api_core_v1_PersistentVolumeClaim_spec_resources_requests": [
+                        "storage"
+                    ]
                 },
                 "io_k8s_api_core_v1_PersistentVolumeClaim_spec_storageClassName": "slow",
                 "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector": {
-                    "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchLabels": {
-                        "release": "stable"
-                    },
+                    "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchLabels": [
+                        {
+                            "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchLabels_KeyMap": "release",
+                            "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchLabels_ValueMap": "stable"
+                        }
+                    ],
                     "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions": [
                         {
                             "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions_key": "environment",
@@ -158,9 +174,12 @@
                 "io_k8s_api_core_v1_Service_metadata_name": "my-service"
             },
             "io_k8s_api_core_v1_Service_spec": {
-                "io_k8s_api_core_v1_Service_spec_selector": {
-                    "app.kubernetes.io/name": "MyApp"
-                },
+                "io_k8s_api_core_v1_Service_spec_selector": [
+                    {
+                        "io_k8s_api_core_v1_Service_spec_selector_KeyMap": "app.kubernetes.io/name",
+                        "io_k8s_api_core_v1_Service_spec_selector_ValueMap": "MyApp"
+                    }
+                ],
                 "io_k8s_api_core_v1_Service_spec_ports": [
                     {
                         "io_k8s_api_core_v1_Service_spec_ports_protocol": {
