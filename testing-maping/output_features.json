@@ -4,49 +4,49 @@
         "apiVersion": "apps_v1",
         "kind": "Deployment",
         "config": {
-            "io_k8s_api_apps_v1_Deployment_apiVersion": "apps/v1",
-            "io_k8s_api_apps_v1_Deployment_kind": "Deployment",
-            "io_k8s_api_apps_v1_Deployment_metadata": {
-                "io_k8s_api_apps_v1_Deployment_metadata_name": "nginx-deployment"
+            "apiVersion": "apps/v1",
+            "kind": "Deployment",
+            "metadata": {
+                "name": "nginx-deployment"
             },
-            "io_k8s_api_apps_v1_Deployment_spec": {
-                "io_k8s_api_apps_v1_Deployment_spec_replicas": 3,
-                "io_k8s_api_apps_v1_Deployment_spec_selector": {
-                    "io_k8s_api_apps_v1_Deployment_spec_selector_matchLabels": {
+            "spec": {
+                "replicas": 3,
+                "selector": {
+                    "matchLabels": {
                         "app": "nginx"
                     }
                 },
-                "io_k8s_api_apps_v1_Deployment_spec_template": {
-                    "io_k8s_api_apps_v1_Deployment_spec_template_metadata": {
-                        "io_k8s_api_apps_v1_Deployment_spec_template_metadata_labels": {
+                "template": {
+                    "metadata": {
+                        "labels": {
                             "app": "nginx"
                         }
                     },
-                    "io_k8s_api_apps_v1_Deployment_spec_template_spec": {
-                        "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers": [
+                    "spec": {
+                        "containers": [
                             {
-                                "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_name": "nginx",
-                                "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_image": "nginx:latest",
-                                "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_ports": [
+                                "name": "nginx",
+                                "image": "nginx:latest",
+                                "ports": [
                                     {
-                                        "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_ports_containerPort": 80
+                                        "containerPort": 80
                                     }
                                 ],
-                                "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe": {
-                                    "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe_httpGet": {
-                                        "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe_httpGet_path": "/",
-                                        "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe_httpGet_port": 80
+                                "livenessProbe": {
+                                    "httpGet": {
+                                        "path": "/",
+                                        "port": 80
                                     },
-                                    "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe_initialDelaySeconds": 15,
-                                    "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe_periodSeconds": 10
+                                    "initialDelaySeconds": 15,
+                                    "periodSeconds": 10
                                 },
-                                "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe": {
-                                    "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe_httpGet": {
-                                        "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe_httpGet_path": "/",
-                                        "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe_httpGet_port": 80
+                                "readinessProbe": {
+                                    "httpGet": {
+                                        "path": "/",
+                                        "port": 80
                                     },
-                                    "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe_initialDelaySeconds": 5,
-                                    "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe_periodSeconds": 5
+                                    "initialDelaySeconds": 5,
+                                    "periodSeconds": 5
                                 }
                             }
                         ]
@@ -57,24 +57,27 @@
     },
     {
         "filename": "example_PersistentVolume.yaml",
-        "apiVersion": "v1",
-        "kind": "PersistentVolume",
         "config": {
             "io_k8s_api_core_v1_PersistentVolume_apiVersion": "v1",
             "io_k8s_api_core_v1_PersistentVolume_kind": "PersistentVolume",
             "io_k8s_api_core_v1_PersistentVolume_metadata": {
                 "io_k8s_api_core_v1_PersistentVolume_metadata_name": "task-pv-volume",
                 "io_k8s_api_core_v1_PersistentVolume_metadata_labels": {
-                    "type": "local"
+                    "io_k8s_api_core_v1_PersistentVolume_metadata_labels_KeyMap": "type",
+                    "io_k8s_api_core_v1_PersistentVolume_metadata_labels_ValueMap": "local"
                 }
             },
             "io_k8s_api_core_v1_PersistentVolume_spec": {
                 "io_k8s_api_core_v1_PersistentVolume_spec_storageClassName": "manual",
-                "io_k8s_api_core_v1_PersistentVolume_spec_capacity": {
-                    "storage": "10Gi"
-                },
+                "io_k8s_api_core_v1_PersistentVolume_spec_capacity": [
+                    {
+                    "io_k8s_api_core_v1_PersistentVolume_spec_capacity_asString": "10Gi"
+                    }
+                ],
                 "io_k8s_api_core_v1_PersistentVolume_spec_accessModes": [
-                    "ReadWriteOnce"
+                    {
+                    "io_k8s_api_core_v1_PersistentVolume_spec_accessModes_StringValue": "ReadWriteOnce"
+                    }
                 ],
                 "io_k8s_api_core_v1_PersistentVolume_spec_hostPath": {
                     "io_k8s_api_core_v1_PersistentVolume_spec_hostPath_path": "/mnt/data"
@@ -82,69 +85,7 @@
             }
         }
     },
-    {
-        "filename": "example_PersistentVolumeClaim.yaml",
-        "apiVersion": "v1",
-        "kind": "PersistentVolumeClaim",
-        "config": {
-            "io_k8s_api_core_v1_PersistentVolumeClaim_apiVersion": "v1",
-            "io_k8s_api_core_v1_PersistentVolumeClaim_kind": "PersistentVolumeClaim",
-            "io_k8s_api_core_v1_PersistentVolumeClaim_metadata": {
-                "io_k8s_api_core_v1_PersistentVolumeClaim_metadata_name": "myclaim"
-            },
-            "io_k8s_api_core_v1_PersistentVolumeClaim_spec": {
-                "io_k8s_api_core_v1_PersistentVolumeClaim_spec_accessModes": [
-                    "ReadWriteOnce"
-                ],
-                "io_k8s_api_core_v1_PersistentVolumeClaim_spec_volumeMode": "Filesystem",
-                "io_k8s_api_core_v1_PersistentVolumeClaim_spec_resources": {
-                    "io_k8s_api_core_v1_PersistentVolumeClaim_spec_resources_requests": {
-                        "storage": "8Gi"
-                    }
-                },
-                "io_k8s_api_core_v1_PersistentVolumeClaim_spec_storageClassName": "slow",
-                "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector": {
-                    "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchLabels": {
-                        "release": "stable"
-                    },
-                    "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions": [
-                        {
-                            "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions_key": "environment",
-                            "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions_operator": "In",
-                            "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions_values": [
-                                "dev"
-                            ]
-                        }
-                    ]
-                }
-            }
-        }
-    },
-    {
-        "filename": "example_pod01.yaml",
-        "apiVersion": "v1",
-        "kind": "Pod",
-        "config": {
-            "io_k8s_api_core_v1_Pod_apiVersion": "v1",
-            "io_k8s_api_core_v1_Pod_kind": "Pod",
-            "io_k8s_api_core_v1_Pod_metadata": {
-                "io_k8s_api_core_v1_Pod_metadata_name": "nginx01"
-            },
-            "io_k8s_api_core_v1_Pod_spec": {
-                "io_k8s_api_core_v1_Pod_spec_containers": [
-                    {
-                        "io_k8s_api_core_v1_Pod_spec_containers_name": "nginx01",
-                        "io_k8s_api_core_v1_Pod_spec_containers_image": "nginx",
-                        "io_k8s_api_core_v1_Pod_spec_containers_ports": [
-                            {
-                                "io_k8s_api_core_v1_Pod_spec_containers_ports_containerPort": 80
-                            }
-                        ]
-                    }
-                ]
-            }
-        }
-    },
+
     {
         "filename": "example_service01.yaml",
         "apiVersion": "v1",
@@ -161,9 +102,98 @@
                 },
                 "io_k8s_api_core_v1_Service_spec_ports": [
                     {
-                        "io_k8s_api_core_v1_Service_spec_ports_protocol": "TCP",
+                        "io_k8s_api_core_v1_Service_spec_ports_protocol": {
+                            "io_k8s_api_core_v1_Service_spec_ports_protocol_TCP": "TCP"
+                        },
                         "io_k8s_api_core_v1_Service_spec_ports_port": 80,
                         "io_k8s_api_core_v1_Service_spec_ports_targetPort": 9376
+                    }
+                ]
+            }
+        }
+    }, 
+    {
+        "filename": "example_PersistentVolumeClaim.yaml",
+        "apiVersion": "v1",
+        "kind": "PersistentVolumeClaim",
+        "config": {
+            "apiVersion": "v1",
+            "kind": "PersistentVolumeClaim",
+            "metadata": {
+                "name": "myclaim"
+            },
+            "spec": {
+                "accessModes": [
+                    "ReadWriteOnce"
+                ],
+                "volumeMode": "Filesystem",
+                "resources": {
+                    "requests": {
+                        "storage": "8Gi"
+                    }
+                },
+                "storageClassName": "slow",
+                "selector": {
+                    "matchLabels": {
+                        "release": "stable"
+                    },
+                    "matchExpressions": [
+                        {
+                            "key": "environment",
+                            "operator": "In",
+                            "values": [
+                                "dev"
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "filename": "example_pod01.yaml",
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "config": {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "name": "nginx01"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "name": "nginx01",
+                        "image": "nginx",
+                        "ports": [
+                            {
+                                "containerPort": 80
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "filename": "example_service01.yaml",
+        "apiVersion": "v1",
+        "kind": "Service",
+        "config": {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "name": "my-service"
+            },
+            "spec": {
+                "selector": {
+                    "app.kubernetes.io/name": "MyApp"
+                },
+                "ports": [
+                    {
+                        "protocol": "TCP",
+                        "port": 80,
+                        "targetPort": 9376
                     }
                 ]
             }
