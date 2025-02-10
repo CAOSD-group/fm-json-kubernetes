@@ -16,10 +16,6 @@
                         {
                             "io_k8s_api_apps_v1_Deployment_spec_selector_matchLabels_KeyMap": "app",
                             "io_k8s_api_apps_v1_Deployment_spec_selector_matchLabels_ValueMap": "nginx"
-                        },
-                        {
-                            "io_k8s_api_apps_v1_Deployment_spec_selector_matchLabels_KeyMap": "web",
-                            "io_k8s_api_apps_v1_Deployment_spec_selector_matchLabels_ValueMap": "exampleweb"
                         }
                     ]
                 },
@@ -87,7 +83,9 @@
                     "storage"
                 ],
                 "io_k8s_api_core_v1_PersistentVolume_spec_accessModes": [
-                    "ReadWriteOnce"
+                    {
+                        "io_k8s_api_core_v1_PersistentVolume_spec_accessModes_StringValue": "ReadWriteOnce"
+                    }
                 ],
                 "io_k8s_api_core_v1_PersistentVolume_spec_hostPath": {
                     "io_k8s_api_core_v1_PersistentVolume_spec_hostPath_path": "/mnt/data"
@@ -107,7 +105,12 @@
             },
             "io_k8s_api_core_v1_PersistentVolumeClaim_spec": {
                 "io_k8s_api_core_v1_PersistentVolumeClaim_spec_accessModes": [
-                    "ReadWriteOnce"
+                    {
+                        "io_k8s_api_core_v1_PersistentVolumeClaim_spec_accessModes_StringValue": "ReadWriteOnce"
+                    },
+                    {
+                        "io_k8s_api_core_v1_PersistentVolumeClaim_spec_accessModes_StringValue": "ExampleAdded"
+                    }
                 ],
                 "io_k8s_api_core_v1_PersistentVolumeClaim_spec_volumeMode": "Filesystem",
                 "io_k8s_api_core_v1_PersistentVolumeClaim_spec_resources": {
@@ -130,7 +133,9 @@
                                 "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions_operator_In": "In"
                             },
                             "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions_values": [
-                                "dev"
+                                {
+                                    "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions_values_StringValue": "dev"
+                                }
                             ]
                         }
                     ]
