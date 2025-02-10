@@ -131,6 +131,22 @@ def search_features_in_csv(hierarchical_props, key_value_pairs, csv_file):
                         aux_hierchical_maps_value = f"{hierarchical_prop}_ValueMap" ## Se crea manualmente el _ValueMap porque no viene en los YAMLS
                         #print(f"El aux VALUE ES: {aux_hierchical_maps_value}")
                         feature_map[aux_hierchical_maps_value] = feature
+                    elif middle.strip() and turned == "StringValue" and feature not in feature_map and aux_hierchical_maps.endswith(hierarchical_prop): ## Nueva adición para añadir los StringValue que aparezcan en la lista de features
+                        aux_hierchical_arr_string = f"{hierarchical_prop}_StringValue" ## Se crea manualmente el _StringValue porque es un feature personalizado del modelo. Se usa para referirse a los arrays de strings
+                        #print(f"El aux VALUE ES: {aux_hierchical_maps_value}")
+                        print(f"Array de Strings: {feature} {hierarchical_prop} {aux_hierchical_arr_string}")
+                        feature_map[aux_hierchical_arr_string] = feature
+                    elif middle.strip() and turned == "asString" and feature not in feature_map and aux_hierchical_maps.endswith(hierarchical_prop): ## Nueva adición para añadir los StringValue que aparezcan en la lista de features
+                        aux_hierchical_as_string = f"{hierarchical_prop}_asString" ## Se crea manualmente el _StringValue porque es un feature personalizado del modelo. Se usa para referirse a los arrays de strings
+                        #print(f"El aux VALUE ES: {aux_hierchical_maps_value}")
+                        print(f"Seleccion de tipo String: {feature} {hierarchical_prop} {aux_hierchical_as_string}")
+                        feature_map[aux_hierchical_as_string] = feature
+                    elif middle.strip() and turned == "asNumber" and feature not in feature_map and aux_hierchical_maps.endswith(hierarchical_prop): ## Nueva adición para añadir los StringValue que aparezcan en la lista de features
+                        aux_hierchical_as_number = f"{hierarchical_prop}_asNumber" ## Se crea manualmente el _StringValue porque es un feature personalizado del modelo. Se usa para referirse a los arrays de strings
+                        #print(f"El aux VALUE ES: {aux_hierchical_maps_value}")
+                        print(f"Seleccion de tipo Number: {feature} {hierarchical_prop} {aux_hierchical_as_number}")
+                        feature_map[aux_hierchical_as_number] = feature
+                        ## Falta opcion asInteger
 
                     """if turned == "KeyMap" and aux_hierchical_maps.endswith(middle) and feature not in feature_map: ##  or turned == "ValueMap"
                         if turned == "KeyMap":
@@ -204,10 +220,10 @@ def apply_feature_mapping(yaml_data, feature_map, hierarchical_props, auxFeature
         mapped_key = {}
         feature_map_key_value = {}
         for key, value in yaml_data.items():
-            aux_key_value = f"{key}_{value}"
             aux_nested = False ## boolean para determinar si una propiedad tiene un feature value
             aux_array = False ## boolean para determinar si una propiedad contiene un array o es un array de features
             aux_maps = False ## marca para determinar los mapas
+            aux_str_values = False
             for key_features, value_features in feature_map.items():
                 # Verificar mapeo directo
                 #print("NO SE EJECUTA?")
@@ -235,25 +251,45 @@ def apply_feature_mapping(yaml_data, feature_map, hierarchical_props, auxFeature
                         key = value_features["feature"]
                         aux_array = True
                         continue
-                
+                ### Nueva adicion: StringValue para representar los arrays de Strings. En features se localizan por el _StringValue o _StringValueAdditional
+                ## Seguir un tratamiento similar que con los mapas. Parte final del feature
+                elif isinstance(value, list) and key_features.endswith("StringValue") and isinstance(value_features, str) and "StringValue" == value_features.split("_")[-1] and value_features not in auxFeaturesAddedList: ## Prueba add StringValue
+                    aux_key_last_before_map = value_features.split("_")[-2]
+                    str_values = []
+                    print(f"SE EJECUTA IF NUEVO {key}   {value_features}")
+                    print(value)
+                    if key.endswith(aux_key_last_before_map) and key_features.endswith(f"{aux_key_last_before_map}_StringValue"):### and value.get("key") in value_features  ## key coge los valores del feature mapeado
+                        print(f"SE EJECUTA DE NUEVO IF NUEVO {value_features}")
+                        for str_value in value:
+                            print(value)
+                            print(f"{str_value}   {key} {value_features}   {aux_key_last_before_map}")
+                            #aux_feature_value = f"{aux_feature_str_value}_ValueMap"
+                                #if value_features.endswith(key_features):
+                            str_values.append({ ## , aux_feature_value: map_value
+                                value_features: str_value
+                            })
+                            auxFeaturesAddedList.add(value_features)
+                        #print(f"EL KEY VALUES ES {key_values}")
+                        feature_str_value = str_values
+                        aux_str_values = True
                 elif isinstance(value, dict) and key_features.endswith("KeyMap") and isinstance(value_features, str) and "KeyMap" == value_features.split("_")[-1] and value_features not in auxFeaturesAddedList: ## or "ValueMap" == last_value_feature)
                     #print(f"NO HAY NADA¿ {last_value_feature}") ## value.get("key")
                     #print(f"{key}     {yaml_data}") ## last_key_feature.endswith(key) and 
                     aux_key_last_before_map = value_features.split("_")[-2]
-                    print(f"ELEMENTOS QUE DEBERIAN DE COIONCIDIR: {value_features}  {aux_key_last_before_map}")
-                    print(f"SE EJECUTA IF RARO {key}    {value}     {key_features}     {value_features}")
+                    #print(f"ELEMENTOS QUE DEBERIAN DE COIONCIDIR: {value_features}  {aux_key_last_before_map}")
+                    #print(f"SE EJECUTA IF RARO {key}    {value}     {key_features}     {value_features}")
                     key_values = []
                     #print(value.get("key"))
                     if key.endswith(aux_key_last_before_map) and key_features.endswith(f"{aux_key_last_before_map}_KeyMap"):### and value.get("key") in value_features  ## key coge los valores del feature mapeado
-                        print(f"SE EJECUTA DE NUEVO IF RARO {value_features}")
+                        #print(f"SE EJECUTA DE NUEVO IF RARO {value_features}")
 
                         for map_key, map_value in value.items():
                             print(f"{key}   {value} {map_key}   {map_value}")
                             aux_feature_maps = value_features.rsplit("_", 1)[0] ## se obtiene el feature quitando la ultima parte para añadir manualmente el ValueMap
                             aux_feature_value = f"{aux_feature_maps}_ValueMap"
                                 #if value_features.endswith(key_features):
-                            print(f"{map_key}   {map_value} {value_features}")
-                            print(f"COINCIDENCIA CON EL FEATURE MAP")
+                            #print(f"{map_key}   {map_value} {value_features}")
+                            #print(f"COINCIDENCIA CON EL FEATURE MAP")
                             key_values.append({
                                 value_features: map_key,
                                 aux_feature_value: map_value
@@ -261,7 +297,7 @@ def apply_feature_mapping(yaml_data, feature_map, hierarchical_props, auxFeature
                             auxFeaturesAddedList.add(value_features)
                             auxFeaturesAddedList.add(aux_feature_value)
 
-                        print(f"EL KEY VALUES ES {key_values}")
+                        #print(f"EL KEY VALUES ES {key_values}")
                         feature_map_key_value = key_values
                         aux_maps = True
 
@@ -275,8 +311,9 @@ def apply_feature_mapping(yaml_data, feature_map, hierarchical_props, auxFeature
             mapped_key = feature_map.get(key, key)
             if aux_nested:
                 new_data[mapped_key] = feature_nested
-            #elif aux_maps:
-            #    new_data[mapped_key] = feature_map_key_value
+            elif aux_str_values: ## prueba add arr of strings
+                print(f"prueba add arr of strings")
+                new_data[mapped_key] = feature_str_value
             elif aux_array or isinstance(value, list): ##  or isinstance(value, list)
                 if aux_maps:
                     print("NO SE EJCUTA?")

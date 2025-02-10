@@ -5,6 +5,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
+    - ExampleAdded
   volumeMode: Filesystem
   resources:
     requests:
