@@ -16,6 +16,10 @@
                         {
                             "io_k8s_api_apps_v1_Deployment_spec_selector_matchLabels_KeyMap": "app",
                             "io_k8s_api_apps_v1_Deployment_spec_selector_matchLabels_ValueMap": "nginx"
+                        },
+                        {
+                            "io_k8s_api_apps_v1_Deployment_spec_selector_matchLabels_KeyMap": "web",
+                            "io_k8s_api_apps_v1_Deployment_spec_selector_matchLabels_ValueMap": "exampleweb"
                         }
                     ]
                 },
@@ -41,7 +45,9 @@
                                 "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe": {
                                     "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe_httpGet": {
                                         "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe_httpGet_path": "/",
-                                        "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe_httpGet_port": 80
+                                        "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe_httpGet_port": {
+                                            "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe_httpGet_port_asInteger": 80
+                                        }
                                     },
                                     "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe_initialDelaySeconds": 15,
                                     "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe_periodSeconds": 10
@@ -49,7 +55,9 @@
                                 "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe": {
                                     "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe_httpGet": {
                                         "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe_httpGet_path": "/",
-                                        "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe_httpGet_port": 80
+                                        "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe_httpGet_port": {
+                                            "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe_httpGet_port_asInteger": 80
+                                        }
                                     },
                                     "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe_initialDelaySeconds": 5,
                                     "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe_periodSeconds": 5
@@ -80,7 +88,12 @@
             "io_k8s_api_core_v1_PersistentVolume_spec": {
                 "io_k8s_api_core_v1_PersistentVolume_spec_storageClassName": "manual",
                 "io_k8s_api_core_v1_PersistentVolume_spec_capacity": [
-                    "storage"
+                    {
+                        "io_k8s_api_core_v1_PersistentVolume_spec_capacity_asString": "storage:10Gi"
+                    },
+                    {
+                        "io_k8s_api_core_v1_PersistentVolume_spec_capacity_asNumber": 2.0
+                    }
                 ],
                 "io_k8s_api_core_v1_PersistentVolume_spec_accessModes": [
                     {
@@ -115,7 +128,12 @@
                 "io_k8s_api_core_v1_PersistentVolumeClaim_spec_volumeMode": "Filesystem",
                 "io_k8s_api_core_v1_PersistentVolumeClaim_spec_resources": {
                     "io_k8s_api_core_v1_PersistentVolumeClaim_spec_resources_requests": [
-                        "storage"
+                        {
+                            "io_k8s_api_core_v1_PersistentVolumeClaim_spec_resources_requests_asString": "storage:8Gi"
+                        },
+                        {
+                            "io_k8s_api_core_v1_PersistentVolumeClaim_spec_resources_requests_asNumber": 15.0
+                        }
                     ]
                 },
                 "io_k8s_api_core_v1_PersistentVolumeClaim_spec_storageClassName": "slow",
@@ -191,7 +209,9 @@
                             "io_k8s_api_core_v1_Service_spec_ports_protocol_TCP": "TCP"
                         },
                         "io_k8s_api_core_v1_Service_spec_ports_port": 80,
-                        "io_k8s_api_core_v1_Service_spec_ports_targetPort": 9376
+                        "io_k8s_api_core_v1_Service_spec_ports_targetPort": {
+                            "io_k8s_api_core_v1_Service_spec_ports_targetPort_asInteger": 9376
+                        }
                     }
                 ]
             }

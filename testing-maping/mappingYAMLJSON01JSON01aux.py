@@ -136,18 +136,29 @@ def search_features_in_csv(hierarchical_props, key_value_pairs, csv_file):
                         #print(f"El aux VALUE ES: {aux_hierchical_maps_value}")
                         print(f"Array de Strings: {feature} {hierarchical_prop} {aux_hierchical_arr_string}")
                         feature_map[aux_hierchical_arr_string] = feature
+                    ## StringValueAdditional: Array de Strings que se añade de manera diferente en el script principal del modelo.
+                    elif middle.strip() and turned == "StringValueAdditional" and feature not in feature_map and aux_hierchical_maps.endswith(hierarchical_prop): ## Nueva adición para añadir los StringValue que aparezcan en la lista de features
+                        aux_hierchical_arr_string_additional = f"{hierarchical_prop}_StringValueAdditional" ## Se crea manualmente el _StringValue porque es un feature personalizado del modelo. Se usa para referirse a los arrays de strings
+                        #print(f"El aux VALUE ES: {aux_hierchical_maps_value}")
+                        print(f"Array de Strings Additional: {feature} {hierarchical_prop} {aux_hierchical_arr_string_additional}")
+                        feature_map[aux_hierchical_arr_string_additional] = feature
+                    ## Para agregar la incorporación de los features de tipo de seleccion de dato, se agregan de manera "manual". Cuando haya coincidencia del feature con Turned igual a asString, asNumber o asInteger se agregan si la 
+                    ## herencia coincide con el feature omitido. Se agrega por la alternatividad del modelo y en la salida se selecciona el que aparece en el JSON. Al no saber el valor que se le agrega a la propiedad no se puede definir
+                    ## antes el tipo de dato.
                     elif middle.strip() and turned == "asString" and feature not in feature_map and aux_hierchical_maps.endswith(hierarchical_prop): ## Nueva adición para añadir los StringValue que aparezcan en la lista de features
                         aux_hierchical_as_string = f"{hierarchical_prop}_asString" ## Se crea manualmente el _StringValue porque es un feature personalizado del modelo. Se usa para referirse a los arrays de strings
                         #print(f"El aux VALUE ES: {aux_hierchical_maps_value}")
-                        print(f"Seleccion de tipo String: {feature} {hierarchical_prop} {aux_hierchical_as_string}")
+                        #print(f"Seleccion de tipo String: {feature} {hierarchical_prop} {aux_hierchical_as_string}")
                         feature_map[aux_hierchical_as_string] = feature
                     elif middle.strip() and turned == "asNumber" and feature not in feature_map and aux_hierchical_maps.endswith(hierarchical_prop): ## Nueva adición para añadir los StringValue que aparezcan en la lista de features
                         aux_hierchical_as_number = f"{hierarchical_prop}_asNumber" ## Se crea manualmente el _StringValue porque es un feature personalizado del modelo. Se usa para referirse a los arrays de strings
-                        #print(f"El aux VALUE ES: {aux_hierchical_maps_value}")
-                        print(f"Seleccion de tipo Number: {feature} {hierarchical_prop} {aux_hierchical_as_number}")
+                        #print(f"Seleccion de tipo Number: {feature} {hierarchical_prop} {aux_hierchical_as_number}")
                         feature_map[aux_hierchical_as_number] = feature
                         ## Falta opcion asInteger
-
+                    elif middle.strip() and turned == "asInteger" and feature not in feature_map and aux_hierchical_maps.endswith(hierarchical_prop): ## Nueva adición para añadir los StringValue que aparezcan en la lista de features
+                        aux_hierchical_as_integer = f"{hierarchical_prop}_asInteger" ## Se crea manualmente el _StringValue porque es un feature personalizado del modelo. Se usa para referirse a los arrays de strings
+                        #print(f"Seleccion de tipo Integer: {feature} {hierarchical_prop} {aux_hierchical_as_integer}")
+                        feature_map[aux_hierchical_as_integer] = feature
                     """if turned == "KeyMap" and aux_hierchical_maps.endswith(middle) and feature not in feature_map: ##  or turned == "ValueMap"
                         if turned == "KeyMap":
                             aux_hierarchical_prop_key = "{hierarchical_prop}_KeyMap"
@@ -217,13 +228,18 @@ def apply_feature_mapping(yaml_data, feature_map, hierarchical_props, auxFeature
         #print(feature_map.items())
         new_data = {}
         feature_nested = {}
+        feature_type_value = {}
         mapped_key = {}
         feature_map_key_value = {}
+        #feature_type_array = {}
+        possible_type_data = ['asString', 'asNumber', 'asInteger']
         for key, value in yaml_data.items():
             aux_nested = False ## boolean para determinar si una propiedad tiene un feature value
             aux_array = False ## boolean para determinar si una propiedad contiene un array o es un array de features
             aux_maps = False ## marca para determinar los mapas
             aux_str_values = False
+            aux_value_type = False
+            aux_value_type_array = False
             for key_features, value_features in feature_map.items():
                 # Verificar mapeo directo
                 #print("NO SE EJECUTA?")
@@ -256,10 +272,10 @@ def apply_feature_mapping(yaml_data, feature_map, hierarchical_props, auxFeature
                 elif isinstance(value, list) and key_features.endswith("StringValue") and isinstance(value_features, str) and "StringValue" == value_features.split("_")[-1] and value_features not in auxFeaturesAddedList: ## Prueba add StringValue
                     aux_key_last_before_map = value_features.split("_")[-2]
                     str_values = []
-                    print(f"SE EJECUTA IF NUEVO {key}   {value_features}")
-                    print(value)
+                    #print(f"SE EJECUTA IF NUEVO {key}   {value_features}")
+                    #print(value)
                     if key.endswith(aux_key_last_before_map) and key_features.endswith(f"{aux_key_last_before_map}_StringValue"):### and value.get("key") in value_features  ## key coge los valores del feature mapeado
-                        print(f"SE EJECUTA DE NUEVO IF NUEVO {value_features}")
+                        #print(f"SE EJECUTA DE NUEVO IF NUEVO {value_features}")
                         for str_value in value:
                             print(value)
                             print(f"{str_value}   {key} {value_features}   {aux_key_last_before_map}")
@@ -282,7 +298,6 @@ def apply_feature_mapping(yaml_data, feature_map, hierarchical_props, auxFeature
                     #print(value.get("key"))
                     if key.endswith(aux_key_last_before_map) and key_features.endswith(f"{aux_key_last_before_map}_KeyMap"):### and value.get("key") in value_features  ## key coge los valores del feature mapeado
                         #print(f"SE EJECUTA DE NUEVO IF RARO {value_features}")
-
                         for map_key, map_value in value.items():
                             print(f"{key}   {value} {map_key}   {map_value}")
                             aux_feature_maps = value_features.rsplit("_", 1)[0] ## se obtiene el feature quitando la ultima parte para añadir manualmente el ValueMap
@@ -296,11 +311,89 @@ def apply_feature_mapping(yaml_data, feature_map, hierarchical_props, auxFeature
                             })
                             auxFeaturesAddedList.add(value_features)
                             auxFeaturesAddedList.add(aux_feature_value)
-
                         #print(f"EL KEY VALUES ES {key_values}")
                         feature_map_key_value = key_values
                         aux_maps = True
 
+                ### Adicion seleccion de tipo de feature dependiendo del tipo de dato del valor de las propiedades
+                elif any(key_features.endswith(keyword) for keyword in possible_type_data) and isinstance(value_features, str) and value_features not in auxFeaturesAddedList and value_features.endswith(key_features): ## and any(keyword == value_features.split("_")[1] for keyword in possible_type_data) ### isinstance(value, str) and # and key_features.endswith(possible_type_data)
+                    ## Definir bien la logica de insercion de los features a añadir... bloque general por el tipo de dato que es value
+                    print("Se ha encontrado una coincidencia del tipo de dato") ##and keyword == value_features.split("_")[1]
+                    aux_key_last_before_value = value_features.split("_")[-2] ## se obtiene la penultima prop
+                    aux_value_last = value_features.rsplit("_", 1)[0]
+                    print(f"{key_features}  {value_features} {key} {value}") ##and keyword == value_features.split("_")[1]
+                    
+                    if key.endswith(aux_key_last_before_value) and aux_value_last.endswith(key): ### and key_features.endswith(f"{aux_key_last_before_value}_asString"): # and value.get("key") in value_features  ## key coge los valores del feature mapeado
+                        print(f"SEGUNDA EJECUCION TIPO DE DATOS     {key}   {value_features}    {value}")
+                        ## aux_value_last.endswith(key)
+                        if isinstance(value, dict):
+                            str_types_values = []
+                            print("ME EJECUTO PARA EL ARRAY")
+                            for key_item, value_item in value.items():
+                                print(f"ALGO SE EJCUTA??    {key_item}    {value_item}  {value_features}")
+                                if value_features not in auxFeaturesAddedList:
+                                    feature_entry = {}  # Diccionario para cada feature
+                                    # Validar que el valor sea coherente con el tipo esperado del feature
+                                    if isinstance(value_item, str) and value_features.endswith("asString"): ## and value_features.endswith("asString")
+                                        feature_entry[value_features] = f"{key_item}:{value_item}"
+                                        #str_types_values.append({value_features:f"{key_item}:{value_item}"})
+                                        #auxFeaturesAddedList.add(value_features)
+                                        #aux_value_type_array = True
+                                        #feature_type_array = str_types_values
+                                        print(f"COINCIDENCIA EN EL ARRAY STRING {value_item}    {str_types_values}")
+                                    elif isinstance(value_item, int) and value_features.endswith("asInteger"):
+                                        feature_entry[value_features] = value_item
+                                        #str_types_values.append({value_features:value_item}) ## f"{key_item}-{value_item}"
+                                        #auxFeaturesAddedList.add(value_features)
+                                        #aux_value_type_array = True
+                                        #feature_type_array = str_types_values
+                                        print(f"COINCIDENCIA EN EL ARRAY INTEGER {value_item}    {str_types_values}")
+                                    elif isinstance(value_item, float) and value_features.endswith("asNumber"):
+                                        feature_entry[value_features] = value_item
+                                        #str_types_values.append({value_features:value_item}) ## f"{key_item}-{value_item}"
+                                        #auxFeaturesAddedList.add(value_features)
+                                        print(f"COINCIDENCIA EN EL ARRAY DE NUMBER {value_item}    {str_types_values}")
+                                        #aux_value_type_array = True
+                                        #feature_type_array = str_types_values
+                                                        # Agregar el feature encontrado
+                                    if feature_entry:
+                                        str_types_values.append(feature_entry)
+                                        auxFeaturesAddedList.add(value_features)
+                                    # Agregar los valores encontrados sin sobrescribir
+                            if "feature_type_array" not in locals():
+                                feature_type_array = []  # Se inicializa solo si no existe
+
+                            if str_types_values:
+                                aux_value_type_array = True
+                                feature_type_array.extend(str_types_values)  # Agregar sin sobrescribir
+                                ##feature_type_array = str_types_values  # Si está vacío, inicializarlo como lista           
+                            #feature_type_array = str_types_values
+                            #print(f"VALOR DEL ARRAY DE FEATS:   {str_types_values}   {feature_type_array}")
+
+                        else:
+                            if isinstance(value, str) and key_features.endswith(f"{aux_key_last_before_value}_asString"):
+                                print("PORQUE SOY STRING¿")
+                                feature_type_value[value_features] = value
+                                aux_value_type = True
+                                auxFeaturesAddedList.add(value_features)
+                            elif isinstance(value, int) and key_features.endswith(f"{aux_key_last_before_value}_asInteger"):
+                                print(f"PORQUE NO SOY INT?  {value}")
+                                #key = value_features
+                                feature_type_value[value_features] = value
+                                aux_value_type = True
+                                auxFeaturesAddedList.add(value_features)
+                            elif isinstance(value, float) and key_features.endswith(f"{aux_key_last_before_value}_asNumber"):
+                                print(f"PORQUE NO SOY INT?  {value}")
+                                #key = value_features
+                                feature_type_value[value_features] = value
+                                aux_value_type = True
+                                auxFeaturesAddedList.add(value_features)
+                    """if key.endswith(aux_key_last_before_value) and key_features.endswith(f"{aux_key_last_before_value}_asString"):### and value.get("key") in value_features  ## key coge los valores del feature mapeado
+                        print(f"SE EJECUTA DE NUEVO IF NUEVO {value_features}")
+                        auxFeaturesAddedList.add(value_features)
+                        #print(f"EL KEY VALUES ES {key_values}")
+                        feature_str_value = str_values
+                        aux_str_values = True"""
                 # Representación de valores seleccionados, se comprueba si algun valor del yaml coincide con la ultima parte de los features en la lista.
                 elif isinstance(value_features, str) and value == value_features.split("_")[-1] and value_features not in auxFeaturesAddedList:
                         if value_features.endswith(key_features):
@@ -312,12 +405,18 @@ def apply_feature_mapping(yaml_data, feature_map, hierarchical_props, auxFeature
             if aux_nested:
                 new_data[mapped_key] = feature_nested
             elif aux_str_values: ## prueba add arr of strings
-                print(f"prueba add arr of strings")
+                #print(f"prueba add arr of strings")
                 new_data[mapped_key] = feature_str_value
+            elif aux_value_type : ## and not aux_array
+                #print(f"ME EJECUTO PARA EL FEATURE SIMPLE ARRAY: {mapped_key}    {key}")
+                new_data[mapped_key] = feature_type_value
+            elif aux_value_type_array:
+                print(f"ELIF FINAL NO SE EJECTUA??   {feature_type_array}")
+                new_data[mapped_key] = feature_type_array
             elif aux_array or isinstance(value, list): ##  or isinstance(value, list)
                 if aux_maps:
-                    print("NO SE EJCUTA?")
-                    print(feature_map_key_value)
+                    #print("NO SE EJCUTA?")
+                    #print(feature_map_key_value)
                     new_data[mapped_key] = feature_map_key_value
                 else:
                     new_data[mapped_key] = [apply_feature_mapping(item, feature_map, hierarchical_props, auxFeaturesAddedList) if isinstance(item, (dict, list)) else item for item in value]

@@ -8,6 +8,7 @@ spec:
   storageClassName: manual
   capacity:
     storage: 10Gi
+    minimum: 2.0
   accessModes:
     - ReadWriteOnce
   hostPath:
