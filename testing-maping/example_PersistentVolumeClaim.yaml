@@ -10,6 +10,7 @@ spec:
   resources:
     requests:
       storage: 8Gi
+      maximum: 15.0
   storageClassName: slow
   selector:
     matchLabels:
