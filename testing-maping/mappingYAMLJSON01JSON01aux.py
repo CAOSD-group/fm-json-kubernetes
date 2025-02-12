@@ -325,37 +325,25 @@ def apply_feature_mapping(yaml_data, feature_map, hierarchical_props, auxFeature
                     
                     if key.endswith(aux_key_last_before_value) and aux_value_last.endswith(key): ### and key_features.endswith(f"{aux_key_last_before_value}_asString"): # and value.get("key") in value_features  ## key coge los valores del feature mapeado
                         print(f"SEGUNDA EJECUCION TIPO DE DATOS     {key}   {value_features}    {value}")
-                        ## aux_value_last.endswith(key)
                         if isinstance(value, dict):
                             str_types_values = []
-                            print("ME EJECUTO PARA EL ARRAY")
+                            print("EJECUCION PARA EL ARRAY TIPO DE DATOS")
                             for key_item, value_item in value.items():
-                                print(f"ALGO SE EJCUTA??    {key_item}    {value_item}  {value_features}")
+                                print(f"PRUEBA EJECUCION FOR   {key_item}    {value_item}  {value_features}")
                                 if value_features not in auxFeaturesAddedList:
                                     feature_entry = {}  # Diccionario para cada feature
                                     # Validar que el valor sea coherente con el tipo esperado del feature
                                     if isinstance(value_item, str) and value_features.endswith("asString"): ## and value_features.endswith("asString")
                                         feature_entry[value_features] = f"{key_item}:{value_item}"
-                                        #str_types_values.append({value_features:f"{key_item}:{value_item}"})
-                                        #auxFeaturesAddedList.add(value_features)
-                                        #aux_value_type_array = True
-                                        #feature_type_array = str_types_values
                                         print(f"COINCIDENCIA EN EL ARRAY STRING {value_item}    {str_types_values}")
                                     elif isinstance(value_item, int) and value_features.endswith("asInteger"):
                                         feature_entry[value_features] = value_item
-                                        #str_types_values.append({value_features:value_item}) ## f"{key_item}-{value_item}"
-                                        #auxFeaturesAddedList.add(value_features)
-                                        #aux_value_type_array = True
-                                        #feature_type_array = str_types_values
                                         print(f"COINCIDENCIA EN EL ARRAY INTEGER {value_item}    {str_types_values}")
                                     elif isinstance(value_item, float) and value_features.endswith("asNumber"):
                                         feature_entry[value_features] = value_item
-                                        #str_types_values.append({value_features:value_item}) ## f"{key_item}-{value_item}"
-                                        #auxFeaturesAddedList.add(value_features)
                                         print(f"COINCIDENCIA EN EL ARRAY DE NUMBER {value_item}    {str_types_values}")
-                                        #aux_value_type_array = True
-                                        #feature_type_array = str_types_values
-                                                        # Agregar el feature encontrado
+
+                                    # Agregar el feature encontrado
                                     if feature_entry:
                                         str_types_values.append(feature_entry)
                                         auxFeaturesAddedList.add(value_features)
@@ -367,9 +355,6 @@ def apply_feature_mapping(yaml_data, feature_map, hierarchical_props, auxFeature
                                 aux_value_type_array = True
                                 feature_type_array.extend(str_types_values)  # Agregar sin sobrescribir
                                 ##feature_type_array = str_types_values  # Si está vacío, inicializarlo como lista           
-                            #feature_type_array = str_types_values
-                            #print(f"VALOR DEL ARRAY DE FEATS:   {str_types_values}   {feature_type_array}")
-
                         else:
                             if isinstance(value, str) and key_features.endswith(f"{aux_key_last_before_value}_asString"):
                                 print("PORQUE SOY STRING¿")
@@ -388,12 +373,6 @@ def apply_feature_mapping(yaml_data, feature_map, hierarchical_props, auxFeature
                                 feature_type_value[value_features] = value
                                 aux_value_type = True
                                 auxFeaturesAddedList.add(value_features)
-                    """if key.endswith(aux_key_last_before_value) and key_features.endswith(f"{aux_key_last_before_value}_asString"):### and value.get("key") in value_features  ## key coge los valores del feature mapeado
-                        print(f"SE EJECUTA DE NUEVO IF NUEVO {value_features}")
-                        auxFeaturesAddedList.add(value_features)
-                        #print(f"EL KEY VALUES ES {key_values}")
-                        feature_str_value = str_values
-                        aux_str_values = True"""
                 # Representación de valores seleccionados, se comprueba si algun valor del yaml coincide con la ultima parte de los features en la lista.
                 elif isinstance(value_features, str) and value == value_features.split("_")[-1] and value_features not in auxFeaturesAddedList:
                         if value_features.endswith(key_features):
