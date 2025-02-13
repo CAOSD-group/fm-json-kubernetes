@@ -8,7 +8,7 @@ spec:
   storageClassName: manual
   capacity:
     storage: 10Gi
-    minimum: 2.0
+    minimum: 2.0 ## Agregado solo para probar la funcionalidad del array en el mapeo
   accessModes:
     - ReadWriteOnce
   hostPath:

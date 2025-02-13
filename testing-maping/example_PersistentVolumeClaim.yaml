@@ -10,7 +10,7 @@ spec:
   resources:
     requests:
       storage: 8Gi
-      maximum: 15.0
+      maximum: 15.0 ## Puesto solo para probar el ejemplo
   storageClassName: slow
   selector:
     matchLabels:
