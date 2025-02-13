@@ -421,8 +421,13 @@ yaml_data_list = read_yaml_files_from_directory(yaml_directory)
 # Ruta del archivo CSV
 csv_file_path = './generateConfigs/kubernetes_mapping_features_part01.csv'
 
-# Preparar estructura para JSON
-output_data = []
+# Guardar la salida de la carpeta con ficheros JSON
+output_json_dir = './generateConfigs/outputs_json_mappeds'
+#output_json_path = './generateConfigs/output_features02.json'
+os.makedirs(output_json_dir, exist_ok=True)  # Crea la carpeta si no existe
+
+# Preparar estructura para JSONs
+#output_data = []
 
 for filename, yaml_data, simple_props, hierarchical_props, key_value_pairs, root_info in yaml_data_list:
     print(f"\nProcesando archivo: {filename}")
@@ -435,12 +440,16 @@ for filename, yaml_data, simple_props, hierarchical_props, key_value_pairs, root
         #"kind": root_info.get("kind", "N/A"),
         "config": updated_config
     }
-    output_data.append(yaml_entry)
+    #output_data.append(yaml_entry)
+    # Generar un nombre de archivo JSON basado en el YAML
+    json_filename = os.path.splitext(filename)[0] + ".json"
+    output_json_path = os.path.join(output_json_dir, json_filename)
 
-# Guardar la salida en JSON
-output_json_path = './generateConfigs/output_features02.json'
+#output_json_path = './generateConfigs/output_features02.json'
 
-with open(output_json_path, 'w', encoding='utf-8') as json_file:
-    json.dump(output_data, json_file, ensure_ascii=False, indent=4)
+    with open(output_json_path, 'w', encoding='utf-8') as json_file:
+        json.dump(yaml_entry, json_file, ensure_ascii=False, indent=4)
+        #json.dump(output_data, json_file, ensure_ascii=False, indent=4)
+    print(f"Archivo guardado: {output_json_path}")
 
-print(f"Resultados guardados en: {output_json_path}")
+print(f"Todos los archivos han sido procesados y guardados")
