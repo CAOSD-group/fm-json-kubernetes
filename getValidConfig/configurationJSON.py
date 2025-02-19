@@ -30,15 +30,10 @@ class ConfigurationJSON(TextToModel):
             print(f"Hay mas de una configuración en las listas")
             configurations = []
             for key, items in list_elements.items():
-                print(f"Lista de items en elements {list_elements.items()}")
                 for idx, item in enumerate(items):
-                    print(f"{idx}   {item}")
                     new_config = elements.copy()  # Se copian los features que ya habian en la config
-                    print(f"COPIA DE ELEMENTOS  {new_config}")
                     new_config.update(item)  # Se agregan los elementos individuales
-                    print(f"ELEMENTOS INDIVIDUALES  {item}")
                     configurations.append(Configuration(new_config))
-                    #print(Configuration(new_config))
             return configurations
         else:
             return Configuration(elements)
@@ -58,7 +53,10 @@ class ConfigurationJSON(TextToModel):
                 elif isinstance(value, list):  # Listas con diccionarios
                     #print(f"Elementos lista {value}")
                     elements[key] = True
-                    if len(value) > 1:
+                    if len(value) == 1:
+                        print("NO ME EJECUTO")
+                        self.extract_features(value[0], elements, list_elements)
+                    elif len(value) > 1:
                         ## Creacion de una confi por cada elemento de la lista
                         print(f"LISTA CON MAS DE UN ELEMENTO")
                         list_elements[key] = []
@@ -66,10 +64,6 @@ class ConfigurationJSON(TextToModel):
                             temp_elements = {}
                             self.extract_features(item, temp_elements, list_elements)
                             list_elements[key].append(temp_elements)
-                    else: ## Solo un elemento o ninguno
-                        print("NO ME EJECUTO")
-                        self.extract_features(value[0], elements, list_elements)
-
                             #print(item)
 
 
@@ -105,9 +99,9 @@ if __name__ == '__main__':
     #print(configuration.elements)
 
     # Imprimir todas las configuraciones generadas
-    """for i, config in enumerate(configurations):
+    for i, config in enumerate(configurations):
         configuration = configuration_reader.transform()
-        print(f'Configuration {i+1}: {config.elements}')"""
+        print(f'Configuration {i+1}: {config.elements}')
 
     #print(os.path.exists(path_json))  # Debe imprimir True si el archivo existe
     
