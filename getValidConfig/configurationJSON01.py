@@ -18,7 +18,7 @@ class ConfigurationJSON(TextToModel):
     def __init__(self, path: str) -> None:
         self._path = path
 
-    def transform(self) -> Configuration:
+    def transform(self): ##  -> Configuration
         json_data = self.get_configuration_from_json(self._path)
         elements = {}
         list_elements = {} ## Variable que guardara las configuraciones si hay más de 1. Listas con mas de 1 valor
@@ -27,16 +27,27 @@ class ConfigurationJSON(TextToModel):
         #print(f"Elementos que se agregan al Configuration: {elements}")
 
         if list_elements:
+            #return self.generate_combinations(elements, list_elements)
+            configurations = self.generate_combinations(elements, list_elements)
+            return configurations
+        else:
+            return [Configuration(elements)] ## return [Configuration(base_config)]
+        """if list_elements:
             print(f"Hay mas de una configuración en las listas")
             configurations = []
             for key, items in list_elements.items():
+                print(f"Lista de items en elements {list_elements.items()}")
                 for idx, item in enumerate(items):
+                    print(f"{idx}   {item}")
                     new_config = elements.copy()  # Se copian los features que ya habian en la config
+                    print(f"COPIA DE ELEMENTOS  {new_config}")
                     new_config.update(item)  # Se agregan los elementos individuales
+                    print(f"ELEMENTOS INDIVIDUALES  {item}")
                     configurations.append(Configuration(new_config))
+                    #print(Configuration(new_config))
             return configurations
         else:
-            return Configuration(elements)
+            return Configuration(elements)"""
         
     def extract_features(self, data, elements, list_elements):
         """ Extrae los features del JSON sin modificar sus claves. """
@@ -52,20 +63,49 @@ class ConfigurationJSON(TextToModel):
                     self.extract_features(value, elements, list_elements)  # Se sigue explorando
                 elif isinstance(value, list):  # Listas con diccionarios
                     #print(f"Elementos lista {value}")
-                    elements[key] = True
-                    if len(value) == 1:
-                        print("NO ME EJECUTO")
-                        self.extract_features(value[0], elements, list_elements)
-                    elif len(value) > 1:
-                        ## Creacion de una confi por cada elemento de la lista
-                        print(f"LISTA CON MAS DE UN ELEMENTO")
+                    elements[key] = True ## No se si duplica el key
+                    if len(value) > 1:
                         list_elements[key] = []
                         for item in value:
+                            print("Ejecución con mas de un elemento en la lista")
                             temp_elements = {}
                             self.extract_features(item, temp_elements, list_elements)
                             list_elements[key].append(temp_elements)
+                        #list_elements.append([self.extract_single_feature(item) for item in value])
+                    else: ## Solo un elemento o ninguno
+                        print("Ejecución con un solo elemento de la lista")
+                        self.extract_features(value[0], elements, list_elements)
+
                             #print(item)
 
+    """def extract_single_feature(self, item):
+         #Extrae un solo feature de un elemento de lista. 
+        feature = {}
+        self.extract_features(item, feature, {})
+        return feature"""
+
+    def generate_combinations(self, base_config, list_elements):
+        """ Genera todas las combinaciones posibles manteniendo la estructura original. """
+        
+        keys = list(list_elements.keys())
+        num_keys = len(keys)
+        configurations = []
+
+        def backtrack(index, current_config):
+            if index == len(list_elements):
+                configurations.append(Configuration(current_config.copy()))
+                return
+            key = keys[index]
+            for option in list_elements[key]:
+                current_config.update(option)
+                backtrack(index + 1, current_config)
+                for key in option.keys():
+                    current_config.pop(key)  # Eliminar claves para la siguiente iteración
+
+        # Iniciamos el backtracking con la configuración base
+        backtrack(0, base_config.copy())
+
+        return configurations
 
     def get_configuration_from_json(self, path: str) -> dict:
         # Returns a list of list 
@@ -95,13 +135,16 @@ if __name__ == '__main__':
 
     configurations = configuration_reader.transform()
 
-    #print(f'Configuration: {configuration}')
+    #print(f'Configuration: {configurations}')
     #print(configuration.elements)
 
     # Imprimir todas las configuraciones generadas
+    #if len(configurations) > 1:
     for i, config in enumerate(configurations):
-        configuration = configuration_reader.transform()
+        #configuration = configuration_reader.transform()
         print(f'Configuration {i+1}: {config.elements}')
+    #else:
+    #    print(f'Configuration: {configurations}')
 
     #print(os.path.exists(path_json))  # Debe imprimir True si el archivo existe
     
