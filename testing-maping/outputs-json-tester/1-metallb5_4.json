@@ -1,0 +1,117 @@
+{
+    "filename": "1-metallb5.yaml",
+    "apiVersion": "v1",
+    "config": {
+        "io_k8s_api_rbac_v1_ClusterRole_apiVersion": [
+            "r",
+            "b",
+            "a",
+            "c",
+            ".",
+            "a",
+            "u",
+            "t",
+            "h",
+            "o",
+            "r",
+            "i",
+            "z",
+            "a",
+            "t",
+            "i",
+            "o",
+            "n",
+            ".",
+            "k",
+            "8",
+            "s",
+            ".",
+            "i",
+            "o",
+            "/",
+            "v",
+            "1"
+        ],
+        "io_k8s_api_rbac_v1_ClusterRole_kind": [
+            "C",
+            "l",
+            "u",
+            "s",
+            "t",
+            "e",
+            "r",
+            "R",
+            "o",
+            "l",
+            "e"
+        ],
+        "io_k8s_api_rbac_v1_ClusterRole_metadata": [
+            "labels",
+            "name"
+        ],
+        "io_k8s_api_rbac_v1_ClusterRole_rules": [
+            {
+                "io_k8s_api_rbac_v1_ClusterRole_rules_apiGroups": [
+                    {
+                        "io_k8s_api_rbac_v1_ClusterRole_rules_apiGroups_StringValue": ""
+                    }
+                ],
+                "io_k8s_api_rbac_v1_ClusterRole_rules_resources": [
+                    {
+                        "io_k8s_api_rbac_v1_ClusterRole_rules_resources_StringValue": "services"
+                    }
+                ],
+                "io_k8s_api_rbac_v1_ClusterRole_rules_verbs": [
+                    {
+                        "io_k8s_api_rbac_v1_ClusterRole_rules_verbs_StringValue": "get"
+                    },
+                    {
+                        "io_k8s_api_rbac_v1_ClusterRole_rules_verbs_StringValue": "list"
+                    },
+                    {
+                        "io_k8s_api_rbac_v1_ClusterRole_rules_verbs_StringValue": "watch"
+                    }
+                ]
+            },
+            {
+                "apiGroups": [
+                    ""
+                ],
+                "resources": [
+                    "services/status"
+                ],
+                "verbs": [
+                    "update"
+                ]
+            },
+            {
+                "apiGroups": [
+                    ""
+                ],
+                "resources": [
+                    "events"
+                ],
+                "verbs": [
+                    "create",
+                    "patch"
+                ]
+            },
+            {
+                "apiGroups": [
+                    "policy"
+                ],
+                "io_k8s_api_rbac_v1_ClusterRole_rules_resourceNames": [
+                    {
+                        "io_k8s_api_rbac_v1_ClusterRole_rules_resourceNames_StringValue": "controller"
+                    }
+                ],
+                "resources": [
+                    "podsecuritypolicies"
+                ],
+                "verbs": [
+                    "use"
+                ]
+            }
+        ]
+    }
+}

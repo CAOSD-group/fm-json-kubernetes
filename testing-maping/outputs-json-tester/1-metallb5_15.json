@@ -1,0 +1,37 @@
+{
+    "filename": "1-metallb5.yaml",
+    "apiVersion": "apps_v1",
+    "config": {
+        "io_k8s_api_apps_v1_Deployment_apiVersion": [
+            "a",
+            "p",
+            "p",
+            "s",
+            "/",
+            "v",
+            "1"
+        ],
+        "io_k8s_api_apps_v1_Deployment_kind": [
+            "D",
+            "e",
+            "p",
+            "l",
+            "o",
+            "y",
+            "m",
+            "e",
+            "n",
+            "t"
+        ],
+        "io_k8s_api_apps_v1_Deployment_metadata": [
+            "labels",
+            "name",
+            "namespace"
+        ],
+        "io_k8s_api_apps_v1_Deployment_spec": [
+            "revisionHistoryLimit",
+            "selector",
+            "template"
+        ]
+    }
+}
