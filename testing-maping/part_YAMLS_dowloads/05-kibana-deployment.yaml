@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: kibana
+  name: kibana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: kibana
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.network/sample-pylogger-azblob-eskibana-default: "true"
+        io.kompose.service: kibana
+    spec:
+      containers:
+        - image: docker.elastic.co/kibana/kibana:8.9.2
+          livenessProbe:
+            exec:
+              command:
+                - bash
+                - -c
+                - 'curl -s -I http://localhost:5601 | grep -q "HTTP/1.1"'
+            failureThreshold: 120
+            periodSeconds: 10
+            timeoutSeconds: 10
+            initialDelaySeconds: 100
+          name: kibana
+          ports:
+            - containerPort: 5601
+              hostPort: 5601
+              protocol: TCP
+          resources:
+            limits:
+              memory: "1073741824"
+          volumeMounts:
+            - mountPath: /usr/share/kibana/config/certs   # NOTE: SSL resources should be placed in the [/usr/share/kibana/config] directory"
+              name: certs
+            - mountPath: /usr/share/kibana/config/kibana.yml   # NOTE: kibana YAML should be placed in the [/usr/share/kibana/config/kibana.yml]"
+              name: certs
+              subPath: kibana.yml
+      restartPolicy: Always
+      volumes:
+        - name: certs
+          configMap:
+            name: es-certs-configmap
+status: {}

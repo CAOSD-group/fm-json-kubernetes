@@ -3,6 +3,9 @@ import csv
 import os
 import json
 
+from datetime import datetime, timezone
+
+
 def extract_yaml_properties(data, parent_key='', root_info=None, first_add=True):
     """
     Extrae las propiedades del YAML en tres listas:
@@ -21,8 +24,13 @@ def extract_yaml_properties(data, parent_key='', root_info=None, first_add=True)
             new_key = f"{parent_key}_{key}" if parent_key else key
             # Guardar valores clave (apiVersion y kind) para determinar el contexto
             if key in ['apiVersion', 'kind']:
-                if '/' in value:
+                if '/' in value and not '.' in value:
                     value = value.replace('/', '_')
+                elif '.' in value and '/': ## Caso en el que el valor de la version contenga puntos '.' se usa solo la segunda parte separada por la barra lateral '/' que donota la versión dentro de los esquemas
+                    aux_value = value.split('/') ## Como se representa en los esquemas api_rbac_v1_, caso en los yaml: rbac.authorization.k8s.io/v1
+                    print(f"EL AUX VALUE SEPARADO ES {aux_value}")
+                    value = aux_value[1]
+                    print(value)
                 root_info[key] = value
             simple_props.append(key)
 
@@ -57,7 +65,7 @@ def read_yaml_files_from_directory(directory_path):
     Lee todos los archivos YAML en un directorio y extrae propiedades.
     """
     yaml_data_list = []
-    context_info = {}
+    #context_info = {}
     error_log_path = './error_log.txt'
 
     with open(error_log_path, 'w', encoding='utf-8') as error_log:
@@ -66,13 +74,23 @@ def read_yaml_files_from_directory(directory_path):
                 file_path = os.path.join(directory_path, filename)
                 try:
                     with open(file_path, 'r', encoding='utf-8') as yaml_file:
-                        yaml_data = yaml.safe_load(yaml_file)
-                        if yaml_data is None:
+                        # yaml_data = yaml.safe_load(yaml_file)
+                        yaml_documents = list(yaml.safe_load_all(yaml_file))  # Cargar múltiples documentos
+                        #if yaml_data is None:
+                        if not yaml_documents:
                             error_log.write(f"Archivo vacío o no válido: {file_path}\n")
                             continue
 
-                        simple_props, hierarchical_props, key_value_pairs, root_info = extract_yaml_properties(yaml_data)
-                        yaml_data_list.append((filename, yaml_data, simple_props, hierarchical_props, key_value_pairs, root_info))
+                        for index, yaml_data in enumerate(yaml_documents):
+                            if yaml_data is None:
+                                error_log.write(f"Documento vacío en {file_path}, índice {index}\n")
+                                continue
+
+                            ## Extraer propiedades    
+                            simple_props, hierarchical_props, key_value_pairs, root_info = extract_yaml_properties(yaml_data)
+                            ## Se guarda el nombre con indice si hay varios elementos
+                            yaml_data_list.append((filename, index, yaml_data, simple_props, hierarchical_props, key_value_pairs, root_info))
+                            #yaml_data_list.append((filename, yaml_data, simple_props, hierarchical_props, key_value_pairs, root_info))
 
                 except yaml.YAMLError as e:
                     error_log.write(f"Error de YAML en archivo {file_path}: {str(e)}\n")
@@ -96,13 +114,6 @@ def search_features_in_csv(hierarchical_props, key_value_pairs, csv_file):
         reader = csv.reader(file)
         for row in reader:
             feature, middle, turned, value = row[0], row[1], row[2], row[3]
-
-            # Buscar coincidencias exactas en la columna 'Midle'
-            """for hierarchical_prop in hierarchical_props:
-                if middle.strip() and middle in hierarchical_prop:
-                    feature_map[hierarchical_prop] = feature
-                    print(feature)"""
-
             if f"_{root_info.get('apiVersion', 'unknown')}_{root_info.get('kind', 'unknown')}_" in feature:
                 for hierarchical_prop in hierarchical_props:
                     if middle.strip() and hierarchical_prop.endswith(middle):
@@ -134,7 +145,7 @@ def search_features_in_csv(hierarchical_props, key_value_pairs, csv_file):
                     elif middle.strip() and turned == "StringValue" and feature not in feature_map and aux_hierchical_maps.endswith(hierarchical_prop): ## Nueva adición para añadir los StringValue que aparezcan en la lista de features
                         aux_hierchical_arr_string = f"{hierarchical_prop}_StringValue" ## Se crea manualmente el _StringValue porque es un feature personalizado del modelo. Se usa para referirse a los arrays de strings
                         #print(f"El aux VALUE ES: {aux_hierchical_maps_value}")
-                        print(f"Array de Strings: {feature} {hierarchical_prop} {aux_hierchical_arr_string}")
+                        print(f"Array de Strings: {feature} {hierarchical_prop} {aux_hierchical_arr_string} {key}   {value}")
                         feature_map[aux_hierchical_arr_string] = feature
                     ## StringValueAdditional: Array de Strings que se añade de manera diferente en el script principal del modelo.
                     elif middle.strip() and turned == "StringValueAdditional" and feature not in feature_map and aux_hierchical_maps.endswith(hierarchical_prop): ## Nueva adición para añadir los StringValue que aparezcan en la lista de features
@@ -159,18 +170,8 @@ def search_features_in_csv(hierarchical_props, key_value_pairs, csv_file):
                         aux_hierchical_as_integer = f"{hierarchical_prop}_asInteger" ## Se crea manualmente el _StringValue porque es un feature personalizado del modelo. Se usa para referirse a los arrays de strings
                         #print(f"Seleccion de tipo Integer: {feature} {hierarchical_prop} {aux_hierchical_as_integer}")
                         feature_map[aux_hierchical_as_integer] = feature
-                    """if turned == "KeyMap" and aux_hierchical_maps.endswith(middle) and feature not in feature_map: ##  or turned == "ValueMap"
-                        if turned == "KeyMap":
-                            aux_hierarchical_prop_key = "{hierarchical_prop}_KeyMap"
-                            feature_map[aux_hierarchical_prop_key] = feature
-                        if turned == "ValueMap":
-                            print(f"NO ME EJECUTO?")
-
-                            aux_hierarchical_prop_value = "{hierarchical_prop}_ValueMap"
-                            feature_map[aux_hierarchical_prop_value] = feature
-                        print(f"FEATURES QUE SON MAPAS: {feature}")"""
                     
-                    for key, yaml_value in key_value_pairs: 
+                    for key, yaml_value in key_value_pairs:
                         if value and str(yaml_value) == value and feature not in feature_map: ## evitar agregar el mismo feature
                             aux_hierchical_value_added = f"{key}_{yaml_value}" ## Se agrega el yaml_value manualmente ya que en la herencia no se adjunta el valor de las propiedades yaml
                             #print(aux_hierchical_value_added)
@@ -179,28 +180,7 @@ def search_features_in_csv(hierarchical_props, key_value_pairs, csv_file):
                                 #print(f"DEBUG:? {aux_hierchical_value_added}   {feature}   {key}")
                                 feature_map[aux_hierchical_value_added] = feature ## Se agrega el feature que tambien coincide el yaml
                                 continue
-                #if value == "-":
-                    #print("Array detectado")
-                    #feature_map[feature] = {"feature_type": "array"}
-                    # Generar prefijo con apiVersion y kind si están presentes
-                    """version_kind_prefix = f"{root_info.get('apiVersion', 'unknown')}_{root_info.get('kind', 'unknown')}_"
-                    feature_key = f"{version_kind_prefix}{key}" if key not in feature_map else key
-                    feature_map[feature_key] = {"type": "array", "feature": feature}
-                    print("El feature map es:")
-                    print(feature_map)
-                    """
 
-                ##feature_map["arr"] = "[]"
-
-                ## Marcar array para agregar a la estructura del yaml_data
-                        #feature_map[key] = feature  
-                        #and feature not in feature_map[key]
-                        #if feature.endswith(aux_hierchical_value_added):
-                            #print(f"Los value key pares son: {key_value_pairs}")
-                            #found_features.append(feature)
-                            #feature_map[key] = feature
-                            #print()
-                            #print(f"Feature map key {feature_map[key]}")
             # Comparar clave-valor en el YAML con el valor del CSV
             """for key, yaml_value in key_value_pairs:
                 if value.strip() and str(yaml_value) == value.strip():
@@ -219,7 +199,7 @@ def extract_key_value_mappings(value, value_features, feature_map): ## Posible e
         })
     return key_values
 
-def apply_feature_mapping(yaml_data, feature_map, hierarchical_props, auxFeaturesAddedList):
+def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList):
     """
     Aplica el mapeo de features al YAML reemplazando las claves por los nombres de features.
     """
@@ -233,6 +213,7 @@ def apply_feature_mapping(yaml_data, feature_map, hierarchical_props, auxFeature
         feature_map_key_value = {}
         #feature_type_array = {}
         possible_type_data = ['asString', 'asNumber', 'asInteger']
+        print(f"Yaml data completo: {yaml_data.items()}")
         for key, value in yaml_data.items():
             aux_nested = False ## boolean para determinar si una propiedad tiene un feature value
             aux_array = False ## boolean para determinar si una propiedad contiene un array o es un array de features
@@ -240,6 +221,9 @@ def apply_feature_mapping(yaml_data, feature_map, hierarchical_props, auxFeature
             aux_str_values = False
             aux_value_type = False
             aux_value_type_array = False
+            
+            if isinstance(value, datetime): ## Comprobacion de si alguno de los valores es de tipo Time RCF 3339
+                value = value.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
             for key_features, value_features in feature_map.items():
                 # Verificar mapeo directo
                 #print("NO SE EJECUTA?")
@@ -274,7 +258,7 @@ def apply_feature_mapping(yaml_data, feature_map, hierarchical_props, auxFeature
                     str_values = []
                     #print(f"SE EJECUTA IF NUEVO {key}   {value_features}")
                     #print(value)
-                    if key.endswith(aux_key_last_before_map) and key_features.endswith(f"{aux_key_last_before_map}_StringValue"):### and value.get("key") in value_features  ## key coge los valores del feature mapeado
+                    if value and key.endswith(aux_key_last_before_map) and key_features.endswith(f"{aux_key_last_before_map}_StringValue"):### and value.get("key") in value_features  ## key coge los valores del feature mapeado
                         #print(f"SE EJECUTA DE NUEVO IF NUEVO {value_features}")
                         for str_value in value:
                             print(value)
@@ -288,6 +272,9 @@ def apply_feature_mapping(yaml_data, feature_map, hierarchical_props, auxFeature
                         #print(f"EL KEY VALUES ES {key_values}")
                         feature_str_value = str_values
                         aux_str_values = True
+                    #else: ## lista vacia
+                    #    feature_str_value = [] ## se deja el array vacio porque no hay contenido o '' o ""
+
                 elif isinstance(value, dict) and key_features.endswith("KeyMap") and isinstance(value_features, str) and "KeyMap" == value_features.split("_")[-1] and value_features not in auxFeaturesAddedList: ## or "ValueMap" == last_value_feature)
                     #print(f"NO HAY NADA¿ {last_value_feature}") ## value.get("key")
                     #print(f"{key}     {yaml_data}") ## last_key_feature.endswith(key) and 
@@ -373,6 +360,11 @@ def apply_feature_mapping(yaml_data, feature_map, hierarchical_props, auxFeature
                                 feature_type_value[value_features] = value
                                 aux_value_type = True
                                 auxFeaturesAddedList.add(value_features)
+                            """elif isinstance(value, datetime):
+                                print(f" Valor de la propiedad en Tiempo,   {key}   {value}")
+                                #value = value.isoformat()
+                                value = value.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
+                                print(f" Valor de la propiedad despues en Time,   {key}   {value}")"""
                 # Representación de valores seleccionados, se comprueba si algun valor del yaml coincide con la ultima parte de los features en la lista.
                 elif isinstance(value_features, str) and value == value_features.split("_")[-1] and value_features not in auxFeaturesAddedList:
                         if value_features.endswith(key_features):
@@ -392,22 +384,28 @@ def apply_feature_mapping(yaml_data, feature_map, hierarchical_props, auxFeature
             elif aux_value_type_array:
                 print(f"ELIF FINAL NO SE EJECTUA??   {feature_type_array}")
                 new_data[mapped_key] = feature_type_array
+                ## Probar confi donde se tiene mas de una opcion en el else: chat // falta poder comprobar arrays en la raiz y su recursion si hay mas de una
             elif aux_array or isinstance(value, list): ##  or isinstance(value, list)
-                if aux_maps:
+                if aux_maps: ## quizas llevar esta condicion a otra parte, es "especial"
                     #print("NO SE EJCUTA?")
                     #print(feature_map_key_value)
                     new_data[mapped_key] = feature_map_key_value
+                elif value is None:
+                    new_data[mapped_key] = []
+                    print(f"Arrays vacios {new_data}")
                 else:
-                    new_data[mapped_key] = [apply_feature_mapping(item, feature_map, hierarchical_props, auxFeaturesAddedList) if isinstance(item, (dict, list)) else item for item in value]
+                    new_data[mapped_key] = [apply_feature_mapping(item, feature_map, auxFeaturesAddedList) if isinstance(item, (dict, list)) else item for item in value]
                     #print(f" Comprobar salida arr aux: {mapped_key} {new_data}")
+                    #new_data[mapped_key] = [apply_feature_mapping(item, feature_map, auxFeaturesAddedList) if isinstance(item, (dict, list)) else item for item in value]
+
             else:
-                new_data[mapped_key] = apply_feature_mapping(value, feature_map, hierarchical_props, auxFeaturesAddedList) if isinstance(value, (dict, list)) else value
+                new_data[mapped_key] = apply_feature_mapping(value, feature_map, auxFeaturesAddedList) if isinstance(value, (dict, list)) else value
 
         return new_data
 
     elif isinstance(yaml_data, list):
         print(f"YAML DATA ELIF {yaml_data}")
-        return [apply_feature_mapping(item, feature_map, hierarchical_props, auxFeaturesAddedList) for item in yaml_data]
+        return [apply_feature_mapping(item, feature_map, auxFeaturesAddedList) for item in yaml_data]
 
     return yaml_data
 
@@ -415,32 +413,62 @@ def apply_feature_mapping(yaml_data, feature_map, hierarchical_props, auxFeature
 # Ruta de la carpeta donde están los archivos YAML
 yaml_directory = './generateConfigs/files_yamls'
 
+#yaml_directory = '../kubernetes_fm/scripts/download_manifests/YAMLs' ## Testing yamls
+## kubernetes_fm\scripts\download_manifests\YAMLs
+## ruta de los yamls descargados: C:\projects\kubernetes_fm\scripts\download_manifests\YAMLs
 # Leer YAMLs y extraer propiedades
 yaml_data_list = read_yaml_files_from_directory(yaml_directory)
 
 # Ruta del archivo CSV
 csv_file_path = './generateConfigs/kubernetes_mapping_features_part01.csv'
 
-# Preparar estructura para JSON
-output_data = []
+# Guardar la salida de la carpeta con ficheros JSON 
+#output_json_dir = './generateConfigs/outputs_json_mappeds'
+output_json_dir = './generateConfigs/outputs-json-tester'
 
-for filename, yaml_data, simple_props, hierarchical_props, key_value_pairs, root_info in yaml_data_list:
-    print(f"\nProcesando archivo: {filename}")
+#output_json_path = './generateConfigs/output_features02.json'
+os.makedirs(output_json_dir, exist_ok=True)  # Crea la carpeta si no existe
+
+# Preparar estructura para JSONs
+#output_data = []
+
+file_count = {}  # Para manejar múltiples documentos
+
+for filename, index, yaml_data, simple_props, hierarchical_props, key_value_pairs, root_info in yaml_data_list:
+    ##print(f"\nProcesando archivo: {filename}")
+    
     auxFeaturesAddedList = set()
     feature_map = search_features_in_csv(hierarchical_props, key_value_pairs, csv_file_path)
-    updated_config = apply_feature_mapping(yaml_data, feature_map, hierarchical_props, auxFeaturesAddedList)
+    updated_config = apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList)
+
     yaml_entry = {
         "filename": filename,
-        #"apiVersion": root_info.get("apiVersion", "N/A"),
+        "apiVersion": root_info.get("apiVersion", "N/A"),
         #"kind": root_info.get("kind", "N/A"),
         "config": updated_config
     }
-    output_data.append(yaml_entry)
+    #output_data.append(yaml_entry)
+    # Generar un nombre de archivo JSON basado en el YAML
+    base_filename = os.path.splitext(filename)[0]
+    if base_filename not in file_count:
+        file_count[base_filename] = 0
+    file_count[base_filename] += 1 
+    
+    json_filename = "01-Sin nombre"
+    if file_count[base_filename] > 1:
+        json_filename = f"{base_filename}_{file_count[base_filename]}.json"
+    else:
+        json_filename = f"{base_filename}.json" 
+    
+    print(f"Procesando archivo: {json_filename}")
+    #json_filename = os.path.splitext(filename)[0] + ".json"
+    output_json_path = os.path.join(output_json_dir, json_filename)
+    
+#output_json_path = './generateConfigs/output_features02.json'
 
-# Guardar la salida en JSON
-output_json_path = './generateConfigs/output_features02.json'
+    with open(output_json_path, 'w', encoding='utf-8') as json_file:
+        json.dump(yaml_entry, json_file, ensure_ascii=False, indent=4)
+        #json.dump(output_data, json_file, ensure_ascii=False, indent=4)
+    print(f"Archivo guardado: {output_json_path}\n")
 
-with open(output_json_path, 'w', encoding='utf-8') as json_file:
-    json.dump(output_data, json_file, ensure_ascii=False, indent=4)
-
-print(f"Resultados guardados en: {output_json_path}")
+print(f"Todos los archivos han sido procesados y guardados")

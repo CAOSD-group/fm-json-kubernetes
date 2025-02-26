@@ -1,0 +1,33 @@
+version: 2
+builds:
+  - main: hack/goreleaser.go
+    id: kubectl-crust-gather
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    binary: kubectl-crust-gather
+    ignore:
+      - goos: windows
+        goarch: arm64
+    hooks:
+      post: ./.goreleaser_hook.sh {{ .Arch }} {{ .Os }} kubectl-{{ .ProjectName }}
+
+archives:
+- id: kubectl-crust-gather
+  builds:
+  - kubectl-crust-gather
+  name_template: "kubectl-{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+- id: kubectl-crust-gather-krew
+  builds:
+  - kubectl-crust-gather
+  name_template: "kubectl-{{ .ProjectName }}_v{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+  files:
+  - LICENSE
+
+release:
+  prerelease: auto
+  mode: keep-existing
