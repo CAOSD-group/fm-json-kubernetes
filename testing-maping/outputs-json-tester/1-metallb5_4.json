@@ -2,53 +2,17 @@
     "filename": "1-metallb5.yaml",
     "apiVersion": "v1",
     "config": {
-        "io_k8s_api_rbac_v1_ClusterRole_apiVersion": [
-            "r",
-            "b",
-            "a",
-            "c",
-            ".",
-            "a",
-            "u",
-            "t",
-            "h",
-            "o",
-            "r",
-            "i",
-            "z",
-            "a",
-            "t",
-            "i",
-            "o",
-            "n",
-            ".",
-            "k",
-            "8",
-            "s",
-            ".",
-            "i",
-            "o",
-            "/",
-            "v",
-            "1"
-        ],
-        "io_k8s_api_rbac_v1_ClusterRole_kind": [
-            "C",
-            "l",
-            "u",
-            "s",
-            "t",
-            "e",
-            "r",
-            "R",
-            "o",
-            "l",
-            "e"
-        ],
-        "io_k8s_api_rbac_v1_ClusterRole_metadata": [
-            "labels",
-            "name"
-        ],
+        "io_k8s_api_rbac_v1_ClusterRole_apiVersion": "rbac.authorization.k8s.io/v1",
+        "io_k8s_api_rbac_v1_ClusterRole_kind": "ClusterRole",
+        "io_k8s_api_rbac_v1_ClusterRole_metadata": {
+            "io_k8s_api_rbac_v1_ClusterRole_metadata_labels": [
+                {
+                    "io_k8s_api_rbac_v1_ClusterRole_metadata_labels_KeyMap": "app",
+                    "io_k8s_api_rbac_v1_ClusterRole_metadata_labels_ValueMap": "metallb"
+                }
+            ],
+            "io_k8s_api_rbac_v1_ClusterRole_metadata_name": "metallb-system:controller"
+        },
         "io_k8s_api_rbac_v1_ClusterRole_rules": [
             {
                 "io_k8s_api_rbac_v1_ClusterRole_rules_apiGroups": [
@@ -74,42 +38,62 @@
                 ]
             },
             {
-                "apiGroups": [
-                    ""
+                "io_k8s_api_rbac_v1_ClusterRole_rules_apiGroups": [
+                    {
+                        "io_k8s_api_rbac_v1_ClusterRole_rules_apiGroups_StringValue": ""
+                    }
                 ],
-                "resources": [
-                    "services/status"
+                "io_k8s_api_rbac_v1_ClusterRole_rules_resources": [
+                    {
+                        "io_k8s_api_rbac_v1_ClusterRole_rules_resources_StringValue": "services/status"
+                    }
                 ],
-                "verbs": [
-                    "update"
+                "io_k8s_api_rbac_v1_ClusterRole_rules_verbs": [
+                    {
+                        "io_k8s_api_rbac_v1_ClusterRole_rules_verbs_StringValue": "update"
+                    }
                 ]
             },
             {
-                "apiGroups": [
-                    ""
+                "io_k8s_api_rbac_v1_ClusterRole_rules_apiGroups": [
+                    {
+                        "io_k8s_api_rbac_v1_ClusterRole_rules_apiGroups_StringValue": ""
+                    }
                 ],
-                "resources": [
-                    "events"
+                "io_k8s_api_rbac_v1_ClusterRole_rules_resources": [
+                    {
+                        "io_k8s_api_rbac_v1_ClusterRole_rules_resources_StringValue": "events"
+                    }
                 ],
-                "verbs": [
-                    "create",
-                    "patch"
+                "io_k8s_api_rbac_v1_ClusterRole_rules_verbs": [
+                    {
+                        "io_k8s_api_rbac_v1_ClusterRole_rules_verbs_StringValue": "create"
+                    },
+                    {
+                        "io_k8s_api_rbac_v1_ClusterRole_rules_verbs_StringValue": "patch"
+                    }
                 ]
             },
             {
-                "apiGroups": [
-                    "policy"
+                "io_k8s_api_rbac_v1_ClusterRole_rules_apiGroups": [
+                    {
+                        "io_k8s_api_rbac_v1_ClusterRole_rules_apiGroups_StringValue": "policy"
+                    }
                 ],
                 "io_k8s_api_rbac_v1_ClusterRole_rules_resourceNames": [
                     {
                         "io_k8s_api_rbac_v1_ClusterRole_rules_resourceNames_StringValue": "controller"
                     }
                 ],
-                "resources": [
-                    "podsecuritypolicies"
+                "io_k8s_api_rbac_v1_ClusterRole_rules_resources": [
+                    {
+                        "io_k8s_api_rbac_v1_ClusterRole_rules_resources_StringValue": "podsecuritypolicies"
+                    }
                 ],
-                "verbs": [
-                    "use"
+                "io_k8s_api_rbac_v1_ClusterRole_rules_verbs": [
+                    {
+                        "io_k8s_api_rbac_v1_ClusterRole_rules_verbs_StringValue": "use"
+                    }
                 ]
             }
         ]

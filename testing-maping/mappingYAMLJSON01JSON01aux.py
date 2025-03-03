@@ -16,10 +16,11 @@ def extract_yaml_properties(data, parent_key='', root_info=None, first_add=True)
     simple_props = []
     hierarchical_props = []
     key_value_pairs = []
+    
     if root_info is None:
         root_info = {}
 
-    if isinstance(data, dict):
+    if isinstance(data, dict): ### and first_add: ## Modificado por el cambio en kind en otras partes del programa...
         for key, value in data.items():
             new_key = f"{parent_key}_{key}" if parent_key else key
             # Guardar valores clave (apiVersion y kind) para determinar el contexto
@@ -190,7 +191,7 @@ def search_features_in_csv(hierarchical_props, key_value_pairs, csv_file):
 
 def extract_key_value_mappings(value, value_features, feature_map): ## Posible encapsulamiento de las funciones para mejorar la legibilidad
     key_values = []
-    aux_feature_maps = value_features.rsplit("_", 1)[0]
+    aux_feature_maps = value0_features.rsplit("_", 1)[0]
     aux_feature_value = f"{aux_feature_maps}_ValueMap"
     for map_key, map_value in value.items():
         key_values.append({
@@ -215,6 +216,8 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList):
         possible_type_data = ['asString', 'asNumber', 'asInteger']
         print(f"Yaml data completo: {yaml_data.items()}")
         for key, value in yaml_data.items():
+            original_key = key ## copia de la clave original
+
             aux_nested = False ## boolean para determinar si una propiedad tiene un feature value
             aux_array = False ## boolean para determinar si una propiedad contiene un array o es un array de features
             aux_maps = False ## marca para determinar los mapas
@@ -245,21 +248,21 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList):
                     #print(value_features.items())
                     if value_features["feature"] not in auxFeaturesAddedList:
                         #print(f"{key}   {value}     {yaml_data}")
-                        auxFeaturesAddedList.add(value_features["feature"])
+                        #auxFeaturesAddedList.add(value_features["feature"]) ### Omitido temporalmente por la omision en arrays de arrays que se genera de features ya agregados/vistos de los yaml
                         ##feature_arr = [value_features["feature"]]
                         #new_data[value_features["feature"]] = [] ## se queda vacio
                         key = value_features["feature"]
                         aux_array = True
-                        continue
+                        #continue
                 ### Nueva adicion: StringValue para representar los arrays de Strings. En features se localizan por el _StringValue o _StringValueAdditional
                 ## Seguir un tratamiento similar que con los mapas. Parte final del feature
-                elif isinstance(value, list) and key_features.endswith("StringValue") and isinstance(value_features, str) and "StringValue" == value_features.split("_")[-1] and value_features not in auxFeaturesAddedList: ## Prueba add StringValue
+                elif isinstance(value, list) and key_features.endswith("StringValue") and isinstance(value_features, str) and "StringValue" == value_features.split("_")[-1]: ## Prueba add StringValue ## and value_features not in auxFeaturesAddedList
                     aux_key_last_before_map = value_features.split("_")[-2]
                     str_values = []
-                    #print(f"SE EJECUTA IF NUEVO {key}   {value_features}")
+                    print(f"SE EJECUTA PRIMER VALUE LIST {key}   {value_features}")
                     #print(value)
                     if value and key.endswith(aux_key_last_before_map) and key_features.endswith(f"{aux_key_last_before_map}_StringValue"):### and value.get("key") in value_features  ## key coge los valores del feature mapeado
-                        #print(f"SE EJECUTA DE NUEVO IF NUEVO {value_features}")
+                        print(f"SE EJECUTA DE NUEVO IF NUEVO    {key}  {value_features}")
                         for str_value in value:
                             print(value)
                             print(f"{str_value}   {key} {value_features}   {aux_key_last_before_map}")
@@ -268,7 +271,7 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList):
                             str_values.append({ ## , aux_feature_value: map_value
                                 value_features: str_value
                             })
-                            auxFeaturesAddedList.add(value_features)
+                            #auxFeaturesAddedList.add(value_features) ### Omitido temporalmente por la omision en arrays de arrays que se genera de features ya agregados/vistos de los yaml
                         #print(f"EL KEY VALUES ES {key_values}")
                         feature_str_value = str_values
                         aux_str_values = True
@@ -413,7 +416,7 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList):
 # Ruta de la carpeta donde están los archivos YAML
 yaml_directory = './generateConfigs/files_yamls'
 
-#yaml_directory = '../kubernetes_fm/scripts/download_manifests/YAMLs' ## Testing yamls
+##yaml_directory = '../kubernetes_fm/scripts/download_manifests/YAMLs' ## Testing yamls
 ## kubernetes_fm\scripts\download_manifests\YAMLs
 ## ruta de los yamls descargados: C:\projects\kubernetes_fm\scripts\download_manifests\YAMLs
 # Leer YAMLs y extraer propiedades
