@@ -1,0 +1,77 @@
+{
+    "filename": "endpoints01.yaml",
+    "apiVersion": "v1",
+    "config": {
+        "io_k8s_api_core_v1_Endpoints_apiVersion": "v1",
+        "io_k8s_api_core_v1_Endpoints_kind": "Endpoints",
+        "io_k8s_api_core_v1_Endpoints_metadata": {
+            "io_k8s_api_core_v1_Endpoints_metadata_creationTimestamp": "2016-10-04T17:45:58Z",
+            "io_k8s_api_core_v1_Endpoints_metadata_labels": [
+                {
+                    "io_k8s_api_core_v1_Endpoints_metadata_labels_KeyMap": "app",
+                    "io_k8s_api_core_v1_Endpoints_metadata_labels_ValueMap": "my-app"
+                }
+            ],
+            "io_k8s_api_core_v1_Endpoints_metadata_name": "app-server",
+            "io_k8s_api_core_v1_Endpoints_metadata_namespace": "default",
+            "io_k8s_api_core_v1_Endpoints_metadata_resourceVersion": "184597135",
+            "io_k8s_api_core_v1_Endpoints_metadata_selfLink": "/self/link",
+            "io_k8s_api_core_v1_Endpoints_metadata_uid": "6826f086-8a5a-11e6-8d09-42010a800005"
+        },
+        "io_k8s_api_core_v1_Endpoints_subsets": [
+            {
+                "io_k8s_api_core_v1_Endpoints_subsets_addresses": [
+                    {
+                        "io_k8s_api_core_v1_Endpoints_subsets_addresses_ip": "10.0.0.1",
+                        "io_k8s_api_core_v1_Endpoints_subsets_addresses_targetRef": {
+                            "io_k8s_api_core_v1_Endpoints_subsets_addresses_targetRef_kind": "Pod",
+                            "io_k8s_api_core_v1_Endpoints_subsets_addresses_targetRef_name": "pod-name-1234-0000",
+                            "io_k8s_api_core_v1_Endpoints_subsets_addresses_targetRef_namespace": "default",
+                            "io_k8s_api_core_v1_Endpoints_subsets_addresses_targetRef_resourceVersion": "1234567890",
+                            "io_k8s_api_core_v1_Endpoints_subsets_addresses_targetRef_uid": "11111111-2222-3333-4444-555555555555"
+                        }
+                    },
+                    {
+                        "io_k8s_api_core_v1_Endpoints_subsets_addresses_ip": "10.0.0.1",
+                        "io_k8s_api_core_v1_Endpoints_subsets_addresses_targetRef": {
+                            "io_k8s_api_core_v1_Endpoints_subsets_addresses_targetRef_kind": "Pod",
+                            "io_k8s_api_core_v1_Endpoints_subsets_addresses_targetRef_name": "pod-name-1234-0001",
+                            "io_k8s_api_core_v1_Endpoints_subsets_addresses_targetRef_namespace": "default",
+                            "io_k8s_api_core_v1_Endpoints_subsets_addresses_targetRef_resourceVersion": "1234567890",
+                            "io_k8s_api_core_v1_Endpoints_subsets_addresses_targetRef_uid": "11111111-2222-3333-4444-555555555555"
+                        }
+                    },
+                    {
+                        "io_k8s_api_core_v1_Endpoints_subsets_addresses_ip": "10.0.0.1",
+                        "io_k8s_api_core_v1_Endpoints_subsets_addresses_targetRef": {
+                            "io_k8s_api_core_v1_Endpoints_subsets_addresses_targetRef_kind": "Pod",
+                            "io_k8s_api_core_v1_Endpoints_subsets_addresses_targetRef_name": "pod-name-1234-0002",
+                            "io_k8s_api_core_v1_Endpoints_subsets_addresses_targetRef_namespace": "default",
+                            "io_k8s_api_core_v1_Endpoints_subsets_addresses_targetRef_resourceVersion": "1234567890",
+                            "io_k8s_api_core_v1_Endpoints_subsets_addresses_targetRef_uid": "11111111-2222-3333-4444-555555555555"
+                        }
+                    },
+                    {
+                        "io_k8s_api_core_v1_Endpoints_subsets_addresses_ip": "10.0.0.1",
+                        "io_k8s_api_core_v1_Endpoints_subsets_addresses_targetRef": {
+                            "io_k8s_api_core_v1_Endpoints_subsets_addresses_targetRef_kind": "Pod",
+                            "io_k8s_api_core_v1_Endpoints_subsets_addresses_targetRef_name": "pod-name-1234-0003",
+                            "io_k8s_api_core_v1_Endpoints_subsets_addresses_targetRef_namespace": "default",
+                            "io_k8s_api_core_v1_Endpoints_subsets_addresses_targetRef_resourceVersion": "1234567890",
+                            "io_k8s_api_core_v1_Endpoints_subsets_addresses_targetRef_uid": "11111111-2222-3333-4444-555555555555"
+                        }
+                    }
+                ],
+                "io_k8s_api_core_v1_Endpoints_subsets_ports": [
+                    {
+                        "io_k8s_api_core_v1_Endpoints_subsets_addresses_targetRef_name": "port-name",
+                        "io_k8s_api_core_v1_Endpoints_subsets_ports_port": 8080,
+                        "io_k8s_api_core_v1_Endpoints_subsets_ports_protocol": {
+                            "io_k8s_api_core_v1_Endpoints_subsets_ports_protocol_TCP": true
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}
