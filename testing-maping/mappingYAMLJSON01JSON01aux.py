@@ -24,15 +24,16 @@ def extract_yaml_properties(data, parent_key='', root_info=None, first_add=True)
         for key, value in data.items():
             new_key = f"{parent_key}_{key}" if parent_key else key
             # Guardar valores clave (apiVersion y kind) para determinar el contexto
-            if key in ['apiVersion', 'kind']:
-                if '/' in value and not '.' in value:
-                    value = value.replace('/', '_')
-                elif '.' in value and '/': ## Caso en el que el valor de la version contenga puntos '.' se usa solo la segunda parte separada por la barra lateral '/' que donota la versión dentro de los esquemas
-                    aux_value = value.split('/') ## Como se representa en los esquemas api_rbac_v1_, caso en los yaml: rbac.authorization.k8s.io/v1
-                    print(f"EL AUX VALUE SEPARADO ES {aux_value}")
-                    value = aux_value[1]
-                    print(value)
-                root_info[key] = value
+            if key in ['apiVersion', 'kind'] and first_add: ## Solo modificar si es la primera llamada
+                if key not in root_info:  # No sobrescribir si ya se definió en el nivel superior   
+                    if '/' in value and not '.' in value:
+                        value = value.replace('/', '_')
+                    elif '.' in value and '/': ## Caso en el que el valor de la version contenga puntos '.' se usa solo la segunda parte separada por la barra lateral '/' que donota la versión dentro de los esquemas
+                        aux_value = value.split('/') ## Como se representa en los esquemas api_rbac_v1_, caso en los yaml: rbac.authorization.k8s.io/v1
+                        print(f"EL AUX VALUE SEPARADO ES {aux_value}")
+                        value = aux_value[1]
+                        print(value)
+                    root_info[key] = value
             simple_props.append(key)
 
             if isinstance(value, (dict, list)):
@@ -86,7 +87,8 @@ def read_yaml_files_from_directory(directory_path):
                             if yaml_data is None:
                                 error_log.write(f"Documento vacío en {file_path}, índice {index}\n")
                                 continue
-
+                            
+                            root_info = {} # Reiniciar root_info para cada documento
                             ## Extraer propiedades    
                             simple_props, hierarchical_props, key_value_pairs, root_info = extract_yaml_properties(yaml_data)
                             ## Se guarda el nombre con indice si hay varios elementos
@@ -237,18 +239,28 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList):
                     auxFeaturesAddedList.add(value_features)
                     key = value_features
                     continue"""
+                #if key == 'io_k8s_api_core_v1_Endpoints_subsets_addresses':
+                #    print(f"ME TENDRIA QUE REPETIR")
                 # Lógica normal para valores de tipo string, se cambia el valor del key directamente
                 if isinstance(value_features, str) and value_features.endswith(key) and value_features not in auxFeaturesAddedList: ## key_features.endswith(key) # Salida similar
+                    aux_feature_before_map = value_features.rsplit("_", 1)[0]
+                    print(f"COMPROBACION INSERCION FEATURES SIMPLES {key}   {value_features}    {key_features}")
+                    #if key.endswith(aux_feature_before_map):
                     auxFeaturesAddedList.add(value_features)
                     key = value_features
-                    continue
+                    #and key.endswith(aux_feature_before_map)
+                    if key == 'io_k8s_api_core_v1_Endpoints_subsets_ports_name':
+                        print("ME EJECTUO SIN AGREGARME")
+                        #if key == 'io_k8s_api_core_v1_Endpoints_subsets_addresses':
+                        #    print(f"ME TENDRIA QUE REPETIR")
+                        #continue
                 # Comprobar arrays u otros features asignados, tratan valores de tipo dict por el tipo de estructura que tienen. Modificacion con el 'feature_type': 'array' 
-                elif key_features.endswith(key) and isinstance(value_features, dict) and value_features.get("feature_type") == "array":
+                elif key_features.endswith(key) and isinstance(value_features, dict) and value_features.get("feature_type") == "array": ### Comprobando
                     #print(f"Array detectado para key '{key}': {value_features['feature']}")
                     #print(value_features.items())
                     if value_features["feature"] not in auxFeaturesAddedList:
-                        #print(f"{key}   {value}     {yaml_data}")
-                        #auxFeaturesAddedList.add(value_features["feature"]) ### Omitido temporalmente por la omision en arrays de arrays que se genera de features ya agregados/vistos de los yaml
+                        print(f"{key}   {value}     {yaml_data}")
+                        auxFeaturesAddedList.add(value_features["feature"]) ### Omitido temporalmente por la omision en arrays de arrays que se genera de features ya agregados/vistos de los yaml
                         ##feature_arr = [value_features["feature"]]
                         #new_data[value_features["feature"]] = [] ## se queda vacio
                         key = value_features["feature"]
@@ -256,7 +268,7 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList):
                         #continue
                 ### Nueva adicion: StringValue para representar los arrays de Strings. En features se localizan por el _StringValue o _StringValueAdditional
                 ## Seguir un tratamiento similar que con los mapas. Parte final del feature
-                elif isinstance(value, list) and key_features.endswith("StringValue") and isinstance(value_features, str) and "StringValue" == value_features.split("_")[-1]: ## Prueba add StringValue ## and value_features not in auxFeaturesAddedList
+                elif isinstance(value, list) and key_features.endswith("StringValue") and isinstance(value_features, str) and "StringValue" == value_features.split("_")[-1]: ## and value_features not in auxFeaturesAddedList
                     aux_key_last_before_map = value_features.split("_")[-2]
                     str_values = []
                     print(f"SE EJECUTA PRIMER VALUE LIST {key}   {value_features}")
@@ -271,30 +283,44 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList):
                             str_values.append({ ## , aux_feature_value: map_value
                                 value_features: str_value
                             })
-                            #auxFeaturesAddedList.add(value_features) ### Omitido temporalmente por la omision en arrays de arrays que se genera de features ya agregados/vistos de los yaml
+                            auxFeaturesAddedList.add(value_features) ### Omitido temporalmente por la omision en arrays de arrays que se genera de features ya agregados/vistos de los yaml
                         #print(f"EL KEY VALUES ES {key_values}")
                         feature_str_value = str_values
                         aux_str_values = True
                     #else: ## lista vacia
                     #    feature_str_value = [] ## se deja el array vacio porque no hay contenido o '' o ""
-
+                ## Se repite proceso con un proceso casi identico para StringValueAdditional
+                ## DECIDIR SI DEFINIR StrValueAdditional como un objeto Mapa o dejarlo como un str... aunque su estructura en yaml es de pares key/map
+                elif isinstance(value, dict) and key_features.endswith("StringValueAdditional") and isinstance(value_features, str) and "StringValueAdditional" == value_features.split("_")[-1]: ## and value_features not in auxFeaturesAddedList
+                    aux_key_last_before_map = value_features.split("_")[-2]
+                    str_values = []
+                    if value and key.endswith(aux_key_last_before_map) and key_features.endswith(f"{aux_key_last_before_map}_StringValueAdditional"):### and value.get("key") in value_features  ## key coge los valores del feature mapeado
+                        for str_key, str_value in value.items():
+                            print(value)
+                            print(f"{str_value}   {key} {value_features}   {aux_key_last_before_map}")
+                            str_values.append({ ## , aux_feature_value: map_value
+                                value_features:f"{str_key}:{str_value}" 
+                            })
+                        feature_str_value = str_values
+                        aux_str_values = True
                 elif isinstance(value, dict) and key_features.endswith("KeyMap") and isinstance(value_features, str) and "KeyMap" == value_features.split("_")[-1] and value_features not in auxFeaturesAddedList: ## or "ValueMap" == last_value_feature)
                     #print(f"NO HAY NADA¿ {last_value_feature}") ## value.get("key")
                     #print(f"{key}     {yaml_data}") ## last_key_feature.endswith(key) and 
                     aux_key_last_before_map = value_features.split("_")[-2]
-                    #print(f"ELEMENTOS QUE DEBERIAN DE COIONCIDIR: {value_features}  {aux_key_last_before_map}")
-                    #print(f"SE EJECUTA IF RARO {key}    {value}     {key_features}     {value_features}")
+                    aux_feature_before_map = value_features.rsplit("_", 1)[0]
+                    print(f"ELEMENTOS QUE DEBERIAN DE COINCIDIR: {value_features}  {aux_key_last_before_map}")
+                    print(f"SE EJECUTA IF RARO {key}    {value}     {key_features}     {value_features}")
                     key_values = []
                     #print(value.get("key"))
-                    if key.endswith(aux_key_last_before_map) and key_features.endswith(f"{aux_key_last_before_map}_KeyMap"):### and value.get("key") in value_features  ## key coge los valores del feature mapeado
-                        #print(f"SE EJECUTA DE NUEVO IF RARO {value_features}")
+                    if key.endswith(aux_key_last_before_map) and key_features.endswith(f"{aux_key_last_before_map}_KeyMap") and key.endswith(aux_feature_before_map):# Se realizan varias comprobaciones sobre si es el feature adecuado  ## key obtiene los valores del feature mapeado
+                        print(f"SE EJECUTA DE NUEVO IF RARO {value_features}")
                         for map_key, map_value in value.items():
                             print(f"{key}   {value} {map_key}   {map_value}")
                             aux_feature_maps = value_features.rsplit("_", 1)[0] ## se obtiene el feature quitando la ultima parte para añadir manualmente el ValueMap
                             aux_feature_value = f"{aux_feature_maps}_ValueMap"
                                 #if value_features.endswith(key_features):
-                            #print(f"{map_key}   {map_value} {value_features}")
-                            #print(f"COINCIDENCIA CON EL FEATURE MAP")
+                            print(f"{map_key}   {map_value} {value_features}")
+                            print(f"COINCIDENCIA CON EL FEATURE MAP")
                             key_values.append({
                                 value_features: map_key,
                                 aux_feature_value: map_value
@@ -397,7 +423,7 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList):
                     new_data[mapped_key] = []
                     print(f"Arrays vacios {new_data}")
                 else:
-                    new_data[mapped_key] = [apply_feature_mapping(item, feature_map, auxFeaturesAddedList) if isinstance(item, (dict, list)) else item for item in value]
+                    new_data[mapped_key] = [apply_feature_mapping(item, feature_map, auxFeaturesAddedList.copy()) if isinstance(item, (dict, list)) else item for item in value] ## auxFeaturesAddedList: antes de la mod
                     #print(f" Comprobar salida arr aux: {mapped_key} {new_data}")
                     #new_data[mapped_key] = [apply_feature_mapping(item, feature_map, auxFeaturesAddedList) if isinstance(item, (dict, list)) else item for item in value]
 

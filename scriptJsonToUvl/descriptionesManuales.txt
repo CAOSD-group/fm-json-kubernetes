@@ -2007,3 +2007,30 @@ Errores arreglados al hacer el mapeo global:
 Parche 1.0 ### Omitido temporalmente por la omision 
 Para permitir usar el mismo feature en difentes puntos del procesamiento
 [Array, {[array], [array]...} ]
+
+- Arrays con varios sub-propiedades anidades de diferentes tipos (Str, Integer...)
+
+auxFeaturesAddedList.copy(): se envia una copia de lista de features agregados para que se puedan agregar en diferentes puntos de la recursividad sin necesidad de no controlar los ya visitados
+
+dict.copy(): se le pasa como lista de features en la condicion else de las listas...
+https://docs.python.org/es/3.13/library/copy.html
+
+
+Revisar features no mapeados:
+io_k8s_api_apps_v1_Deployment_spec_template_spec_nodeSelector
+
+error al haber varios ValueMap:io_k8s_api_apps_v1_DaemonSet_metadata_labels
+Sol: aux_feature_before_map = value_features.rsplit("_", 1)[0]
+     and key.endswith(aux_feature_before_map):### se usa esta nueva comprobación para verificar que se esta tratando el feature correspondiente con todas las partes que lo forman
+
+
+This feature could be a map? : no se muestra como array de strings porque es un dict y contiene dos elementos como clave/valor
+io_k8s_api_apps_v1_Deployment_spec_template_spec_nodeSelector_StringValueAdditional
+## DECIDIR SI DEFINIR StrValueAdditional como un objeto Mapa o dejarlo como un str... aunque su estructura en yaml es de pares key/map
+https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/
+
+Error en la coincidencia del todo
+"io_k8s_api_core_v1_Endpoints_subsets_ports": [
+    {
+        "io_k8s_api_core_v1_Endpoints_subsets_addresses_targetRef_name": "port-name",
+        "io_k8s_api_core_v1_Endpoints_subsets_ports_port": 8080,
