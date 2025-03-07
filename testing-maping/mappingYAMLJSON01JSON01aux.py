@@ -236,26 +236,23 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList):
                 value = value.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
             #print(f"Mapa completo:  {feature_map.items()}")
             for key_features, value_features in feature_map.items():
-                # Verificar mapeo directo
-                #print("NO SE EJECUTA?")
-                #last_key_feature = key_features.rsplit("_", 1)[0]
-                #print(key_features)
-                #print(last_value_feature)
-                """if value_features.endswith(key) and value_features not in auxFeaturesAddedList:
-                    auxFeaturesAddedList.add(value_features)
-                    key = value_features
-                    continue"""
-                #if key == 'io_k8s_api_core_v1_Endpoints_subsets_addresses':
-                #    print(f"ME TENDRIA QUE REPETIR")
+                
                 # Lógica normal para features string, se cambia el valor del key directamente
                 if isinstance(value_features, str) and value_features.endswith(key) and value_features not in auxFeaturesAddedList: ## key_features.endswith(key) # Salida similar
                     aux_feature_before_map = value_features.rsplit("_", 1)[0]
-                    print(f"Elmentos del mapa que se recorren:  {key_features}  {value_features}")
+                    print(f"Elmentos del if que se recorren:{key} {value}  {key_features}  {value_features}")
                     #if aux_feature_before_map not in auxFeaturesAddedList:
                     #    print("features que no deberia de insertarse")
                     #if any(feature.endswith(key) for feature in auxFeaturesAddedList):
                     #if aux_feature_before_map in auxFeaturesAddedList and aux_feature_before_map is not None:
                     ### Ajuste para tratar de evitar la insercion de fueatures incorrectos en posiciones que no corresponden por el key
+                    print(f"MAPPED KEY {mapped_key}")
+                    if isinstance(mapped_key, str):
+                                print("Soy un mapped key string")
+                                copy_map = mapped_key
+                                if copy_map.startswith("io_k8s"):
+                                    reference_deepth = mapped_key.count("_")
+                                    print(f"Deepth del mapa actual bucle: {reference_deepth}  ME EJECUTO")
                     if any(feature.endswith(key) for feature in auxFeaturesAddedList): ## and aux_feature_before_map not in auxFeaturesAddedList
                         print(f"Hay mas de un elemento que ya tiene la key")
                         aux_feature_before_insertion = value_features.rsplit("_", 1)[0]                    
@@ -294,15 +291,27 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList):
                                     auxFeaturesAddedList.add(value_features)                            
                                     key = value_features
                         else:
+                            if isinstance(mapped_key, str):
+                                print("Soy un mapped key string")
+                                copy_map = mapped_key
+                                if copy_map.startswith("io_k8s"):
+                                    reference_deepth = mapped_key.count("_")
+                                    print(f"Deepth del mapa actual: {reference_deepth}  ME EJECUTO")
+                                    if reference_deepth != value_features.count("_"):
+                                        print(f"Feature omitido por la coincidencia de profundidad: {value_features}")
+                                        continue
+                                    else:
+                                        print(f"NO DEBERIA DE HABER NADA MAS NO? Features saltados? {value_features}")
                             print(f"COMPROBACION INSERCION FEATURES SIMPLES {key}   {value}   {value_features}    {key_features}")
                             print(f"LISTA DE Features: {auxFeaturesAddedList}")
-                            #print(f"Feature que se inserta antes de tiempo {value_features}")
-                            aux_feature_before_insertion_else = value_features.rsplit("_", 1)[0]                    
-                            #print(f"Features que ya tienen la key de: {value_features}  {aux_feature_before_insertion}")
+                            aux_feature_before_insertion_else = value_features.rsplit("_", 1)[0]
+                            print(f"Mapa actual: {mapped_key}")          
+                                #print(f"Features que ya tienen la key de: {value_features}  {aux_feature_before_insertion}")
                             if aux_feature_before_insertion_else in auxFeaturesAddedList:
                                 auxFeaturesAddedList.add(value_features)                            
                                 key = value_features
-                                #auxFeaturesAddedList.add(value_features)
+                                print(f"Feature que se inserta en el else final {value_features}")
+                            #auxFeaturesAddedList.add(value_features)
                     """if value_features not in auxFeaturesAddedList and value_features not in new_data:
                         print(f"LISTA DE Features: {auxFeaturesAddedList}")
                         print(f"LISTA DE LISTA: {new_data}")
@@ -313,18 +322,19 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList):
                     #auxFeaturesAddedList.add(value_features)
                     #key = value_features
                     #and key.endswith(aux_feature_before_map)
-
+                    
                 # Comprobar arrays u otros features asignados, tratan valores de tipo dict por el tipo de estructura que tienen. Modificacion con el 'feature_type': 'array' 
                 elif key_features.endswith(key) and isinstance(value_features, dict) and value_features.get("feature_type") == "array": ### Comprobando
                     #print(f"Array detectado para key '{key}': {value_features['feature']}")
                     #print(value_features.items())
                     if value_features["feature"] not in auxFeaturesAddedList:
-                        #print(f"Array SIMPLE: {key}   {value}    lISTA DE FEATURES: {auxFeaturesAddedList} ") ## {yaml_data}
+                        print(f"Array SIMPLE: {key}   {value}   {key_features} {value_features}") # lISTA DE FEATURES: {auxFeaturesAddedList} ## {yaml_data}
                         auxFeaturesAddedList.add(value_features["feature"]) ### Omitido temporalmente por la omision en arrays de arrays que se genera de features ya agregados/vistos de los yaml
                         ##feature_arr = [value_features["feature"]]
                         #new_data[value_features["feature"]] = [] ## se queda vacio
                         key = value_features["feature"]
-                        #print(f"Clave que se añade al mapeo y a la  lista   {key}")
+                        print(value_features["feature"])
+                        print(f"Clave que se añade al mapeo y a la  lista   {key}")
                         aux_array = True
                         #continue
                 ### Nueva adicion: StringValue para representar los arrays de Strings. En features se localizan por el _StringValue o _StringValueAdditional
@@ -332,13 +342,13 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList):
                 elif isinstance(value, list) and key_features.endswith("StringValue") and isinstance(value_features, str) and "StringValue" == value_features.split("_")[-1]: ## and value_features not in auxFeaturesAddedList
                     aux_key_last_before_map = value_features.split("_")[-2]
                     str_values = []
-                    #print(f"SE EJECUTA PRIMER VALUE LIST {key}   {value_features}")
+                    print(f"SE EJECUTA PRIMER VALUE LIST {key}   {value_features}")
                     #print(value)
                     if value and key.endswith(aux_key_last_before_map) and key_features.endswith(f"{aux_key_last_before_map}_StringValue"):### and value.get("key") in value_features  ## key coge los valores del feature mapeado
-                        #print(f"SE EJECUTA DE NUEVO IF NUEVO    {key}  {value_features}")
+                        print(f"SE EJECUTA DE NUEVO IF NUEVO    {key}  {value_features}")
                         for str_value in value:
                             #print(value)
-                            #print(f"{str_value}   {key} {value_features}   {aux_key_last_before_map}")
+                            print(f"{str_value}   {key} {value_features}   {aux_key_last_before_map}")
                             #aux_feature_value = f"{aux_feature_str_value}_ValueMap"
                                 #if value_features.endswith(key_features):
                             str_values.append({ ## , aux_feature_value: map_value
@@ -481,6 +491,11 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList):
                             auxFeaturesAddedList.add(value_features)
 
             mapped_key = feature_map.get(key, key)
+
+            if key == "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_env":
+                #print(new_data[mapped_key])
+                print(f"El valor del mapedd key es: {mapped_key}")
+
             if aux_nested:
                 new_data[mapped_key] = feature_nested
             elif aux_str_values: ## prueba add arr of strings
@@ -502,9 +517,22 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList):
                     new_data[mapped_key] = []
                     print(f"Arrays vacios {new_data}")
                 else:
+                    if key == "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_env":
+                    #print(new_data[mapped_key])
+                        print(f"El valor del mapedd key es: {mapped_key}")
                     new_data[mapped_key] = [apply_feature_mapping(item, feature_map, auxFeaturesAddedList.copy()) if isinstance(item, (dict, list)) else item for item in value] ## auxFeaturesAddedList: antes de la mod
-                    #print(f" Comprobar salida arr aux: {new_data[mapped_key]}")
-                    #new_data[mapped_key] = [apply_feature_mapping(item, feature_map, auxFeaturesAddedList) if isinstance(item, (dict, list)) else item for item in value]
+                    
+                    #if key == "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_env":
+                    #    print(new_data[mapped_key])
+                    #    print(f"El valor del mapedd key es: {mapped_key}")
+                """if isinstance(value, list):
+                    new_data[mapped_key] = [apply_feature_mapping(item, feature_map, auxFeaturesAddedList.copy()) if isinstance(item, (dict, list)) else item for item in value]
+                elif isinstance(value, dict):
+                    new_data[mapped_key] = apply_feature_mapping(value, feature_map, auxFeaturesAddedList) if isinstance(value, (dict, list)) else value
+                else:"""
+                #new_data[mapped_key] = [apply_feature_mapping(item, feature_map, auxFeaturesAddedList.copy()) if isinstance(item, (dict, list)) else item for item in value] ## auxFeaturesAddedList: antes de la mod
+                #print(f" Comprobar salida arr aux: {new_data[mapped_key]}")
+                #new_data[mapped_key] = [apply_feature_mapping(item, feature_map, auxFeaturesAddedList) if isinstance(item, (dict, list)) else item for item in value]
             else:
                 new_data[mapped_key] = apply_feature_mapping(value, feature_map, auxFeaturesAddedList) if isinstance(value, (dict, list)) else value
 
