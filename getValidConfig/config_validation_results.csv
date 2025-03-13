@@ -21,8 +21,11 @@ bad-sa.json,True
 bad-sa_2.json,True
 bad-sa_3.json,True
 endpoints01.json,True
+endpoints10.json,True
 example_deployment02.json,False
 example_PersistentVolume.json,True
 example_PersistentVolumeClaim.json,True
 example_pod01.json,True
 example_service01.json,True
+Total Valid,20
+Total Invalid,8

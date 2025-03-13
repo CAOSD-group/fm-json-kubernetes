@@ -1,40 +1,7 @@
-Error desconocido en archivo ../generateConfigs/outputs-json-tester\1-metallb5.json: name 'file_name' is not defined
-Error desconocido en archivo ../generateConfigs/outputs-json-tester\1-metallb5_10.json: name 'file_name' is not defined
-Error desconocido en archivo ../generateConfigs/outputs-json-tester\1-metallb5_11.json: name 'file_name' is not defined
-Error desconocido en archivo ../generateConfigs/outputs-json-tester\1-metallb5_12.json: name 'file_name' is not defined
-Error desconocido en archivo ../generateConfigs/outputs-json-tester\1-metallb5_13.json: name 'file_name' is not defined
-Error desconocido en archivo ../generateConfigs/outputs-json-tester\1-metallb5_14.json: 'io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_env_name'
-Error desconocido en archivo ../generateConfigs/outputs-json-tester\1-metallb5_15.json: Error: the element "runAsNonRoot" is not present in the FM model.
-Error desconocido en archivo ../generateConfigs/outputs-json-tester\1-metallb5_2.json: name 'file_name' is not defined
-Error desconocido en archivo ../generateConfigs/outputs-json-tester\1-metallb5_3.json: name 'file_name' is not defined
-Error desconocido en archivo ../generateConfigs/outputs-json-tester\1-metallb5_4.json: 'io_k8s_api_rbac_v1_ClusterRole_rules_verbs_StringValue'
-Error desconocido en archivo ../generateConfigs/outputs-json-tester\1-metallb5_5.json: 'io_k8s_api_rbac_v1_ClusterRole_rules_resources_StringValue'
-Error desconocido en archivo ../generateConfigs/outputs-json-tester\1-metallb5_6.json: name 'file_name' is not defined
-Error desconocido en archivo ../generateConfigs/outputs-json-tester\1-metallb5_7.json: name 'file_name' is not defined
-Error desconocido en archivo ../generateConfigs/outputs-json-tester\1-metallb5_8.json: name 'file_name' is not defined
-Error desconocido en archivo ../generateConfigs/outputs-json-tester\1-metallb5_9.json: name 'file_name' is not defined
-Error desconocido en archivo ../generateConfigs/outputs-json-tester\apidiscovery.k8s.io.v2beta1.APIGroupDiscovery4.json: Error: the element "apiVersion" is not present in the FM model.
-Error desconocido en archivo ../generateConfigs/outputs-json-tester\apiextensions.k8s.io.v1.ConversionReview1.json: Error: the element "apiVersion" is not present in the FM model.
-Error desconocido en archivo ../generateConfigs/outputs-json-tester\apiextensions.k8s.io.v1.CustomResourceDefinition.json: Error: the element "$ref" is not present in the FM model.
-Error desconocido en archivo ../generateConfigs/outputs-json-tester\bad-sa.json: name 'file_name' is not defined
-Error desconocido en archivo ../generateConfigs/outputs-json-tester\bad-sa_2.json: name 'file_name' is not defined
-Error desconocido en archivo ../generateConfigs/outputs-json-tester\bad-sa_3.json: name 'file_name' is not defined
-Error desconocido en archivo ../generateConfigs/outputs-json-tester\endpoints01.json: name 'file_name' is not defined
-Error desconocido en archivo ../generateConfigs/outputs-json-tester\example_PersistentVolume.json: name 'file_name' is not defined
-Error desconocido en archivo ../generateConfigs/outputs-json-tester\example_PersistentVolumeClaim.json: name 'file_name' is not defined
-Error desconocido en archivo ../generateConfigs/outputs-json-tester\example_pod01.json: name 'file_name' is not defined
-Error desconocido en archivo ../generateConfigs/outputs-json-tester\example_service01.json: name 'file_name' is not defined
-Error en ../generateConfigs/outputs-json-tester\1-metallb5_14.json: 'io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_env_name'
-Error en ../generateConfigs/outputs-json-tester\1-metallb5_15.json: Error: the element "runAsNonRoot" is not present in the FM model.
-Error en ../generateConfigs/outputs-json-tester\1-metallb5_4.json: 'io_k8s_api_rbac_v1_ClusterRole_rules_verbs_StringValue'
-Error en ../generateConfigs/outputs-json-tester\1-metallb5_5.json: 'io_k8s_api_rbac_v1_ClusterRole_rules_resources_StringValue'
-Error en ../generateConfigs/outputs-json-tester\apidiscovery.k8s.io.v2beta1.APIGroupDiscovery4.json: Error: the element "apiVersion" is not present in the FM model.
-Error en ../generateConfigs/outputs-json-tester\apiextensions.k8s.io.v1.ConversionReview1.json: Error: the element "apiVersion" is not present in the FM model.
-Error en ../generateConfigs/outputs-json-tester\apiextensions.k8s.io.v1.CustomResourceDefinition.json: Error: the element "$ref" is not present in the FM model.
-Error en ../generateConfigs/outputs-json-tester\1-metallb5_14.json: 'io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_env_name'
-Error en ../generateConfigs/outputs-json-tester\1-metallb5_15.json: Error: the element "runAsNonRoot" is not present in the FM model.
-Error en ../generateConfigs/outputs-json-tester\1-metallb5_4.json: 'io_k8s_api_rbac_v1_ClusterRole_rules_verbs_StringValue'
-Error en ../generateConfigs/outputs-json-tester\1-metallb5_5.json: 'io_k8s_api_rbac_v1_ClusterRole_rules_resources_StringValue'
-Error en ../generateConfigs/outputs-json-tester\apidiscovery.k8s.io.v2beta1.APIGroupDiscovery4.json: Error: the element "apiVersion" is not present in the FM model.
-Error en ../generateConfigs/outputs-json-tester\apiextensions.k8s.io.v1.ConversionReview1.json: Error: the element "apiVersion" is not present in the FM model.
-Error en ../generateConfigs/outputs-json-tester\apiextensions.k8s.io.v1.CustomResourceDefinition.json: Error: the element "$ref" is not present in the FM model.
+Error desconocido en archivo 1-metallb5_14.json: 'io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_env_name'
+Error desconocido en archivo 1-metallb5_15.json: Error: the element "runAsNonRoot" is not present in the FM model.
+Error desconocido en archivo 1-metallb5_4.json: 'io_k8s_api_rbac_v1_ClusterRole_rules_verbs_StringValue'
+Error desconocido en archivo 1-metallb5_5.json: 'io_k8s_api_rbac_v1_ClusterRole_rules_resources_StringValue'
+Error desconocido en archivo apidiscovery.k8s.io.v2beta1.APIGroupDiscovery4.json: Error: the element "apiVersion" is not present in the FM model.
+Error desconocido en archivo apiextensions.k8s.io.v1.ConversionReview1.json: Error: the element "apiVersion" is not present in the FM model.
+Error desconocido en archivo apiextensions.k8s.io.v1.CustomResourceDefinition.json: Error: the element "$ref" is not present in the FM model.
