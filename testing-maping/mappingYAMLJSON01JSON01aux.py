@@ -207,7 +207,7 @@ def extract_key_value_mappings(value, value_features, feature_map): ## Posible e
         })
     return key_values
 
-def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList):
+def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, mapped_key):
     """
     Aplica el mapeo de features al YAML reemplazando las claves por los nombres de features.
     """
@@ -217,7 +217,7 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList):
         new_data = {}
         feature_nested = {}
         feature_type_value = {}
-        mapped_key = {}
+        ## mapped_key = {}
         feature_map_key_value = {}
         #feature_type_array = {}
         possible_type_data = ['asString', 'asNumber', 'asInteger']
@@ -274,7 +274,7 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList):
                             key = value_features
                             auxFeaturesAddedList.add(value_features)
                                 #continue
-                        elif key_features.count("_") == 3 and 'apps_v1' in key_features:
+                        elif key_features.count("_") == 3 and 'apps_v1' in key_features: ## batch.v1 ,autoscaling.v1 y autoscaling.v2, policy.v1, core.v1, core.v1.Binding
                             print(f"ELIF CASO apps/v1:  {key}   {key_features}  {value_features} ")
                             #if key_features.count("_") == 2:
                             key = value_features
@@ -299,7 +299,7 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList):
                                     print(f"Deepth del mapa actual: {reference_deepth}  ME EJECUTO")
                                     if reference_deepth != value_features.count("_"):
                                         print(f"Feature omitido por la coincidencia de profundidad: {value_features}")
-                                        continue
+                                        ##continue
                                     else:
                                         print(f"NO DEBERIA DE HABER NADA MAS NO? Features saltados? {value_features}")
                             print(f"COMPROBACION INSERCION FEATURES SIMPLES {key}   {value}   {value_features}    {key_features}")
@@ -520,7 +520,9 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList):
                     if key == "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_env":
                     #print(new_data[mapped_key])
                         print(f"El valor del mapedd key es: {mapped_key}")
-                    new_data[mapped_key] = [apply_feature_mapping(item, feature_map, auxFeaturesAddedList.copy()) if isinstance(item, (dict, list)) else item for item in value] ## auxFeaturesAddedList: antes de la mod
+                    if isinstance (value, int):
+                        print(f"ERROR EN EL FILE {mapped_key}   {value} {key}")
+                    new_data[mapped_key] = [apply_feature_mapping(item, feature_map, auxFeaturesAddedList.copy(), mapped_key) if isinstance(item, (dict, list)) else item for item in value] ## auxFeaturesAddedList: antes de la mod
                     
                     #if key == "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_env":
                     #    print(new_data[mapped_key])
@@ -534,7 +536,9 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList):
                 #print(f" Comprobar salida arr aux: {new_data[mapped_key]}")
                 #new_data[mapped_key] = [apply_feature_mapping(item, feature_map, auxFeaturesAddedList) if isinstance(item, (dict, list)) else item for item in value]
             else:
-                new_data[mapped_key] = apply_feature_mapping(value, feature_map, auxFeaturesAddedList) if isinstance(value, (dict, list)) else value
+                if isinstance (value, int):
+                    print(f"ERROR EN EL FILE ELSE FINAL: {mapped_key}   {value} {key}")
+                new_data[mapped_key] = apply_feature_mapping(value, feature_map, auxFeaturesAddedList, mapped_key) if isinstance(value, (dict, list)) else value
 
         return new_data
 
@@ -546,8 +550,8 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList):
 
 
 # Ruta de la carpeta donde están los archivos YAML
-yaml_directory = './generateConfigs/files_yamls'
-#yaml_directory = '../kubernetes_fm/scripts/download_manifests/YAMLs' ## Testing yamls
+#yaml_directory = './generateConfigs/files_yamls'
+yaml_directory = '../kubernetes_fm/scripts/download_manifests/YAMLs' ## Testing yamls
 
 ## kubernetes_fm\scripts\download_manifests\YAMLs
 ## ruta de los yamls descargados: C:\projects\kubernetes_fm\scripts\download_manifests\YAMLs
@@ -555,11 +559,13 @@ yaml_directory = './generateConfigs/files_yamls'
 yaml_data_list = read_yaml_files_from_directory(yaml_directory)
 
 # Ruta del archivo CSV
-csv_file_path = './generateConfigs/kubernetes_mapping_features_part01.csv'
+#csv_file_path = './generateConfigs/kubernetes_mapping_features_part01.csv'
+csv_file_path = './generateConfigs/kubernetes_mapping_features02.csv'
+
 
 # Guardar la salida de la carpeta con ficheros JSON 
 ##output_json_dir = './generateConfigs/outputs_json_mappeds02'
-output_json_dir = './generateConfigs/outputs-json-tester'
+output_json_dir = './generateConfigs/outputs-json-mappeds03'
 
 #output_json_path = './generateConfigs/output_features02.json'
 os.makedirs(output_json_dir, exist_ok=True)  # Crea la carpeta si no existe
@@ -573,8 +579,9 @@ for filename, index, yaml_data, simple_props, hierarchical_props, key_value_pair
     ##print(f"\nProcesando archivo: {filename}")
     
     auxFeaturesAddedList = set()
+    mapped_key = {}
     feature_map = search_features_in_csv(hierarchical_props, key_value_pairs, csv_file_path)
-    updated_config = apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList)
+    updated_config = apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, mapped_key)
 
     yaml_entry = {
         "filename": filename,
@@ -597,9 +604,8 @@ for filename, index, yaml_data, simple_props, hierarchical_props, key_value_pair
     
     print(f"Procesando archivo: {json_filename}")
     #json_filename = os.path.splitext(filename)[0] + ".json"
-    output_json_path = os.path.join(output_json_dir, json_filename)
-    
-#output_json_path = './generateConfigs/output_features02.json'
+    #output_json_path = os.path.join(output_json_dir, json_filename)
+    output_json_path = os.path.normpath(os.path.join(output_json_dir, json_filename)) ## Se adapta a la salida del SO, estandarizar la ruta / O \
 
     with open(output_json_path, 'w', encoding='utf-8') as json_file:
         json.dump(yaml_entry, json_file, ensure_ascii=False, indent=4)
