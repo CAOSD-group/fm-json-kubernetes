@@ -3,8 +3,9 @@
 import re
 import csv
 
-#uvl_model = './kubernetes_combined_02.uvl'
-uvl_model_path = './kubernetes_combined_part01.uvl'
+uvl_model_path = './kubernetes_combined_02.uvl'
+#uvl_model_path = './kubernetes_combined_part01.uvl'
+#uvl_model_path = './kubernetes-mapped-v1.32/kubernetes_combined_02_V32_part01.uvl'
 
 # Procesar el modelo para extraer los datos en las columnas
 csv_data = []
@@ -23,8 +24,11 @@ with open(uvl_model_path, encoding="utf-8") as uvl_model:
         ## Se omiten/saltan las lineas que contienen mandatory, optional, alternative, namespace, features... 
         #if not re.match(r"^(String|Integer|io_k8s_)", line):   ## Alternativa de salto de expresiones que no interesan
         #    continue
+        value_row = "-" if "cardinality" in line else "" ## Se le asigna el guión para determinar si un feature es un array
         if not line.startswith(("String", "Boolean", "Integer", "io_k8s_")): # Saltar líneas que no sean features, se definen por esos 4 tipos: String, Integer o encabezado por io.. Boolean
-            value_row = "-" if "cardinality" in line else "" ## Se le asigna el guión para determinar si un feature es un array
+            if line.startswith("constraints"): ## se omite la lectura de las constraints. 
+                print(f"Linea que omite todo: {line}")
+                break   ## Se usa break porque el unico punto posible donde se empieza por 'constraints' es al declarar las restricciones
             continue
 
         #parts = line.split("namespace").split("features").split("Kubernetes")
@@ -42,8 +46,15 @@ with open(uvl_model_path, encoding="utf-8") as uvl_model:
         else:
             # Si no hay tipo de dato explícito, se asume que la primera parte de las partes es el feature
             feature = parts[0]
-        value_row = "-" if "cardinality" in line else "" ## Se le asigna el guión para determinar si un feature es un array
-
+        #value_row = "-" if "cardinality" in line else "" ## Se le asigna el guión para determinar si un feature es un array
+        ### Adicion prueba obtencion version y kind
+        feature_aux_midle = re.search(r"[A-Z].*", feature)
+        kind = feature_aux_midle.group(0).split('_')[0] ## Probando a obtener el Kind solo
+        version_aux = feature.split(f"{kind}")[0]
+        print(f"La version cortada es: {version_aux}")
+        api_version = version_aux.split('_')[-2]
+        print(f"La version del YAML es: {api_version}")
+        ####
         # Obtener las partes del feature
         split_feature = feature.split("_")
         print(f"El feature del archivo es: {feature}")
@@ -54,16 +65,17 @@ with open(uvl_model_path, encoding="utf-8") as uvl_model:
         print(midle_row)
         turned_row = split_feature[-1] if split_feature else ""    
         # Valor: se deja vacio o se asigna el valor si es un feature agregado que contiene el valor asignado
-        value_row = turned_row if "Specific value" in line else "" ## Se define el valor y se asigna el Valor si se encuentran las palabras clave en la documentación
+        value_row = turned_row if "Specific value" in line else value_row ## Se define el valor y se asigna el Valor si se encuentran las palabras clave en la documentación
         print(f"VALORES: {feature}  {midle_row} {turned_row}    {value_row}")
         # Agregar al CSV
         csv_data.append([feature, midle_row, turned_row, value_row])
 
-output_file_csv = './generateConfigs/kubernetes_mapping_features.csv'
-
+output_file_csv = './generateConfigs/kubernetes_mapping_features02.csv'
+#output_file_csv = './kubernetes-mapped-v1.32/kubernetes_mapping_features01.csv'
+##str_ouput_rows = "Feature, Midle, Turned, Value"
 with open(output_file_csv, mode="w", newline="") as csv_file:
     writer = csv.writer(csv_file)
-    writer.writerow(["Feature, Midle, Turned, Value"])  # Encabezado
+    writer.writerow(["Feature", "Midle", "Turned", "Value"])  ## [str_ouput_rows] # Encabezado writer.writerow(["Feature, Midle, Turned, Value"])
     writer.writerows(csv_data)
 ##generate_csv_from_uvl = (uvl_model_path)
 
