@@ -2034,3 +2034,55 @@ Error en la coincidencia del todo
     {
         "io_k8s_api_core_v1_Endpoints_subsets_addresses_targetRef_name": "port-name",
         "io_k8s_api_core_v1_Endpoints_subsets_ports_port": 8080,
+Fixed: Con el ajuste de temer en cuenta el nivel de los primeros features en insertarse.
+key_features.count("_") == 3:
+
+                "io_k8s_api_core_v1_Endpoints_subsets_ports": [
+                    {
+                        "io_k8s_api_core_v1_Endpoints_subsets_ports_name": "port-name",
+                        "io_k8s_api_core_v1_Endpoints_subsets_ports_port": 8080,
+                        "io_k8s_api_core_v1_Endpoints_subsets_ports_protocol": {
+                            "io_k8s_api_core_v1_Endpoints_subsets_ports_protocol_TCP": true
+                        }
+                    }
+                ]
+
+Por la comparacion que se realiza c
+
+Error en la declaracion de cardinality para floats:
+
+io_k8s_apiextensions_apiserver_pkg_apis_apiextensions_v1_CustomResourceDefinition_spec_versions_schema_openAPIV3Schema_multipleOf
+        "multipleOf": {
+          "format": "double",
+          "type": "number"
+        },
+
+No deberian de haberse declarado como cardinality en el modelo...
+
+
+Arrays de enteros, 3 -- que si tienen la estuctura de un array de Strings
+            "type": "integer"
+          },
+          "type": "array",
+
+          Mas errores con la primera insercion de los features...
+
+Primeros niveles
+
+Niveles mas profuntos...
+
+
+Errores en el script que comprobara la validez de todos los json mapeados...
+
+example_deployment02 es invalid?
+
+Errores encontrados en el mapeo YAML-JSON:
+
+Error desconocido en archivo .chainsaw.json: Error: the element "apiVersion" is not present in the FM model. -- Version no esta en el fm
+Error desconocido en archivo 00-emptyDir_2.json: 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_name'
+Error desconocido en archivo 00-ns-lanchonete.json: Error: the element "tag" is not present in the FM model. -- Propiedad no esta en el fm ni en la doc...
+Error desconocido en archivo 001.setup.json: Error: the element "apiVersion" is not present in the FM model. -- Version no esta en el fm
+Error desconocido en archivo 001.setup_2.json: Error: the element "apiVersion" is not present in the FM model. -- Version no esta en el fm
+Error desconocido en archivo 01-bazarr-deployment.json: 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_env_name' 
+Error desconocido en archivo 01-dashboard_8.json: 'io_k8s_api_rbac_v1_Role_rules_resourceNames_StringValue' -- Mala insercion del feature donde no debe
+Error desconocido en archivo 01-dynamic-resource-limits.json: Error: the element "apiVersion" i not present in the FM model. --  Version no esta en el fm: "kyverno.io/v1"

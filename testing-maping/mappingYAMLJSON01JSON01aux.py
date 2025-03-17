@@ -231,7 +231,8 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, mapped_k
             aux_str_values = False
             aux_value_type = False
             aux_value_type_array = False
-            
+            list_double_version = {'apps_v1', 'batch_v1', 'autoscaling_v1', 'autoscaling_v2', 'policy_v1', 'core_v1'}
+            ##batch.v1 ,autoscaling.v1 y autoscaling.v2, policy.v1, core.v1, core.v1.Binding
             if isinstance(value, datetime): ## Comprobacion de si alguno de los valores es de tipo Time RCF 3339
                 value = value.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
             #print(f"Mapa completo:  {feature_map.items()}")
@@ -274,8 +275,8 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, mapped_k
                             key = value_features
                             auxFeaturesAddedList.add(value_features)
                                 #continue
-                        elif key_features.count("_") == 3 and 'apps_v1' in key_features: ## batch.v1 ,autoscaling.v1 y autoscaling.v2, policy.v1, core.v1, core.v1.Binding
-                            print(f"ELIF CASO apps/v1:  {key}   {key_features}  {value_features} ")
+                        elif key_features.count("_") == 3 and any(version in key_features for version in list_double_version): ## batch.v1 ,autoscaling.v1 y autoscaling.v2, policy.v1, core.v1, core.v1.Binding
+                            print(f"ELIF CASO VERSION CON / :  {key}   {key_features}  {value_features} ")
                             #if key_features.count("_") == 2:
                             key = value_features
                             auxFeaturesAddedList.add(value_features)
@@ -341,7 +342,7 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, mapped_k
                 ## Seguir un tratamiento similar que con los mapas. Parte final del feature
                 elif isinstance(value, list) and key_features.endswith("StringValue") and isinstance(value_features, str) and "StringValue" == value_features.split("_")[-1]: ## and value_features not in auxFeaturesAddedList
                     aux_key_last_before_map = value_features.split("_")[-2]
-                    str_values = []
+                    str_arr_values = []
                     print(f"SE EJECUTA PRIMER VALUE LIST {key}   {value_features}")
                     #print(value)
                     if value and key.endswith(aux_key_last_before_map) and key_features.endswith(f"{aux_key_last_before_map}_StringValue"):### and value.get("key") in value_features  ## key coge los valores del feature mapeado
@@ -351,30 +352,30 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, mapped_k
                             print(f"{str_value}   {key} {value_features}   {aux_key_last_before_map}")
                             #aux_feature_value = f"{aux_feature_str_value}_ValueMap"
                                 #if value_features.endswith(key_features):
-                            str_values.append({ ## , aux_feature_value: map_value
+                            str_arr_values.append({ ## , aux_feature_value: map_value
                                 value_features: str_value
                             })
                             auxFeaturesAddedList.add(value_features) ### Omitido temporalmente por la omision en arrays de arrays que se genera de features ya agregados/vistos de los yaml
                         #print(f"EL KEY VALUES ES {key_values}")
-                        feature_str_value = str_values
+                        feature_str_value = str_arr_values
                         aux_str_values = True
                 ## Seguir un tratamiento similar que con los mapas. Parte final del feature
                 elif isinstance(value, list) and key_features.endswith("IntegerValue") and isinstance(value_features, str) and "IntegerValue" == value_features.split("_")[-1]: ## and value_features not in auxFeaturesAddedList
                     aux_key_last_before_map = value_features.split("_")[-2]
-                    int_values = []
+                    values_arr_int = []
                     #print(value)
                     if value and key.endswith(aux_key_last_before_map) and key_features.endswith(f"{aux_key_last_before_map}_IntegerValue"):### and value.get("key") in value_features  ## key coge los valores del feature mapeado
-                        for int_values in value:
+                        for int_value in value:
                             print("Array de INTEGERS")
-                            print(f"{int_values}   {key} {value_features}   {aux_key_last_before_map}")
+                            print(f"{values_arr_int}   {key} {value_features}   {aux_key_last_before_map}")
                             #aux_feature_value = f"{aux_feature_str_value}_ValueMap"
                                 #if value_features.endswith(key_features):
-                            int_values.append({ ## , aux_feature_value: map_value
-                                value_features: int_values
+                            values_arr_int.append({ ## , aux_feature_value: map_value
+                                value_features: int_value
                             })
                             auxFeaturesAddedList.add(value_features) ### Omitido temporalmente por la omision en arrays de arrays que se genera de features ya agregados/vistos de los yaml
                         #print(f"EL KEY VALUES ES {key_values}")
-                        feature_str_value = int_values
+                        feature_str_value = values_arr_int
                         aux_str_values = True
                     #else: ## lista vacia
                     #    feature_str_value = [] ## se deja el array vacio porque no hay contenido o '' o ""
@@ -550,8 +551,8 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, mapped_k
 
 
 # Ruta de la carpeta donde están los archivos YAML
-#yaml_directory = './generateConfigs/files_yamls'
-yaml_directory = '../kubernetes_fm/scripts/download_manifests/YAMLs' ## Testing yamls
+yaml_directory = './generateConfigs/files_yamls'
+##yaml_directory = '../kubernetes_fm/scripts/download_manifests/YAMLs' ## Testing yamls
 
 ## kubernetes_fm\scripts\download_manifests\YAMLs
 ## ruta de los yamls descargados: C:\projects\kubernetes_fm\scripts\download_manifests\YAMLs
@@ -565,7 +566,7 @@ csv_file_path = './generateConfigs/kubernetes_mapping_features02.csv'
 
 # Guardar la salida de la carpeta con ficheros JSON 
 ##output_json_dir = './generateConfigs/outputs_json_mappeds02'
-output_json_dir = './generateConfigs/outputs-json-mappeds03'
+output_json_dir = './generateConfigs/outputs-json-mappeds04'
 
 #output_json_path = './generateConfigs/output_features02.json'
 os.makedirs(output_json_dir, exist_ok=True)  # Crea la carpeta si no existe
