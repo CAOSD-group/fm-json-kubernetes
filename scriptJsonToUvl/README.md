@@ -2,6 +2,7 @@
 
 convert0.py genera 2 archivos: el feature model uvl en __kubernetes_combined_constraints.uvl__ y un conjunto de descripciones en __descriptions_01.json__. Este último es el que se usa en los análisis del script __analisisScriptNpl01.py__, para generar las constraints sobre los features y descripciones en __restrictions02.txt__. Todas las funciones que se mencionan en las agrupaciones se encuentran en [analisisScriptNpl01.py](https://github.com/CAOSD-group/fm-json-kubernetes/blob/main/scriptJsonToUvl/analisisScriptNpl01.py), así como los patrones y tratamiendo de las reglas y las palabras clave que añaden las descripciones al archivo descriptions_01.json en convert01.py.
 
+![prueba01 drawio](https://github.com/user-attachments/assets/81de09c1-f7b0-46f7-a2b5-829410c31d12)
 
 # AGRUPACIONES DE LAS CONSTRAINTS SEGÚN EL MAPEO QUE TIENEN
 

@@ -29,8 +29,8 @@ En la carpeta v.30.2 se encuentran los siguientes archivos:
 
 En la siguiente imagen se puede observar de manera visual como se relacionan los archivos.
 
-![prueba01 drawio](https://github.com/user-attachments/assets/81de09c1-f7b0-46f7-a2b5-829410c31d12)
 
+![Schema updated](https://github.com/user-attachments/assets/4d97bee9-67b7-4c47-8b32-a040f17d2dd1)
 
 # ¿Cómo usar el programa?
 
