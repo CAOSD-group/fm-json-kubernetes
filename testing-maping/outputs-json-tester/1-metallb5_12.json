@@ -2,86 +2,29 @@
     "filename": "1-metallb5.yaml",
     "apiVersion": "v1",
     "config": {
-        "io_k8s_api_core_v1_ServiceAccount_apiVersion": [
-            "r",
-            "b",
-            "a",
-            "c",
-            ".",
-            "a",
-            "u",
-            "t",
-            "h",
-            "o",
-            "r",
-            "i",
-            "z",
-            "a",
-            "t",
-            "i",
-            "o",
-            "n",
-            ".",
-            "k",
-            "8",
-            "s",
-            ".",
-            "i",
-            "o",
-            "/",
-            "v",
-            "1"
-        ],
-        "io_k8s_api_core_v1_ServiceAccount_kind": [
-            "R",
-            "o",
-            "l",
-            "e",
-            "B",
-            "i",
-            "n",
-            "d",
-            "i",
-            "n",
-            "g"
-        ],
-        "io_k8s_api_core_v1_ServiceAccount_metadata": [
-            "labels",
-            "name",
-            "namespace"
-        ],
-        "roleRef": [
-            "apiGroup",
-            "kind",
-            "name"
-        ],
-        "subjects": [
+        "io_k8s_api_rbac_v1_RoleBinding_apiVersion": "rbac.authorization.k8s.io/v1",
+        "io_k8s_api_rbac_v1_RoleBinding_kind": "RoleBinding",
+        "io_k8s_api_rbac_v1_RoleBinding_metadata": {
+            "io_k8s_api_rbac_v1_RoleBinding_metadata_labels": [
+                {
+                    "io_k8s_api_rbac_v1_RoleBinding_metadata_labels_KeyMap": "app",
+                    "io_k8s_api_rbac_v1_RoleBinding_metadata_labels_ValueMap": "metallb"
+                }
+            ],
+            "io_k8s_api_rbac_v1_RoleBinding_metadata_name": "pod-lister",
+            "io_k8s_api_rbac_v1_RoleBinding_metadata_namespace": "metallb-system"
+        },
+        "io_k8s_api_rbac_v1_RoleBinding_roleRef": {
+            "io_k8s_api_rbac_v1_RoleBinding_roleRef_apiGroup": "rbac.authorization.k8s.io",
+            "io_k8s_api_rbac_v1_RoleBinding_roleRef_kind": "Role",
+            "io_k8s_api_rbac_v1_RoleBinding_roleRef_name": "pod-lister"
+        },
+        "io_k8s_api_rbac_v1_RoleBinding_subjects": [
             {
-                "kind": [
-                    "S",
-                    "e",
-                    "r",
-                    "v",
-                    "i",
-                    "c",
-                    "e",
-                    "A",
-                    "c",
-                    "c",
-                    "o",
-                    "u",
-                    "n",
-                    "t"
-                ],
-                "io_k8s_api_core_v1_ServiceAccount_metadata_name": [
-                    "s",
-                    "p",
-                    "e",
-                    "a",
-                    "k",
-                    "e",
-                    "r"
-                ]
+                "io_k8s_api_rbac_v1_RoleBinding_subjects_kind": {
+                    "io_k8s_api_rbac_v1_RoleBinding_subjects_kind_ServiceAccount": true
+                },
+                "io_k8s_api_rbac_v1_RoleBinding_subjects_name": "speaker"
             }
         ]
     }
