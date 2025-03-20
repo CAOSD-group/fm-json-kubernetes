@@ -2,36 +2,114 @@
     "filename": "1-metallb5.yaml",
     "apiVersion": "apps_v1",
     "config": {
-        "io_k8s_api_apps_v1_Deployment_apiVersion": [
-            "a",
-            "p",
-            "p",
-            "s",
-            "/",
-            "v",
-            "1"
-        ],
-        "io_k8s_api_apps_v1_Deployment_kind": [
-            "D",
-            "e",
-            "p",
-            "l",
-            "o",
-            "y",
-            "m",
-            "e",
-            "n",
-            "t"
-        ],
-        "io_k8s_api_apps_v1_Deployment_metadata": [
-            "labels",
-            "name",
-            "namespace"
-        ],
-        "io_k8s_api_apps_v1_Deployment_spec": [
-            "revisionHistoryLimit",
-            "selector",
-            "template"
-        ]
+        "io_k8s_api_apps_v1_Deployment_apiVersion": "apps/v1",
+        "io_k8s_api_apps_v1_Deployment_kind": "Deployment",
+        "io_k8s_api_apps_v1_Deployment_metadata": {
+            "io_k8s_api_apps_v1_Deployment_metadata_labels": [
+                {
+                    "io_k8s_api_apps_v1_Deployment_metadata_labels_KeyMap": "app",
+                    "io_k8s_api_apps_v1_Deployment_metadata_labels_ValueMap": "metallb"
+                },
+                {
+                    "io_k8s_api_apps_v1_Deployment_metadata_labels_KeyMap": "component",
+                    "io_k8s_api_apps_v1_Deployment_metadata_labels_ValueMap": "controller"
+                }
+            ],
+            "io_k8s_api_apps_v1_Deployment_metadata_name": "controller",
+            "io_k8s_api_apps_v1_Deployment_metadata_namespace": "metallb-system"
+        },
+        "io_k8s_api_apps_v1_Deployment_spec": {
+            "io_k8s_api_apps_v1_Deployment_spec_revisionHistoryLimit": 3,
+            "io_k8s_api_apps_v1_Deployment_spec_selector": {
+                "io_k8s_api_apps_v1_Deployment_spec_selector_matchLabels": [
+                    {
+                        "io_k8s_api_apps_v1_Deployment_spec_selector_matchLabels_KeyMap": "app",
+                        "io_k8s_api_apps_v1_Deployment_spec_selector_matchLabels_ValueMap": "metallb"
+                    },
+                    {
+                        "io_k8s_api_apps_v1_Deployment_spec_selector_matchLabels_KeyMap": "component",
+                        "io_k8s_api_apps_v1_Deployment_spec_selector_matchLabels_ValueMap": "controller"
+                    }
+                ]
+            },
+            "io_k8s_api_apps_v1_Deployment_spec_template": {
+                "io_k8s_api_apps_v1_Deployment_spec_template_metadata": {
+                    "io_k8s_api_apps_v1_Deployment_spec_template_metadata_annotations": [
+                        {
+                            "io_k8s_api_apps_v1_Deployment_spec_template_metadata_annotations_KeyMap": "prometheus.io/port",
+                            "io_k8s_api_apps_v1_Deployment_spec_template_metadata_annotations_ValueMap": "7472"
+                        },
+                        {
+                            "io_k8s_api_apps_v1_Deployment_spec_template_metadata_annotations_KeyMap": "prometheus.io/scrape",
+                            "io_k8s_api_apps_v1_Deployment_spec_template_metadata_annotations_ValueMap": "true"
+                        }
+                    ],
+                    "io_k8s_api_apps_v1_Deployment_spec_template_metadata_labels": [
+                        {
+                            "io_k8s_api_apps_v1_Deployment_spec_template_metadata_labels_KeyMap": "app",
+                            "io_k8s_api_apps_v1_Deployment_spec_template_metadata_labels_ValueMap": "metallb"
+                        },
+                        {
+                            "io_k8s_api_apps_v1_Deployment_spec_template_metadata_labels_KeyMap": "component",
+                            "io_k8s_api_apps_v1_Deployment_spec_template_metadata_labels_ValueMap": "controller"
+                        }
+                    ]
+                },
+                "io_k8s_api_apps_v1_Deployment_spec_template_spec": {
+                    "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers": [
+                        {
+                            "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_args": [
+                                {
+                                    "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_args_StringValue": "--port=7472"
+                                },
+                                {
+                                    "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_args_StringValue": "--config=config"
+                                }
+                            ],
+                            "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_env": [
+                                {
+                                    "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_name": "METALLB_ML_SECRET_NAME",
+                                    "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_env_value": "memberlist"
+                                },
+                                {
+                                    "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_name": "METALLB_DEPLOYMENT",
+                                    "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_env_value": "controller"
+                                }
+                            ],
+                            "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_image": "192.168.2.100:5000/metallb/controller:v0.12.1",
+                            "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_name": "controller",
+                            "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_ports": [
+                                {
+                                    "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_ports_containerPort": 7472,
+                                    "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_env_name": "monitoring"
+                                }
+                            ],
+                            "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_securityContext": {
+                                "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_securityContext_allowPrivilegeEscalation": false,
+                                "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_securityContext_capabilities": {
+                                    "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_securityContext_capabilities_drop": [
+                                        {
+                                            "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_securityContext_capabilities_drop_StringValue": "all"
+                                        }
+                                    ]
+                                },
+                                "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_securityContext_readOnlyRootFilesystem": true
+                            }
+                        }
+                    ],
+                    "io_k8s_api_apps_v1_Deployment_spec_template_spec_nodeSelector": [
+                        {
+                            "io_k8s_api_apps_v1_Deployment_spec_template_spec_nodeSelector_StringValueAdditional": "kubernetes.io/os:linux"
+                        }
+                    ],
+                    "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_securityContext": {
+                        "runAsNonRoot": true,
+                        "runAsUser": 65534
+                    },
+                    "io_k8s_api_apps_v1_Deployment_spec_template_spec_serviceAccountName": "controller",
+                    "io_k8s_api_apps_v1_Deployment_spec_template_spec_terminationGracePeriodSeconds": 0
+                }
+            }
+        }
     }
 }

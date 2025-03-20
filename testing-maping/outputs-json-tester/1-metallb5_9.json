@@ -2,111 +2,29 @@
     "filename": "1-metallb5.yaml",
     "apiVersion": "v1",
     "config": {
-        "io_k8s_api_core_v1_ServiceAccount_apiVersion": [
-            "r",
-            "b",
-            "a",
-            "c",
-            ".",
-            "a",
-            "u",
-            "t",
-            "h",
-            "o",
-            "r",
-            "i",
-            "z",
-            "a",
-            "t",
-            "i",
-            "o",
-            "n",
-            ".",
-            "k",
-            "8",
-            "s",
-            ".",
-            "i",
-            "o",
-            "/",
-            "v",
-            "1"
-        ],
-        "io_k8s_api_core_v1_ServiceAccount_kind": [
-            "C",
-            "l",
-            "u",
-            "s",
-            "t",
-            "e",
-            "r",
-            "R",
-            "o",
-            "l",
-            "e",
-            "B",
-            "i",
-            "n",
-            "d",
-            "i",
-            "n",
-            "g"
-        ],
-        "io_k8s_api_core_v1_ServiceAccount_metadata": [
-            "labels",
-            "name"
-        ],
-        "roleRef": [
-            "apiGroup",
-            "kind",
-            "name"
-        ],
-        "subjects": [
+        "io_k8s_api_rbac_v1_ClusterRoleBinding_apiVersion": "rbac.authorization.k8s.io/v1",
+        "io_k8s_api_rbac_v1_ClusterRoleBinding_kind": "ClusterRoleBinding",
+        "io_k8s_api_rbac_v1_ClusterRoleBinding_metadata": {
+            "io_k8s_api_rbac_v1_ClusterRoleBinding_metadata_labels": [
+                {
+                    "io_k8s_api_rbac_v1_ClusterRoleBinding_metadata_labels_KeyMap": "app",
+                    "io_k8s_api_rbac_v1_ClusterRoleBinding_metadata_labels_ValueMap": "metallb"
+                }
+            ],
+            "io_k8s_api_rbac_v1_ClusterRoleBinding_metadata_name": "metallb-system:controller"
+        },
+        "io_k8s_api_rbac_v1_ClusterRoleBinding_roleRef": {
+            "io_k8s_api_rbac_v1_ClusterRoleBinding_roleRef_apiGroup": "rbac.authorization.k8s.io",
+            "io_k8s_api_rbac_v1_ClusterRoleBinding_roleRef_kind": "ClusterRole",
+            "io_k8s_api_rbac_v1_ClusterRoleBinding_roleRef_name": "metallb-system:controller"
+        },
+        "io_k8s_api_rbac_v1_ClusterRoleBinding_subjects": [
             {
-                "kind": [
-                    "S",
-                    "e",
-                    "r",
-                    "v",
-                    "i",
-                    "c",
-                    "e",
-                    "A",
-                    "c",
-                    "c",
-                    "o",
-                    "u",
-                    "n",
-                    "t"
-                ],
-                "io_k8s_api_core_v1_ServiceAccount_metadata_name": [
-                    "c",
-                    "o",
-                    "n",
-                    "t",
-                    "r",
-                    "o",
-                    "l",
-                    "l",
-                    "e",
-                    "r"
-                ],
-                "namespace": [
-                    "m",
-                    "e",
-                    "t",
-                    "a",
-                    "l",
-                    "l",
-                    "b",
-                    "-",
-                    "s",
-                    "y",
-                    "s",
-                    "t",
-                    "e",
-                    "m"
-                ]
+                "io_k8s_api_rbac_v1_ClusterRoleBinding_subjects_kind": {
+                    "io_k8s_api_rbac_v1_ClusterRoleBinding_subjects_kind_ServiceAccount": true
+                },
+                "io_k8s_api_rbac_v1_ClusterRoleBinding_subjects_name": "controller",
+                "io_k8s_api_rbac_v1_ClusterRoleBinding_subjects_namespace": "metallb-system"
             }
         ]
     }

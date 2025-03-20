@@ -2,34 +2,168 @@
     "filename": "1-metallb5.yaml",
     "apiVersion": "apps_v1",
     "config": {
-        "io_k8s_api_apps_v1_DaemonSet_apiVersion": [
-            "a",
-            "p",
-            "p",
-            "s",
-            "/",
-            "v",
-            "1"
-        ],
-        "io_k8s_api_apps_v1_DaemonSet_kind": [
-            "D",
-            "a",
-            "e",
-            "m",
-            "o",
-            "n",
-            "S",
-            "e",
-            "t"
-        ],
-        "io_k8s_api_apps_v1_DaemonSet_metadata": [
-            "labels",
-            "name",
-            "namespace"
-        ],
-        "io_k8s_api_apps_v1_DaemonSet_spec": [
-            "selector",
-            "template"
-        ]
+        "io_k8s_api_apps_v1_DaemonSet_apiVersion": "apps/v1",
+        "io_k8s_api_apps_v1_DaemonSet_kind": "DaemonSet",
+        "io_k8s_api_apps_v1_DaemonSet_metadata": {
+            "io_k8s_api_apps_v1_DaemonSet_metadata_labels": [
+                {
+                    "io_k8s_api_apps_v1_DaemonSet_metadata_labels_KeyMap": "app",
+                    "io_k8s_api_apps_v1_DaemonSet_metadata_labels_ValueMap": "metallb"
+                },
+                {
+                    "io_k8s_api_apps_v1_DaemonSet_metadata_labels_KeyMap": "component",
+                    "io_k8s_api_apps_v1_DaemonSet_metadata_labels_ValueMap": "speaker"
+                }
+            ],
+            "io_k8s_api_apps_v1_DaemonSet_metadata_name": "speaker",
+            "io_k8s_api_apps_v1_DaemonSet_metadata_namespace": "metallb-system"
+        },
+        "io_k8s_api_apps_v1_DaemonSet_spec": {
+            "io_k8s_api_apps_v1_DaemonSet_spec_selector": {
+                "io_k8s_api_apps_v1_DaemonSet_spec_selector_matchLabels": [
+                    {
+                        "io_k8s_api_apps_v1_DaemonSet_spec_selector_matchLabels_KeyMap": "app",
+                        "io_k8s_api_apps_v1_DaemonSet_spec_selector_matchLabels_ValueMap": "metallb"
+                    },
+                    {
+                        "io_k8s_api_apps_v1_DaemonSet_spec_selector_matchLabels_KeyMap": "component",
+                        "io_k8s_api_apps_v1_DaemonSet_spec_selector_matchLabels_ValueMap": "speaker"
+                    }
+                ]
+            },
+            "io_k8s_api_apps_v1_DaemonSet_spec_template": {
+                "io_k8s_api_apps_v1_DaemonSet_spec_template_metadata": {
+                    "io_k8s_api_apps_v1_DaemonSet_spec_template_metadata_annotations": [
+                        {
+                            "io_k8s_api_apps_v1_DaemonSet_spec_template_metadata_annotations_KeyMap": "prometheus.io/port",
+                            "io_k8s_api_apps_v1_DaemonSet_spec_template_metadata_annotations_ValueMap": "7472"
+                        },
+                        {
+                            "io_k8s_api_apps_v1_DaemonSet_spec_template_metadata_annotations_KeyMap": "prometheus.io/scrape",
+                            "io_k8s_api_apps_v1_DaemonSet_spec_template_metadata_annotations_ValueMap": "true"
+                        }
+                    ],
+                    "io_k8s_api_apps_v1_DaemonSet_spec_template_metadata_labels": [
+                        {
+                            "io_k8s_api_apps_v1_DaemonSet_spec_template_metadata_labels_KeyMap": "app",
+                            "io_k8s_api_apps_v1_DaemonSet_spec_template_metadata_labels_ValueMap": "metallb"
+                        },
+                        {
+                            "io_k8s_api_apps_v1_DaemonSet_spec_template_metadata_labels_KeyMap": "component",
+                            "io_k8s_api_apps_v1_DaemonSet_spec_template_metadata_labels_ValueMap": "speaker"
+                        }
+                    ]
+                },
+                "io_k8s_api_apps_v1_DaemonSet_spec_template_spec": {
+                    "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers": [
+                        {
+                            "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_args": [
+                                {
+                                    "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_args_StringValue": "--port=7472"
+                                },
+                                {
+                                    "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_args_StringValue": "--config=config"
+                                }
+                            ],
+                            "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_env": [
+                                {
+                                    "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_name": "METALLB_NODE_NAME",
+                                    "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_env_valueFrom": {
+                                        "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_env_valueFrom_fieldRef": {
+                                            "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_env_valueFrom_fieldRef_fieldPath": "spec.nodeName"
+                                        }
+                                    }
+                                },
+                                {
+                                    "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_name": "METALLB_HOST",
+                                    "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_env_valueFrom": {
+                                        "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_env_valueFrom_fieldRef": {
+                                            "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_env_valueFrom_fieldRef_fieldPath": "status.hostIP"
+                                        }
+                                    }
+                                },
+                                {
+                                    "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_name": "METALLB_ML_BIND_ADDR",
+                                    "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_env_valueFrom": {
+                                        "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_env_valueFrom_fieldRef": {
+                                            "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_env_valueFrom_fieldRef_fieldPath": "status.podIP"
+                                        }
+                                    }
+                                },
+                                {
+                                    "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_name": "METALLB_ML_LABELS",
+                                    "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_env_value": "app=metallb,component=speaker"
+                                },
+                                {
+                                    "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_name": "METALLB_ML_SECRET_KEY",
+                                    "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_env_valueFrom": {
+                                        "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_env_valueFrom_secretKeyRef": {
+                                            "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_env_name": "memberlist",
+                                            "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_env_valueFrom_secretKeyRef_key": "secretkey"
+                                        }
+                                    }
+                                }
+                            ],
+                            "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_image": "192.168.2.100:5000/metallb/speaker:v0.12.1",
+                            "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_name": "speaker",
+                            "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_ports": [
+                                {
+                                    "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_ports_containerPort": 7472,
+                                    "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_env_name": "monitoring"
+                                },
+                                {
+                                    "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_ports_containerPort": 7946,
+                                    "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_env_name": "memberlist-tcp"
+                                },
+                                {
+                                    "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_ports_containerPort": 7946,
+                                    "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_env_name": "memberlist-udp",
+                                    "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_ports_protocol": {
+                                        "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_ports_protocol_UDP": true
+                                    }
+                                }
+                            ],
+                            "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_securityContext": {
+                                "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_securityContext_allowPrivilegeEscalation": false,
+                                "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_securityContext_capabilities": {
+                                    "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_securityContext_capabilities_add": [
+                                        {
+                                            "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_securityContext_capabilities_add_StringValue": "NET_RAW"
+                                        }
+                                    ],
+                                    "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_securityContext_capabilities_drop": [
+                                        {
+                                            "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_securityContext_capabilities_drop_StringValue": "ALL"
+                                        }
+                                    ]
+                                },
+                                "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_securityContext_readOnlyRootFilesystem": true
+                            }
+                        }
+                    ],
+                    "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_hostNetwork": true,
+                    "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_nodeSelector": [
+                        {
+                            "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_nodeSelector_StringValueAdditional": "kubernetes.io/os:linux"
+                        }
+                    ],
+                    "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_serviceAccountName": "speaker",
+                    "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_terminationGracePeriodSeconds": 2,
+                    "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_tolerations": [
+                        {
+                            "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_tolerations_effect": {
+                                "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_tolerations_effect_NoSchedule": true,
+                                "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_tolerations_operator_Exists": true
+                            },
+                            "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_tolerations_key": "node-role.kubernetes.io/master",
+                            "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_tolerations_operator": {
+                                "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_tolerations_effect_NoSchedule": true,
+                                "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_tolerations_operator_Exists": true
+                            }
+                        }
+                    ]
+                }
+            }
+        }
     }
 }

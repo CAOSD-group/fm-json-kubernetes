@@ -7,11 +7,13 @@ import os
 import csv
 
 FM_PATH = '../kubernetes_combined_02.uvl'
-JSON_DIR = '../generateConfigs/outputs-json-tester'
-ERROR_LOG_FILE = "error_log.txt"
-csv_ouput_file = "config_validation_results.csv"
+##JSON_DIR = '../generateConfigs/outputs-json-tester'
+JSON_DIR = '../generateConfigs/outputs-json-mappeds03'
 
-open(ERROR_LOG_FILE, "w").close() 
+ERROR_LOG_FILE = "error_log02.txt"
+csv_ouput_file = "config_validation_results01.csv"
+
+open(ERROR_LOG_FILE, "w").close() ## Se limpia el archivo
 
 def save_statistics(csv_data, output_file):
   """Guarda los resultados en un archivo CSV."""
@@ -72,17 +74,32 @@ def process_file(filepath, fm_model, sat_model):
 def validate_all_configs(directory, fm_model, sat_model):
   """Recorre el directorio de JSONs, valida las configuraciones y guarda los resultados."""
   csv_data = []
+  valid_count = 0
+  invalid_count = 0
 
-  for filename in os.listdir(directory):
-    if filename.endswith(".json"):  # Solo procesar JSON
-      print(f"Filename: {filename}")
-      file_path = os.path.normpath(os.path.join(directory, filename))     ## os.path.join(directory, filename)
-      print(f"Array csv que se va insertando y el file_path: {csv_data} {file_path}")
-      result = process_file(file_path, fm_model, sat_model)
-      csv_data.append(result)
-  
-  save_statistics(csv_data, csv_ouput_file)
+  with open(csv_ouput_file, mode="w", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerow(["Filename", "Valid"])  # Escribir cabecera del CSV  
 
+    for filename in os.listdir(directory):
+      if filename.endswith(".json"):  # Solo procesar JSON
+        print(f"Filename: {filename}")
+        file_path = os.path.normpath(os.path.join(directory, filename))     ## os.path.join(directory, filename)
+        print(f"Array csv que se va insertando y el file_path: {csv_data} {file_path}")
+        result = process_file(file_path, fm_model, sat_model)
+        writer.writerow(result)  # Escribir en el CSV linea por linea
+        ##csv_data.append(result)
+        if result[1] is True:
+          valid_count += 1
+        else:
+          invalid_count += 1
+      writer.writerow(["Total Valid", valid_count])
+      writer.writerow(["Total Invalid", invalid_count])
+
+    ##save_statistics(csv_data, csv_ouput_file)
+    print(f"\n Total de archivos válidos: {valid_count}")
+    print(f" Total de archivos inválidos: {invalid_count}")
+    print(f"Resultados guardados en {csv_ouput_file}")
 if __name__ == '__main__':
   fm_model = UVLReader(FM_PATH).transform()
   sat_model = FmToPysat(fm_model).transform()
