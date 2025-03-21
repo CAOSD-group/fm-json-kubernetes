@@ -2086,3 +2086,19 @@ Error desconocido en archivo 001.setup_2.json: Error: the element "apiVersion" i
 Error desconocido en archivo 01-bazarr-deployment.json: 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_env_name' 
 Error desconocido en archivo 01-dashboard_8.json: 'io_k8s_api_rbac_v1_Role_rules_resourceNames_StringValue' -- Mala insercion del feature donde no debe
 Error desconocido en archivo 01-dynamic-resource-limits.json: Error: the element "apiVersion" i not present in the FM model. --  Version no esta en el fm: "kyverno.io/v1"
+
+
+Agregar rows al csv final de salida:
+Filename,Valid ## NumFeatures, ##TiempoMapeo(T de procesamiento del mapping), NºConfs, ##TiempoValidacion(T que se tarda en validar el json)
+
+No hace falta limitar el tamaño, con las refs de tiempo de procesamiento, N features se pueda reflejar el tiempo
+
+Archivos que se omiten: Los que tienen corchetes dobles como en plantillas de jinja, helm. O carac invalidos -- revisar filtro de la figura VamoS
+Archivos que se dejan, arrays vacios, custom CRDs, Se suman a invalid... aunque sean Error y demas
+
+Resumen:
+- Modificar salida del Csv para tener en cuenta otros elementos
+- Modificar mapeo para mejorar los errores...
+- Filtrar y omitir yamls no validos por la sintaxis especifica
+
+Si una propiedad no esta ni en el modelo, ni en la doc, ni en deffinitions se considera como descarte?

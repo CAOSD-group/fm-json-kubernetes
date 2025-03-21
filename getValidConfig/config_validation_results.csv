@@ -1,4 +1,4 @@
-Filename,Valid
+Filename,Valid ## NumFeatures, NºConfs, ##TiempoMapeo(T de procesamiento del mapping), ##TiempoValidacion(T que se tarda en validar el json)
 1-metallb5.json,True
 1-metallb5_10.json,True
 1-metallb5_11.json,True
