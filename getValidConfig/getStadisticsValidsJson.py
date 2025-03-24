@@ -3,6 +3,8 @@ from flamapy.metamodels.pysat_metamodel.transformations import FmToPysat
 from configurationJSON01 import ConfigurationJSON  # Reader JSON
 from valid_config import valid_config_version_json
 
+import time  # Libreria para calcular los tiempos de procesamiento
+
 import os
 import csv
 
@@ -43,10 +45,18 @@ def process_file(filepath, fm_model, sat_model):
   #results = []
   try:
     print(f"Procesando archivo: {filepath}")
+    
+    start_conf_time = time.time()  # Inicio del tiempo de mapeo
     configuration_reader = ConfigurationJSON(filepath)
     configurations = configuration_reader.transform()
+    end_conf_time = time.time()  # Fin del tiempo de mapeo
+    conf_time = round(end_conf_time - start_conf_time, 4)  # Row T conf: Tiempo de mapeo de confs en segundos
+    num_confs = len(configurations)  # Row Nº Confs: Número de configuraciones del fichero
+    num_features = 0 ## Agregar num de features de cada file, uno lineal con los del archivo o total con la suma de los features en cada conf...
+    ## Cada el de la lista conf es un feature (complete_list) o tratar con las confs y obtener el total de features?
     file_valid = True
 
+    start_validation_time = time.time()  # Inicio del tiempo de validación
     for i, config in enumerate(configurations): ## Comprobacion de cada configuracion de cada achivo
       valid, complete_config = valid_config_version_json(config, fm_model, sat_model)
       print(f'Configuración {i+1}: {config.elements} -> Válida: {valid}')
@@ -54,6 +64,9 @@ def process_file(filepath, fm_model, sat_model):
         file_valid = False
         break # Si hay una sola conf inválida se considera el archivo entero inválido ## continue
       ##results.append([os.path.basename(filepath), i + 1, valid])  # Guardamos nombre y resultado
+      end_validation_time = time.time()  # Fin del tiempo de validación
+      validation_time = round(end_validation_time - start_validation_time, 4)  # Row T val: Tiempo de validación en segundos
+      
       print(f"Error en la lectura del archivo? {os.path.basename(filepath)}")
       #print(f"Diferencias con el filepath normal: {file_path}")
 
