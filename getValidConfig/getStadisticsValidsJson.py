@@ -50,9 +50,12 @@ def process_file(filepath, fm_model, sat_model):
     configuration_reader = ConfigurationJSON(filepath)
     configurations = configuration_reader.transform()
     end_conf_time = time.time()  # Fin del tiempo de mapeo
-    conf_time = round(end_conf_time - start_conf_time, 4)  # Row T conf: Tiempo de mapeo de confs en segundos
+    conf_time = round(end_conf_time - start_conf_time, 5)  # Row T conf: Tiempo de mapeo de confs en segundos
     num_confs = len(configurations)  # Row Nº Confs: Número de configuraciones del fichero
-    num_features = 0 ## Agregar num de features de cada file, uno lineal con los del archivo o total con la suma de los features en cada conf...
+    #num_features = 0 ## Agregar num de features de cada file, uno lineal con los del archivo o total con la suma de los features en cada conf...
+    # Si hay configuraciones, tomamos la primera para contar sus features
+    num_features = len(configurations[0].elements) if configurations else 0
+
     ## Cada el de la lista conf es un feature (complete_list) o tratar con las confs y obtener el total de features?
     file_valid = True
 
@@ -64,23 +67,20 @@ def process_file(filepath, fm_model, sat_model):
         file_valid = False
         break # Si hay una sola conf inválida se considera el archivo entero inválido ## continue
       ##results.append([os.path.basename(filepath), i + 1, valid])  # Guardamos nombre y resultado
-      end_validation_time = time.time()  # Fin del tiempo de validación
-      validation_time = round(end_validation_time - start_validation_time, 4)  # Row T val: Tiempo de validación en segundos
-      
-      print(f"Error en la lectura del archivo? {os.path.basename(filepath)}")
       #print(f"Diferencias con el filepath normal: {file_path}")
-
-    return [os.path.basename(filepath), file_valid] ##results
+    end_validation_time = time.time()  # Fin del tiempo de validación
+    validation_time = round(end_validation_time - start_validation_time, 4)  # Row T val: Tiempo de validación en segundos
+    return [os.path.basename(filepath), file_valid, num_features, num_confs, conf_time, validation_time] ##results
 
   except FileNotFoundError:
     with open(ERROR_LOG_FILE, "a") as error_log:
       error_log.write(f"Archivo no encontrado: {os.path.basename(filepath)}\n")
-    return [os.path.basename(filepath), "Error"]
+    return [os.path.basename(filepath), "Error", "-", "-", "-", "-"] #return [os.path.basename(filepath), "Error"]
 
   except Exception as e:
     with open(ERROR_LOG_FILE, "a") as error_log:
       error_log.write(f"Error desconocido en archivo {os.path.basename(filepath)}: {str(e)}\n")
-    return [os.path.basename(filepath), "Error"]  # Marcar como error
+    return [os.path.basename(filepath), "Error", "-", "-", "-", "-"] ##results
   ##return [os.path.basename(filepath), file_valid] ##results
 
 
@@ -92,7 +92,7 @@ def validate_all_configs(directory, fm_model, sat_model):
 
   with open(csv_ouput_file, mode="w", newline="") as file:
     writer = csv.writer(file)
-    writer.writerow(["Filename", "Valid"])  # Escribir cabecera del CSV  
+    writer.writerow(["Filename", "Valid", "NumFeatures", "NumConfs", "TiempoConf", "TiempoVal"])  # Escribir cabecera del CSV  
 
     for filename in os.listdir(directory):
       if filename.endswith(".json"):  # Solo procesar JSON
