@@ -2,7 +2,7 @@ import yaml
 import csv
 import os
 import json
-
+import re
 from datetime import datetime, timezone
 
 
@@ -11,7 +11,7 @@ def extract_yaml_properties(data, parent_key='', root_info=None, first_add=True)
     Extrae las propiedades del YAML en tres listas:
     - Propiedades simples (para comparación con Turned)
     - Propiedades jerárquicas (para comparación con Midle)
-    - Pares clave-valor para comparaciones más precisas
+    - Pares clave-valor para guardar las claves-valores originales y realizar una comparación mas precisa
     """
     simple_props = []
     hierarchical_props = []
@@ -20,7 +20,7 @@ def extract_yaml_properties(data, parent_key='', root_info=None, first_add=True)
     if root_info is None:
         root_info = {}
 
-    if isinstance(data, dict): ### and first_add: ## Modificado por el cambio en kind en otras partes del programa...
+    if isinstance(data, dict):
         for key, value in data.items():
             new_key = f"{parent_key}_{key}" if parent_key else key
             # Guardar valores clave (apiVersion y kind) para determinar el contexto
@@ -148,7 +148,7 @@ def search_features_in_csv(hierarchical_props, key_value_pairs, csv_file):
                     elif middle.strip() and turned == "StringValue" and feature not in feature_map and aux_hierchical_maps.endswith(hierarchical_prop): ## Nueva adición para añadir los StringValue que aparezcan en la lista de features
                         aux_hierchical_arr_string = f"{hierarchical_prop}_StringValue" ## Se crea manualmente el _StringValue porque es un feature personalizado del modelo. Se usa para referirse a los arrays de strings
                         #print(f"El aux VALUE ES: {aux_hierchical_maps_value}")
-                        print(f"Array de Strings: {feature} {hierarchical_prop} {aux_hierchical_arr_string} {key}   {value}")
+                        ##print(f"Array de Strings: {feature} {hierarchical_prop} {aux_hierchical_arr_string} {key}   {value}")
                         feature_map[aux_hierchical_arr_string] = feature
                     elif middle.strip() and turned == "IntegerValue" and feature not in feature_map and aux_hierchical_maps.endswith(hierarchical_prop): ## Nueva adición para añadir los StringValue que aparezcan en la lista de features
                         aux_hierchical_arr_integer = f"{hierarchical_prop}_IntegerValue" ## Se crea manualmente el _StringValue porque es un feature personalizado del modelo. Se usa para referirse a los arrays de strings
@@ -159,7 +159,7 @@ def search_features_in_csv(hierarchical_props, key_value_pairs, csv_file):
                     elif middle.strip() and turned == "StringValueAdditional" and feature not in feature_map and aux_hierchical_maps.endswith(hierarchical_prop): ## Nueva adición para añadir los StringValue que aparezcan en la lista de features
                         aux_hierchical_arr_string_additional = f"{hierarchical_prop}_StringValueAdditional" ## Se crea manualmente el _StringValue porque es un feature personalizado del modelo. Se usa para referirse a los arrays de strings
                         #print(f"El aux VALUE ES: {aux_hierchical_maps_value}")
-                        print(f"Array de Strings Additional: {feature} {hierarchical_prop} {aux_hierchical_arr_string_additional}")
+                        ##print(f"Array de Strings Additional: {feature} {hierarchical_prop} {aux_hierchical_arr_string_additional}")
                         feature_map[aux_hierchical_arr_string_additional] = feature
                     ## Para agregar la incorporación de los features de tipo de seleccion de dato, se agregan de manera "manual". Cuando haya coincidencia del feature con Turned igual a asString, asNumber o asInteger se agregan si la 
                     ## herencia coincide con el feature omitido. Se agrega por la alternatividad del modelo y en la salida se selecciona el que aparece en el JSON. Al no saber el valor que se le agrega a la propiedad no se puede definir
@@ -193,7 +193,7 @@ def search_features_in_csv(hierarchical_props, key_value_pairs, csv_file):
             """for key, yaml_value in key_value_pairs:
                 if value.strip() and str(yaml_value) == value.strip():
                     feature_map[key] = feature"""
-        print(f"El mapa entero es: {feature_map}")
+        ##print(f"El mapa entero es: {feature_map}")
     return feature_map
 
 def extract_key_value_mappings(value, value_features, feature_map): ## Posible encapsulamiento de las funciones para mejorar la legibilidad
@@ -207,7 +207,7 @@ def extract_key_value_mappings(value, value_features, feature_map): ## Posible e
         })
     return key_values
 
-def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, mapped_key):
+def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, aux_hierchical_prop, mapped_key, aux_bool, depth_mapping = 0):
     """
     Aplica el mapeo de features al YAML reemplazando las claves por los nombres de features.
     """
@@ -217,14 +217,19 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, mapped_k
         new_data = {}
         feature_nested = {}
         feature_type_value = {}
-        ## mapped_key = {}
+        #mapped_key = {}
         feature_map_key_value = {}
+        ##aux_hierchical_prop = []
         #feature_type_array = {}
         possible_type_data = ['asString', 'asNumber', 'asInteger']
         print(f"Yaml data completo: {yaml_data.items()}")
-        for key, value in yaml_data.items():
-            original_key = key ## copia de la clave original
+        print(f"Deeph actual de mapeo: {depth_mapping}")
+        ##print(f"Hierchical  {hierarchical_prop}")
 
+
+        for key, value in yaml_data.items():
+            #deep_mapping = deep_mapping + 1
+            original_key = key ## copia de la clave original
             aux_nested = False ## boolean para determinar si una propiedad tiene un feature value
             aux_array = False ## boolean para determinar si una propiedad contiene un array o es un array de features
             aux_maps = False ## marca para determinar los mapas
@@ -235,194 +240,174 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, mapped_k
             ##batch.v1 ,autoscaling.v1 y autoscaling.v2, policy.v1, core.v1, core.v1.Binding
             if isinstance(value, datetime): ## Comprobacion de si alguno de los valores es de tipo Time RCF 3339
                 value = value.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
-            #print(f"Mapa completo:  {feature_map.items()}")
+            elif isinstance(value, str) and "{{" in value: ## Comprobacion de si alguno de los valores contiene sintaxis invalida en YAML, puesta para plantillas de jinja o helm
+                value = value.replace("{{", '"{{').replace("}}",'}}"') ## parche temporal, se omitien directamente en una comprobacion previa
+
+            #print(f"Que valor obtengo?{hierarchical_key}")
             for key_features, value_features in feature_map.items():
-                
-                # Lógica normal para features string, se cambia el valor del key directamente
+               
+                # Lógica normal para valores de tipo string, se cambia el valor del key directamente
                 if isinstance(value_features, str) and value_features.endswith(key) and value_features not in auxFeaturesAddedList: ## key_features.endswith(key) # Salida similar
-                    aux_feature_before_map = value_features.rsplit("_", 1)[0]
-                    print(f"Elmentos del if que se recorren:{key} {value}  {key_features}  {value_features}")
-                    #if aux_feature_before_map not in auxFeaturesAddedList:
-                    #    print("features que no deberia de insertarse")
-                    #if any(feature.endswith(key) for feature in auxFeaturesAddedList):
-                    #if aux_feature_before_map in auxFeaturesAddedList and aux_feature_before_map is not None:
-                    ### Ajuste para tratar de evitar la insercion de fueatures incorrectos en posiciones que no corresponden por el key
-                    print(f"MAPPED KEY {mapped_key}")
-                    if isinstance(mapped_key, str):
-                                print("Soy un mapped key string")
-                                copy_map = mapped_key
-                                if copy_map.startswith("io_k8s"):
-                                    reference_deepth = mapped_key.count("_")
-                                    print(f"Deepth del mapa actual bucle: {reference_deepth}  ME EJECUTO")
-                    if any(feature.endswith(key) for feature in auxFeaturesAddedList): ## and aux_feature_before_map not in auxFeaturesAddedList
-                        print(f"Hay mas de un elemento que ya tiene la key")
-                        aux_feature_before_insertion = value_features.rsplit("_", 1)[0]                    
-                        print(f"Features que ya tienen la key de: {value_features}  {aux_feature_before_insertion}")
-                        if aux_feature_before_insertion in auxFeaturesAddedList:
-                            key = value_features
-                            print(f"Valor finalmente insertado en la lista: {key_features}  {value_features}")
-                            print(f"Lista que se inserta en el if: {auxFeaturesAddedList}")
-                            auxFeaturesAddedList.add(value_features)
-                        else:
-                            print(f"No se inserta nada porque el feature no coincide {value_features}")
-                            
-                    else:
-                        if key_features.count("_") == 2: # len(auxFeaturesAddedList) < 3 and
-                            #split_keys_number = key_features.splic("_")
-                            #if key_features
-                            print(f"QUE COINCIDENCIAS HAY:  {key}   {key_features}  {value_features} ")
-                            #if key_features.count("_") == 2:
-                            key = value_features
-                            auxFeaturesAddedList.add(value_features)
-                                #continue
-                        elif key_features.count("_") == 3 and any(version in key_features for version in list_double_version): ## batch.v1 ,autoscaling.v1 y autoscaling.v2, policy.v1, core.v1, core.v1.Binding
-                            print(f"ELIF CASO VERSION CON / :  {key}   {key_features}  {value_features} ")
-                            #if key_features.count("_") == 2:
-                            key = value_features
-                            auxFeaturesAddedList.add(value_features)
-                        elif key_features.count("_") == 3:
-                                print(f"COMPROBACION INSERCION FEATURES SIMPLES {key}   {value}   {value_features}    {key_features}")
-                                print(f"LISTA DE Features: {auxFeaturesAddedList}")
-                                aux_feature_before_insertion = value_features.rsplit("_", 1)[0]                    
-                                #print(f"Features que ya tienen la key de: {value_features}  {aux_feature_before_insertion}")
-                                if aux_feature_before_insertion in auxFeaturesAddedList:
-                                    key = value_features
-                                    print(f"Valor finalmente insertado en la lista: {key_features}  {value_features}")
-                                    print(f"Lista que se inserta en el if: {auxFeaturesAddedList}")
-                                    auxFeaturesAddedList.add(value_features)                            
-                                    key = value_features
-                        else:
-                            if isinstance(mapped_key, str):
-                                print("Soy un mapped key string")
-                                copy_map = mapped_key
-                                if copy_map.startswith("io_k8s"):
-                                    reference_deepth = mapped_key.count("_")
-                                    print(f"Deepth del mapa actual: {reference_deepth}  ME EJECUTO")
-                                    if reference_deepth != value_features.count("_"):
-                                        print(f"Feature omitido por la coincidencia de profundidad: {value_features}")
-                                        ##continue
-                                    else:
-                                        print(f"NO DEBERIA DE HABER NADA MAS NO? Features saltados? {value_features}")
+
+                    if key_features.count("_") == 2: # len(auxFeaturesAddedList) < 3 and
+                        print(f"QUE COINCIDENCIAS HAY:  {key}   {key_features}  {value_features} ")
+                        key = value_features
+                        auxFeaturesAddedList.add(value_features)
+                        aux_hierchical_prop.append(key_features)
+                            #continue
+                    elif key_features.count("_") == 3 and any(version in key_features for version in list_double_version): ## batch.v1 ,autoscaling.v1 y autoscaling.v2, policy.v1, core.v1, core.v1.Binding
+                        print(f"ELIF CASO VERSION CON / :  {key}   {key_features}  {value_features} ")
+                        #if key_features.count("_") == 2:
+                        key = value_features
+                        auxFeaturesAddedList.add(value_features)
+                        aux_hierchical_prop.append(key_features)
+                    elif key_features.count("_") == 3:
                             print(f"COMPROBACION INSERCION FEATURES SIMPLES {key}   {value}   {value_features}    {key_features}")
                             print(f"LISTA DE Features: {auxFeaturesAddedList}")
-                            aux_feature_before_insertion_else = value_features.rsplit("_", 1)[0]
-                            print(f"Mapa actual: {mapped_key}")          
-                                #print(f"Features que ya tienen la key de: {value_features}  {aux_feature_before_insertion}")
-                            if aux_feature_before_insertion_else in auxFeaturesAddedList:
+                            aux_feature_before_insertion = value_features.rsplit("_", 1)[0]                    
+                            if aux_feature_before_insertion in auxFeaturesAddedList:
+                                key = value_features
+                                print(f"Valor finalmente insertado en la lista: {key_features}  {value_features}")
+                                print(f"Lista que se inserta en el if: {auxFeaturesAddedList}")
                                 auxFeaturesAddedList.add(value_features)                            
                                 key = value_features
-                                print(f"Feature que se inserta en el else final {value_features}")
-                            #auxFeaturesAddedList.add(value_features)
-                    """if value_features not in auxFeaturesAddedList and value_features not in new_data:
-                        print(f"LISTA DE Features: {auxFeaturesAddedList}")
-                        print(f"LISTA DE LISTA: {new_data}")
-                        auxFeaturesAddedList.add(value_features)
-                        key = value_features
-                    print(f"COMPROBACION INSERCION FEATURES SIMPLES {key}   {value}   {value_features}    {key_features}")"""
-                    #if key.endswith(aux_feature_before_map):
-                    #auxFeaturesAddedList.add(value_features)
-                    #key = value_features
-                    #and key.endswith(aux_feature_before_map)
-                    
+                                aux_hierchical_prop.append(key_features)
+                    else:
+                        if any(feature.endswith(key) for feature in auxFeaturesAddedList): ## and aux_feature_before_map not in auxFeaturesAddedList
+                            print(f"Hay mas de un elemento que ya tiene la key")
+                            aux_feature_before_insertion = value_features.rsplit("_", 1)[0]
+                            mapped_key_before = mapped_key.rsplit("_", 1)[0]
+                            feature_aux_depth = re.search(r"[A-Z].*", value_features)
+                            feature_mapped_depth = re.search(r"[A-Z].*", mapped_key)
+
+                            ##print(f"El match del feature Midle es: {feature_aux_depth}")
+                            midle_depth = feature_aux_depth.group(0)
+                            mapped_depth = feature_mapped_depth.group(0)
+                            print(midle_depth)
+                            print(mapped_depth)
+                            print(f"Compare deepth midle with current recursive depth:  {midle_depth.count('_')}    {mapped_depth.count('_')}    {depth_mapping}")
+
+                            #print(f"Features que ya tienen la key de: {value_features}  {aux_feature_before_insertion}")
+                            print(f"Features que ya tienen la key de: {value_features}")
+                            print(f"Siempre hay mapped-key? {mapped_key}    {key_features}  {value_features}    {aux_bool}")
+                            print(f"Deeph actual de mapeo: {depth_mapping}  {value_features.count('_')}")
+                            if aux_bool and isinstance(mapped_key, str) and mapped_key: ## mapped_key es el padre del arr
+                                print(f"Comprobacion de la lista actual {key_features}    {aux_hierchical_prop}  {value_features}")
+                                if aux_bool and mapped_key.count("_") < value_features.count("_") and mapped_key == aux_feature_before_insertion:
+                                    print(f"Deberia de coincider que mapped tenga un nivel mas  {mapped_key}    {value_features}")
+                                    key = value_features
+                                    print(f"Valor finalmente if insertado en la lista: {key_features}  {value_features}")
+                                    auxFeaturesAddedList.add(value_features)
+                                    aux_hierchical_prop.append(key_features)
+                                elif aux_bool and aux_feature_before_insertion == mapped_key_before and depth_mapping == midle_depth.count('_'): ## nuevo insertado con el depth
+                                    print(f"Casos nuevos: {key_features}  {value_features}  {mapped_key}    {depth_mapping}   {midle_depth.count('_')}")
+                                    key = value_features
+                                    auxFeaturesAddedList.add(value_features)
+                                    aux_hierchical_prop.append(key_features)
+                                elif aux_bool and  mapped_key != aux_feature_before_insertion and mapped_key.count("_") > value_features.count("_"): ## Se omite cuando el feature anterior es mayor que el siguiente. Puede ser menor o igual pero no mayor...
+                                    print(f"Deberia de saltarse esta parte jeje  {mapped_key}   {value_features}    {value}")
+                                    continue 
+
+                            if key_features not in aux_hierchical_prop and aux_feature_before_insertion in auxFeaturesAddedList and not aux_bool: ##aux_feature_before_insertion in auxFeaturesAddedList:
+                                if mapped_key.count("_") == value_features.count("_"):
+                                    if mapped_key.rsplit("_", 1)[0] == aux_feature_before_insertion:
+                                        key = value_features
+                                        print(f"Valor finalmente insertado en la lista: {key_features}  {value_features}   {aux_bool}    ") # {aux_bool_dict}
+                                        print(f"Lista que se inserta en el if: {auxFeaturesAddedList}")
+                                        print(f"Hierchical que se sigue en el if: {aux_hierchical_prop}")
+                                        auxFeaturesAddedList.add(value_features)
+                                        aux_hierchical_prop.append(key_features)
+                                elif mapped_key.count("_") > value_features.count("_"):
+                                    print(f"Estructuras diferentes  {mapped_key}    {value_features}")
+                                    continue
+                            elif aux_bool and value_features not in auxFeaturesAddedList and key_features not in aux_hierchical_prop and depth_mapping == value_features.count("_"):
+                                #auxFeaturesAddedList.add(value_features)
+                                #aux_hierchical_prop.append(key_features)                           
+                                print(f"Coincidencia conflictiva: {value_features}  {key_features}  {mapped_key}")
+                            else:
+                                print(f"No se inserta nada porque el feature no coincide {value_features}   {mapped_key}    {value}")
+                                continue
+                                
+                        if value_features not in auxFeaturesAddedList:  ## key_features not in aux_hierchical_prop and
+                            auxFeaturesAddedList.add(value_features)                            
+                            key = value_features
+                            print (f"ME EJECUTO SOLO E INSERTO {key_features} y {value_features}")
+                            aux_hierchical_prop.append(key_features)
+                            ## continue
                 # Comprobar arrays u otros features asignados, tratan valores de tipo dict por el tipo de estructura que tienen. Modificacion con el 'feature_type': 'array' 
-                elif key_features.endswith(key) and isinstance(value_features, dict) and value_features.get("feature_type") == "array": ### Comprobando
-                    #print(f"Array detectado para key '{key}': {value_features['feature']}")
-                    #print(value_features.items())
+                elif key_features.endswith(key) and isinstance(value_features, dict) and value_features.get("feature_type") == "array" : ### Comprobando
                     if value_features["feature"] not in auxFeaturesAddedList:
                         print(f"Array SIMPLE: {key}   {value}   {key_features} {value_features}") # lISTA DE FEATURES: {auxFeaturesAddedList} ## {yaml_data}
                         auxFeaturesAddedList.add(value_features["feature"]) ### Omitido temporalmente por la omision en arrays de arrays que se genera de features ya agregados/vistos de los yaml
-                        ##feature_arr = [value_features["feature"]]
-                        #new_data[value_features["feature"]] = [] ## se queda vacio
                         key = value_features["feature"]
                         print(value_features["feature"])
+                        aux_hierchical_prop.append(key_features)
                         print(f"Clave que se añade al mapeo y a la  lista   {key}")
                         aux_array = True
                         #continue
-                ### Nueva adicion: StringValue para representar los arrays de Strings. En features se localizan por el _StringValue o _StringValueAdditional
-                ## Seguir un tratamiento similar que con los mapas. Parte final del feature
+                    """elif isinstance(value, dict) and key_features.endswith(key) and value_features not in auxFeaturesAddedList:
+                        print(f"Dict simple: {key}   {value}   {key_features} {value_features}") # lISTA DE FEATURES: {auxFeaturesAddedList} ## {yaml_data}
+                        auxFeaturesAddedList.add(value_features) ### Omitido temporalmente por la omision en arrays de arrays que se genera de features ya agregados/vistos de los yaml
+                        key = value_features
+                        print(value_features)
+                        aux_hierchical_prop.append(key_features)
+                        print(f"Clave que se añade al mapeo y a la  lista   {key}")"""
+                        ##aux_array = True
                 elif isinstance(value, list) and key_features.endswith("StringValue") and isinstance(value_features, str) and "StringValue" == value_features.split("_")[-1]: ## and value_features not in auxFeaturesAddedList
                     aux_key_last_before_map = value_features.split("_")[-2]
                     str_arr_values = []
-                    print(f"SE EJECUTA PRIMER VALUE LIST {key}   {value_features}")
-                    #print(value)
                     if value and key.endswith(aux_key_last_before_map) and key_features.endswith(f"{aux_key_last_before_map}_StringValue"):### and value.get("key") in value_features  ## key coge los valores del feature mapeado
-                        print(f"SE EJECUTA DE NUEVO IF NUEVO    {key}  {value_features}")
                         for str_value in value:
-                            #print(value)
                             print(f"{str_value}   {key} {value_features}   {aux_key_last_before_map}")
-                            #aux_feature_value = f"{aux_feature_str_value}_ValueMap"
-                                #if value_features.endswith(key_features):
                             str_arr_values.append({ ## , aux_feature_value: map_value
                                 value_features: str_value
                             })
                             auxFeaturesAddedList.add(value_features) ### Omitido temporalmente por la omision en arrays de arrays que se genera de features ya agregados/vistos de los yaml
-                        #print(f"EL KEY VALUES ES {key_values}")
+                            aux_hierchical_prop.append(key_features)
                         feature_str_value = str_arr_values
                         aux_str_values = True
                 ## Seguir un tratamiento similar que con los mapas. Parte final del feature
                 elif isinstance(value, list) and key_features.endswith("IntegerValue") and isinstance(value_features, str) and "IntegerValue" == value_features.split("_")[-1]: ## and value_features not in auxFeaturesAddedList
                     aux_key_last_before_map = value_features.split("_")[-2]
                     values_arr_int = []
-                    #print(value)
                     if value and key.endswith(aux_key_last_before_map) and key_features.endswith(f"{aux_key_last_before_map}_IntegerValue"):### and value.get("key") in value_features  ## key coge los valores del feature mapeado
                         for int_value in value:
-                            print("Array de INTEGERS")
-                            print(f"{values_arr_int}   {key} {value_features}   {aux_key_last_before_map}")
-                            #aux_feature_value = f"{aux_feature_str_value}_ValueMap"
-                                #if value_features.endswith(key_features):
                             values_arr_int.append({ ## , aux_feature_value: map_value
                                 value_features: int_value
                             })
                             auxFeaturesAddedList.add(value_features) ### Omitido temporalmente por la omision en arrays de arrays que se genera de features ya agregados/vistos de los yaml
-                        #print(f"EL KEY VALUES ES {key_values}")
+                            aux_hierchical_prop.append(key_features)
                         feature_str_value = values_arr_int
                         aux_str_values = True
-                    #else: ## lista vacia
-                    #    feature_str_value = [] ## se deja el array vacio porque no hay contenido o '' o ""
-                ## Se repite proceso con un proceso casi identico para StringValueAdditional
-                ## DECIDIR SI DEFINIR StrValueAdditional como un objeto Mapa o dejarlo como un str... aunque su estructura en yaml es de pares key/map
                 elif isinstance(value, dict) and key_features.endswith("StringValueAdditional") and isinstance(value_features, str) and "StringValueAdditional" == value_features.split("_")[-1]: ## and value_features not in auxFeaturesAddedList
                     aux_key_last_before_map = value_features.split("_")[-2]
                     str_values = []
                     if value and key.endswith(aux_key_last_before_map) and key_features.endswith(f"{aux_key_last_before_map}_StringValueAdditional"):### and value.get("key") in value_features  ## key coge los valores del feature mapeado
                         for str_key, str_value in value.items():
-                            #print(value)
-                            #print(f"{str_value}   {key} {value_features}   {aux_key_last_before_map}")
                             str_values.append({ ## , aux_feature_value: map_value
                                 value_features:f"{str_key}:{str_value}" 
                             })
                         auxFeaturesAddedList.add(value_features) ###  Agregado por comprobacion de la lista
+                        aux_hierchical_prop.append(key_features)
                         feature_str_value = str_values
                         aux_str_values = True
                 elif isinstance(value, dict) and key_features.endswith("KeyMap") and isinstance(value_features, str) and "KeyMap" == value_features.split("_")[-1] and value_features not in auxFeaturesAddedList: ## or "ValueMap" == last_value_feature)
-                    #print(f"NO HAY NADA¿ {last_value_feature}") ## value.get("key")
-                    #print(f"{key}     {yaml_data}") ## last_key_feature.endswith(key) and 
                     aux_key_last_before_map = value_features.split("_")[-2]
                     aux_feature_before_map = value_features.rsplit("_", 1)[0]
-                    #print(f"ELEMENTOS QUE DEBERIAN DE COINCIDIR: {value_features}  {aux_key_last_before_map}")
-                    #print(f"SE EJECUTA IF RARO {key}    {value}     {key_features}     {value_features}")
                     key_values = []
-                    #print(value.get("key"))
                     if key.endswith(aux_key_last_before_map) and key_features.endswith(f"{aux_key_last_before_map}_KeyMap") and key.endswith(aux_feature_before_map):# Se realizan varias comprobaciones sobre si es el feature adecuado  ## key obtiene los valores del feature mapeado
-                        #print(f"SE EJECUTA DE NUEVO IF RARO {value_features}")
                         for map_key, map_value in value.items():
-                            #print(f"{key}   {value} {map_key}   {map_value}")
                             aux_feature_maps = value_features.rsplit("_", 1)[0] ## se obtiene el feature quitando la ultima parte para añadir manualmente el ValueMap
                             aux_feature_value = f"{aux_feature_maps}_ValueMap"
-                                #if value_features.endswith(key_features):
-                            #print(f"{map_key}   {map_value} {value_features}")
-                            #print(f"COINCIDENCIA CON EL FEATURE MAP")
                             key_values.append({
                                 value_features: map_key,
                                 aux_feature_value: map_value
                             })
                             auxFeaturesAddedList.add(value_features)
                             auxFeaturesAddedList.add(aux_feature_value)
-                        #print(f"EL KEY VALUES ES {key_values}")
                         feature_map_key_value = key_values
                         aux_maps = True
 
-                ### Adicion seleccion de tipo de feature dependiendo del tipo de dato del valor de las propiedades
                 elif any(key_features.endswith(keyword) for keyword in possible_type_data) and isinstance(value_features, str) and value_features not in auxFeaturesAddedList and value_features.endswith(key_features): ## and any(keyword == value_features.split("_")[1] for keyword in possible_type_data) ### isinstance(value, str) and # and key_features.endswith(possible_type_data)
                     ## Definir bien la logica de insercion de los features a añadir... bloque general por el tipo de dato que es value
                     print("Se ha encontrado una coincidencia del tipo de dato") ##and keyword == value_features.split("_")[1]
@@ -449,103 +434,79 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, mapped_k
                                     elif isinstance(value_item, float) and value_features.endswith("asNumber"):
                                         feature_entry[value_features] = value_item
                                         print(f"COINCIDENCIA EN EL ARRAY DE NUMBER {value_item}    {str_types_values}")
-
-                                    # Agregar el feature encontrado
                                     if feature_entry:
                                         str_types_values.append(feature_entry)
                                         auxFeaturesAddedList.add(value_features)
+                                        aux_hierchical_prop.append(key_features)
                                     # Agregar los valores encontrados sin sobrescribir
                             if "feature_type_array" not in locals():
                                 feature_type_array = []  # Se inicializa solo si no existe
-
                             if str_types_values:
                                 aux_value_type_array = True
                                 feature_type_array.extend(str_types_values)  # Agregar sin sobrescribir
                                 ##feature_type_array = str_types_values  # Si está vacío, inicializarlo como lista           
                         else:
                             if isinstance(value, str) and key_features.endswith(f"{aux_key_last_before_value}_asString"):
-                                #print("VALOR STRING")
                                 feature_type_value[value_features] = value
                                 aux_value_type = True
                                 auxFeaturesAddedList.add(value_features)
+                                aux_hierchical_prop.append(key_features)
                             elif isinstance(value, int) and key_features.endswith(f"{aux_key_last_before_value}_asInteger"):
-                                #print(f"VALOR INTEGER?  {value}")
                                 feature_type_value[value_features] = value
                                 aux_value_type = True
                                 auxFeaturesAddedList.add(value_features)
+                                aux_hierchical_prop.append(key_features)
                             elif isinstance(value, float) and key_features.endswith(f"{aux_key_last_before_value}_asNumber"):
-                                #print(f"VALOR NUMBER?  {value}")
-                                #key = value_features
                                 feature_type_value[value_features] = value
-                                aux_value_type = True
+                                aux_value_type = True 
                                 auxFeaturesAddedList.add(value_features)
-                            """elif isinstance(value, datetime):
-                                print(f" Valor de la propiedad en Tiempo,   {key}   {value}")
-                                #value = value.isoformat()
-                                value = value.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
-                                print(f" Valor de la propiedad despues en Time,   {key}   {value}")"""
+                                aux_hierchical_prop.append(key_features)
                 # Representación de valores seleccionados, se comprueba si algun valor del yaml coincide con la ultima parte de los features en la lista.
                 elif isinstance(value_features, str) and value == value_features.split("_")[-1] and value_features not in auxFeaturesAddedList:
                         if value_features.endswith(key_features):
                             aux_nested = True
                             feature_nested[value_features] = aux_nested ## value: al final se deja el valor booleano ya que el feature agregado es boolean tambien
                             auxFeaturesAddedList.add(value_features)
+                            aux_hierchical_prop.append(key_features)
 
             mapped_key = feature_map.get(key, key)
-
-            if key == "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_env":
-                #print(new_data[mapped_key])
-                print(f"El valor del mapedd key es: {mapped_key}")
-
+            aux_arr_key = None
+            aux_array_bool = False
+            aux_bool_dict = False
             if aux_nested:
                 new_data[mapped_key] = feature_nested
             elif aux_str_values: ## prueba add arr of strings
                 #print(f"prueba add arr of strings")
                 new_data[mapped_key] = feature_str_value
             elif aux_value_type : ## and not aux_array
-                #print(f"ME EJECUTO PARA EL FEATURE SIMPLE ARRAY: {mapped_key}    {key}")
                 new_data[mapped_key] = feature_type_value
             elif aux_value_type_array:
                 print(f"ELIF FINAL NO SE EJECTUA??   {feature_type_array}")
                 new_data[mapped_key] = feature_type_array
-                ## Probar confi donde se tiene mas de una opcion en el else: chat // falta poder comprobar arrays en la raiz y su recursion si hay mas de una
             elif aux_array or isinstance(value, list): ##  or isinstance(value, list)
                 if aux_maps: ## quizas llevar esta condicion a otra parte, es "especial"
-                    #print("NO SE EJCUTA?")
-                    #print(feature_map_key_value)
                     new_data[mapped_key] = feature_map_key_value
                 elif value is None:
                     new_data[mapped_key] = []
                     print(f"Arrays vacios {new_data}")
                 else:
-                    if key == "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_env":
-                    #print(new_data[mapped_key])
-                        print(f"El valor del mapedd key es: {mapped_key}")
-                    if isinstance (value, int):
-                        print(f"ERROR EN EL FILE {mapped_key}   {value} {key}")
-                    new_data[mapped_key] = [apply_feature_mapping(item, feature_map, auxFeaturesAddedList.copy(), mapped_key) if isinstance(item, (dict, list)) else item for item in value] ## auxFeaturesAddedList: antes de la mod
-                    
-                    #if key == "io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_env":
-                    #    print(new_data[mapped_key])
-                    #    print(f"El valor del mapedd key es: {mapped_key}")
-                """if isinstance(value, list):
-                    new_data[mapped_key] = [apply_feature_mapping(item, feature_map, auxFeaturesAddedList.copy()) if isinstance(item, (dict, list)) else item for item in value]
-                elif isinstance(value, dict):
-                    new_data[mapped_key] = apply_feature_mapping(value, feature_map, auxFeaturesAddedList) if isinstance(value, (dict, list)) else value
-                else:"""
-                #new_data[mapped_key] = [apply_feature_mapping(item, feature_map, auxFeaturesAddedList.copy()) if isinstance(item, (dict, list)) else item for item in value] ## auxFeaturesAddedList: antes de la mod
-                #print(f" Comprobar salida arr aux: {new_data[mapped_key]}")
-                #new_data[mapped_key] = [apply_feature_mapping(item, feature_map, auxFeaturesAddedList) if isinstance(item, (dict, list)) else item for item in value]
+                    aux_arr_key = mapped_key
+                    aux_array_bool = aux_array
+                    """if isinstance(value, dict):
+                        aux_bool_dict = True"""
+                    new_data[mapped_key] = [apply_feature_mapping(item, feature_map, auxFeaturesAddedList.copy(), aux_hierchical_prop, aux_arr_key, aux_array_bool, depth_mapping+1) if isinstance(item, (dict, list)) else item for item in value] ## auxFeaturesAddedList: antes de la mod
             else:
-                if isinstance (value, int):
-                    print(f"ERROR EN EL FILE ELSE FINAL: {mapped_key}   {value} {key}")
-                new_data[mapped_key] = apply_feature_mapping(value, feature_map, auxFeaturesAddedList, mapped_key) if isinstance(value, (dict, list)) else value
+                aux_arr_key = mapped_key
+                aux_array_bool = aux_array
+                """if isinstance(value, dict):
+                    aux_bool_dict = True"""
+                new_data[mapped_key] = apply_feature_mapping(value, feature_map, auxFeaturesAddedList, aux_hierchical_prop, aux_arr_key, aux_array_bool, depth_mapping+1) if isinstance(value, (dict, list)) else value
 
         return new_data
 
     elif isinstance(yaml_data, list):
-        print(f"YAML DATA ELIF {yaml_data}")
-        return [apply_feature_mapping(item, feature_map, auxFeaturesAddedList) for item in yaml_data]
+        print(f"YAML DATA ELIF {yaml_data}") ## caso que no suele pasar
+        return [apply_feature_mapping(item, feature_map, auxFeaturesAddedList, aux_hierchical_prop, aux_arr_key, aux_array_bool,depth_mapping+1) for item in yaml_data]
 
     return yaml_data
 
@@ -581,8 +542,12 @@ for filename, index, yaml_data, simple_props, hierarchical_props, key_value_pair
     
     auxFeaturesAddedList = set()
     mapped_key = {}
+    aux_hierchical = []
+    aux_bool = False
+    ##aux_bool_dict = False
+    depth_mapping = 1
     feature_map = search_features_in_csv(hierarchical_props, key_value_pairs, csv_file_path)
-    updated_config = apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, mapped_key)
+    updated_config = apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, aux_hierchical, mapped_key, aux_bool, depth_mapping)
 
     yaml_entry = {
         "filename": filename,
