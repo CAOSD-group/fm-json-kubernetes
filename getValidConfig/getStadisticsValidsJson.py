@@ -92,7 +92,7 @@ def validate_all_configs(directory, fm_model, sat_model):
 
   with open(csv_ouput_file, mode="w", newline="") as file:
     writer = csv.writer(file)
-    writer.writerow(["Filename", "Valid", "NumFeatures", "NumConfs", "TiempoConf", "TiempoVal"])  # Escribir cabecera del CSV  
+    writer.writerow(["Filename", "Valid", "Features", "Configurations", "TimeConf", "TimeVal"])  # Escribir cabecera del CSV  
 
     for filename in os.listdir(directory):
       if filename.endswith(".json"):  # Solo procesar JSON
