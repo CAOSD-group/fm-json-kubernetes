@@ -216,8 +216,8 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, aux_hier
         #print(feature_map.items())
         new_data = {}
         
-        feature_map_key_value = {} ## batch.v1 ,autoscaling.v1 y autoscaling.v2, policy.v1, core.v1, core.v1.Binding
-        feature_type_value = {}
+        #feature_map_key_value = {} ## batch.v1 ,autoscaling.v1 y autoscaling.v2, policy.v1, core.v1, core.v1.Binding
+        #feature_type_value = {} ## mod dentro del for()
 
         ##aux_hierchical_prop = []
         #feature_type_array = {}
@@ -238,9 +238,10 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, aux_hier
             aux_value_type_array = False
             list_double_version = {'apps_v1', 'batch_v1', 'autoscaling_v1', 'autoscaling_v2', 'policy_v1', 'core_v1'}
             feature_nested = {} ## Estructura para agregar el value personalizado para definir la coincidencia de los valores predeterminados en el modelo
-            #feature_type_value = {}
+            feature_type_value = {}
+            feature_map_key_value = {} ## batch.v1 ,autoscaling.v1 y autoscaling.v2, policy.v1, core.v1, core.v1.Binding
+            feature_type_array = [] ## Features as...
             #mapped_key = {}
-            #feature_map_key_value = {} ## batch.v1 ,autoscaling.v1 y autoscaling.v2, policy.v1, core.v1, core.v1.Binding
             if isinstance(value, datetime): ## Comprobacion de si alguno de los valores es de tipo Time RCF 3339
                 value = value.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
             elif isinstance(value, str) and "{{" in value: ## Comprobacion de si alguno de los valores contiene sintaxis invalida en YAML, puesta para plantillas de jinja o helm
@@ -311,7 +312,7 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, aux_hier
                                     print(f"Deberia de saltarse esta parte jeje  {mapped_key}   {value_features}    {value}")
                                     continue 
 
-                            if key_features not in aux_hierchical_prop and aux_feature_before_insertion in auxFeaturesAddedList and not aux_bool: ##aux_feature_before_insertion in auxFeaturesAddedList:
+                            if aux_feature_before_insertion in auxFeaturesAddedList and not aux_bool: ##aux_feature_before_insertion in auxFeaturesAddedList: ## key_features not in aux_hierchical_prop and 
                                 if mapped_key.count("_") == value_features.count("_"):
                                     if mapped_key.rsplit("_", 1)[0] == aux_feature_before_insertion:
                                         key = value_features
@@ -323,7 +324,7 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, aux_hier
                                 elif mapped_key.count("_") > value_features.count("_"):
                                     print(f"Estructuras diferentes  {mapped_key}    {value_features}")
                                     continue
-                            elif aux_bool and value_features not in auxFeaturesAddedList and key_features not in aux_hierchical_prop and depth_mapping == value_features.count("_"):
+                            elif aux_bool and value_features not in auxFeaturesAddedList and depth_mapping == value_features.count("_"): ## and key_features not in aux_hierchical_prop
                                 #auxFeaturesAddedList.add(value_features)
                                 #aux_hierchical_prop.append(key_features)                           
                                 print(f"Coincidencia conflictiva: {value_features}  {key_features}  {mapped_key}")
@@ -362,10 +363,12 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, aux_hier
                         aux_hierchical_prop.append(key_features)
                         print(f"Clave que se añade al mapeo y a la  lista   {key}")"""
                         ##aux_array = True
-                elif isinstance(value, list) and key_features.endswith("StringValue") and isinstance(value_features, str) and "StringValue" == value_features.split("_")[-1]: ## and value_features not in auxFeaturesAddedList
-                    aux_key_last_before_map = value_features.split("_")[-2]
+                elif isinstance(value, list) and key_features.endswith("StringValue") and  isinstance(value_features, str) and "StringValue" == value_features.split("_")[-1]: ## and value_features not in auxFeaturesAddedList
+                    aux_key_last_before_map = value_features.split("_")[-2] ## Se obtiene la penultima prop
+                    aux_feature_before_insertion = value_features.rsplit("_", 1)[0] ## se obtiene el value feature menos la ultima insersion
+
                     str_arr_values = []
-                    if value and key.endswith(aux_key_last_before_map) and key_features.endswith(f"{aux_key_last_before_map}_StringValue"):### and value.get("key") in value_features  ## key coge los valores del feature mapeado
+                    if value and key == aux_feature_before_insertion and key_features.endswith(f"{aux_key_last_before_map}_StringValue"):### and value.get("key") in value_features  ## key coge los valores del feature mapeado ## key.endswith(aux_key_last_before_map)
                         for str_value in value:
                             print(f"INSERCION VALUES EN EL ARRAY {str_value}   {key} {value_features}   {aux_key_last_before_map}")
                             str_arr_values.append({ ## , aux_feature_value: map_value
@@ -378,8 +381,9 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, aux_hier
                 ## Seguir un tratamiento similar que con los mapas. Parte final del feature
                 elif isinstance(value, list) and key_features.endswith("IntegerValue") and isinstance(value_features, str) and "IntegerValue" == value_features.split("_")[-1]: ## and value_features not in auxFeaturesAddedList
                     aux_key_last_before_map = value_features.split("_")[-2]
+                    aux_feature_before_insertion = value_features.rsplit("_", 1)[0] ## se obtiene el value feature menos la ultima insersion
                     values_arr_int = []
-                    if value and key.endswith(aux_key_last_before_map) and key_features.endswith(f"{aux_key_last_before_map}_IntegerValue"):### and value.get("key") in value_features  ## key coge los valores del feature mapeado
+                    if value and key == aux_feature_before_insertion and key_features.endswith(f"{aux_key_last_before_map}_IntegerValue"):### and value.get("key") in value_features  ## key coge los valores del feature mapeado
                         for int_value in value:
                             values_arr_int.append({ ## , aux_feature_value: map_value
                                 value_features: int_value
@@ -390,8 +394,9 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, aux_hier
                         aux_str_values = True
                 elif isinstance(value, dict) and key_features.endswith("StringValueAdditional") and isinstance(value_features, str) and "StringValueAdditional" == value_features.split("_")[-1]: ## and value_features not in auxFeaturesAddedList
                     aux_key_last_before_map = value_features.split("_")[-2]
+                    aux_feature_before_insertion = value_features.rsplit("_", 1)[0] ## se obtiene el value feature menos la ultima insersion
                     str_values = []
-                    if value and key.endswith(aux_key_last_before_map) and key_features.endswith(f"{aux_key_last_before_map}_StringValueAdditional"):### and value.get("key") in value_features  ## key coge los valores del feature mapeado
+                    if value and key == aux_feature_before_insertion and key_features.endswith(f"{aux_key_last_before_map}_StringValueAdditional"):### and value.get("key") in value_features  ## key coge los valores del feature mapeado
                         for str_key, str_value in value.items():
                             str_values.append({ ## , aux_feature_value: map_value
                                 value_features:f"{str_key}:{str_value}" 
@@ -403,8 +408,9 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, aux_hier
                 elif isinstance(value, dict) and key_features.endswith("KeyMap") and isinstance(value_features, str) and "KeyMap" == value_features.split("_")[-1] and value_features not in auxFeaturesAddedList: ## or "ValueMap" == last_value_feature)
                     aux_key_last_before_map = value_features.split("_")[-2]
                     aux_feature_before_map = value_features.rsplit("_", 1)[0]
+                    ## aux_feature_before_insertion = value_features.rsplit("_", 1)[0] ## se obtiene el value feature menos la ultima insersion
                     key_values = []
-                    if key.endswith(aux_key_last_before_map) and key_features.endswith(f"{aux_key_last_before_map}_KeyMap") and key.endswith(aux_feature_before_map):# Se realizan varias comprobaciones sobre si es el feature adecuado  ## key obtiene los valores del feature mapeado
+                    if key.endswith(aux_key_last_before_map) and key_features.endswith(f"{aux_key_last_before_map}_KeyMap") and key == aux_feature_before_map:# Se realizan varias comprobaciones sobre si es el feature adecuado  ## key obtiene los valores del feature mapeado
                         for map_key, map_value in value.items():
                             aux_feature_maps = value_features.rsplit("_", 1)[0] ## se obtiene el feature quitando la ultima parte para añadir manualmente el ValueMap
                             aux_feature_value = f"{aux_feature_maps}_ValueMap"
@@ -424,7 +430,7 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, aux_hier
                     aux_value_last = value_features.rsplit("_", 1)[0]
                     print(f"{key_features}  {value_features} {key} {value}") ##and keyword == value_features.split("_")[1]
                     
-                    if key.endswith(aux_key_last_before_value) and aux_value_last.endswith(key): ### and key_features.endswith(f"{aux_key_last_before_value}_asString"): # and value.get("key") in value_features  ## key coge los valores del feature mapeado
+                    if key == aux_value_last: ### and key_features.endswith(f"{aux_key_last_before_value}_asString"): # and value.get("key") in value_features  ## key coge los valores del feature mapeado,  and aux_value_last.endswith(key):
                         print(f"SEGUNDA EJECUCION TIPO DE DATOS     {key}   {value_features}    {value}")
                         if isinstance(value, dict):
                             str_types_values = []
@@ -448,11 +454,11 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, aux_hier
                                         auxFeaturesAddedList.add(value_features)
                                         aux_hierchical_prop.append(key_features)
                                     # Agregar los valores encontrados sin sobrescribir
-                            if "feature_type_array" not in locals():
-                                feature_type_array = []  # Se inicializa solo si no existe
+                            #if "feature_type_array" not in locals():
+                            #    feature_type_array = []  # Se inicializa solo si no existe
                             if str_types_values:
                                 aux_value_type_array = True
-                                feature_type_array.extend(str_types_values)  # Agregar sin sobrescribir
+                                feature_type_array.append(str_types_values)  # Agregar sin sobrescribir
                                 ##feature_type_array = str_types_values  # Si está vacío, inicializarlo como lista           
                         else:
                             if isinstance(value, str) and key_features.endswith(f"{aux_key_last_before_value}_asString"):
