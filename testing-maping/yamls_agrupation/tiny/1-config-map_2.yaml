@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cassandra-config
+  namespace: data
+  labels:
+    app: cassandra
+data:
+  CASSANDRA_SEEDS: cassandra-pods-0.cassandra.data.svc.cluster.local
+  SCHEMA_SEED_INSTANCE: cassandra-pods-0
+  REPLICATION_FACTOR: '3'

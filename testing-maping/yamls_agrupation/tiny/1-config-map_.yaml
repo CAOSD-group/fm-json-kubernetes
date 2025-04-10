@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: service-config
+  namespace: service
+  labels:
+    app: services
+data:
+  server.port: '8080'
+  server.threadPool.threads.minimum: '5'
+  server.threadPool.threads.maximum: '15'
+  eureka.client.registerWithEureka: 'false'
+  eureka.client.fetchRegistry: 'false'
+  ribbon.eureka.enabled: 'false'
+  GatewaySvc.ribbon.listOfServers: http://gateway-svc:80
+  AdminSvc.ribbon.listOfServers: http://admin-svc:80
+  AuthSvc.ribbon.listOfServers: http://auth-svc:80
+  ProductSvc.ribbon.listOfServers: http://product-svc:80
+  OrderSvc.ribbon.listOfServers: http://order-svc:80
+  InventorySvc.ribbon.listOfServers: http://inventory-svc:80
+  database.cassandra.hosts: cassandra.data
+  database.cassandra.port: '9042'
+  database.cassandra.keySpace: oms
+  database.postgres.host: postgres.data
+  database.postgres.port: '5432'
+  database.postgres.schema: oms
+  opentracing.jaeger.enabled: 'true'
+  opentracing.jaeger.udp-sender.host: jaeger-agent.monitor
+  opentracing.jaeger.udp-sender.port: '6831'
+  server.log.path: /var/log/oms
+  server.log.level: INFO
+  JAVA_HEAP_MEMORY: -Xms256M -Xmx512M
+  order.process.async: 'true'
+  order.queue.type: rabbitmq
+  order.queue.host: rabbitmq.data
+  order.queue.name: order-queue
+  redis.enabled: 'true'
+  redis.hostname: redis.data
+  redis.port: '6379'
