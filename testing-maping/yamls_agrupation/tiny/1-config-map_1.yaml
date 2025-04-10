@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web-config
+  namespace: ui
+  labels:
+    app: web
+data:
+  SERVICES_HOST: gateway-svc.service
+  SERVICES_PORT: '80'
+  PYUI_LOG_FILE: /var/log/oms/PyUi.log
+  REGISTRY_URL: '#'
+  DJANGO_DEBUG: 'False'
+  PROMETHEUS_PORT: '32103'
+  JAEGER_PORT: '32102'
+  KIBANA_PORT: '32101'
+  RABBITMQ_PORT: '32104'
+  JAEGER_AGENT_HOST: jaeger-agent.monitor
+  JAEGER_AGENT_PORT: '6831'

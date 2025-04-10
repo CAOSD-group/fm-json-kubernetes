@@ -2102,3 +2102,366 @@ Resumen:
 - Filtrar y omitir yamls no validos por la sintaxis especifica
 
 Si una propiedad no esta ni en el modelo, ni en la doc, ni en deffinitions se considera como descarte?
+
+Exs:
+00-ns-lanchonete
+001.setup 
+Use metallb.io to Bare-metal cluster operators are left with two lesser tools to bring user traffic into their clusters, “NodePort” and “externalIPs” services.
+https://metallb.io/
+
+
+{
+    "filename": "001.setup.yaml",
+    "apiVersion": "v1beta1",
+    "config": {
+        "apiVersion": "metallb.io/v1beta1",
+        "kind": "IPAddressPool",
+        "metadata": {
+            "name": "first-pool",
+            "namespace": "metallb-system"
+        },
+        "spec": {
+            "addresses": [
+                "192.168.31.101-192.168.31.110"
+            ]
+        }
+    }
+}
+
+{
+    "filename": "00-ns-lanchonete.yaml",
+    "apiVersion": "v1",
+    "config": {
+        "io_k8s_api_core_v1_Namespace_apiVersion": "v1",
+        "io_k8s_api_core_v1_Namespace_kind": "Namespace",
+        "io_k8s_api_core_v1_Namespace_metadata": {
+            "io_k8s_api_core_v1_Namespace_metadata_name": "ns-lanchonete",
+            "tag": "ns-lanchonete-tag",
+            "io_k8s_api_core_v1_Namespace_metadata_labels": [
+                {
+                    "io_k8s_api_core_v1_Namespace_metadata_labels_KeyMap": "app",
+                    "io_k8s_api_core_v1_Namespace_metadata_labels_ValueMap": "ns-lanchonete"
+                },
+                {
+                    "io_k8s_api_core_v1_Namespace_metadata_labels_KeyMap": "tag",
+                    "io_k8s_api_core_v1_Namespace_metadata_labels_ValueMap": "ns-lanchonete-tag"
+                }
+            ]
+        }
+    }
+}
+
+
+Revisar insercion varia de features-valores
+
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/master
+        operator: Exists
+
+
+
+
+Error en el nuevo feature:
+
+Idk, antes funcionaba bien...
+"io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_name": "METALLB_NODE_NAME",
+SOLUCIONADO:: DEPTH CONCURRENTE
+
+### Error a tratar:
+
+                        {
+                            "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_tolerations_effect": {
+                                "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_tolerations_effect_NoSchedule": true,
+                                "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_tolerations_operator_Exists": true
+                            },
+                            "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_env_valueFrom_secretKeyRef_key": "node-role.kubernetes.io/master",
+                            "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_tolerations_operator": {
+                                "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_tolerations_effect_NoSchedule": true,
+                                "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_tolerations_operator_Exists": true
+                            }
+                        }
+Salida esperada::                        
+                        {
+                            "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_tolerations_effect": {
+                                "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_tolerations_effect_NoSchedule": true
+                            },
+                            "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_tolerations_key": "node-role.kubernetes.io/master",
+                            "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_tolerations_operator": {
+                                "io_k8s_api_apps_v1_DaemonSet_spec_template_spec_tolerations_operator_Exists": true
+                            }
+                        }
+
+** Ajustado
+
+Nuevos errores en la agregacion de feat a los arrays con multiples opciones
+
+
+Estruc hierchical_prop no se usa al final
+mapped_key dejar por el momento
+
+Revisar cambios y borrar lineas que ya no se usan :: funcional
+
+                                        "optional": true,
+                                        "io_k8s_api_batch_v1_CronJob_spec_jobTemplate_spec_template_spec_volumes_secret_secretName": "secretNameValue"
+                                    },
+
+error_log.txt
+
+Error desconocido en archivo 1-metallb5_14.json: 'io_k8s_api_apps_v1_DaemonSet_spec_template_spec_containers_env_name'
+Error desconocido en archivo 1-metallb5_15.json: Error: the element "runAsNonRoot" is not present in the FM model.
+Error desconocido en archivo 1-metallb5_4.json: 'io_k8s_api_rbac_v1_ClusterRole_rules_verbs_StringValue' -- No entiendo los errores...
+Error desconocido en archivo 1-metallb5_5.json: 'io_k8s_api_rbac_v1_ClusterRole_rules_resources_StringValue'
+Error desconocido en archivo apidiscovery.k8s.io.v2beta1.APIGroupDiscovery4.json: Error: the element "apiVersion" is not present in the FM model.
+Error desconocido en archivo apiextensions.k8s.io.v1.ConversionReview1.json: Error: the element "apiVersion" is not present in the FM model.
+Error desconocido en archivo apiextensions.k8s.io.v1.CustomResourceDefinition.json: Error: the element "$ref" is not present in the FM model.
+
+
+
+Mas errores de relacion entre pares de arrays
+
+io_k8s_api_batch_v1_CronJob_spec_jobTemplate_spec_template_spec_ephemeralContainers
+SOL ::
+
+io_k8s_api_batch_v1_CronJob_spec_jobTemplate_spec_template_spec_affinity_nodeAffinity_requiredDuringSchedulingIgnoredDuringExecution_nodeSelectorTerms_matchFields
+SOL ::
+
+io_k8s_api_batch_v1_CronJob_spec_jobTemplate_spec_template_spec_volumes_csi_readOnly
+
+
+Error en el mapeo detectado analizando la no conversion de features del archivo 0podmonitorCustomResourceDefinition,
+En el modelo para tratar de evitar las recursiones infinitas se omitio la extension de JSONSchemaProps sobre si misma en propiedades
+para evitar el ciclo infinito que se puede generar al expandir una y otra vez sobre llamadas hacia el mismo esquema... El "error" puede
+ser el no mostrar la propiedad y directamente omitir su representacion; Tratar de mostrar propiedad sin expandir el esquema, tratar propiedad y expandir esquema 1 vez mas o
+evalar el uso de la recursividad con el esquema y determinar un numero maximo de repeticiones. Por otro lado, apiVersion, kind, metadata... no estan dentro de las props del esquema
+asi que de todas formas el YAML no se podria mapear segun mi modelo
+            "io_k8s_apiextensions_apiserver_pkg_apis_apiextensions_v1_CustomResourceDefinition_spec_versions": [
+                {
+                    "io_k8s_apiextensions_apiserver_pkg_apis_apiextensions_v1_CustomResourceDefinition_spec_versions_name": "v1",
+                    "io_k8s_apiextensions_apiserver_pkg_apis_apiextensions_v1_CustomResourceDefinition_spec_versions_schema": {
+                        "io_k8s_apiextensions_apiserver_pkg_apis_apiextensions_v1_CustomResourceDefinition_spec_versions_schema_openAPIV3Schema": {
+                            "io_k8s_apiextensions_apiserver_pkg_apis_apiextensions_v1_CustomResourceDefinition_spec_versions_schema_openAPIV3Schema_description": "PodMonitor defines monitoring for a set of pods.",
+                            "properties": {
+                                "apiVersion": {
+                                    "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                                    "type": "string"
+                                },
+                                "kind": {
+                                    "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                                    "type": "string"
+                                },
+                                "metadata": {
+                                    "type": "object"
+                                },
+                                "spec": {
+                                    "description": "Specification of desired Pod selection for target discovery by Prometheus.",
+                                    "properties": {
+                                        "jobLabel": {
+                                            "description": "The label to use to retrieve the job name from.",
+                                            "type": "string"
+                                        },
+                                        "labelLimit": {
+                                            "description": "Per-scrape limit on number of labels that will be accepted for a sample. Only valid in Prometheus versions 2.27.0 and newer.",
+                                            "format": "int64",
+                                            "type": "integer"
+                                        },
+
+Propiedad que deberia de contener apiVersion, kind... etc
+                            "properties": {
+                              "additionalProperties": {
+                                "$ref": "#/definitions/io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSONSchemaProps"
+                              },
+                              "type": "object"
+                            },                                       
+
+                            Insercion de un properties sin contexto en los archivos 0000_... 0000_90_cluster_csi_driver_01_config.crd.yaml
+
+
+
+
+Creo que no he contemplado el posible array de alternatives con asStr...
+00_namespaces.yaml
+        "io_k8s_api_core_v1_ResourceQuota_spec": {
+            "io_k8s_api_core_v1_ResourceQuota_spec_hard": [
+                "storagens2.storageclass.storage.k8s.io/requests.storage"
+            ]
+        }
+
+
+      
+Diferencias de properties en cuanto a los esquemas JSON y la documentacion- En 1.30 / 1.32 no cambia en los esquemas
+
+        "properties": {
+          "additionalProperties": {
+            "$ref": "#/definitions/io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSONSchemaProps"
+          },
+          "type": "object"
+        },
+
+En la doc solo se muestra como objeto:
+
+https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.32/#jsonschemaprops-v1-apiextensions-k8s-io
+
+properties
+object
+
+https://github.com/aquasecurity/starboard/tree/main
+https://github.com/aquasecurity/starboard/blob/main/pkg/apis/aquasecurity/v1alpha1/vulnerability_types.go
+https://fluxcd.io/flux/components/kustomize/kustomizations/
+
+
+
+Error especifico por el que no se realizaba el mapeo correctamente de types values:
+## 00_namespaces.yaml"
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: storage-ns1
+  namespace: management
+spec:
+  hard:
+    storagens2.storageclass.storage.k8s.io/requests.storage: 0
+
+En principio se define en el modelo siguiendo las descripciones de la doc, siendo String y Number los valores posibles en el feature
+Sin embargo, en el ejemplo mostrado se agrega un Integer, desembocando en que no se realice el mapeo correctamente al no haber coincidencia
+entre el tipo de dato del valor y el feature que se deberia de agregar asString... No se si dicha conf daria error en el despliegue o se saltaria ""
+
+							io_k8s_api_core_v1_ResourceQuota_spec_hard cardinality [1..*] {doc 'hard is the set of desired hard limits for each named resource More info: https:_kubernetesio/docs/concepts/policy/resource-quotas/'}
+								alternative
+									String io_k8s_api_core_v1_ResourceQuota_spec_hard_asString {doc 'Sub-feature added of type String'}
+									Integer io_k8s_api_core_v1_ResourceQuota_spec_hard_asNumber {doc 'Sub-feature added of type Number'}
+
+
+Tener en cuenta las declaraciones de valores con ##
+Se omiten los caracteres #@ :: 
+  name: #@ data.values.rabbitmq.cluster_namespace
+
+  Gen Confs no es del todo precisa: casos "complejos" donde hay arr dentro de arrs se generan entre el nivel mas bajo y de arriba 
+
+  https://docs.python.org/3/library/gc.html
+  https://docs.python.org/3/library/csv.html
+  yield python
+
+  Dentro de muchos Yamls hay definiciones de objetos personalizados. Archivos CRDs creación:
+  https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/
+
+  https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/
+
+Archivos con sintaxis invalida == False
+
+
+
+      volumes:
+      - awsElasticBlockStore:
+          fsType: fsTypeValue
+          partition: 3
+          readOnly: true
+          volumeID: volumeIDValue
+        azureDisk:
+          cachingMode: cachingModeValue
+          diskName: diskNameValue
+          diskURI: diskURIValue
+          fsType: fsTypeValue
+          kind: kindValue
+          readOnly: true
+        azureFile:
+          readOnly: true
+          secretName: secretNameValue
+          shareName: shareNameValue
+        cephfs:
+          monitors:
+          - monitorsValue
+          path: pathValue
+          readOnly: true
+          secretFile: secretFileValue
+          secretRef:
+            name: nameValue
+          user: userValue
+        cinder:
+          fsType: fsTypeValue
+          readOnly: true
+          secretRef:
+            name: nameValue
+          volumeID: volumeIDValue
+        configMap:
+          defaultMode: 3
+          items:
+          - key: keyValue
+            mode: 3
+            path: pathValue
+          name: nameValue
+          optional: true
+        csi:
+          driver: driverValue
+          fsType: fsTypeValue
+          nodePublishSecretRef:
+            name: nameValue
+          readOnly: true
+          volumeAttributes:
+            volumeAttributesKey: volumeAttributesValue
+        downwardAPI:
+          defaultMode: 2
+          items:
+          - fieldRef:
+              apiVersion: apiVersionValue
+              fieldPath: fieldPathValue
+            mode: 4
+            path: pathValue
+            resourceFieldRef:
+              containerName: containerNameValue
+              divisor: "0"
+              resource: resourceValue
+        emptyDir:
+          medium: mediumValue
+          sizeLimit: "0"
+        ephemeral:
+          volumeClaimTemplate:
+            metadata:
+              annotations:
+                annotationsKey: annotationsValue
+              clusterName: clusterNameValue
+              creationTimestamp: "2008-01-01T01:01:01Z"
+              deletionGracePeriodSeconds: 10
+              deletionTimestamp: "2009-01-01T01:01:01Z"
+              finalizers:
+              - finalizersValue
+              generateName: generateNameValue
+              generation: 7
+              labels:
+                labelsKey: labelsValue
+              managedFields:
+              - apiVersion: apiVersionValue
+                fieldsType: fieldsTypeValue
+                fieldsV1: {}
+                manager: managerValue
+                operation: operationValue
+                subresource: subresourceValue
+                time: "2004-01-01T01:01:01Z"
+              name: nameValue
+              namespace: namespaceValue
+              ownerReferences:
+              - apiVersion: apiVersionValue
+                blockOwnerDeletion: true
+                controller: true
+                kind: kindValue
+                name: nameValue
+                uid: uidValue
+              resourceVersion: resourceVersionValue
+              selfLink: selfLinkValue
+              uid: uidValue
+            spec:
+              accessModes:
+              - accessModesValue
+              dataSource:
+                apiGroup: apiGroupValue
+                kind: kindValue
+                name: nameValue
+              dataSourceRef:
+                apiGroup: apiGroupValue
+                kind: kindValue
+                name: nameValue
+              resources:
+                limits:
+                  limitsKey: "0"
+                requests:
+                  requestsKey: "0"

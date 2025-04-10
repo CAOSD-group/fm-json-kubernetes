@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluent-config
+  namespace: monitor
+  labels:
+    app: fluentd
+data:
+  fluent.conf: "<source>\n  @type tail\n  path /var/log/containers/*.log\n  pos_file\
+    \ /var/log/fluentd-containers.log.pos\n  tag kubernetes.*\n  format none\n  read_from_head\
+    \ true\n</source>\n\n\n<match kubernetes.var.log.containers.**-svc-pods-**>\n\
+    \  @type rewrite_tag_filter\n  <rule>\n    key message\n    pattern /time=\\d{4}-\\\
+    d{2}-\\d{2}/\n    tag logger.${tag}\n  </rule>\n  <rule>\n    key message\n  \
+    \  pattern /^(?!time=\\d{4}-\\d{2}-\\d{2}).*$/\n    tag unknown..${tag}\n  </rule>\n\
+    </match>\n<match kubernetes.var.log.containers.**-app-pods-**>\n  @type rewrite_tag_filter\n\
+    \  <rule>\n    key message\n    pattern /time=\\d{4}-\\d{2}-\\d{2}/\n    tag logger.${tag}\n\
+    \  </rule>\n  <rule>\n    key message\n    pattern /^(?!time=\\d{4}-\\d{2}-\\\
+    d{2}).*$/\n    tag unknown..${tag}\n  </rule>\n</match>\n\n<match fluent.**>\n\
+    \  @type null\n</match>\n<match kubernetes.**>\n  @type null\n</match>\n\n\n<filter\
+    \ logger.**>\n  @type record_transformer\n  enable_ruby\n  <record>\n    time\
+    \ ${record[\"message\"][/time=\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}.\\d{3}/].sub(\"\
+    time=\",\"\")}\n    level ${record[\"message\"][/level=[A-Z]*\\s/].sub(\"level=\"\
+    ,\"\")}\n    hostname ${record[\"message\"][/hostname=[A-Za-z0-9\\-]*\\s/].sub(\"\
+    hostname=\",\"\")}\n    service ${record[\"message\"][/service=[A-Za-z0-9\\-]*\\\
+    s/].sub(\"service=\",\"\")}\n    message ${record[\"message\"].sub(/^.*\\smessage=/,\"\
+    \")}\n    logsrc app-logger\n  </record>\n</filter>\n\n<filter unknown.**>\n \
+    \ @type record_transformer\n  enable_ruby\n  <record>\n    message ${record[\"\
+    message\"]}\n    logsrc app-unknown\n  </record>\n</filter>\n\n<match **>\n  @type\
+    \ copy\n  <store>\n    @type elasticsearch\n    host elasticsearch\n    port 9200\n\
+    \    logstash_format true\n    logstash_prefix fluentd\n    logstash_dateformat\
+    \ %Y%m%d\n    include_tag_key true\n    type_name access_log\n    tag_key @log_name\n\
+    \    flush_interval 1s\n  </store>\n  <store>\n    @type stdout\n  </store>\n\
+    </match>\n"

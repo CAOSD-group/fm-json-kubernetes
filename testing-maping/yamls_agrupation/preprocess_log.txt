@@ -1,0 +1,78 @@
+Inicio: 2025-04-10 14:50:21.938624
+
+[OK] .serviceaccount.yaml (único) → tiny
+[ERROR] .svc_ingress.yaml: while constructing a mapping
+  in "./generateConfigs/files_yamls\.svc_ingress.yaml", line 25, column 50
+found unhashable key
+  in "./generateConfigs/files_yamls\.svc_ingress.yaml", line 25, column 51
+[OK] 00-namespaces_9a43c8c6.yaml, índice 0 → tiny
+[OK] 00-namespaces_9a43c8c6.yaml, índice 1 → tiny
+[OK] 00-namespaces_9a43c8c6.yaml, índice 2 → tiny
+[OK] 00_namespaces.yaml, índice 0 → tiny
+[OK] 00_namespaces.yaml, índice 1 → tiny
+[OK] 00_namespaces.yaml, índice 2 → tiny
+[OK] 01-bookinfo.yaml, índice 0 → tiny
+[OK] 01-bookinfo.yaml, índice 1 → tiny
+[OK] 01-bookinfo.yaml, índice 2 → tiny
+[OK] 01-bookinfo.yaml, índice 3 → tiny
+[OK] 01-bookinfo.yaml, índice 4 → tiny
+[OK] 01-bookinfo.yaml, índice 5 → tiny
+[OK] 01-bookinfo.yaml, índice 6 → tiny
+[OK] 01-bookinfo.yaml, índice 7 → tiny
+[OK] 01-bookinfo.yaml, índice 8 → tiny
+[OK] 01-bookinfo.yaml, índice 9 → tiny
+[OK] 01-bookinfo.yaml, índice 10 → tiny
+[OK] 01-bookinfo.yaml, índice 11 → tiny
+[OK] 01-bookinfo.yaml, índice 12 → tiny
+[OK] 01-bookinfo.yaml, índice 13 → tiny
+[INVALIDO] Documento vacío o no mapeable en 01-bookinfo.yaml, índice 14
+[OK] 1-config-map.yaml, índice 0 → tiny
+[OK] 1-config-map.yaml, índice 1 → tiny
+[OK] 1-config-map.yaml, índice 2 → tiny
+[OK] 1-config-map.yaml, índice 3 → tiny
+[INVALIDO] 1-config-map.yaml, índice 4 → errores
+[OK] 1-metallb5.yaml, índice 0 → tiny
+[OK] 1-metallb5.yaml, índice 1 → tiny
+[OK] 1-metallb5.yaml, índice 2 → tiny
+[OK] 1-metallb5.yaml, índice 3 → tiny
+[OK] 1-metallb5.yaml, índice 4 → tiny
+[OK] 1-metallb5.yaml, índice 5 → tiny
+[OK] 1-metallb5.yaml, índice 6 → tiny
+[OK] 1-metallb5.yaml, índice 7 → tiny
+[OK] 1-metallb5.yaml, índice 8 → tiny
+[OK] 1-metallb5.yaml, índice 9 → tiny
+[OK] 1-metallb5.yaml, índice 10 → tiny
+[OK] 1-metallb5.yaml, índice 11 → tiny
+[OK] 1-metallb5.yaml, índice 12 → tiny
+[OK] 1-metallb5.yaml, índice 13 → tiny
+[OK] 1-metallb5.yaml, índice 14 → tiny
+[ERROR] 90-batch.yaml: while constructing a mapping
+  in "./generateConfigs/files_yamls\90-batch.yaml", line 6, column 14
+found unhashable key
+  in "./generateConfigs/files_yamls\90-batch.yaml", line 6, column 15
+[OK] apps.v1.Deployment14.yaml (único) → medium
+[OK] apps.v1.Deployment15.yaml (único) → medium
+[OK] batch.v1.CronJob5.yaml (único) → medium
+[SIN META] configMap.yaml (único) → no_apiversion_kind
+[CRD OMITIDO] crdProp.yaml (único) → custom_resources
+[OK] endpoints01.yaml (único) → tiny
+[OK] example_deployment02.yaml (único) → tiny
+[OK] example_PersistentVolume.yaml (único) → tiny
+[OK] example_PersistentVolumeClaim.yaml (único) → tiny
+[OK] example_pod01.yaml (único) → tiny
+[OK] example_service01.yaml (único) → tiny
+[OK] no-valid-yamls.yaml, índice 0 → tiny
+[OK] no-valid-yamls.yaml, índice 1 → tiny
+[INVALIDO] Documento vacío o no mapeable en no-valid-yamls.yaml, índice 2
+[OK] no-valid-yamls.yaml, índice 3 → tiny
+[OK] no-valid-yamls.yaml, índice 4 → tiny
+[OK] no-valid-yamls.yaml, índice 5 → tiny
+
+--- RESUMEN ---
+Total procesados: 20
+Total suma procesados mas enumeration: 47
+Con errores: 5
+Sin apiVersion/kind: 1
+Recursos personalizados: 1
+Validos clasificados: 13
+Fin: 2025-04-10 14:50:22.315089
