@@ -1,13 +1,8 @@
-Inicio: 2025-04-10 14:50:21.938624
+Inicio: 2025-04-11 13:45:01.308513
 
 [OK] .serviceaccount.yaml (único) → tiny
-[ERROR] .svc_ingress.yaml: while constructing a mapping
-  in "./generateConfigs/files_yamls\.svc_ingress.yaml", line 25, column 50
-found unhashable key
-  in "./generateConfigs/files_yamls\.svc_ingress.yaml", line 25, column 51
-[OK] 00-namespaces_9a43c8c6.yaml, índice 0 → tiny
-[OK] 00-namespaces_9a43c8c6.yaml, índice 1 → tiny
-[OK] 00-namespaces_9a43c8c6.yaml, índice 2 → tiny
+[TEMPLATE OMITIDO] .svc_ingress.yaml contiene templating → omitido
+[TEMPLATE OMITIDO] 00-namespaces_9a43c8c6.yaml contiene templating → omitido
 [OK] 00_namespaces.yaml, índice 0 → tiny
 [OK] 00_namespaces.yaml, índice 1 → tiny
 [OK] 00_namespaces.yaml, índice 2 → tiny
@@ -26,11 +21,7 @@ found unhashable key
 [OK] 01-bookinfo.yaml, índice 12 → tiny
 [OK] 01-bookinfo.yaml, índice 13 → tiny
 [INVALIDO] Documento vacío o no mapeable en 01-bookinfo.yaml, índice 14
-[OK] 1-config-map.yaml, índice 0 → tiny
-[OK] 1-config-map.yaml, índice 1 → tiny
-[OK] 1-config-map.yaml, índice 2 → tiny
-[OK] 1-config-map.yaml, índice 3 → tiny
-[INVALIDO] 1-config-map.yaml, índice 4 → errores
+[TEMPLATE OMITIDO] 1-config-map.yaml contiene templating → omitido
 [OK] 1-metallb5.yaml, índice 0 → tiny
 [OK] 1-metallb5.yaml, índice 1 → tiny
 [OK] 1-metallb5.yaml, índice 2 → tiny
@@ -46,10 +37,7 @@ found unhashable key
 [OK] 1-metallb5.yaml, índice 12 → tiny
 [OK] 1-metallb5.yaml, índice 13 → tiny
 [OK] 1-metallb5.yaml, índice 14 → tiny
-[ERROR] 90-batch.yaml: while constructing a mapping
-  in "./generateConfigs/files_yamls\90-batch.yaml", line 6, column 14
-found unhashable key
-  in "./generateConfigs/files_yamls\90-batch.yaml", line 6, column 15
+[TEMPLATE OMITIDO] 90-batch.yaml contiene templating → omitido
 [OK] apps.v1.Deployment14.yaml (único) → medium
 [OK] apps.v1.Deployment15.yaml (único) → medium
 [OK] batch.v1.CronJob5.yaml (único) → medium
@@ -61,18 +49,13 @@ found unhashable key
 [OK] example_PersistentVolumeClaim.yaml (único) → tiny
 [OK] example_pod01.yaml (único) → tiny
 [OK] example_service01.yaml (único) → tiny
-[OK] no-valid-yamls.yaml, índice 0 → tiny
-[OK] no-valid-yamls.yaml, índice 1 → tiny
-[INVALIDO] Documento vacío o no mapeable en no-valid-yamls.yaml, índice 2
-[OK] no-valid-yamls.yaml, índice 3 → tiny
-[OK] no-valid-yamls.yaml, índice 4 → tiny
-[OK] no-valid-yamls.yaml, índice 5 → tiny
+[TEMPLATE OMITIDO] no-valid-yamls.yaml contiene templating → omitido
 
 --- RESUMEN ---
 Total procesados: 20
-Total suma procesados mas enumeration: 47
-Con errores: 5
+Total suma procesados mas enumeration: 33
+Con errores: 1
 Sin apiVersion/kind: 1
 Recursos personalizados: 1
-Validos clasificados: 13
-Fin: 2025-04-10 14:50:22.315089
+Validos clasificados: 17
+Fin: 2025-04-11 13:45:02.108365

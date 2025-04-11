@@ -1,0 +1,18 @@
+#for cronjob in linux env
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: nightbatchcron
+  namespace: {{secret.namespace}}
+spec:
+  schedule: "30 2 * * 1,2,3,4,5"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: nightbackupbatch
+            image: docker_image_url/nightbatch
+          imagePullSecrets:
+          - name: regcred
+          restartPolicy: OnFailure

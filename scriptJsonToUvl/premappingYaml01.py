@@ -117,7 +117,14 @@ def main():
 
             try:
                 with open(src_path, 'r', encoding='utf-8') as yaml_file:
-                    yaml_documents = list(yaml.safe_load_all(yaml_file))
+                    raw_content = yaml_file.read()
+                    # Verificación de templating
+                if has_invalid_content(raw_content):
+                    shutil.copy(src_path, os.path.join(output_dir, 'errores', fname))
+                    log.write(f"[TEMPLATE OMITIDO] {fname} contiene templating → omitido\n")
+                    continue
+                # Separación por documentos YAML estándar
+                yaml_documents = list(yaml.safe_load_all(raw_content))
 
                 if not yaml_documents:
                     log.write(f"[VACÍO] {fname}\n")
@@ -163,12 +170,12 @@ def main():
                     bucket = get_size_bucket(content)
                     unique_name = get_unique_name(os.path.join(output_dir, bucket), fname, i, content)
 
-                    if has_invalid_content(content):
+                    """if has_invalid_content(content):
                         with open(os.path.join(output_dir, 'errores', unique_name), 'w', encoding='utf-8') as f:
                             f.write(content)
                         log.write(f"[INVALIDO] {fname}, índice {i} → errores\n")
                         errores += 1
-                        continue
+                        continue"""
 
                     if not has_valid_api_and_kind(doc):
                         with open(os.path.join(output_dir, 'no_apiversion_kind', unique_name), 'w', encoding='utf-8') as f:
