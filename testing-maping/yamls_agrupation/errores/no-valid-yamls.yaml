@@ -1,0 +1,34 @@
+apiVersion: s3.kubedoop.dev/v1alpha1
+kind: S3Connection
+metadata:
+  name: s3connection
+---
+apiVersion: s3.kubedoop.dev/v1alpha1
+kind: S3Bucket
+metadata:
+  name: s3bucket
+
+---
+#00-namespaces.yaml
+#@ load("@ytt:data", "data")
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: #@ data.values.secrets.namespace
+  labels:
+    name: #@ data.values.secrets.namespace
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: #@ data.values.rabbitmq.package_install_namespace
+  labels:
+    name: #@ data.values.rabbitmq.package_install_namespace
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: #@ data.values.rabbitmq.cluster_namespace
+  labels:
+    name: #@ data.values.rabbitmq.cluster_namespace
