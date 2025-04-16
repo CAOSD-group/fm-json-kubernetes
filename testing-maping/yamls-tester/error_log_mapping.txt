@@ -1,0 +1,12 @@
+[OMITIDO] apiVersion sin versión explícita: rbac.authorization.k8s.io en yamls_agrupation\tester\tiny\aarkay-developer_.yaml
+[OMITIDO] apiVersion sin versión explícita: rbac.authorization.k8s.io en yamls_agrupation\tester\tiny\aarkay-read-only_1.yaml
+[OMITIDO] apiVersion sin versión explícita: 0.1.0 en yamls_agrupation\tester\tiny\app239.yaml
+[OMITIDO] apiVersion sin versión explícita: 0.1.0 en yamls_agrupation\tester\tiny\app65.yaml
+[OMITIDO] Clave o valor inválida detectada: None: None en yamls_agrupation\tester\tiny\hpa-template.yaml
+[OMITIDO] apiVersion sin versión explícita: rbac.authorization.k8s.io en yamls_agrupation\tester\tiny\aarkay-developer_.yaml
+[OMITIDO] apiVersion sin versión explícita: rbac.authorization.k8s.io en yamls_agrupation\tester\tiny\aarkay-read-only_1.yaml
+[OMITIDO] apiVersion sin versión explícita: 0.1.0 en yamls_agrupation\tester\tiny\app239.yaml
+[OMITIDO] apiVersion sin versión explícita: 0.1.0 en yamls_agrupation\tester\tiny\app65.yaml
+[OMITIDO] Clave o valor inválida detectada: None: None en yamls_agrupation\tester\tiny\hpa-template.yaml
+[YAML ERROR] en yamls_agrupation\tester\small\example_deployment01.yaml: mapping values are not allowed here
+  in "yamls_agrupation\tester\small\example_deployment01.yaml", line 21, column 16

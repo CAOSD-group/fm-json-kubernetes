@@ -2465,3 +2465,24 @@ Archivos con sintaxis invalida == False
                   limitsKey: "0"
                 requests:
                   requestsKey: "0"
+
+Deteccion de nueva sintaxis problematica con Yaml: Caracteres [ ? ]
+hpa-template.yaml
+
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: [ ? ] 
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: [ ? ]
+  minReplicas: [ ? ]
+  maxReplicas: [ ? ]
+
+
+También se ha arreglado el error de [GENERAL ERROR] en archivo ./yamls_agrupation\tiny\aarkay-developer_.yaml: list index out of range
+Que se producia por una mala comprobacion en la descomposicion de las versiones. Ahora se omiten directamente
+
+https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.32/

@@ -7,6 +7,12 @@ from datetime import datetime, timezone
 
 import gc
 
+# Ruta base donde están los buckets clasificados por tamaño
+yaml_base_directory = './yamls_agrupation/tester'
+
+# Buckets válidos
+buckets = ['tiny', 'small', 'medium', 'large', 'huge']
+
 
 def extract_yaml_properties(data, parent_key='', root_info=None, first_add=True):
     """
@@ -24,17 +30,23 @@ def extract_yaml_properties(data, parent_key='', root_info=None, first_add=True)
 
     if isinstance(data, dict):
         for key, value in data.items():
+
+            if key is None or value is None:
+                raise ValueError(f"Clave o valor inválida detectada: {key}: {value}")
+            
             new_key = f"{parent_key}_{key}" if parent_key else key
             # Guardar valores clave (apiVersion y kind) para determinar el contexto
             if key in ['apiVersion', 'kind'] and first_add: ## Solo modificar si es la primera llamada
                 if key not in root_info:  # No sobrescribir si ya se definió en el nivel superior   
                     if '/' in value and not '.' in value:
                         value = value.replace('/', '_')
-                    elif '.' in value and '/': ## Caso en el que el valor de la version contenga puntos '.' se usa solo la segunda parte separada por la barra lateral '/' que donota la versión dentro de los esquemas
+                    elif '.' in value and '/' in value: ## Caso en el que el valor de la version contenga puntos '.' se usa solo la segunda parte separada por la barra lateral '/' que donota la versión dentro de los esquemas
                         aux_value = value.split('/') ## Como se representa en los esquemas api_rbac_v1_, caso en los yaml: rbac.authorization.k8s.io/v1
-                        print(f"EL AUX VALUE SEPARADO ES {aux_value}")
                         value = aux_value[1]
-                        print(value)
+                    elif '.' in value and not '/' in value:
+                        ## No hay una definición de la versión y solo se agrega un grupo o una versión no válida
+                        raise ValueError(f"apiVersion sin versión explícita: {value}")
+
                     root_info[key] = value
             simple_props.append(key)
 
@@ -60,13 +72,17 @@ def extract_yaml_properties(data, parent_key='', root_info=None, first_add=True)
         prefix = f"{root_info['apiVersion']}_{root_info['kind']}"
         hierarchical_props = [f"{prefix}_{prop}" for prop in hierarchical_props]
         key_value_pairs = [(f"{prefix}_{key}", value) for key, value in key_value_pairs]
-
+    elif 'apiVersion' not in root_info or 'kind' not in root_info and first_add:
+        print(f"[WARNING] No se pudo determinar apiVersion/kind en {root_info}")
+        return None, None, None, root_info ## Tratar de determinar archivos sin apiVersion kind en el root
     return simple_props, hierarchical_props, key_value_pairs, root_info
 
 
 def process_yaml_file(file_path):
     """Procesa un archivo YAML y extrae información relevante."""
-    error_log_path = './error_log.txt'
+    ##error_log_path = './error_log_mapping.txt'
+    error_log_path = './yamls_agrupation/yamls-tester/error_log_mapping.txt'
+
     #with open(error_log_path, 'a', encoding='utf-8') as error_log:
     try:
         with open(file_path, 'r', encoding='utf-8') as yaml_file:
@@ -77,12 +93,19 @@ def process_yaml_file(file_path):
             for index, yaml_data in enumerate(yaml_documents):
                 if yaml_data is None:
                     continue
-                
-                root_info = {}  # Reiniciar root_info para cada documento
-                simple_props, hierarchical_props, key_value_pairs, root_info = extract_yaml_properties(yaml_data)
+                try:
+                    root_info = {}  # Reiniciar root_info para cada documento
+                    simple_props, hierarchical_props, key_value_pairs, root_info = extract_yaml_properties(yaml_data)
 
-                yield (file_path, index, yaml_data, simple_props, hierarchical_props, key_value_pairs, root_info)
+                    ##if None in (simple_props, hierarchical_props, key_value_pairs):
+                    ##    continue  # Por si el warning anterior dejó algo inválido
+                    
+                    yield (file_path, index, yaml_data, simple_props, hierarchical_props, key_value_pairs, root_info)
 
+                except ValueError as ve:
+                    with open(error_log_path, 'a', encoding='utf-8') as error_log:
+                        error_log.write(f"[OMITIDO] {ve} en {file_path}\n")
+                    continue 
     except yaml.YAMLError as e:
         with open(error_log_path, 'a', encoding='utf-8') as error_log:
             error_log.write(f"[YAML ERROR] en {file_path}: {str(e)}\n")
@@ -96,6 +119,12 @@ def process_yaml_file(file_path):
 
 def read_yaml_files_from_directory(directory_path):
     """Lee archivos YAML en un directorio y los procesa en tiempo real."""
+
+    # Comprobar si el directorio está vacío
+    if not any(fname.endswith((".yaml", ".yml")) for fname in os.listdir(directory_path)):
+        print(f"[AVISO] Carpeta vacía o sin YAMLs: {directory_path}")
+        return  # Se salta esta carpeta y continúa con la siguiente
+    
     for filename in os.listdir(directory_path):
         if filename.endswith((".yaml", ".yml")):
             file_path = os.path.join(directory_path, filename)
@@ -103,6 +132,12 @@ def read_yaml_files_from_directory(directory_path):
 
             gc.collect()  # Liberar memoria periódicamente
 
+# Lista generadora que procesa YAMLs de todas las carpetas válidas
+def iterate_all_buckets(base_dir, bucket_list):
+    for bucket in bucket_list:
+        bucket_path = os.path.normpath(os.path.join(base_dir, bucket))
+        if os.path.isdir(bucket_path):
+            yield from read_yaml_files_from_directory(bucket_path)
 
 def load_features_csv(csv_path):
     feature_dict = {}
@@ -213,7 +248,7 @@ def search_features_in_csv(hierarchical_props, key_value_pairs, csv_dict):
 
 def extract_key_value_mappings(value, value_features, feature_map): ## Posible encapsulamiento de las funciones para mejorar la legibilidad
     key_values = []
-    aux_feature_maps = value0_features.rsplit("_", 1)[0]
+    aux_feature_maps = value_features.rsplit("_", 1)[0]
     aux_feature_value = f"{aux_feature_maps}_ValueMap"
     for map_key, map_value in value.items():
         key_values.append({
@@ -237,14 +272,14 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, aux_hier
         ##aux_hierchical_prop = []
         #feature_type_array = {}
         possible_type_data = ['asString', 'asNumber', 'asInteger']
-        ##print(f"Yaml data completo: {yaml_data.items()}")
+        print(f"Yaml data completo: {yaml_data.items()}")
         print(f"Deeph actual de mapeo: {depth_mapping}")
         ##print(f"Hierchical  {hierarchical_prop}")
 
 
         for key, value in yaml_data.items():
             #deep_mapping = deep_mapping + 1
-            original_key = key ## copia de la clave original
+            # original_key = key ## copia de la clave original
             aux_nested = False ## boolean para determinar si una propiedad tiene un feature value
             aux_array = False ## boolean para determinar si una propiedad contiene un array o es un array de features
             aux_maps = False ## marca para determinar los mapas
@@ -259,8 +294,8 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, aux_hier
             #mapped_key = {}
             if isinstance(value, datetime): ## Comprobacion de si alguno de los valores es de tipo Time RCF 3339
                 value = value.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
-            elif isinstance(value, str) and "{{" in value: ## Comprobacion de si alguno de los valores contiene sintaxis invalida en YAML, puesta para plantillas de jinja o helm
-                value = value.replace("{{", '"{{').replace("}}",'}}"') ## parche temporal, se omitien directamente en una comprobacion previa
+            """elif isinstance(value, str) and "{{" in value: ## Comprobacion de si alguno de los valores contiene sintaxis invalida en YAML, puesta para plantillas de jinja o helm
+                value = value.replace("{{", '"{{').replace("}}",'}}"') ## parche temporal, se omitien directamente en una comprobacion previa"""
 
             #print(f"Que valor obtengo?{hierarchical_key}")
             for key_features, value_features in feature_map.items():
@@ -588,20 +623,21 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, aux_hier
 
 
 # Ruta de la carpeta donde están los archivos YAML
-yaml_directory = './generateConfigs/files_yamls'
+## yaml_directory = './generateConfigs/files_yamls'
 #yaml_directory = '../kubernetes_fm/scripts/download_manifests/YAMLs02' ## Testing yamls
 
 ## kubernetes_fm\scripts\download_manifests\YAMLs
 ## ruta de los yamls descargados: C:\projects\kubernetes_fm\scripts\download_manifests\YAMLs
 # Leer YAMLs y extraer propiedades
-yaml_data_list = read_yaml_files_from_directory(yaml_directory)
-
+## yaml_data_list = read_yaml_files_from_directory(yaml_directory)
+yaml_data_list = iterate_all_buckets(yaml_base_directory, buckets)
 
 
 # Guardar la salida de la carpeta con ficheros JSON 
 ##output_json_dir = './generateConfigs/outputs_json_mappeds02'
 #output_json_dir = './generateConfigs/outputs_json_mappeds05'
-output_json_dir = './generateConfigs/outputs_json_tester'
+## output_json_dir = './generateConfigs/outputs_json_tester'
+output_json_dir = './yamls_agrupation/yamls-tester/'
 
 #output_json_path = './generateConfigs/output_features02.json'
 os.makedirs(output_json_dir, exist_ok=True)  # Crea la carpeta si no existe

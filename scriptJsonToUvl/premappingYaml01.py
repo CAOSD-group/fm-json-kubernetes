@@ -5,9 +5,10 @@ from datetime import datetime
 from hashlib import md5
 
 #input_dir = '../kubernetes_fm/scripts/download_manifests/YAMLs02'
-input_dir = './generateConfigs/files_yamls'
+#input_dir = './generateConfigs/files_yamls'
+input_dir = '../files_yamls_dowload/yamls-tester'
 
-output_dir = './yamls_agrupation'
+output_dir = './yamls_agrupation/tester'
 
 # Clasificación por tamaño: 0-5 kb, 5-25 kb...
 buckets = {
