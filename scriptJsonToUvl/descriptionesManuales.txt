@@ -2486,3 +2486,7 @@ También se ha arreglado el error de [GENERAL ERROR] en archivo ./yamls_agrupati
 Que se producia por una mala comprobacion en la descomposicion de las versiones. Ahora se omiten directamente
 
 https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.32/
+
+
+[YAML ERROR] en yamls_agrupation\tester\small\example_deployment01.yaml: mapping values are not allowed here
+  in "yamls_agrupation\tester\small\example_deployment01.yaml", line 21, column 16
