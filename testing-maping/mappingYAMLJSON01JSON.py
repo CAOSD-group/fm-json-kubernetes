@@ -6,9 +6,10 @@ import re
 from datetime import datetime, timezone
 
 import gc
+import shutil
 
 # Ruta base donde están los buckets clasificados por tamaño
-yaml_base_directory = './yamls_agrupation/tester'
+yaml_base_directory = './yamls_agrupation' ## tester
 
 # Buckets válidos
 buckets = ['tiny', 'small', 'medium', 'large', 'huge']
@@ -31,7 +32,7 @@ def extract_yaml_properties(data, parent_key='', root_info=None, first_add=True)
     if isinstance(data, dict):
         for key, value in data.items():
 
-            if key is None or value is None:
+            if key is None and value is None: ## Omitir el tipo de casos con declaraciones "name: [ ? ]"
                 raise ValueError(f"Clave o valor inválida detectada: {key}: {value}")
             
             new_key = f"{parent_key}_{key}" if parent_key else key
@@ -80,8 +81,8 @@ def extract_yaml_properties(data, parent_key='', root_info=None, first_add=True)
 
 def process_yaml_file(file_path):
     """Procesa un archivo YAML y extrae información relevante."""
-    ##error_log_path = './error_log_mapping.txt'
-    error_log_path = './yamls_agrupation/yamls-tester/error_log_mapping.txt'
+    error_log_path = './error_log_mapping.txt'
+    ##error_log_path = './yamls_agrupation/yamls-tester/error_log_mapping.txt'
 
     #with open(error_log_path, 'a', encoding='utf-8') as error_log:
     try:
@@ -105,10 +106,21 @@ def process_yaml_file(file_path):
                 except ValueError as ve:
                     with open(error_log_path, 'a', encoding='utf-8') as error_log:
                         error_log.write(f"[OMITIDO] {ve} en {file_path}\n")
+                    # Copia de archivo con error de valor inválido o de apiVersion sin versión
+                    error_mapping_dir = os.path.join(yaml_base_directory, 'erroresMapeo')
+                    os.makedirs(error_mapping_dir, exist_ok=True)
+                    dest_path = os.path.join(error_mapping_dir, os.path.basename(file_path))
+                    shutil.copy(file_path, dest_path)    
                     continue 
     except yaml.YAMLError as e:
         with open(error_log_path, 'a', encoding='utf-8') as error_log:
             error_log.write(f"[YAML ERROR] en {file_path}: {str(e)}\n")
+        # Copia de archivo con error de YAML
+        error_yaml_dir = os.path.join(yaml_base_directory, 'erroresYAML')
+        os.makedirs(error_yaml_dir, exist_ok=True)
+        dest_path = os.path.join(error_yaml_dir, os.path.basename(file_path))
+        shutil.copy(file_path, dest_path)
+
     except FileNotFoundError:
         with open(error_log_path, 'a', encoding='utf-8') as error_log:
             error_log.write(f"[NOT FOUND] Archivo no encontrado: {file_path}\n")
@@ -635,9 +647,9 @@ yaml_data_list = iterate_all_buckets(yaml_base_directory, buckets)
 
 # Guardar la salida de la carpeta con ficheros JSON 
 ##output_json_dir = './generateConfigs/outputs_json_mappeds02'
-#output_json_dir = './generateConfigs/outputs_json_mappeds05'
 ## output_json_dir = './generateConfigs/outputs_json_tester'
-output_json_dir = './yamls_agrupation/yamls-tester/'
+##output_json_dir = './yamls_agrupation/yamls-tester/'
+output_json_dir = './generateConfigs/outputs_json_mappeds06'
 
 #output_json_path = './generateConfigs/output_features02.json'
 os.makedirs(output_json_dir, exist_ok=True)  # Crea la carpeta si no existe

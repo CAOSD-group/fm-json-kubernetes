@@ -1,0 +1,28 @@
+apiVersion: rbac.authorization.k8s.io
+kind: Role
+metadata:
+  name: roboshop-developer
+  namespace: aarkay
+rules:
+- apiGroups:
+  - '*'
+  resources:
+  - deployments
+  - services
+  - secrets
+  - configmaps
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - delete
+- apiGroups:
+  - '*'
+  resources:
+  - pods
+  verbs:
+  - get
+  - list
+  - watch
