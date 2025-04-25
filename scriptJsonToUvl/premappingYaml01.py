@@ -4,11 +4,11 @@ import yaml
 from datetime import datetime
 from hashlib import md5
 
-#input_dir = '../kubernetes_fm/scripts/download_manifests/YAMLs02'
+input_dir = '../kubernetes_fm/scripts/download_manifests/YAMLs02'
 #input_dir = './generateConfigs/files_yamls'
-input_dir = '../files_yamls_dowload/yamls-tester'
+##input_dir = '../files_yamls_dowload/yamls-tester'
 
-output_dir = './yamls_agrupation/tester'
+output_dir = './yamls_agrupation' ## /tester
 
 # Clasificación por tamaño: 0-5 kb, 5-25 kb...
 buckets = {
@@ -28,55 +28,25 @@ def prepare_output_dirs():
 # Detecta contenido inválido
 def has_invalid_content(content):
         return '{{' in content or '}}' in content or '#@' in content
-        """if '{{' in content or '}}' in content:
-            return True
-        elif '#@' in content:
-            return True"""
-        """for line in content.splitlines():
-            if line.strip().startswith('#@'):
-                return True"""
-                ##     return '{{' in content or '}}' in content or '#@' in content
-        #return False
 
 # Detecta CRDs o recursos personalizados
 def is_custom_resource(doc):
         return doc.get('kind') == 'CustomResourceDefinition' ## Si kind coincide con el tipo CRD se descarta
 
-        """ if not isinstance(doc, dict):
-                return False
-            if doc.get('kind') == 'CustomResourceDefinition':
-                return True
-            api = doc.get('apiVersion', '')
-            return '.' in api""" ## and not api.startswith('v1') and not api.startswith('apps/')
 
-# Genera nombre único por hash
+# Genera nombre único, si hay coincidencia se agrega una generacion por hash
 def get_unique_name(dest_folder, fname, index, content):
-    """if not os.path.exists(path):
-        return fname"""  # Nombre original si no hay colisión
-    fname_modify = ""
+
     base, ext = os.path.splitext(fname) ## Separa el nombre base de la extension
-    fname_modify = f"{base}{ext}"
-    path = os.path.join(dest_folder, fname)
-    """if fname not in used_names and not os.path.exists(path):## and not os.path.exists(path)
-        #used_names.add(fname)
-        if index > 0:
-            fname += f"{base}_{index}{ext}"
-        used_names.add(fname)
-        return fname"""
-    if fname in used_names and os.path.exists(path):
+    fname_modify = f"{base}_{index}{ext}" if index > 0 else f"{base}{ext}"
+
+    if fname_modify in used_names: ## Se comprueba si el candidato ya esta en la lista global
         hash_id = md5(content.encode()).hexdigest()[:8]
         fname_modify = f"{base}_{hash_id}_{index}{ext}" if index > 0 else f"{base}_{hash_id}{ext}"
-        used_names.add(fname_modify)
-        return fname_modify
 
-    #hash_id = md5(content.encode()).hexdigest()[:8]
-    #base, ext = os.path.splitext(fname)
-    fname_modify = f"{base}_{index}{ext}" if index > 0 else f"{base}_{ext}"
     used_names.add(fname_modify)
+    print(f"VALORES fname2: {fname_modify}  {fname} {index}")
 
-    #if index > 0:
-    #    fname_modify += f"_{index}"
-    #    print(f"El valor modificado: {fname_modify}")
     return fname_modify
 
 # Determina bucket de tamaño
@@ -162,21 +132,17 @@ def main():
                 #  Caso 2: múltiples documentos → procesar individualmente
                 for i, doc in enumerate(yaml_documents):
                     total_files_declarations += 1
-                    if not isinstance(doc, dict):
-                        log.write(f"[INVALIDO] Documento vacío o no mapeable en {fname}, índice {i}\n")
-                        errores += 1
-                        continue
 
                     content = yaml.dump(doc, sort_keys=False)
                     bucket = get_size_bucket(content)
                     unique_name = get_unique_name(os.path.join(output_dir, bucket), fname, i, content)
 
-                    """if has_invalid_content(content):
-                        with open(os.path.join(output_dir, 'errores', unique_name), 'w', encoding='utf-8') as f:
-                            f.write(content)
-                        log.write(f"[INVALIDO] {fname}, índice {i} → errores\n")
+                    if not isinstance(doc, dict): ## Omision de archivos vacíos o sin contenido: solo comentarios etc
+                        with open(os.path.join(output_dir, 'errores', unique_name), 'w', encoding='utf-8') as f: ## Agregado para guardar archivos con los errores...
+                            f.write(content)                        
+                        log.write(f"[INVALIDO] Documento vacío o no mapeable en {fname}, índice {i}\n")
                         errores += 1
-                        continue"""
+                        continue
 
                     if not has_valid_api_and_kind(doc):
                         with open(os.path.join(output_dir, 'no_apiversion_kind', unique_name), 'w', encoding='utf-8') as f:
@@ -199,6 +165,7 @@ def main():
 
             except Exception as e:
                 errores += 1
+                shutil.copy(src_path, os.path.join(output_dir, 'errores', fname)) ## Agregado para guardar también los errores generales sin contemplar
                 log.write(f"[ERROR] {fname}: {str(e)}\n")
 
         log.write("\n--- RESUMEN ---\n")

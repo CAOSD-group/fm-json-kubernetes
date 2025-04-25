@@ -2490,3 +2490,164 @@ https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.32/
 
 [YAML ERROR] en yamls_agrupation\tester\small\example_deployment01.yaml: mapping values are not allowed here
   in "yamls_agrupation\tester\small\example_deployment01.yaml", line 21, column 16
+
+
+Neuvos errores unicode en el preprocesamiento:
+
+
+01_myEKS_clustercreation.yaml
+
+[ERROR] 01_myEKS_clustercreation.yaml: while parsing a block mapping
+  in "<unicode string>", line 2, column 1:
+    apiVersion: eksctl.io/v1alpha5
+    ^
+expected <block end>, but found ']'
+  in "<unicode string>", line 10, column 62:
+     ... 1a", "eu-west-1b", "eu-west-1c"]]
+                                         ^
+
+[ERROR] 05_rbac_user_role.yaml: while scanning a simple key
+  in "<unicode string>", line 13, column 1:
+    EoF
+    ^
+could not find expected ':'
+  in "<unicode string>", line 13, column 4:
+    EoF
+       ^
+[ERROR] 05_rbac_user_role_binding.yaml: while scanning a simple key
+  in "<unicode string>", line 14, column 1:
+    EoF
+    ^
+could not find expected ':'
+  in "<unicode string>", line 14, column 4:
+    EoF
+       ^                    
+
+[ERROR] deploy-nginx26.yaml: while scanning a simple key
+  in "<unicode string>", line 8, column 1:
+    //Este es un comentario
+    ^
+could not find expected ':'
+  in "<unicode string>", line 9, column 1:
+    spec:
+    ^
+
+[ERROR] deployment1947.yaml: while scanning a simple key
+  in "<unicode string>", line 23, column 1:
+    -----------------
+    ^
+could not find expected ':'
+  in "<unicode string>", line 25, column 1:
+    apiVersion: app/v1
+    ^
+[ERROR] deployment6835.yaml: while scanning a simple key
+  in "<unicode string>", line 4, column 1:
+    <<<<<<< HEAD
+    ^
+could not find expected ':'
+  in "<unicode string>", line 5, column 7:
+      name: newserver
+          ^
+[ERROR] deployment837.yaml: while parsing a block mapping
+  in "<unicode string>", line 16, column 5:
+        containers:
+        ^
+expected <block end>, but found '<block sequence start>'
+  in "<unicode string>", line 20, column 6:
+         - containerPort: 5000
+         ^
+
+[ERROR] devicetopic-modelgroup011.yaml: while scanning for the next token
+found character '\t' that cannot start any token
+  in "<unicode string>", line 85, column 69:
+     ... _Models_devicetopic-modelgroup01	
+                                         ^
+Hay que definir una estrategia para aquellas versiones que no tengan mapeo ni en la doc ni en el modelo como:
+
+        "apiVersion": "policy/v1beta1",
+        "kind": "PodSecurityPolicy",
+
+[ERROR] docker-secret12.yaml: while scanning a simple key
+  in "<unicode string>", line 7, column 1:
+    LmNvbSI6IHsKCQkJImF1dGgiOiAiUVZk ... 
+    ^
+could not find expected ':'
+  in "<unicode string>", line 8, column 1:
+    VkdKSE5UVmFibHAxV1cxdk1tVkVVbXBs ... 
+    ^
+[ERROR] drpc.yaml: while scanning a simple key
+  in "<unicode string>", line 24, column 1:
+    ${PROTECTED_NAMESPACES}
+    ^
+could not find expected ':'
+  in "<unicode string>", line 25, column 1:
+    
+    ^
+[ERROR] drpcrecipe.yaml: while scanning a simple key
+  in "<unicode string>", line 24, column 1:
+    ${PROTECTED_NAMESPACES}
+    ^
+could not find expected ':'
+  in "<unicode string>", line 26, column 1:
+    
+    ^
+
+[ERROR] dummy_pod.yaml: while parsing a flow mapping
+  in "<unicode string>", line 25, column 12:
+        image: {images[emissary]}
+               ^
+expected ',' or '}', but got '['
+  in "<unicode string>", line 25, column 19:
+        image: {images[emissary]}
+                      ^
+[ERROR] efk_test.yaml: mapping values are not allowed here
+  in "<unicode string>", line 16, column 5:
+    kind: PersistentVolume
+        ^
+[ERROR] efk_test1.yaml: mapping values are not allowed here
+  in "<unicode string>", line 16, column 5:
+    kind: PersistentVolume
+        ^
+[ERROR] efk_test2.yaml: mapping values are not allowed here
+  in "<unicode string>", line 16, column 5:
+    kind: PersistentVolume
+        ^
+[ERROR] efk_test3.yaml: mapping values are not allowed here
+  in "<unicode string>", line 16, column 5:
+    kind: PersistentVolume
+        ^
+[ERROR] elastic-data-persistentvolume2.yaml: while scanning a double-quoted scalar
+  in "<unicode string>", line 15, column 10:
+       path: "c:\Users\martin.mocik\Documents ... 
+             ^
+expected escape sequence of 8 hexadecimal numbers, but found 's'
+  in "<unicode string>", line 15, column 15:
+       path: "c:\Users\martin.mocik\Documents\kube ... 
+                  ^
+[ERROR] empty.yaml: while parsing a flow node
+expected the node content, but found '-'
+  in "<unicode string>", line 1, column 4:
+    [[[- if false -]]]
+       ^
+[ERROR] empty1.yaml: while parsing a flow node
+expected the node content, but found '-'
+  in "<unicode string>", line 1, column 4:
+    [[[- if false -]]]
+       ^
+
+
+      containers:
+      - name: frontend
+        image: ***.dkr.ecr.us-east-1.amazonaws.com/frontend:v003
+        ports:
+
+[[[- if false -]]]
+
+[[[- end -]]]
+
+
+.1. Se pueden definir todas las versiones y kinds que hay en la doc y en el modelo y en base a ello omitir las que no esten dentro del rango?
+
+.2. Tenerlas en cuenta aparte como "personalizables" y directamente no contarlas en la validacion
+
+.3. Tenerlas en cuenta y que forme parte del computo global de los numeros finales de validacion.
