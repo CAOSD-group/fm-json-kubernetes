@@ -5,6 +5,8 @@ import json
 import os
 from flamapy.core.transformations.text_to_model import TextToModel
 
+from copy import deepcopy
+from itertools import product
 from flamapy.metamodels.configuration_metamodel.models.configuration import Configuration
 from flamapy.core.utils import file_exists
 from flamapy.core.exceptions import ConfigurationNotFound
@@ -18,105 +20,146 @@ class ConfigurationJSON(TextToModel):
     def __init__(self, path: str) -> None:
         self._path = path
 
-    def transform(self): ##  -> Configuration
+    def transform(self):
         json_data = self.get_configuration_from_json(self._path)
-        elements = {}
-        list_elements = {} ## Variable que guardara las configuraciones si hay más de 1. Listas con mas de 1 valor
-        #self.extract_features(json_data["config"], elements)  # Extrae solo la parte relevante
-        self.extract_features(json_data["config"], elements, list_elements)
-        #print(f"Elementos que se agregan al Configuration: {elements}")
+        base_config = {}
+        blocks = []
 
-        if list_elements:
-            #return self.generate_combinations(elements, list_elements)
-            configurations = self.generate_combinations(elements, list_elements)
-            return configurations
-        else:
-            return [Configuration(elements)] ## return [Configuration(base_config)]
-        """if list_elements:
-            print(f"Hay mas de una configuración en las listas")
-            configurations = []
-            for key, items in list_elements.items():
-                print(f"Lista de items en elements {list_elements.items()}")
-                for idx, item in enumerate(items):
-                    print(f"{idx}   {item}")
-                    new_config = elements.copy()  # Se copian los features que ya habian en la config
-                    print(f"COPIA DE ELEMENTOS  {new_config}")
-                    new_config.update(item)  # Se agregan los elementos individuales
-                    print(f"ELEMENTOS INDIVIDUALES  {item}")
-                    configurations.append(Configuration(new_config))
-                    #print(Configuration(new_config))
-            return configurations
-        else:
-            return Configuration(elements)"""
-        
-    def extract_features(self, data, elements, list_elements):
-        """ Extrae los features del JSON sin modificar sus claves. """
-        #print(f"Data completo {data}")
-        if isinstance(data, dict):
-            for key, value in data.items():
-                if isinstance(value, (str, int, float, bool)):  # Datos primitivos
-                    #print(f"Elementos value {value}")
-                    elements[key] = value
-                elif isinstance(value, dict):  # Listas con diccionarios
-                    #print(f"Elementos dict 2    {key} {value}")
-                    elements[key] = True
-                    self.extract_features(value, elements, list_elements)  # Se sigue explorando
-                elif isinstance(value, list):  # Listas con diccionarios
-                    #print(f"Elementos lista {value}")
-                    elements[key] = True ## No se si duplica el key
-                    if len(value) > 1:
-                        list_elements[key] = []
-                        for item in value:
-                            print("Ejecución con mas de un elemento en la lista")
-                            temp_elements = {}
-                            self.extract_features(item, temp_elements, list_elements)
-                            list_elements[key].append(temp_elements)
-                        #list_elements.append([self.extract_single_feature(item) for item in value])
-                    else: ## Solo un elemento o ninguno
-                        print("Ejecución con un solo elemento de la lista")
-                        self.extract_features(value[0], elements, list_elements)
+        self.extract_features(json_data['config'], base_config, blocks)
 
-                            #print(item)
-
-    """def extract_single_feature(self, item):
-         #Extrae un solo feature de un elemento de lista. 
-        feature = {}
-        self.extract_features(item, feature, {})
-        return feature"""
-
-    def generate_combinations(self, base_config, list_elements):
-        """ Genera todas las combinaciones posibles manteniendo la estructura original. """
-        
-        keys = list(list_elements.keys())
-        num_keys = len(keys)
-        configurations = []
-
-        def backtrack(index, current_config):
-            if index == len(list_elements):
-                configurations.append(Configuration(current_config.copy()))
-                return
-            key = keys[index]
-            for option in list_elements[key]:
-                current_config.update(option)
-                backtrack(index + 1, current_config)
-                for key in option.keys():
-                    current_config.pop(key)  # Eliminar claves para la siguiente iteración
-
-        # Iniciamos el backtracking con la configuración base
-        backtrack(0, base_config.copy())
-
+        configurations = self.generate_combinations(base_config, blocks)
         return configurations
 
+    def extract_features(self, data, base_config, blocks):
+        """Extrae valores fijos a base_config y bloques con combinaciones posibles a blocks."""
+        caseThree = False
+        if isinstance(data, dict):
+            for key, value in data.items():
+                if isinstance(value, (str, int, float, bool)):
+                    base_config[key] = value
+
+                elif isinstance(value, dict):
+                    base_config[key] = True
+                    self.extract_features(value, base_config, blocks)
+
+                elif isinstance(value, list):
+                    #print(f"Los values con list here    {value}")
+                    if not value:
+                        continue
+
+                if all(isinstance(x, dict) for x in value):
+                    combined_block = []
+                    #print(f"Los values dict there    {value}")
+                    if len(value) > 0:
+                        for item in value:
+                            #print(f"Item:   {item}")
+                            static = {}
+                            lists = {}
+                            
+                            for k, v in item.items():
+                                #print(f"Key, value de cada item: {k}    {v}")
+                                base_config[k] = True
+                                if isinstance(v, list):
+                                    # Intentar extraer valores primitivos desde dicts
+                                    extracted_values = []
+                                    for item in v:
+                                        if isinstance(item, dict):
+                                            # Si es un diccionario con un único valor primitivo
+                                            #print(f"Soy El item: {item}")
+                                            if len(item) == 1:
+                                                inner_value = list(item.values())[0]
+                                                inner_key = list(item.keys())[0]
+                                                print(f"Inner key   {inner_key} {inner_value}")
+                                                if isinstance(inner_value, (str, int, float, bool)):
+                                                    extracted_values.append(inner_value)
+                                                    lists[inner_key] = extracted_values
+                                                    #extracted_values.append({inner_key: inner_value,})
+                                        #elif isinstance(item, (str, int, float, bool)):
+                                        #    extracted_values.append(item)
+                                    #if extracted_values:
+                                    #    lists = extracted_values
+
+                                elif isinstance(v, (str, int, float, bool)):
+                                    static[k] = v
+                                    """elif isinstance(v, list):
+                                        print(f"Valor v:    {k}    {v}")
+                                        #for i in v:
+                                        print(f"sigo el salto ") # {i}
+                                        if isinstance(v, dict): ## ctrl z
+                                            #caseThree = True
+                                            for x, z in v.items():
+                                                print(f"sigo aun el salto   {x} {z}")
+                                                lists[x] = z
+                                        elif isinstance(v, (str, int, float, bool)):
+                                            print(f"sigo aun el salto   {lists[k]}")
+                                            lists[k] = v
+                                        else:
+                                            pass"""
+                                elif isinstance(v, dict):
+                                    print(f"Item segunda iter:   {item}")
+                                    self.extract_features(v, static, blocks)
+
+                            if lists: # and caseThree
+                                keys = list(lists.keys())
+                                #print(f"Keys de las listas  {keys}")
+                                value_lists = [lists[k] for k in keys]
+                                #print(f"Keys de las listas y values:  {keys}    ")
+                                for prod in product(*value_lists):
+                                    merged = {k: prod[i] for i, k in enumerate(keys)}
+                                    merged.update(static)
+                                    combined_block.append(merged)
+                            else:
+                                combined_block.append(static.copy())
+                    else:
+                        print(f"Un unico elemento en la lista")
+                        print(f"Elemento unitario:  {value}")
+                        #if isinstance(v, list) and all(isinstance(i, (str, int, float, bool)) for i in v):
+                        #    lists[k] = v                        
+                        if isinstance(value, (str, int, float, bool)):
+                            base_config[key] = value
+
+                    # Agregamos un solo bloque combinado
+                    blocks.append(combined_block)
+                    base_config[key] = True
+
+                    """elif all(isinstance(x, (str, int, float, bool)) for x in value):
+                        # Lista de valores simples
+                        blocks.append([{key: v} for v in value])
+                        base_config[key] = True"""
+        
+        elif isinstance(data, list):
+            print(f"Data es list")
+            #for item in data:
+            #    self.extract_features(item, base_config, blocks)
+
+    def generate_combinations(self, base_config, blocks):
+        """Combinación total entre todos los bloques, añadiendo base_config fijo."""
+        def backtrack(index, current, result):
+            if index == len(blocks):
+                merged = deepcopy(base_config)
+                for partial in current:
+                    merged.update(partial)
+                result.append(Configuration(merged))
+                return
+
+            for option in blocks[index]:
+                current.append(option)
+                backtrack(index + 1, current, result)
+                current.pop()
+
+        result = []
+        backtrack(0, [], result)
+        return result
+
     def get_configuration_from_json(self, path: str) -> dict:
-        # Returns a list of list 
         if not file_exists(path):
             raise ConfigurationNotFound
 
         with open(path, 'r', encoding='utf-8') as jsonfile:
-            data = json.load(jsonfile)  # Cargar JSON como dict
+            data = json.load(jsonfile)
 
         return data
-
+        
 if __name__ == '__main__':
     # You need the model in SAT
     #fm_model = UVLReader(FM_PATH).transform()
@@ -125,28 +168,25 @@ if __name__ == '__main__':
     # You need the configuration as a list of features
     #elements = ['Pizza', 'Topping', 'Mozzarella', 'Dough', 'Sicilian', 'Size', 'Normal']
     #path_json = '../generateConfigs/outputs_json_mappeds/example_service01.json' ## scriptJsonToUvl/generateConfigs/outputs_json_mappeds/example_deployment02.json
-    path_json = '../generateConfigs/outputs_json_mappeds/example_PersistentVolumeClaim.json' ## scriptJsonToUvl/generateConfigs/outputs_json_mappeds/example_deployment02.json
-
+    #path_json = '../generateConfigs/outputs_json_tester/1-metallb5_5.json' ## scriptJsonToUvl/generateConfigs/outputs_json_mappeds/example_deployment02.json
+    path_json = '../generateConfigs/outputs_json_tester/example_deployment02.json'
+    ##example_PersistentVolume
     #path_json = '../generateConfigs/outputs_json_mappeds/example_pod01.json'
 
     #output_json_dir = '../generateConfigs/outputs_json_mappeds'
-    configuration_reader = ConfigurationJSON(path_json)
-    #print(configuration_reader)
-
-    configurations = configuration_reader.transform()
-
+    
     #print(f'Configuration: {configurations}')
     #print(configuration.elements)
 
     # Imprimir todas las configuraciones generadas
     #if len(configurations) > 1:
+    
+    configuration_reader = ConfigurationJSON(path_json)
+    configurations = configuration_reader.transform()
+    #print(f"Configuraciones que se leen:    {configurations}")
     for i, config in enumerate(configurations):
-        #configuration = configuration_reader.transform()
+        configuration = configuration_reader.transform()
         print(f'Configuration {i+1}: {config.elements}')
-    #else:
-    #    print(f'Configuration: {configurations}')
-
-    #print(os.path.exists(path_json))  # Debe imprimir True si el archivo existe
     
     
     #print(os.path.exists(output_json_dir))  # Debe imprimir True si el archivo existe

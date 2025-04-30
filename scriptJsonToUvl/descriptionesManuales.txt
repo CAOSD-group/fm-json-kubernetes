@@ -2651,3 +2651,203 @@ expected the node content, but found '-'
 .2. Tenerlas en cuenta aparte como "personalizables" y directamente no contarlas en la validacion
 
 .3. Tenerlas en cuenta y que forme parte del computo global de los numeros finales de validacion.
+
+
+Definir tipos de apiVersions y kinds globales en base a los esquemas para evitar/omitir el análisis de yamls personalizados como:
+
+{
+    "filename": "apps.v1.DaemonSet40.yaml",
+    "apiVersion": "apps_v1",
+    "config": {
+        "io_k8s_api_apps_v1_DaemonSet_apiVersion": "apps/v1",
+        "io_k8s_api_apps_v1_DaemonSet_kind": "DaemonSet",
+        "io_k8s_api_apps_v1_DaemonSet_metadata": {
+            "io_k8s_api_apps_v1_DaemonSet_metadata_annotations": [
+                {
+                    "io_k8s_api_apps_v1_DaemonSet_metadata_annotations_KeyMap": "9",
+                    "io_k8s_api_apps_v1_DaemonSet_metadata_annotations_ValueMap": "10"
+                }
+            ],
+            "clusterName": "15",
+            "creationTimestamp": null,
+            "deletionGracePeriodSeconds": -4955867275792137171,
+            "finalizers": [
+                "14"
+            ],
+            "generateName": "3",
+            "generation": 8071137005907523419,
+            "labels": {
+                "7": "8"
+            },
+            "managedFields": [
+                {
+                    "apiVersion": "17",
+                    "fieldsType": "18",
+                    "manager": "16",
+                    "operation": "鐊唊飙Ş-U圴÷a/ɔ}摁(湗Ć]"
+                }
+            ],
+      
+Propiedad clustername no existe en la api ni en los esquemas...
+{
+    "filename": "apps.v1.DaemonSet.after_roundtrip10.yaml",
+    "apiVersion": "apps_v1",
+    "config": {
+        "io_k8s_api_apps_v1_DaemonSet_apiVersion": "apps/v1",
+        "io_k8s_api_apps_v1_DaemonSet_kind": "DaemonSet",
+        "io_k8s_api_apps_v1_DaemonSet_metadata": {
+            "io_k8s_api_apps_v1_DaemonSet_metadata_annotations": [
+                {
+                    "io_k8s_api_apps_v1_DaemonSet_metadata_annotations_KeyMap": "9",
+                    "io_k8s_api_apps_v1_DaemonSet_metadata_annotations_ValueMap": "10"
+                }
+            ],
+            "clusterName": "15",
+            "creationTimestamp": null,
+
+
+"filename": "workload-total17.yaml",
+    "apiVersion": "v1beta1",
+...
+        "folder": "Kube-Prometheus",
+            "json": "{\n          \"editable\": false,\n          \"links\": [\n              {\n                  \"asDropdown\": true,\n                  \"includeVars\": true,\n
+
+{
+  "filename": "tp-cp.yaml",
+  "apiVersion": "v1",
+  "config": {
+      "apiVersion": "v1",
+      "kind": "helm-install",
+      "meta": {
+          "globalEnvVariable": {
+              "REPLACE_RECIPE": true,
+{
+    "filename": "wordlist.yaml",
+    "apiVersion": "v1",
+    "config": {
+        "io_k8s_api_core_v1_ConfigMap_apiVersion": "v1",
+        "io_k8s_api_core_v1_ConfigMap_kind": "ConfigMap",
+        "io_k8s_api_core_v1_ConfigMap_metadata": {
+            "io_k8s_api_core_v1_ConfigMap_metadata_name": "wordlist"
+        },
+        "io_k8s_api_core_v1_ConfigMap_data": [
+            {
+                "io_k8s_api_core_v1_ConfigMap_data_StringValueAdditional": "dirTraversal.txt:../private/secret.html\n../../private/secret.html\n../../../private/secret.html\n../../../../
+
+{
+    "filename": "pipeline24_2.yaml",
+    "apiVersion": "v1beta1",
+    "config": {
+        "apiVersion": "tekton.dev/v1beta1",
+        "kind": "Task",
+        "metadata": {
+            "name": "build-packages"
+        },
+        "spec"
+
+    "filename": "openunison-argocd-url1.yaml",
+    "apiVersion": "v1",
+    "config": {
+        "apiVersion": "openunison.tremolo.io/v1",
+        "kind": "PortalUrl",
+
+
+
+Definir el comportamiento y reglas para la generación de configuraciones en el script:
+
+Las listas de nivel plano (que no son array o clonables) se incluyen tal cual en la configuración base.
+
+Solo se generan combinaciones internas dentro de listas estructuradas. Dependiendo del nivel o profundidad
+se pueden crear diferentes configuraciones que se recorren de manera parecida la de los arboles en profundidad.
+Saltando de una opción posible de cada array a otro si cumple con las demas reglas. Diferente rama "padre"
+y niveles similares.
+
+No se cruzan features de estructuras anidadas distintas entre sí. Arrays anidados dentro de otro array que forma parte de un solo elemento y no se pueden mezclar elementos entre elementos de la misma rama
+
+El nombre de los features se mantiene 
+
+
+file: 1-metallb5.yaml
+
+Tenemos:
+1 elemento en labels → ✅ solo 1
+
+4 reglas (rules) → cada una genera N configuraciones internas
+
+🧩 Regla 1:
+resources: 3
+
+verbs: 3 ➡️ Combinaciones internas: 3 × 3 = 9
+
+🧩 Regla 2:
+resources: 1
+
+verbs: 3 ➡️ Combinaciones internas: 1 × 3 = 3
+
+🧩 Regla 3:
+resources: 1
+
+verbs: 2 ➡️ Combinaciones internas: 1 × 2 = 2
+
+🧩 Regla 4:
+resources: 1
+
+verbs: 1
+
+resourceNames: 1 ➡️ Combinaciones internas: 1 × 1 × 1 = 1
+
+🧮 TOTAL CONFIGURACIONES:
+✅ Como cada rule es independiente y se generan configuraciones por separado de cada una:
+
+Total = 9 + 3 + 2 + 1 = 15 configuraciones
+
+Cada configuración incluye:
+
+los valores base (apiVersion, kind, etc.)
+
+los valores de metadata (labels)
+
+una sola de las combinaciones posibles de una rule
+
+Es decir, cada config representa una combinación específica y aislada de un rule y su contenido.
+
+
+Para este en concreto se generan las configs en base a cada sub-rama y no se mezclan entre reglas. Sin 
+embargo, si hubiese otro array en otra rama o estructura con 2 elementos, estos 2 elementos se deberian
+ de combinar con cada config que se puede obtener de las rules. Dando 2x15 = 30 configuraciones. En este caso al 
+ no haber otra estructura con mas de 1 elemento solo se generan las de las reglas. Tambien esta el caso general 
+ donde hay mas de una estructura al mismo nivel, no anidadas y de distinta rama y se generan combinaciones entre ellas
+
+ file: 1-metallb5_4.yaml
+
+Tenemos:
+1 elemento en labels → ✅ solo 1
+
+4 reglas (rules) → cada una genera N configuraciones internas
+
+🧩 Regla 1:
+
+
+verbs: 3 ➡️ Combinaciones internas: 3
+
+🧩 Regla 2:
+resources: 1
+
+verbs: 3 ➡️ Combinaciones internas: 1
+
+🧩 Regla 3:
+resources: 1
+
+verbs: 2 ➡️ Combinaciones internas: 1 × 2 = 2
+
+🧩 Regla 4:
+resources: 1
+
+verbs: 1
+
+resourceNames: 1 ➡️ Combinaciones internas: 1 × 1 × 1 = 1
+
+🧮 TOTAL CONFIGURACIONES:
+✅ Como cada rule es independiente y se generan configuraciones por separado de cada una:
+
+Total = 3 + 1 + 2 + 1 = 7 configuraciones
