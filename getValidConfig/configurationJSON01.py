@@ -32,7 +32,6 @@ class ConfigurationJSON(TextToModel):
 
     def extract_features(self, data, base_config, blocks):
         """Extrae valores fijos a base_config y bloques con combinaciones posibles a blocks."""
-        caseThree = False
         if isinstance(data, dict):
             for key, value in data.items():
                 if isinstance(value, (str, int, float, bool)):
@@ -47,85 +46,89 @@ class ConfigurationJSON(TextToModel):
                     if not value:
                         continue
 
-                if all(isinstance(x, dict) for x in value):
-                    combined_block = []
-                    #print(f"Los values dict there    {value}")
-                    if len(value) > 0:
-                        for item in value:
-                            #print(f"Item:   {item}")
-                            static = {}
-                            lists = {}
-                            
-                            for k, v in item.items():
-                                #print(f"Key, value de cada item: {k}    {v}")
-                                base_config[k] = True
-                                if isinstance(v, list):
-                                    # Intentar extraer valores primitivos desde dicts
-                                    extracted_values = []
-                                    for item in v:
-                                        if isinstance(item, dict):
-                                            # Si es un diccionario con un único valor primitivo
-                                            #print(f"Soy El item: {item}")
-                                            if len(item) == 1:
+                    if all(isinstance(x, dict) for x in value):
+                        combined_block = []
+                        #print(f"Los values dict there    {value}")
+                        if len(value) > 0:
+                            for item in value:
+                                #print(f"Item:   {item}")
+                                static = {}
+                                lists = {}
+                                
+                                for k, v in item.items():
+                                    #print(f"Key, value de cada item: {k}    {v}")
+                                    base_config[k] = True
+                                    if isinstance(v, list):
+                                        # Intentar extraer valores primitivos desde dicts
+                                        extracted_values = []
+                                        for item in v:
+                                            """if isinstance(subitem, dict):
+                                                if len(subitem) == 1:
+                                                    print("No me deberia de ejectutar")
+                                                    for inner_key, inner_value in subitem.items():
+                                                        if isinstance(inner_value, (str, int, float, bool)):
+                                                            #lists.setdefault(inner_key, []).append(inner_value)
+                                                            extracted_values.append(inner_value)
+                                                            lists[inner_key] = extracted_values
+                                                else:
+                                                    print(f"[DEBUG] Lista con dicts complejos en key={k}")
+                                                    print(subitem)
+                                                    nested_static = {}
+                                                    self.extract_features(subitem, nested_static, blocks)
+                                                    static.update(nested_static)
+                                            elif isinstance(subitem, (str, int, float, bool)):
+                                                #lists.setdefault(k, []).append(subitem)
+                                                extracted_values.append(inner_value)"""
+                                            if isinstance(item, dict):
+                                                # Si es un diccionario con un único valor primitivo
+                                                #print(f"Soy El item: {item}")
+                                                #if len(item) == 1:
                                                 inner_value = list(item.values())[0]
                                                 inner_key = list(item.keys())[0]
-                                                print(f"Inner key   {inner_key} {inner_value}")
+                                                print(f"Inner key   {inner_key} Inner Value {inner_value} Item:   {item}")
                                                 if isinstance(inner_value, (str, int, float, bool)):
                                                     extracted_values.append(inner_value)
                                                     lists[inner_key] = extracted_values
                                                     #extracted_values.append({inner_key: inner_value,})
-                                        #elif isinstance(item, (str, int, float, bool)):
-                                        #    extracted_values.append(item)
-                                    #if extracted_values:
-                                    #    lists = extracted_values
+                                            elif isinstance(item, (str, int, float, bool)):
+                                                extracted_values.append(item)
+                                        #if extracted_values:
+                                        #    lists = extracted_values
 
-                                elif isinstance(v, (str, int, float, bool)):
-                                    static[k] = v
-                                    """elif isinstance(v, list):
-                                        print(f"Valor v:    {k}    {v}")
-                                        #for i in v:
-                                        print(f"sigo el salto ") # {i}
-                                        if isinstance(v, dict): ## ctrl z
-                                            #caseThree = True
-                                            for x, z in v.items():
-                                                print(f"sigo aun el salto   {x} {z}")
-                                                lists[x] = z
-                                        elif isinstance(v, (str, int, float, bool)):
-                                            print(f"sigo aun el salto   {lists[k]}")
-                                            lists[k] = v
-                                        else:
-                                            pass"""
-                                elif isinstance(v, dict):
-                                    print(f"Item segunda iter:   {item}")
-                                    self.extract_features(v, static, blocks)
+                                    elif isinstance(v, (str, int, float, bool)):
+                                        static[k] = v
+    
+                                    elif isinstance(v, dict):
+                                        print(f"Item segunda iter:   {item}")
+                                        self.extract_features(v, static, blocks)
 
-                            if lists: # and caseThree
-                                keys = list(lists.keys())
-                                #print(f"Keys de las listas  {keys}")
-                                value_lists = [lists[k] for k in keys]
-                                #print(f"Keys de las listas y values:  {keys}    ")
-                                for prod in product(*value_lists):
-                                    merged = {k: prod[i] for i, k in enumerate(keys)}
-                                    merged.update(static)
-                                    combined_block.append(merged)
-                            else:
-                                combined_block.append(static.copy())
-                    else:
-                        print(f"Un unico elemento en la lista")
-                        print(f"Elemento unitario:  {value}")
-                        #if isinstance(v, list) and all(isinstance(i, (str, int, float, bool)) for i in v):
-                        #    lists[k] = v                        
-                        if isinstance(value, (str, int, float, bool)):
-                            base_config[key] = value
+                                if lists: # and caseThree
+                                    keys = list(lists.keys())
+                                    #print(f"Keys de las listas  {keys}")
+                                    value_lists = [lists[k] for k in keys]
+                                    #print(f"Keys de las listas y values:  {keys}    ")
+                                    for prod in product(*value_lists):
+                                        merged = {k: prod[i] for i, k in enumerate(keys)}
+                                        merged.update(static)
+                                        combined_block.append(merged)
+                                else:
+                                    combined_block.append(static.copy())
+                        else:
+                            print(f"Un unico elemento en la lista")
+                            print(f"Elemento unitario:  {value}")
+                            #if isinstance(v, list) and all(isinstance(i, (str, int, float, bool)) for i in v):
+                            #    lists[k] = v                        
+                            if isinstance(value, (str, int, float, bool)):
+                                base_config[key] = value
 
-                    # Agregamos un solo bloque combinado
-                    blocks.append(combined_block)
-                    base_config[key] = True
+                        # Agregamos un solo bloque combinado
+                        blocks.append(combined_block)
+                        base_config[key] = True
 
-                    """elif all(isinstance(x, (str, int, float, bool)) for x in value):
-                        # Lista de valores simples
-                        blocks.append([{key: v} for v in value])
-                        base_config[key] = True"""
+                        """elif all(isinstance(x, (str, int, float, bool)) for x in value):
+                            # Lista de valores simples
+                            blocks.append([{key: v} for v in value])
+                            base_config[key] = True"""
         
         elif isinstance(data, list):
             print(f"Data es list")
@@ -169,7 +172,7 @@ if __name__ == '__main__':
     #elements = ['Pizza', 'Topping', 'Mozzarella', 'Dough', 'Sicilian', 'Size', 'Normal']
     #path_json = '../generateConfigs/outputs_json_mappeds/example_service01.json' ## scriptJsonToUvl/generateConfigs/outputs_json_mappeds/example_deployment02.json
     #path_json = '../generateConfigs/outputs_json_tester/1-metallb5_5.json' ## scriptJsonToUvl/generateConfigs/outputs_json_mappeds/example_deployment02.json
-    path_json = '../generateConfigs/outputs_json_tester/example_deployment02.json'
+    path_json = '../generateConfigs/outputs_json_tester/endpoints01.json'
     ##example_PersistentVolume
     #path_json = '../generateConfigs/outputs_json_mappeds/example_pod01.json'
 
