@@ -2851,3 +2851,37 @@ resourceNames: 1 ➡️ Combinaciones internas: 1 × 1 × 1 = 1
 ✅ Como cada rule es independiente y se generan configuraciones por separado de cada una:
 
 Total = 3 + 1 + 2 + 1 = 7 configuraciones
+
+
+
+Modificacion cardinality;
+
+Se ha detectado que con el cardinality predeterminado de [1..*] se generan varios errores al "obligar" a declarar un elemento para cada array detectado.
+Kubernetes permite declarar ciertas propiedades como null, {} o empty para generar/declarar esas props como espacios dentro y definirlos despues o crear un path vacio.
+
+Se ha decidido modificar dichas propiedades, se buscan expresiones o similares para poder determinar que propiedades son las que se permiten declara de tal manera.
+
+Expr encontradas:
+
+- an empty set: array de Strings, FieldsV1
+- emptyDir: propiedad que se puede declarar como empty...
+
+- Otra alternativa: Declarar todos los arras como [0..*]: no refleja "fielmente" como se define la estructura en el modelo.
++ Rapido, + Global en general.
+
+
+                  "io_k8s_api_apps_v1_Deployment_spec_template_spec_volumes_emptyDir": {
+                      "io_k8s_api_apps_v1_Deployment_spec_template_spec_volumes_emptyDir_empty": true
+                  }
+
+									io_k8s_api_apps_v1_Deployment_spec_template_spec_volumes_emptyDir {doc 'emptyDir represents a temporary directory that shares a pod_s lifetime More info: https:_kubernetesio/docs/concepts/storage/volumes#emptydir'}
+														optional
+															String io_k8s_api_apps_v1_Deployment_spec_template_spec_volumes_emptyDir_medium {doc 'medium represents what type of storage medium should back this directory The default is  which means to use the node_s default medium Must be an empty string (default) or Memory More info: https:_kubernetesio/docs/concepts/storage/volumes#emptydir'}
+															io_k8s_api_apps_v1_Deployment_spec_template_spec_volumes_emptyDir_empty {doc 'Added bool to option empty in the propertie {}'}
+															io_k8s_api_apps_v1_Deployment_spec_template_spec_volumes_emptyDir_sizeLimit {doc 'sizeLimit is the total amount of local storage required for this EmptyDir volume The size limit is also applicable for memory medium The maximum usage on memory medium EmptyDir would be the minimum value between the SizeLimit specified here and the sum of memory limits of all containers in a pod The default is nil which means that the limit is undefined More info: https:_kubernetesio/docs/concepts/storage/volumes#emptydir'}
+																alternative
+Mod emptyDir para adaptar el funcionamiento
+
+
+- creationTimestamp: null
+- deletionTimestamp?, managedFields?, 
