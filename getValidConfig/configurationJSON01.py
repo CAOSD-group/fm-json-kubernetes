@@ -54,46 +54,43 @@ class ConfigurationJSON(TextToModel):
                                 #print(f"Item:   {item}")
                                 static = {}
                                 lists = {}
+                                aux_lists = {}
                                 
                                 for k, v in item.items():
                                     #print(f"Key, value de cada item: {k}    {v}")
-                                    base_config[k] = True
+                                    #base_config[k] = True
                                     if isinstance(v, list):
                                         # Intentar extraer valores primitivos desde dicts
+                                        static[k] = True
                                         extracted_values = []
+                                        aux_combined_block = []
                                         for item in v:
-                                            """if isinstance(subitem, dict):
-                                                if len(subitem) == 1:
-                                                    print("No me deberia de ejectutar")
-                                                    for inner_key, inner_value in subitem.items():
-                                                        if isinstance(inner_value, (str, int, float, bool)):
-                                                            #lists.setdefault(inner_key, []).append(inner_value)
-                                                            extracted_values.append(inner_value)
-                                                            lists[inner_key] = extracted_values
-                                                else:
-                                                    print(f"[DEBUG] Lista con dicts complejos en key={k}")
-                                                    print(subitem)
-                                                    nested_static = {}
-                                                    self.extract_features(subitem, nested_static, blocks)
-                                                    static.update(nested_static)
-                                            elif isinstance(subitem, (str, int, float, bool)):
-                                                #lists.setdefault(k, []).append(subitem)
-                                                extracted_values.append(inner_value)"""
                                             if isinstance(item, dict):
                                                 # Si es un diccionario con un único valor primitivo
                                                 #print(f"Soy El item: {item}")
-                                                #if len(item) == 1:
-                                                inner_value = list(item.values())[0]
-                                                inner_key = list(item.keys())[0]
-                                                print(f"Inner key   {inner_key} Inner Value {inner_value} Item:   {item}")
-                                                if isinstance(inner_value, (str, int, float, bool)):
-                                                    extracted_values.append(inner_value)
-                                                    lists[inner_key] = extracted_values
-                                                    #extracted_values.append({inner_key: inner_value,})
+                                                print(f"ITEM VALUE: {item.keys()}  {len(item)}")
+                                                if len(item) == 1:
+                                                    inner_value = list(item.values())[0] ## Casos donde haya solo 1 elemento en la lista: StringValue, Maps etc
+                                                    inner_key = list(item.keys())[0]
+                                                    #print(f"Inner key   {inner_key} Inner Value {inner_value} Item:   {item}")
+                                                    if isinstance(inner_value, (str, int, float, bool)):
+                                                        extracted_values.append(inner_value)
+                                                        aux_lists[inner_key] = extracted_values
+                                                        print(f"lists:  {lists}")
+                                                        #extracted_values.append({inner_key: inner_value,})
+                                                else:
+                                                    #print(f"Subitem     {subitem} ")
+                                                    flat_kv = self.flatten_primitive_kv(item)
+                                                    aux_combined_block.append(flat_kv)
+                                                    #print(f" Aux combined   {aux_combined_block}")
+
                                             elif isinstance(item, (str, int, float, bool)):
                                                 extracted_values.append(item)
-                                        #if extracted_values:
-                                        #    lists = extracted_values
+                                        if extracted_values:
+                                            lists = aux_lists
+                                        if aux_combined_block : ## and len(subitem) > 1
+                                            #print(f" Aux combined 2   {aux_combined_block}")  
+                                            blocks.append(aux_combined_block)
 
                                     elif isinstance(v, (str, int, float, bool)):
                                         static[k] = v
@@ -104,9 +101,11 @@ class ConfigurationJSON(TextToModel):
 
                                 if lists: # and caseThree
                                     keys = list(lists.keys())
-                                    #print(f"Keys de las listas  {keys}")
+                                    print(f"Keys de las listas  {keys}")
                                     value_lists = [lists[k] for k in keys]
                                     #print(f"Keys de las listas y values:  {keys}    ")
+                                    print(f" VALUE LIST DEL FINAL   {value_lists}")
+
                                     for prod in product(*value_lists):
                                         merged = {k: prod[i] for i, k in enumerate(keys)}
                                         merged.update(static)
@@ -152,7 +151,19 @@ class ConfigurationJSON(TextToModel):
 
         result = []
         backtrack(0, [], result)
+        ##print(f"Resultado final:    {result}")
         return result
+
+    def flatten_primitive_kv(self ,d):
+        flat = {}
+        for k, v in d.items():
+            if isinstance(v, (str, int, float, bool)):
+                flat[k] = v
+            elif isinstance(v, dict):
+                flat[k] = True
+                inner = self.flatten_primitive_kv(v)
+                flat.update(inner)
+        return flat
 
     def get_configuration_from_json(self, path: str) -> dict:
         if not file_exists(path):
@@ -164,19 +175,11 @@ class ConfigurationJSON(TextToModel):
         return data
         
 if __name__ == '__main__':
-    # You need the model in SAT
-    #fm_model = UVLReader(FM_PATH).transform()
-    #sat_model = FmToPysat(fm_model).transform()
-    
-    # You need the configuration as a list of features
-    #elements = ['Pizza', 'Topping', 'Mozzarella', 'Dough', 'Sicilian', 'Size', 'Normal']
-    #path_json = '../generateConfigs/outputs_json_mappeds/example_service01.json' ## scriptJsonToUvl/generateConfigs/outputs_json_mappeds/example_deployment02.json
+
     #path_json = '../generateConfigs/outputs_json_tester/1-metallb5_5.json' ## scriptJsonToUvl/generateConfigs/outputs_json_mappeds/example_deployment02.json
-    path_json = '../generateConfigs/outputs_json_tester/endpoints01.json'
+    path_json = '../generateConfigs/outputs_json_tester/example_deployment02.json'
     ##example_PersistentVolume
     #path_json = '../generateConfigs/outputs_json_mappeds/example_pod01.json'
-
-    #output_json_dir = '../generateConfigs/outputs_json_mappeds'
     
     #print(f'Configuration: {configurations}')
     #print(configuration.elements)
@@ -190,12 +193,3 @@ if __name__ == '__main__':
     for i, config in enumerate(configurations):
         configuration = configuration_reader.transform()
         print(f'Configuration {i+1}: {config.elements}')
-    
-    
-    #print(os.path.exists(output_json_dir))  # Debe imprimir True si el archivo existe
-    ##json_convertion = configuration.get_configuration_from_json(path_json)
-    ##print(f"La lista generada en txt es: {json_convertion}")
-    #valid, complete_config = valid_config(elements, fm_model, sat_model)
-
-    # Output the result
-    #print(f'Valid? {valid}')
