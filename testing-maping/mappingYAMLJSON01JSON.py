@@ -9,10 +9,24 @@ import gc
 import shutil
 
 # Ruta base donde están los buckets clasificados por tamaño
-yaml_base_directory = './yamls_agrupation' ## tester
-
+yaml_base_directory = './yamls_agrupation/tester' ## tester
+csv_kinds_versions = './generateConfigs/kinds_versions_detected.csv'
 # Buckets válidos
 buckets = ['tiny', 'small', 'medium', 'large', 'huge']
+
+
+def load_kinds_versions(path_csv):
+    """
+    Obtiene las versiones y kinds admitidas en base al modelo de kubernetes. Se usa para filtrar que archivos mapear/validar
+    """
+    kinds_versions = set()
+    with open(path_csv, mode='r', encoding='utf-8') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            version = row['Version'].strip() ## group = row['Group'].strip()
+            kind = row['Kind'].strip()
+            kinds_versions.add((version, kind))
+    return kinds_versions
 
 
 def extract_yaml_properties(data, parent_key='', root_info=None, first_add=True):
@@ -37,7 +51,7 @@ def extract_yaml_properties(data, parent_key='', root_info=None, first_add=True)
             
             new_key = f"{parent_key}_{key}" if parent_key else key
             # Guardar valores clave (apiVersion y kind) para determinar el contexto
-            if key in ['apiVersion', 'kind'] and first_add: ## Solo modificar si es la primera llamada
+            if key in ['apiVersion', 'kind'] and first_add: ## Solo se modifica si es la primera llamada
                 if key not in root_info:  # No sobrescribir si ya se definió en el nivel superior   
                     if '/' in value and not '.' in value:
                         value = value.replace('/', '_')
@@ -82,7 +96,8 @@ def extract_yaml_properties(data, parent_key='', root_info=None, first_add=True)
 def process_yaml_file(file_path):
     """Procesa un archivo YAML y extrae información relevante."""
     #error_log_path = './error_log_mapping_tester.txt'
-    error_log_path = './error_log_mapping02.txt'
+    error_log_path = './error_log_mapping_tester.txt'
+    dict_allowed_kinds_versions = load_kinds_versions(csv_kinds_versions) ## Se cargan los kinds y versions permitidos
 
     #with open(error_log_path, 'a', encoding='utf-8') as error_log:
     try:
@@ -101,8 +116,33 @@ def process_yaml_file(file_path):
                     ##if None in (simple_props, hierarchical_props, key_value_pairs):
                     ##    continue  # Por si el warning anterior dejó algo inválido
                     
+                    ## Se comprueba si los ficheros a mapear tienen una version y kinds validos sobre el contexto del modelo
+                    apiVersion =  root_info.get('apiVersion')
+                    kind = root_info.get('kind')
+
+                    if "_" in apiVersion:
+                        split_version = apiVersion.split("_")[1]
+                        apiVersion = split_version
+                        print(f"Split version:  {split_version}")
+                    if (apiVersion, kind) not in dict_allowed_kinds_versions:
+                        print(f"Archivo no valido por version y kind")
+                        print(f"ApiVersion:  {apiVersion}   kind:   {kind}")
+
+                        dest_path_invalid = os.path.join(yaml_base_directory, 'invalidKindsVersions')
+                        json_name = os.path.basename(file_path).replace('.yaml', f'.json')
+                        os.makedirs(dest_path_invalid, exist_ok=True)
+                        json_path = os.path.join(dest_path_invalid, json_name)
+                        #dest_path_file = os.path.join(dest_path_invalid, os.path.basename(file_path))
+                        #shutil.copy(file_path, dest_path_file) ## shutil.move
+
+                        with open(json_path, 'w', encoding='utf-8') as f_json:
+                            json.dump(yaml_data, f_json, indent=2)
+                        with open(error_log_path, 'a', encoding='utf-8') as error_log:
+                            error_log.write(f"[KIND NO VÁLIDO] Falta apiVersion/kind raíz en {file_path} (doc {index})\n")
+                        continue   
+
                     yield (file_path, index, yaml_data, simple_props, hierarchical_props, key_value_pairs, root_info)
-                    # yaml_data_list.append((filename, index, yaml_data, simple_props, hierarchical_props, key_value_pairs, root_info))
+                        # yaml_data_list.append((filename, index, yaml_data, simple_props, hierarchical_props, key_value_pairs, root_info))
 
                 except ValueError as ve:
                     with open(error_log_path, 'a', encoding='utf-8') as error_log:
@@ -306,7 +346,7 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, aux_hier
         possible_type_data = ['asString', 'asNumber', 'asInteger']
         yaml_with_error_type = False
 
-        print(f"Yaml data completo: {yaml_data.items()}")
+        #print(f"Yaml data completo: {yaml_data.items()}")
         print(f"Deeph actual de mapeo: {depth_mapping}")
         ##print(f"Hierchical  {hierarchical_prop}")
 
@@ -680,9 +720,11 @@ yaml_data_list = iterate_all_buckets(yaml_base_directory, buckets)
 
 # Guardar la salida de la carpeta con ficheros JSON 
 ##output_json_dir = './generateConfigs/outputs_json_mappeds02'
-#output_json_dir = './generateConfigs/outputs_json_tester'
-output_json_dir = './generateConfigs/outputs_json_mappeds09'
+output_json_dir = './generateConfigs/outputs_json_tester_invalid'
+#output_invalid_kinds_versions = './generateConfigs/outputs_no_validkinds_versions'
+#os.makedirs(output_invalid_kinds_versions, exist_ok=True)
 
+##output_json_dir = './generateConfigs/outputs_json_mappeds09'
 #output_json_path = './generateConfigs/output_features02.json'
 os.makedirs(output_json_dir, exist_ok=True)  # Crea la carpeta si no existe
 
@@ -738,7 +780,8 @@ for filename, index, yaml_data, simple_props, hierarchical_props, key_value_pair
     #output_json_path = os.path.join(output_json_dir, json_filename)
     output_json_path = os.path.normpath(os.path.join(output_json_dir, json_filename)) ## Se adapta a la salida del SO, estandarizar la ruta / O \
 
-    if contains_datetime(yaml_entry):
+    need_fix_type = contains_datetime(yaml_entry) ## flag para determinar el contenido de los tipos de yaml entry, si hay time, date o datetime se llama a convert_all..
+    if need_fix_type:
         yaml_entry = convert_all_datetimes(yaml_entry) ## Funcion para comprobar si hay algun valor con formato datetime en estructuras anidadas que pueda provocar un error
     try:
         with open(output_json_path, 'w', encoding='utf-8') as json_file:
