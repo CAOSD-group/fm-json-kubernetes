@@ -2865,7 +2865,8 @@ Expr encontradas:
 
 - an empty set: array de Strings, FieldsV1
 - emptyDir: propiedad que se puede declarar como empty...
-
+- is null
+- can be null
 - Otra alternativa: Declarar todos los arras como [0..*]: no refleja "fielmente" como se define la estructura en el modelo.
 + Rapido, + Global en general.
 
@@ -2885,3 +2886,19 @@ Mod emptyDir para adaptar el funcionamiento
 
 - creationTimestamp: null
 - deletionTimestamp?, managedFields?, 
+
+
+
+Definir el alcande de los kinds en el modelo. Se tendrian que obtener todos los kinds permitidos en el modelo para poder admitir y decidir que kinds son permitidos para el mapeo no? Al obtener todo tipo de yamls se obtienen tambien ficheros yaml con kinds y apiVersions personalizadas que no estan en el esquema _definitions.json. Por ello se ha pensado en obtener la lista "automaticamente" y en base a ella omitir el mapeo/validacion para tratarlos como un grupo aparte y remarcarlo en la salida final de validacion. ¿Es una buena estrategia?
+Sobre los nombres de los features en el esquema json:
+1. "io.k8s.api - 620
+"io.k8s.kube - 6
+La version se puede capturar con una expresion que capture todo despues de "io.k8s." y termine cuando se detecta la primera letra mayuscula $A
+kind se captura detectando la primera letra mayus... hasta el siguiente punto - Si coincide se salta, xq ya esta agregado.
+
+# Posibles mejoras a futuro: Si se observa que ciertos CRDs se repiten mucho y se podrían incluir: Se podrían extraer sus esquemas de validación desde los OpenAPIv3 que registran los CRDs en un cluster real. Y a partir de ahí generar nuevos fragmentos del modelo.
+
+io.k8s.api.node. = grupos
+v1. la version
+
+v1alpha2
