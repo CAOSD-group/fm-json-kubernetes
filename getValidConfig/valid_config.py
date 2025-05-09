@@ -99,7 +99,12 @@ if __name__ == '__main__':
     ## elements = ['io_k8s_api_apps_v1_Deployment_spec_replicas', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe_initialDelaySeconds', 'io_k8s_api_apps_v1_Deployment_spec_template', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe_httpGet_port', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_image', 'io_k8s_api_apps_v1_Deployment_spec', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe', 'io_k8s_api_apps_v1_Deployment_spec_template_spec', 'io_k8s_api_apps_v1_Deployment_spec_template_metadata_labels', 'io_k8s_api_apps_v1_Deployment_spec_template_metadata', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_ports_containerPort', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe_httpGet_path', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe_periodSeconds', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe_initialDelaySeconds', 'io_k8s_api_apps_v1_Deployment_metadata_name', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe_httpGet_port', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_readinessProbe_httpGet', 'io_k8s_api_apps_v1_Deployment_spec_selector_matchLabels', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe_periodSeconds', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe_httpGet', 'io_k8s_api_apps_v1_Deployment_apiVersion', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_livenessProbe_httpGet_path', 'io_k8s_api_apps_v1_Deployment_kind', 'io_k8s_api_apps_v1_Deployment_metadata', 'io_k8s_api_apps_v1_Deployment_spec_selector', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_ports', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers', 'io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_name']
     #elements = ['io_k8s_api_core_v1_Pod_metadata_name', 'io_k8s_api_core_v1_Pod_spec_containers_name', 'io_k8s_api_core_v1_Pod_spec_containers_image', 'io_k8s_api_core_v1_Pod_spec_containers_ports_containerPort', 'io_k8s_api_core_v1_Pod_spec', 'io_k8s_api_core_v1_Pod_metadata', 'io_k8s_api_core_v1_Pod_apiVersion', 'io_k8s_api_core_v1_Pod_spec_containers', 'io_k8s_api_core_v1_Pod_spec_containers_ports', 'io_k8s_api_core_v1_Pod_kind']
     #path_json = '../generateConfigs/outputs_json_mappeds/example_PersistentVolume.json' ## scriptJsonToUvl/generateConfigs/outputs_json_mappeds/example_deployment02.json
-    path_json = '../generateConfigs/outputs-json-tester/example_deployment02.json' ## scriptJsonToUvl/generateConfigs/outputs_json_mappeds/example_deployment02.json
+    
+    #path_json = '../generateConfigs/outputs-json-tester/example_deployment02.json' ## scriptJsonToUvl/generateConfigs/outputs_json_mappeds/example_deployment02.json
+    path_json = '../generateConfigs/outputs_json_tester_invalid/manifests30_17.json'
+    ## Probar despues: 01-helloworld7, .serviceaccount, .template
+
+    #JSON_DIR = '../generateConfigs/outputs_json_mappeds04' 
 
     configuration_reader = ConfigurationJSON(path_json)
     configurations = configuration_reader.transform()
@@ -107,9 +112,9 @@ if __name__ == '__main__':
     ##elements = listJson
     for i, config in enumerate(configurations):
         #configuration = configuration_reader.transform()
-        valid, complete_config = valid_config_version_json(config, fm_model, sat_model)
-        if valid == False:
-            print("FALSE GENERAL ")
+        valid = valid_config_version_json(config, fm_model, sat_model)
+        #if valid == False:
+        #    print("FALSE GENERAL ")
         print(f"CONF VALID? {valid} \n")
 
         print(f'Configuration {i+1}: {config.elements}  {valid}')
