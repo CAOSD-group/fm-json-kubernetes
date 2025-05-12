@@ -2863,10 +2863,18 @@ Se ha decidido modificar dichas propiedades, se buscan expresiones o similares p
 
 Expr encontradas:
 
-- an empty set: array de Strings, FieldsV1
-- emptyDir: propiedad que se puede declarar como empty...
-- is null
+- an empty set: array de Strings, FieldsV1. resourceNames Es un array de Strings, fieldsV1 es un objeto...
+- is null : _isNull
 - can be null
+
+Propiedades encontradas:
+
+- emptyDir: propiedad que se puede declarar como empty... _emptyDir. En este caso se usa la propia propiedad "emptyDir" de Volumnes y el esquema con nombre completo EmptyDirVolumeSource para capturar las modificaciones en el modelo.
+Probado sobre sleep-with-emptyDir2.yaml, batch.v1.CronJob24.yaml
+- fieldsV1: propiedad localizada que se suele definir como null...
+- 
+
+:: Localizacion de las prop agregadas en funcion de la expresion a cubrir, es decir, para declaraciones relacionadas con null o {} se definiran las opciones de los features con el formato de "_isNull", "_isEmpty" para tener localizadas las opciones en un conjunto "global" de todas las prop agregadas
 - Otra alternativa: Declarar todos los arras como [0..*]: no refleja "fielmente" como se define la estructura en el modelo.
 + Rapido, + Global en general.
 
@@ -2887,6 +2895,8 @@ Mod emptyDir para adaptar el funcionamiento
 - creationTimestamp: null
 - deletionTimestamp?, managedFields?, 
 
+Prop que se repite mucho y no esta en ningun esquema...
+  clusterName: "15"
 
 
 Definir el alcande de los kinds en el modelo. Se tendrian que obtener todos los kinds permitidos en el modelo para poder admitir y decidir que kinds son permitidos para el mapeo no? Al obtener todo tipo de yamls se obtienen tambien ficheros yaml con kinds y apiVersions personalizadas que no estan en el esquema _definitions.json. Por ello se ha pensado en obtener la lista "automaticamente" y en base a ella omitir el mapeo/validacion para tratarlos como un grupo aparte y remarcarlo en la salida final de validacion. ¿Es una buena estrategia?
