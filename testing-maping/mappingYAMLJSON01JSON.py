@@ -133,7 +133,7 @@ def process_yaml_file(file_path):
                         os.makedirs(dest_path_invalid, exist_ok=True)
                         json_path = os.path.join(dest_path_invalid, json_name)
                         #dest_path_file = os.path.join(dest_path_invalid, os.path.basename(file_path))
-                        #shutil.copy(file_path, dest_path_file) ## shutil.move
+                        #shutil.copy(file_path, dest_path_file) ## shutil.move ## carpeta de yamls/agrupation
 
                         with open(json_path, 'w', encoding='utf-8') as f_json:
                             json.dump(yaml_data, f_json, indent=2)
@@ -299,7 +299,20 @@ def search_features_in_csv(hierarchical_props, key_value_pairs, csv_dict):
                     aux_hierchical_as_integer = f"{hierarchical_prop}_asInteger" ## Se crea manualmente el _StringValue porque es un feature personalizado del modelo. Se usa para referirse a los arrays de strings
                     #print(f"Seleccion de tipo Integer: {feature} {hierarchical_prop} {aux_hierchical_as_integer}")
                     feature_map[aux_hierchical_as_integer] = feature
-                
+                elif middle.strip() and turned == "isNull" and feature not in feature_map and aux_hierchical_maps.endswith(hierarchical_prop): ## Nueva adición para añadir los StringValue que aparezcan en la lista de features
+                    aux_hierchical_is_null = f"{hierarchical_prop}_isNull" ## Se crea manualmente el _isNull porque es un feature personalizado del modelo. Se usa para referirse a los features con valor null en las propiedades. Se agrega para poder referenciar dicho no valor...
+                    print(f"Seleccion de tipo Null: {feature} {hierarchical_prop} {aux_hierchical_is_null}")
+                    feature_map[aux_hierchical_is_null] = feature
+                elif middle.strip() and turned == "isEmpty" and feature not in feature_map and aux_hierchical_maps.endswith(hierarchical_prop): ## Nueva adición para añadir los StringValue que aparezcan en la lista de features
+                    aux_hierchical_is_empty = f"{hierarchical_prop}_isEmpty" ## Se crea manualmente el _isEmpty porque es un feature personalizado del modelo. Se usa para referirse a los features con valor empty en las propiedades. Se agrega para poder referenciar dicho no valor...
+                    #print(f"Seleccion de tipo Empty: {feature} {hierarchical_prop} {aux_hierchical_is_empty}")
+                    feature_map[aux_hierchical_is_empty] = feature
+
+                elif middle.strip() and turned == "isEmpty02" and feature not in feature_map and aux_hierchical_maps.endswith(hierarchical_prop): ## Nueva adición para añadir los StringValue que aparezcan en la lista de features
+                    aux_hierchical_is_empty = f"{hierarchical_prop}_isEmpty02" ## Se crea manualmente el _isEmpty porque es un feature personalizado del modelo. Se usa para referirse a los features con valor empty en las propiedades. Se agrega para poder referenciar dicho no valor...
+                    print(f"Seleccion de tipo Empty02: {feature} {hierarchical_prop} {aux_hierchical_is_empty}")
+                    feature_map[aux_hierchical_is_empty] = feature
+
                 for key, yaml_value in key_value_pairs:
                     #if isinstance(yaml_value, str)
                     if value and str(yaml_value) == value and feature not in feature_map: ## evitar agregar el mismo feature
@@ -315,7 +328,7 @@ def search_features_in_csv(hierarchical_props, key_value_pairs, csv_dict):
             """for key, yaml_value in key_value_pairs:
                 if value.strip() and str(yaml_value) == value.strip():
                     feature_map[key] = feature"""
-        #print(f"El mapa entero es: {feature_map}")
+    print(f"El mapa entero es: {feature_map}")
     return feature_map
 
 def extract_key_value_mappings(value, value_features, feature_map): ## Posible encapsulamiento de las funciones para mejorar la legibilidad
@@ -360,11 +373,15 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, aux_hier
             aux_str_values = False
             aux_value_type = False
             aux_value_type_array = False
+            aux_feat_empty = False
+            aux_feat_null = False
             list_double_version = {'apps_v1', 'batch_v1', 'autoscaling_v1', 'autoscaling_v2', 'policy_v1', 'core_v1'}
             feature_nested = {} ## Estructura para agregar el value personalizado para definir la coincidencia de los valores predeterminados en el modelo
             feature_type_value = {}
             feature_map_key_value = {} ## batch.v1 ,autoscaling.v1 y autoscaling.v2, policy.v1, core.v1, core.v1.Binding
             feature_type_array = [] ## Features as...
+            feature_empty = {}
+            feature_null = {}
             #mapped_key = {}
             #yaml_with_error_type = False
 
@@ -440,7 +457,7 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, aux_hier
                                         print(f"Deberia de saltarse esta parte jeje  {mapped_key}   {value_features}    {value}")
                                         continue """
                                 else:
-                                    print(f"Deberia de saltarse  {mapped_key}   {value_features}    {value}")
+                                    ##print(f"Deberia de saltarse  {mapped_key}   {value_features}    {value}")
                                     continue
 
                             if aux_feature_before_insertion in auxFeaturesAddedList and not aux_bool: ##aux_feature_before_insertion in auxFeaturesAddedList: ## key_features not in aux_hierchical_prop and 
@@ -490,7 +507,8 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, aux_hier
                                 #print (f"ME EJECUTO SOLO E INSERTO {key_features} y {value_features}")
                                 aux_hierchical_prop.append(key_features)
                             else:
-                                print(f"CUANDO ME INSERTO CON VALUE SIN OPERAR? {value} {value_features}    {key_features}")
+                                pass
+                                #print(f"CUANDO ME INSERTO CON VALUE SIN OPERAR? {value} {value_features}    {key_features}")
                         else:
                             #print(f"Elementos omitidos else final:  {value_features}    {midle_depth}   {depth_mapping}")
                             continue
@@ -517,9 +535,9 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, aux_hier
                                 continue
                         auxFeaturesAddedList.add(value_features["feature"]) ### Omitido temporalmente por la omision en arrays de arrays que se genera de features ya agregados/vistos de los yaml
                         key = value_features["feature"]
-                        ##print(value_features["feature"])
+                        print(value_features["feature"])
                         aux_hierchical_prop.append(key_features)
-                        ##print(f"Clave que se añade al mapeo y a la  lista   {key}")
+                        print(f"Clave que se añade al mapeo y a la  lista   {key}  ")
                         aux_array = True
                         #continue
                     """elif isinstance(value, dict) and key_features.endswith(key) and value_features not in auxFeaturesAddedList:
@@ -654,6 +672,59 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, aux_hier
                         feature_nested[value_features] = aux_nested ## value: al final se deja el valor booleano ya que el feature agregado es boolean tambien
                         auxFeaturesAddedList.add(value_features)
                         aux_hierchical_prop.append(key_features)
+                        """elif isinstance(value_features, str) and 'isNull' == value_features.split("_")[-1] and value_features not in auxFeaturesAddedList:
+                            print(f"Feature localizado de null")
+                            pass"""
+                            #elif isinstance(value_features, str) and isinstance(value, dict) and not value and 'isNull' == value_features.split("_")[-1] and value_features not in auxFeaturesAddedList:
+                                #print(f"Feature localizado de null")
+                                # Representación de valores null o empty, se comprueba si algun valor del yaml coincide con la ultima parte de los features en la lista.
+                elif isinstance(value_features, str) and isinstance(value, dict) and not value and 'isEmpty02' == value_features.split("_")[-1] and value_features not in auxFeaturesAddedList:
+                    #aux_value_last = value_features.rsplit("_", 1)[0]
+                    print(f"Se ejecuta el nuevo caso agregado   {key_features}  {value_features}    {key}    {value} ")
+                    aux_key_last_before_value = value_features.split("_")[-2] ## se obtiene la penultima prop
+                    aux_feature_before_insertion = value_features.rsplit("_", 1)[0] ## se obtiene el value feature menos la ultima insersion
+                    if key == aux_feature_before_insertion and value_features.endswith(key_features) and key_features.endswith(f"{aux_key_last_before_value}_isEmpty02"): # and key_features.endswith(f"{aux_key_last_before_map}_StringValueAdditional"):
+                        print(f"Se sigue ejecutando  {value_features}   {key_features}")
+                        aux_feat_empty = True
+                        feature_empty[value_features] = aux_feat_empty ## value: al final se deja el valor booleano ya que el feature agregado es boolean tambien
+                        auxFeaturesAddedList.add(value_features)
+                        aux_hierchical_prop.append(key_features)
+                elif isinstance(value_features, str) and isinstance(value, dict) and not value and 'isEmpty02' == value_features.split("_")[-1] and value_features not in auxFeaturesAddedList:
+                    #aux_value_last = value_features.rsplit("_", 1)[0]
+                    print(f"Se ejecuta el nuevo caso agregado   {key_features}  {value_features}    {key}    {value} ")
+                    aux_key_last_before_value = value_features.split("_")[-2] ## se obtiene la penultima prop
+                    aux_feature_before_insertion = value_features.rsplit("_", 1)[0] ## se obtiene el value feature menos la ultima insersion
+                    if key == aux_feature_before_insertion and value_features.endswith(key_features) and key_features.endswith(f"{aux_key_last_before_value}_isEmpty02"): # and key_features.endswith(f"{aux_key_last_before_map}_StringValueAdditional"):
+                        print(f"Se sigue ejecutando  {value_features}   {key_features}")
+                        aux_feat_empty = True
+                        feature_empty[value_features] = aux_feat_empty ## value: al final se deja el valor booleano ya que el feature agregado es boolean tambien
+                        auxFeaturesAddedList.add(value_features)
+                        aux_hierchical_prop.append(key_features)
+                    
+                elif isinstance(value_features, str) and isinstance(value, dict) and not value and 'isEmpty' == value_features.split("_")[-1] and value_features not in auxFeaturesAddedList:
+                    #aux_value_last = value_features.rsplit("_", 1)[0]
+                    print(f"Se ejecuta el nuevo caso agregado   {key_features}  {value_features}    {key}    {value} ")
+                    aux_key_last_before_value = value_features.split("_")[-2] ## se obtiene la penultima prop
+                    aux_feature_before_insertion = value_features.rsplit("_", 1)[0] ## se obtiene el value feature menos la ultima insersion
+                    if key == aux_feature_before_insertion and value_features.endswith(key_features) and key_features.endswith(f"{aux_key_last_before_value}_isEmpty"): # and key_features.endswith(f"{aux_key_last_before_map}_StringValueAdditional"):
+                        print(f"Se sigue ejecutando  {value_features}   {key_features}")
+                        aux_feat_empty = True
+                        feature_empty[value_features] = aux_feat_empty ## value: al final se deja el valor booleano ya que el feature agregado es boolean tambien
+                        auxFeaturesAddedList.add(value_features)
+                        aux_hierchical_prop.append(key_features)
+
+                elif isinstance(value_features, str) and value is None and 'isNull' == value_features.split("_")[-1] and value_features not in auxFeaturesAddedList:
+                    #aux_value_last = value_features.rsplit("_", 1)[0] isinstance(value_features, str) 
+                    print(f"Se ejecuta el nuevo caso agregado Null   {key_features}  {value_features}    {key}    {value} ")
+                    aux_key_last_before_value = value_features.split("_")[-2] ## se obtiene la penultima prop
+                    aux_feature_before_insertion = value_features.rsplit("_", 1)[0] ## se obtiene el value feature menos la ultima insersion
+                    if key == aux_feature_before_insertion and key_features.endswith(f"{aux_key_last_before_value}_isNull"): # and value_features.endswith(key_features):
+                        print(f"Se sigue ejecutando Null  {value_features}   {key_features}")
+                        aux_feat_null = True
+                        feature_null[value_features] = aux_feat_null ## value: al final se deja el valor booleano ya que el feature agregado es boolean tambien
+                        auxFeaturesAddedList.add(value_features)
+                        aux_hierchical_prop.append(key_features)
+
 
             mapped_key = feature_map.get(key, key)
             aux_arr_key = None
@@ -662,6 +733,10 @@ def apply_feature_mapping(yaml_data, feature_map, auxFeaturesAddedList, aux_hier
             if aux_nested:
                 ##print(f"if final feature_nested  {feature_nested}")
                 new_data[mapped_key] = feature_nested
+            elif aux_feat_empty:
+                new_data[mapped_key] = feature_empty
+            elif aux_feat_null:
+                new_data[mapped_key] = feature_null
             elif aux_str_values: ## prueba add arr of strings
                 #print(f"prueba add arr of strings")
                 new_data[mapped_key] = feature_str_value
@@ -734,7 +809,7 @@ os.makedirs(output_json_dir, exist_ok=True)  # Crea la carpeta si no existe
 file_count = {}  # Para manejar múltiples documentos
 # Ruta del archivo CSV
 #csv_file_path = './generateConfigs/kubernetes_mapping_features_part01.csv'
-csv_file_path = './generateConfigs/kubernetes_mapping_features02.csv'
+csv_file_path = './generateConfigs/kubernetes_mapping_features02-2.csv'
 csv_dict = load_features_csv(csv_file_path)
 
 for filename, index, yaml_data, simple_props, hierarchical_props, key_value_pairs, root_info in yaml_data_list:
