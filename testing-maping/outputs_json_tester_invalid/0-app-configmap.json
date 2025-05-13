@@ -1,0 +1,17 @@
+{
+    "filename": "0-app-configmap.yaml",
+    "apiVersion": "v1",
+    "config": {
+        "io_k8s_api_core_v1_ConfigMap_apiVersion": "v1",
+        "io_k8s_api_core_v1_ConfigMap_kind": "ConfigMap",
+        "io_k8s_api_core_v1_ConfigMap_metadata": {
+            "io_k8s_api_core_v1_ConfigMap_metadata_name": "go-app",
+            "io_k8s_api_core_v1_ConfigMap_metadata_namespace": "default"
+        },
+        "io_k8s_api_core_v1_ConfigMap_data": [
+            {
+                "io_k8s_api_core_v1_ConfigMap_data_StringValueAdditional": "config.yaml:---\nappPort: 8000\notlpEndpoint: tempo.monitoring:4318\ns3:\n  region: us-west-rack1\n  bucket: images\n  endpoint: http://192.168.50.211:9000\n  pathStyle: true\n  user: admin\n  secret: devops123\ndb:\n  user: myuser\n  password: devops123\n  host: \"192.168.50.74\"\n  database: mydb\n"
+            }
+        ]
+    }
+}

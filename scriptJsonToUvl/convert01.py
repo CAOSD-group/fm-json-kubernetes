@@ -532,6 +532,7 @@ class SchemaProcessor:
 
                 self.is_cardinality = False ## SE INICIE CON FALSE : se delimita en los tipos
                 self.is_deprecated = False
+                bool_added_value = False ## Added para tratar de evitar duplicacion de alternative y mandatory, values y stringValue
                 # Verificar si la propiedad es requerida basado en su descripción
                 description = details.get('description', '')
                 is_required_by_description = self.is_required_based_on_description(description)
@@ -597,6 +598,10 @@ class SchemaProcessor:
                 #print(f"El numero de arrays es: {countArrays}")
                 full_name = re.sub(r'\s*\{.*?\}', '', full_name)
                 # Procesar referencias
+                # Extraer y añadir valores como subfeatures
+                extracted_values = self.extract_values(description)
+                bool_added_value = bool(extracted_values)
+
                 if '$ref' in details:
                     ref = details['$ref']
                     # boolonOf = False # Prueba omision de refs con oneOf
@@ -732,7 +737,8 @@ class SchemaProcessor:
                         type_data_items = items['type']
                         full_name = full_name.replace(" cardinality [1..*]", "") ## Agregado para omitir el cardinality cuando no corresponde...
 
-                        if type_data_items == 'string':
+                        if type_data_items == 'string' and not bool_added_value:
+                            bool_added_strVal = True
                             aux_description_string_items = f"Added String mandatory for complete structure Array in the model The modified is not in json but provide represents, Array of Strings: StringValue"
                             feature['sub_features'].append({
                                 'name': f"{full_name}_StringValue {{doc '{aux_description_string_items}'}}", ## RefName Aparte {full_name}_{ref_name}
@@ -752,7 +758,7 @@ class SchemaProcessor:
                                 'type_data': 'Integer'
                             })
                         else:
-                            print("Tipo de dato en array no controlado")
+                            print("Tipo de dato en array no controlado. Exclusion de tipos, no compatibilidad.")
                 # Procesar propiedades adicionales
                 elif 'additionalProperties' in details:
                     additional_properties = details['additionalProperties']
@@ -813,7 +819,7 @@ class SchemaProcessor:
                         items = additional_properties['items']
                         type_data_additional_items = items['type'] ## Tipo de dato items dentro de additionalProperties
 
-                        if type_data_additional_items == 'string':
+                        if type_data_additional_items == 'string' and not bool_added_value:
                             full_name = full_name.replace(" cardinality [1..*]", "") ## Agregado para omitir el cardinality cuando no corresponde...
                             aux_description_string_AP_items = f"Added String mandatory for complete structure Array in the model into AdditionalProperties array Array of Strings: StringValue"
                             feature['sub_features'].append({
@@ -831,7 +837,7 @@ class SchemaProcessor:
                         #aux_description_additional_properties = ref_schema.get('description', '')
                         #print(description)
 
-                        if type_data_additional_properties == 'string':
+                        if type_data_additional_properties == 'string' and not bool_added_value:
                             full_name = full_name.replace(" cardinality [1..*]", "") ## Agregado para omitir el cardinality cuando no corresponde...
                             aux_description_string_properties = f"Added String mandatory for complete structure Object in the model The modified is not in json but provide represents, Array of Strings: StringValue"
                             aux_description_maps_properties = f"Added Map mandatory for complete structure Object in the model The modified is not in json but provide represents, Array of Strings: StringValue"
@@ -862,15 +868,15 @@ class SchemaProcessor:
                                 })
 
                 # Extraer y añadir valores como subfeatures
-                extracted_values = self.extract_values(description)
+                #extracted_values = self.extract_values(description)
                 ## Todos los valores que se extraen son "String", para facilitar la representacion de los valores prestablecidos se cambia el tipo a Boolean
-                if extracted_values: 
+                if extracted_values:
                     ## details['type_data'] = 'Boolean' ## Esto es para acceder al tipo del ESQUEMA
                     feature['type_data'] = '' ## Se accede al tipo de dato del FEATURE actual: De Boolean a vacio '' 
                     #full_name_value = f"{full_name}_{value}" ### ÑFALLA EN LOS VALORES
                     full_name = full_name.replace(" cardinality [1..*]", "") ## Por si se pasa el cardinality en algun punto ### Proabando añadir cardinality
                     #value_sanitized_name = re.sub(r'\s*\{.*?\}', '', full_name)
-                    #bool_default_value = False
+                    #bool_added_value = True
                     for value in extracted_values:
                         bool_default_value = False
                         if ('{default' in value): ## Condicion para comprobar si alguno de los valores es default, se marcan y se elimina el default para agregarlo en conjunto con doc
@@ -882,6 +888,7 @@ class SchemaProcessor:
                             print("OMITIENDO HEALTHY", full_name_value)
                             continue
                         aux_description_value = f"Specific value: {value}"
+
                         feature['sub_features'].append({
                             'name': f"{full_name_value} {{default, doc '{aux_description_value}'}}" if bool_default_value else f"{full_name_value} {{doc '{aux_description_value}'}}",
                             'type': 'alternative', # Todos los valores suelen ser alternatives (Elección de solo uno)
@@ -895,7 +902,6 @@ class SchemaProcessor:
                     #return 'Boolean'  and not extracted_values
                         #print("El tipo de dato es: ", self.feature_aux_original_type)
                         full_name = full_name.replace(" {abstract}", "")
-                        ##value_sanitized_name = re.sub(r'\s*\{.*?\}', '', full_name) #### PROBANDO ADD DOC
                         aux_description_mandatory = f"Added String mandatory for changing booleans of boolean_keywords: {self.feature_aux_original_type} *_name"
                         #if full_name == 'io_k8s_api_core_v1_PodSecurityContext_seccompProfile':
                         #    print(f"EL NOMBRE Y TIPO DEL FEATURE AUXILIAR EN COINCIDENCIA ES: {self.feature_aux_original_type}")
@@ -1089,7 +1095,7 @@ def generate_uvl_from_definitions(definitions_file, output_file, descriptions_fi
 definitions_file = './kubernetes-json-v1.30.2/v1.30.2/_definitions.json'
 #definitions_file = './kubernetes-json-schema-v1.32.0/v1.32.0/_definitions.json' ## V mas actual estable
 
-output_file = './kubernetes_combined_02_2.uvl'
+output_file = './kubernetes_combined_02_3.uvl'
 #output_file = './kubernetes-mapped-v1.32/kubernetes_combined_02_V32.uvl'  ## V mas actual estable
 
 #output_file = './Modelo-v.1.30.0/kubernetes_combined_02_30_0.uvl'

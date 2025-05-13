@@ -1,0 +1,52 @@
+{
+    "filename": "0-storage.kafka_1.yaml",
+    "apiVersion": "v1",
+    "config": {
+        "io_k8s_api_core_v1_PersistentVolume_apiVersion": "v1",
+        "io_k8s_api_core_v1_PersistentVolume_kind": "PersistentVolume",
+        "io_k8s_api_core_v1_PersistentVolume_metadata": {
+            "io_k8s_api_core_v1_PersistentVolume_metadata_name": "kafka-pv",
+            "io_k8s_api_core_v1_PersistentVolume_metadata_namespace": "kafka"
+        },
+        "io_k8s_api_core_v1_PersistentVolume_spec": {
+            "io_k8s_api_core_v1_PersistentVolume_spec_storageClassName": "local-storage",
+            "io_k8s_api_core_v1_PersistentVolume_spec_capacity": [
+                {
+                    "io_k8s_api_core_v1_PersistentVolume_spec_capacity_asString": "storage:2Gi"
+                }
+            ],
+            "io_k8s_api_core_v1_PersistentVolume_spec_accessModes": [
+                {
+                    "io_k8s_api_core_v1_PersistentVolume_spec_accessModes_StringValue": "ReadWriteOnce"
+                }
+            ],
+            "io_k8s_api_core_v1_PersistentVolume_spec_persistentVolumeReclaimPolicy": {
+                "io_k8s_api_core_v1_PersistentVolume_spec_persistentVolumeReclaimPolicy_Retain": true
+            },
+            "io_k8s_api_core_v1_PersistentVolume_spec_hostPath": {
+                "io_k8s_api_core_v1_PersistentVolume_spec_hostPath_path": "/data/volumes/pv1"
+            },
+            "io_k8s_api_core_v1_PersistentVolume_spec_nodeAffinity": {
+                "io_k8s_api_core_v1_PersistentVolume_spec_nodeAffinity_required": {
+                    "io_k8s_api_core_v1_PersistentVolume_spec_nodeAffinity_required_nodeSelectorTerms": [
+                        {
+                            "io_k8s_api_core_v1_PersistentVolume_spec_nodeAffinity_required_nodeSelectorTerms_matchExpressions": [
+                                {
+                                    "io_k8s_api_core_v1_PersistentVolume_spec_nodeAffinity_required_nodeSelectorTerms_matchExpressions_key": "kubernetes.io/hostname",
+                                    "io_k8s_api_core_v1_PersistentVolume_spec_nodeAffinity_required_nodeSelectorTerms_matchExpressions_operator": {
+                                        "io_k8s_api_core_v1_PersistentVolume_spec_nodeAffinity_required_nodeSelectorTerms_matchExpressions_operator_NotIn": true
+                                    },
+                                    "io_k8s_api_core_v1_PersistentVolume_spec_nodeAffinity_required_nodeSelectorTerms_matchExpressions_values": [
+                                        {
+                                            "io_k8s_api_core_v1_PersistentVolume_spec_nodeAffinity_required_nodeSelectorTerms_matchExpressions_values_StringValue": "Anything"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
