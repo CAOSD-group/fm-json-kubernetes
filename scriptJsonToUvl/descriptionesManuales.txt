@@ -2912,3 +2912,21 @@ io.k8s.api.node. = grupos
 v1. la version
 
 v1alpha2
+
+
+Error modelo, revisar tipos:
+io_k8s_api_networking_v1_NetworkPolicy_spec_policyTypes
+io_k8s_api_admissionregistration_v1_ValidatingAdmissionPolicyBindingSpec_validationActions
+							io_k8s_api_networking_v1_NetworkPolicy_spec_policyTypes cardinality [1..*] {doc 'policyTypes is a list of rule types that the NetworkPolicy relates to Valid options are [Ingress], [Egress], or [Ingress, Egress] If this field is not specified, it will default based on the existence of ingress or egress rules; policies that contain an egress section are assumed to affect egress, and all policies (whether or not they contain an ingress section) are assumed to affect ingress If you want to write an egress-only policy, you must explicitly specify policyTypes [ Egress ] Likewise, if you want to write a policy that specifies that no egress is allowed, you must specify a policyTypes value that include Egress (since such a policy would not include an egress section and would otherwise default to just [ Ingress ]) This field is beta-level in 18'}
+								mandatory
+									String io_k8s_api_networking_v1_NetworkPolicy_spec_policyTypes_StringValue {doc 'Added String mandatory for complete structure Array in the model The modified is not in json but provide represents, Array of Strings: StringValue'}
+								alternative
+									io_k8s_api_networking_v1_NetworkPolicy_spec_policyTypes_Ingress {doc 'Specific value: Ingress'}
+									io_k8s_api_networking_v1_NetworkPolicy_spec_policyTypes_Egress
+
+strValueAdditional
+io_k8s_api_apps_v1_StatefulSet_spec_volumeClaimTemplates_status_allocatedResourceStatuses
+											io_k8s_api_apps_v1_StatefulSet_spec_volumeClaimTemplates_status_allocatedResourceStatuses cardinality [1..*] {doc 'allocatedResourceStatuses stores status of resource being resized for the given PVC Key names follow standard Kubernetes label syntax Valid values are either:	* Un-prefixed keys:		- storage - the capacity of the volume	* Custom resources must use implementation-defined prefixed names such as examplecom/my-custom-resourceApart from above values - keys that are unprefixed or have kubernetesio prefix are considered reserved and hence may not be usedClaimResourceStatus can be in any of following states:	- ControllerResizeInProgress:		State set when resize controller starts resizing the volume in control-plane	- ControllerResizeFailed:		State set when resize has failed in resize controller with a terminal error	- NodeResizePending:		State set when resize controller has finished resizing the volume but further resizing of		volume is needed on the node	- NodeResizeInProgress:		State set when kubelet starts resizing the volume	- NodeResizeFailed:		State set when resizing has failed in kubelet with a terminal error Transient errors don_t set		NodeResizeFailedFor example: if expanding a PVC for more capacity - this field can be one of the following states:	- pvcstatusallocatedResourceStatus[_storage_] = ControllerResizeInProgress     - pvcstatusallocatedResourceStatus[_storage_] = ControllerResizeFailed     - pvcstatusallocatedResourceStatus[_storage_] = NodeResizePending     - pvcstatusallocatedResourceStatus[_storage_] = NodeResizeInProgress     - pvcstatusallocatedResourceStatus[_storage_] = NodeResizeFailedWhen this field is not set, it means that no resize operation is in progress for the given PVCA controller that receives PVC update with previously unknown resourceName or ClaimResourceStatus should ignore the update for the purpose it was designed For example - a controller that only is responsible for resizing capacity of the volume, should ignore PVC updates that change other valid resources associated with PVCThis is an alpha field and requires enabling RecoverVolumeExpansionFailure feature'}
+												mandatory
+													String io_k8s_api_apps_v1_StatefulSet_spec_volumeClaimTemplates_status_allocatedResourceStatuses_StringValueAdditional {doc 'Added String mandatory for complete structure Object in the model The modified is not in json but provide represents, Array of Strings: StringValue'}
+												alternative

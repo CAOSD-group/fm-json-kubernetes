@@ -1,0 +1,17 @@
+{
+    "filename": "0-eks-iam-role_1.yaml",
+    "apiVersion": "v1beta1",
+    "config": {
+        "apiVersion": "iam.aws.upbound.io/v1beta1",
+        "kind": "RolePolicyAttachment",
+        "metadata": {
+            "name": "dev-demo-eks-cluster-amazon-eks-cluster-policy"
+        },
+        "spec": {
+            "forProvider": {
+                "role": "dev-demo-eks-cluster",
+                "policyArn": "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+            }
+        }
+    }
+}

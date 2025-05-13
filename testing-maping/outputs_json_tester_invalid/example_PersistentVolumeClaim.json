@@ -1,0 +1,48 @@
+{
+    "filename": "example_PersistentVolumeClaim.yaml",
+    "apiVersion": "v1",
+    "config": {
+        "io_k8s_api_core_v1_PersistentVolumeClaim_apiVersion": "v1",
+        "io_k8s_api_core_v1_PersistentVolumeClaim_kind": "PersistentVolumeClaim",
+        "io_k8s_api_core_v1_PersistentVolumeClaim_metadata": {
+            "io_k8s_api_core_v1_PersistentVolumeClaim_metadata_name": "myclaim"
+        },
+        "io_k8s_api_core_v1_PersistentVolumeClaim_spec": {
+            "io_k8s_api_core_v1_PersistentVolumeClaim_spec_accessModes": [
+                {
+                    "io_k8s_api_core_v1_PersistentVolumeClaim_spec_accessModes_StringValue": "ReadWriteOnce"
+                }
+            ],
+            "io_k8s_api_core_v1_PersistentVolumeClaim_spec_volumeMode": "Filesystem",
+            "io_k8s_api_core_v1_PersistentVolumeClaim_spec_resources": {
+                "io_k8s_api_core_v1_PersistentVolumeClaim_spec_resources_requests": [
+                    {
+                        "io_k8s_api_core_v1_PersistentVolumeClaim_spec_resources_requests_asString": "storage:8Gi"
+                    }
+                ]
+            },
+            "io_k8s_api_core_v1_PersistentVolumeClaim_spec_storageClassName": "slow",
+            "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector": {
+                "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchLabels": [
+                    {
+                        "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchLabels_KeyMap": "release",
+                        "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchLabels_ValueMap": "stable"
+                    }
+                ],
+                "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions": [
+                    {
+                        "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions_key": "environment",
+                        "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions_operator": {
+                            "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions_operator_In": true
+                        },
+                        "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions_values": [
+                            {
+                                "io_k8s_api_core_v1_PersistentVolumeClaim_spec_selector_matchExpressions_values_StringValue": "dev"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}
