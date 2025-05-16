@@ -44,6 +44,9 @@ class ConfigurationJSON(TextToModel):
                 elif isinstance(value, list):
                     #print(f"Los values con list here    {value}")
                     if not value:
+                        #print(f"Listas vacias   {key}") ## Listas vacias como _metadata_annotations. Se agregan si existe la key... Decidir si mejora u empeora la validacion
+                        if key:
+                            base_config[key] = True
                         continue
 
                     if all(isinstance(x, dict) for x in value):
@@ -61,6 +64,7 @@ class ConfigurationJSON(TextToModel):
                                     #base_config[k] = True
                                     if isinstance(v, list):
                                         # Intentar extraer valores primitivos desde dicts
+                                        #print(f"Lista en recorrido: {v}")
                                         static[k] = True
                                         extracted_values = []
                                         aux_combined_block = []
@@ -68,32 +72,32 @@ class ConfigurationJSON(TextToModel):
                                             if isinstance(item, dict):
                                                 # Si es un diccionario con un único valor primitivo
                                                 #print(f"Soy El item: {item}")
-                                                print(f"ITEM VALUE: {item.keys()}  {len(item)}")
+                                                #print(f"ITEM VALUE: {item.keys()}  {len(item)}")
                                                 if len(item) == 1:
                                                     inner_value = list(item.values())[0] ## Casos donde haya solo 1 elemento en la lista: StringValue, Maps etc
                                                     inner_key = list(item.keys())[0]
                                                     aux_block = {}
-                                                    print(f"Inner key   {inner_key} Inner Value {inner_value} Item:   {item}")
+                                                    #print(f"Inner key   {inner_key} Inner Value {inner_value} Item:   {item}")
                                                     if isinstance(inner_value, (str, int, float, bool)):
-                                                        print("No se agregan a las listas?")
+                                                        #print("No se agregan a las listas?")
                                                         extracted_values.append(inner_value)
                                                         aux_lists[inner_key] = extracted_values
-                                                        print(f"lists:  {lists}")
+                                                        #print(f"lists:  {lists}")
                                                         #extracted_values.append({inner_key: inner_value,})
                                                     elif isinstance(inner_value, dict):
-                                                        print("Soy un dict")
+                                                        #print("Soy un dict")
                                                         #aux_block = {inner_key: True, inner_value} 
                                                         inner_value [inner_key]= True
                                                         #aux_combined_block.append(aux_block)
                                                         aux_combined_block.append(inner_value)
                                                     else:
-                                                        print("Conjunto no controlado")
+                                                        #print("Conjunto no controlado")
                                                         pass
                                                 else:
                                                     #print(f"Subitem     {subitem} ")
                                                     flat_kv = self.flatten_primitive_kv(item)
                                                     aux_combined_block.append(flat_kv)
-                                                    print(f" Aux combined   {aux_combined_block}")
+                                                    #print(f" Aux combined   {aux_combined_block}")
 
                                             elif isinstance(item, (str, int, float, bool)):
                                                 extracted_values.append(item)
@@ -107,15 +111,15 @@ class ConfigurationJSON(TextToModel):
                                         static[k] = v
     
                                     elif isinstance(v, dict):
-                                        print(f"Item segunda iter:   {item}  valor:   {v}")
+                                        #print(f"Item segunda iter:   {item}  valor:   {v}")
                                         self.extract_features(v, static, blocks)
 
                                 if lists: # and caseThree
                                     keys = list(lists.keys())
-                                    print(f"Keys de las listas  {keys}")
+                                    #print(f"Keys de las listas  {keys}")
                                     value_lists = [lists[k] for k in keys]
                                     #print(f"Keys de las listas y values:  {keys}    ")
-                                    print(f" VALUE LIST DEL FINAL   {value_lists}")
+                                    #print(f" VALUE LIST DEL FINAL   {value_lists}")
 
                                     for prod in product(*value_lists):
                                         merged = {k: prod[i] for i, k in enumerate(keys)}
@@ -124,8 +128,7 @@ class ConfigurationJSON(TextToModel):
                                 else:
                                     combined_block.append(static.copy())
                         else:
-                            print(f"Un unico elemento en la lista")
-                            print(f"Elemento unitario:  {value}")
+#                           print(f"Un unico elemento en la lista")
                             #if isinstance(v, list) and all(isinstance(i, (str, int, float, bool)) for i in v):
                             #    lists[k] = v                        
                             if isinstance(value, (str, int, float, bool)):
@@ -188,7 +191,7 @@ class ConfigurationJSON(TextToModel):
 if __name__ == '__main__':
 
     #path_json = '../generateConfigs/outputs_json_tester/1-metallb5_5.json' ## scriptJsonToUvl/generateConfigs/outputs_json_mappeds/example_deployment02.json
-    path_json = '../generateConfigs/outputs_json_tester_invalid/manifests30_14.json'
+    path_json = '../generateConfigs/outputs_json_tester_invalid/01-assert54_2.json'
     ##example_PersistentVolume
     #path_json = '../generateConfigs/outputs_json_mappeds/example_pod01.json'
     

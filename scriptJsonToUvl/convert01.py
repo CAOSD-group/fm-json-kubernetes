@@ -546,12 +546,19 @@ class SchemaProcessor:
 
                 if self.is_cardinality and 'cardinality' in full_name: ## Bloque de condiciones para agregar el cardinality a los features de tipo array y marcarlos o desmarcarlos para eliminar la etiqueta
                     full_name = full_name.replace(" cardinality [1..*]", "")
-                    full_name = f"{full_name} cardinality [1..*]"
-                elif self.is_cardinality and not 'cardinality' in full_name: ## Quizas falte comprobar algun caso por lo que no funciona del todo correctamente aun
-                    full_name = f"{full_name} cardinality [1..*]"
+                    if 'unstructured key value map' in description:
+                        full_name = f"{full_name} cardinality [0..*]"
+                    else:
+                        full_name = f"{full_name} cardinality [1..*]"
+                elif self.is_cardinality and not 'cardinality' in full_name:
+                    if 'unstructured key value map' in description:
+                        full_name = f"{full_name} cardinality [0..*]"
+                    else:
+                        full_name = f"{full_name} cardinality [1..*]"
                 else:
                     self.is_cardinality = False ## Para evitar casos en que se mantenga el cardinality del anterior feature
                     full_name = full_name.replace(" cardinality [1..*]", "")
+                    full_name = full_name.replace(" cardinality [0..*]", "")
 
                 #description = details.get('description', '')
                 if description:
@@ -839,9 +846,10 @@ class SchemaProcessor:
 
                         if type_data_additional_properties == 'string' and not bool_added_value:
                             full_name = full_name.replace(" cardinality [1..*]", "") ## Agregado para omitir el cardinality cuando no corresponde...
+                            full_name = full_name.replace(" cardinality [0..*]", "")
                             aux_description_string_properties = f"Added String mandatory for complete structure Object in the model The modified is not in json but provide represents, Array of Strings: StringValue"
-                            aux_description_maps_properties = f"Added Map mandatory for complete structure Object in the model The modified is not in json but provide represents, Array of Strings: StringValue"
-                            list_local_features_maps = ['Map of', 'matchLabels is a map of', 'unstructured key value map', 'label keys and values']    
+                            aux_description_maps_properties = f"Added Map for complete structure Object in the model The modified is not in json but provide represents, Array of pairs key, value: ValueMap, KeyMap"
+                            list_local_features_maps = ['Map of', 'matchLabels is a map of', 'label keys and values'] ## 'unstructured key value map',
                             #print(f" EN PRINCIPIO SE EJECUTAR N+ MAPASSS {full_name}" )
                             if any(wordMap in description for wordMap in list_local_features_maps): ## Opcion para añadir los sub-features como mapas
                                 feature['sub_features'].append({
@@ -858,8 +866,24 @@ class SchemaProcessor:
                                 'sub_features': [],
                                 'type_data': 'String' ## Por defecto para la compatibilidad en los esquemas simples y la propiedad del feature: Boolean
                                 })
-                            else:        
+                            elif 'unstructured key value map' in description:
+                                ## Caso especial de objeto que puede ser null/optional
                                 feature['sub_features'].append({
+                                'name': f"{full_name}_KeyMap {{doc 'key: {aux_description_maps_properties}'}}", ## RefName Aparte {full_name}_{ref_name}
+                                'type': 'optional',
+                                'description': aux_description_maps_properties, #f"Added String mandatory for adding the structure Array in the model: StringValue",
+                                'sub_features': [],
+                                'type_data': 'String' ## Por defecto para la compatibilidad en los esquemas simples y la propiedad del feature: Boolean
+                                })
+                                feature['sub_features'].append({
+                                'name': f"{full_name}_ValueMap {{doc 'value: {aux_description_maps_properties}'}}", ## RefName Aparte {full_name}_{ref_name}
+                                'type': 'optional',
+                                'description': aux_description_maps_properties, #f"Added String mandatory for adding the structure Array in the model: StringValue",
+                                'sub_features': [],
+                                'type_data': 'String' ## Por defecto para la compatibilidad en los esquemas simples y la propiedad del feature: Boolean
+                                })                                
+                            else:        
+                                feature['sub_features'].append({ ## Caso por si hay alguna estruc buscada sin las expresiones de mapa
                                     'name': f"{full_name}_StringValueAdditional {{doc '{aux_description_string_properties}'}}", ## RefName Aparte {full_name}_{ref_name}
                                     'type': 'mandatory',
                                     'description': aux_description_string_properties, #f"Added String mandatory for adding the structure Array in the model: StringValue",
@@ -1095,7 +1119,7 @@ def generate_uvl_from_definitions(definitions_file, output_file, descriptions_fi
 definitions_file = './kubernetes-json-v1.30.2/v1.30.2/_definitions.json'
 #definitions_file = './kubernetes-json-schema-v1.32.0/v1.32.0/_definitions.json' ## V mas actual estable
 
-output_file = './kubernetes_combined_02_3.uvl'
+output_file = './kubernetes_combined_04.uvl'
 #output_file = './kubernetes-mapped-v1.32/kubernetes_combined_02_V32.uvl'  ## V mas actual estable
 
 #output_file = './Modelo-v.1.30.0/kubernetes_combined_02_30_0.uvl'
