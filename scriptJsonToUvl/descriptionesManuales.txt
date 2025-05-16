@@ -2895,6 +2895,19 @@ Mod emptyDir para adaptar el funcionamiento
 - creationTimestamp: null
 - deletionTimestamp?, managedFields?, 
 
+        "metadata": {
+            "annotations": {},
+
+01-kubeseal_7:
+        "io_k8s_api_core_v1_Service_metadata": {
+            "io_k8s_api_core_v1_Service_metadata_annotations": [],
+
+        "io_k8s_api_apps_v1_Deployment_metadata": {
+            "io_k8s_api_apps_v1_Deployment_metadata_annotations": [],
+
+En principio no hay discrepancia respecto al modelo, valida como True los 2 casos de annotations. Tanto como si esta cardinality a 1..* y mandatory como si se cambia a 0..* y optional
+
+
 Prop que se repite mucho y no esta en ningun esquema...
   clusterName: "15"
 
@@ -2930,3 +2943,11 @@ io_k8s_api_apps_v1_StatefulSet_spec_volumeClaimTemplates_status_allocatedResourc
 												mandatory
 													String io_k8s_api_apps_v1_StatefulSet_spec_volumeClaimTemplates_status_allocatedResourceStatuses_StringValueAdditional {doc 'Added String mandatory for complete structure Object in the model The modified is not in json but provide represents, Array of Strings: StringValue'}
 												alternative
+
+
+Confs con el numero comprobadas correctas. Pero el tiempo de generacion de configs es rapido comparado con el de validacion:
+
+
+01-assert54_2.json,True,25,1152,0.03204,4247.297,Todas las Configuraciones validas
+
+El de validacion si se ajusta a mas de 2 hrs..
