@@ -1,0 +1,468 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: gitlab
+spec:
+  interval: 15m
+  timeout: 20m
+  chart:
+    spec:
+      chart: gitlab
+      version: 8.10.0
+      sourceRef:
+        kind: HelmRepository
+        name: gitlab
+        namespace: flux-charts
+      interval: 15m
+
+  driftDetection:
+    mode: enabled
+  maxHistory: 3
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+
+  valuesFrom:
+    - kind: Secret
+      name: &db-secret database-gitlab-staging
+      valuesKey: HOST
+      targetPath: global.psql.main.host
+    - kind: Secret
+      name: *db-secret
+      valuesKey: DATABASE_NAME
+      targetPath: global.psql.main.database
+    - kind: Secret
+      name: *db-secret
+      valuesKey: LOGIN
+      targetPath: global.psql.main.username
+
+    - kind: Secret
+      name: &db-ci-secret database-gitlab-ci-staging
+      valuesKey: HOST
+      targetPath: global.psql.ci.host
+    - kind: Secret
+      name: *db-ci-secret
+      valuesKey: DATABASE_NAME
+      targetPath: global.psql.ci.database
+    - kind: Secret
+      name: *db-ci-secret
+      valuesKey: LOGIN
+      targetPath: global.psql.ci.username
+
+  # https://gitlab.com/gitlab-org/charts/gitlab/-/blob/master/values.yaml
+  values:
+    global:
+      common:
+        labels: { }
+      pod:
+        labels: { }
+
+      edition: ee
+      time_zone: ${TIMEZONE}
+      extraEnv:
+        GITLAB_LOG_LEVEL: 'info'
+        GITLAB_ALLOW_SEPARATE_CI_DATABASE: 1
+
+
+      ## https://docs.gitlab.com/charts/charts/globals#configure-host-settings
+      hosts:
+        domain: ${DOMAIN_NAME}
+        hostSuffix: staging # TODO: replace to `hostSuffix:` alone when production ready
+        https: true
+        tls:
+          enabled: false
+
+      ## https://docs.gitlab.com/charts/charts/globals#configure-ingress-settings
+      ingress:
+        configureCertmanager: false
+        useNewIngressForCerts: false
+        class: traefik # class name to use
+        enabled: true
+        tls:
+          enabled: false
+
+      # Override enablement of ServiceMonitor and PodMonitor objects.
+      monitoring:
+        enabled: true
+
+      gitlab:
+      # license:
+      #   secret: gitlab-license-secret
+      #   key: license
+
+      ## Secret created according to https://docs.gitlab.com/charts/installation/secrets#initial-root-password
+      initialRootPassword:
+        secret: gitlab-admin-secret
+        key: initialRootPassword
+
+      ## https://docs.gitlab.com/charts/charts/globals#configure-postgresql-settings
+      psql:
+        main:
+          password:
+            useSecret: true
+            secret: *db-secret
+            key: PASSWORD
+        ci:
+          enabled: true
+          password:
+            useSecret: true
+            secret: *db-ci-secret
+            key: PASSWORD
+
+      ## https://docs.gitlab.com/charts/charts/globals#configure-redis-settings
+      redis:
+        host: gitlab-dragonfly.gitlab.svc.cluster.local
+        auth:
+          enabled: false
+
+      ## https://docs.gitlab.com/charts/charts/globals#configure-gitaly-settings
+      gitaly:
+        enabled: true
+        authToken:
+          secret: gitlab-gitaly-secret
+          key: authToken
+        internal:
+          names: [ default ]
+        external: [ ]
+
+      ## https://docs.gitlab.com/charts/charts/globals#configure-praefect-settings
+      praefect:
+        enabled: false
+
+      ## https://docs.gitlab.com/charts/charts/globals#configure-minio-settings
+      minio:
+        enabled: true
+        credentials:
+          secret: gitlab-minio-secret
+
+      ## https://docs.gitlab.com/charts/charts/globals#configure-appconfig-settings
+      appConfig:
+        ## https://docs.gitlab.com/charts/charts/globals#general-application-settings
+        enableUsagePing: false
+        enableSeatLink: false
+        enableImpersonation: true
+        usernameChangingEnabled: false
+
+        ## https://docs.gitlab.com/charts/charts/globals#content-security-policy
+        contentSecurityPolicy:
+          enabled: true
+          report_only: false
+
+        ## https://docs.gitlab.com/charts/charts/globals#lfs-artifacts-uploads-packages-external-mr-diffs-and-dependency-proxy
+        object_store:
+          enabled: true
+          proxy_download: true
+        lfs:
+          enabled: true
+          bucket: gitlab-lfs
+        artifacts:
+          enabled: true
+          bucket: gitlab-artifacts
+        uploads:
+          enabled: true
+          bucket: gitlab-uploads
+        packages:
+          enabled: true
+          bucket: gitlab-packages
+        externalDiffs:
+          enabled: true
+          when: outdated
+          bucket: gitlab-external-diffs
+        terraformState:
+          enabled: true
+          bucket: gitlab-terraform-state
+        ciSecureFiles:
+          enabled: true
+          bucket: gitlab-ci-secure-files
+        dependencyProxy:
+          enabled: true
+          bucket: gitlab-dependency-proxy
+        backups:
+          bucket: gitlab-backups
+          tmpBucket: gitlab-tmp
+
+        ## https://docs.gitlab.com/charts/charts/globals#kas-settings
+        gitlab_kas:
+          enabled: true
+          secret: gitlab-kas-secret
+          key: kas_shared_secret
+
+        ## https://docs.gitlab.com/charts/charts/globals#omniauth
+        omniauth: # TODO: this
+          enabled: false
+          autoSignInWithProvider:
+          syncProfileFromProvider: [ ]
+          syncProfileAttributes: [ email ]
+          allowSingleSignOn: [ saml ]
+          blockAutoCreatedUsers: true
+          autoLinkLdapUser: false
+          autoLinkSamlUser: false
+          autoLinkUser: [ ]
+          externalProviders: [ ]
+          allowBypassTwoFactor: [ ]
+          providers: [ ]
+          # - secret: gitlab-google-oauth2
+          #   key: provider
+
+        gitlab_docs:
+          enabled: false
+
+        smartcard:
+          enabled: false
+
+        sidekiq:
+          routingRules: [ ]
+
+        # Config that only applies to the defaults on initial install
+        initialDefaults: { }
+        # signupEnabled:
+      ## End of global.appConfig
+
+      oauth:
+        gitlab-pages:
+          secret: oauth-gitlab-pages-secret
+          appIdKey: appId
+          appSecretKey: appSecret
+          # redirectUri: redirectUri
+          # authScope: authScope
+
+      ## https://docs.gitlab.com/charts/charts/gitlab/kas/
+      kas:
+        enabled: true
+
+      ## https://docs.gitlab.com/charts/charts/gitlab/spamcheck/
+      spamcheck:
+        enabled: false
+
+      ## https://docs.gitlab.com/charts/charts/globals#configure-gitlab-shell
+      shell:
+        authToken:
+          secret: gitlab-shell-secret
+          key: secret
+        hostKeys:
+          secret: gitlab-shell-host-keys
+
+      ## Rails application secrets
+      ## Secret created according to https://docs.gitlab.com/charts/installation/secrets#gitlab-rails-secret
+      ## If allowing shared-secrets generation, this is OPTIONAL.
+      railsSecrets:
+        secret: gitlab-rails-secret
+
+      ## Rails generic setting, applicable to all Rails-based containers
+      rails:
+        bootsnap: # Enable / disable Shopify/Bootsnap cache
+          enabled: true
+
+      ## https://docs.gitlab.com/charts/charts/globals#configure-registry-settings
+      registry:
+        enabled: true
+
+        bucket: gitlab-registry
+        httpSecret:
+          secret: gitlab-registry-httpsecret
+          key: secret
+        notificationSecret:
+          secret: gitlab-registry-notification
+          key: secret
+
+      pages:
+        enabled: true
+        apiSecret:
+          secret: gitlab-pages-secret
+          key: shared_secret
+        authSecret: { }
+        # secret:
+        # key:
+
+      ## https://docs.gitlab.com/charts/charts/globals#outgoing-email
+      ## Outgoing email server settings
+      smtp:
+        enabled: false
+      ## https://docs.gitlab.com/charts/charts/globals#outgoing-email
+      ## Email persona used in email sent by GitLab
+      email:
+        from: ""
+        display_name: GitLab
+        reply_to: ""
+        subject_suffix: ""
+        smime:
+          enabled: false
+
+      ## Global Deployment Annotations
+      deployment:
+        annotations: { }
+
+      ## https://docs.gitlab.com/charts/charts/globals#configure-workhorse-settings
+      ## Global settings related to Workhorse
+      workhorse:
+        serviceName: webservice-default
+        # scheme:
+        # host:
+        # port:
+        ## https://docs.gitlab.com/charts/installation/secrets#gitlab-workhorse-secret
+        secret: gitlab-workhorse-secret
+        key: shared_secret
+        tls:
+          enabled: false
+
+      ## https://docs.gitlab.com/charts/charts/globals#custom-certificate-authorities
+      # configuration of certificates container & custom CA injection
+      certificates:
+        image:
+          repository: registry.gitlab.com/gitlab-org/build/cng/certificates
+          # Default tag is `global.gitlabVersion` or `master` if the former one is undefined.
+          # tag: master
+          # pullPolicy: IfNotPresent
+          # pullSecrets: []
+        customCAs: [ ]
+        # - secret: custom-CA
+        # - secret: more-custom-CAs
+        #   keys:
+        #     - custom-ca-1.crt
+        # - configMap: custom-CA-cm
+        # - configMap: more-custom-CAs-cm
+        #   keys:
+        #     - custom-ca-2.crt
+        #     - custom-ca-3.crt
+
+
+      ## https://docs.gitlab.com/charts/charts/globals#service-accounts
+      serviceAccount:
+        enabled: false
+        create: true
+        annotations: { }
+        ## Name to be used for serviceAccount, otherwise defaults to chart fullname
+        # name:
+
+      ## https://docs.gitlab.com/charts/charts/globals/#tracing
+      tracing:
+        connection:
+          string: ""
+        urlTemplate: ""
+
+      zoekt:
+        gateway:
+          basicAuth:
+            secretName: gitlab-zoekt-basicauth
+        indexer:
+          internalApi: { }
+
+
+      ## https://docs.gitlab.com/charts/charts/globals
+      extraEnvFrom: { }
+      #   MY_NODE_NAME:
+      #     fieldRef:
+      #       fieldPath: spec.nodeName
+      #   MY_CPU_REQUEST:
+      #     resourceFieldRef:
+      #       containerName: test-container
+      #       resource: requests.cpu
+      #   SECRET_THING:
+      #     secretKeyRef:
+      #       name: special-secret
+      #       key: special_token
+      #       # optional: boolean
+      #   CONFIG_STRING:
+      #     configMapKeyRef:
+      #       name: useful-config
+      #       key: some-string
+      #       # optional: boolean
+
+      ## https://docs.gitlab.com/charts/charts/globals/#jobs
+      job:
+        nameSuffixOverride:
+
+
+    upgradeCheck:
+      enabled: true
+
+
+    certmanager:
+      installCRDs: false
+      install: false
+    nginx-ingress:
+      enabled: false
+    haproxy:
+      install: false
+    prometheus:
+      install: false
+    postgresql:
+      install: false
+    traefik:
+      install: false
+    redis:
+      install: false
+
+
+    ## https://docs.gitlab.com/charts/charts/registry/
+    registry:
+      enabled: true
+
+    ## Automatic shared secret generation
+    ## https://docs.gitlab.com/charts/installation/secrets
+    ## https://docs.gitlab.com/charts/charts/shared-secrets.html
+    #    shared-secrets:
+    #      enabled: false
+
+    gitlab-runner:
+      install: false
+
+    ## Settings for individual sub-charts under GitLab
+    ## Note: Many of these settings are configurable via globals
+    gitlab:
+      ## https://docs.gitlab.com/charts/charts/gitlab/toolbox
+      toolbox:
+      gitaly:
+        resources:
+          requests:
+            cpu: 80m
+            memory: 660M
+          limits:
+            memory: 660M
+      webservice:
+        maxReplicas: 2
+        maxUnavailable: 1
+        minReplicas: 1
+
+        workerProcesses: 1
+        resources:
+          limits:
+            memory: 2Gi
+          requests:
+            cpu: 100m
+            memory: 2Gi
+      sidekiq:
+        maxReplicas: 2
+        maxUnavailable: 1
+        minReplicas: 1
+      gitlab-shell:
+        maxReplicas: 2
+        maxUnavailable: 1
+        minReplicas: 1
+      gitlab-registry:
+        maxReplicas: 2
+        maxUnavailable: 1
+        minReplicas: 1
+      gitlab-kas:
+        maxReplicas: 2
+        maxUnavailable: 1
+        minReplicas: 1
+      gitlab-pages:
+        maxReplicas: 2
+        maxUnavailable: 1
+        minReplicas: 1
+        resources:
+          requests:
+            cpu: 10m
+            memory: 128Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
+
+    gitlab-zoekt:
+      install: true

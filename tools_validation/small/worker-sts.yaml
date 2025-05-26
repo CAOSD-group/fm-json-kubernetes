@@ -1,0 +1,251 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  annotations:
+    meta.helm.sh/release-name: airflow
+    meta.helm.sh/release-namespace: airflow
+  labels:
+    component: worker
+    release: airflow
+    tier: airflow
+  name: airflow-worker
+  namespace: airflow
+spec:
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Retain
+    whenScaled: Retain
+  podManagementPolicy: OrderedReady
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      component: worker
+      release: airflow
+      tier: airflow
+  serviceName: airflow-worker
+  template:
+    metadata:
+      labels:
+        component: worker
+        release: airflow
+        tier: airflow
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  component: worker
+              topologyKey: kubernetes.io/hostname
+            weight: 100
+      containers:
+      - args:
+        - bash
+        - -c
+        - |-
+          exec \
+          airflow celery worker
+        env:
+        - name: DUMB_INIT_SETSID
+          value: "0"
+        - name: AIRFLOW__CORE__FERNET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: fernet-key
+              name: airflow-fernet-key
+        - name: AIRFLOW_HOME
+          value: /opt/airflow
+        - name: AIRFLOW__CORE__SQL_ALCHEMY_CONN
+          valueFrom:
+            secretKeyRef:
+              key: connection
+              name: airflow-metadata
+        - name: AIRFLOW__DATABASE__SQL_ALCHEMY_CONN
+          valueFrom:
+            secretKeyRef:
+              key: connection
+              name: airflow-metadata
+        - name: AIRFLOW_CONN_AIRFLOW_DB
+          valueFrom:
+            secretKeyRef:
+              key: connection
+              name: airflow-metadata
+        - name: AIRFLOW__WEBSERVER__SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: webserver-secret-key
+              name: airflow-webserver-secret-key
+        - name: AIRFLOW__CELERY__BROKER_URL
+          valueFrom:
+            secretKeyRef:
+              key: connection
+              name: airflow-broker-url
+        image: apache/airflow:2.8.3
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - CONNECTION_CHECK_MAX_COUNT=0 exec /entrypoint python -m celery --app
+              airflow.providers.celery.executors.celery_executor.app inspect ping
+              -d celery@$(hostname)
+          failureThreshold: 5
+          initialDelaySeconds: 10
+          periodSeconds: 60
+          successThreshold: 1
+          timeoutSeconds: 20
+        name: worker
+        ports:
+        - containerPort: 8793
+          name: worker-logs
+          protocol: TCP
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /opt/airflow/logs
+          name: logs
+        - mountPath: /opt/airflow/dags
+          name: dag-script-volume
+        - mountPath: /opt/airflow/elt
+          name: elt-script
+        - mountPath: /opt/airflow/airflow.cfg
+          name: config
+          readOnly: true
+          subPath: airflow.cfg
+        - mountPath: /opt/airflow/config/airflow_local_settings.py
+          name: config
+          readOnly: true
+          subPath: airflow_local_settings.py
+      - args:
+        - bash
+        - /clean-logs
+        env:
+        - name: AIRFLOW__LOG_RETENTION_DAYS
+          value: "15"
+        - name: AIRFLOW_HOME
+          value: /opt/airflow
+        image: apache/airflow:2.8.3
+        imagePullPolicy: IfNotPresent
+        name: worker-log-groomer
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /opt/airflow/logs
+          name: logs
+      dnsPolicy: ClusterFirst
+      initContainers:
+      - args:
+        - airflow
+        - db
+        - check-migrations
+        - --migration-wait-timeout=60
+        env:
+        - name: AIRFLOW__CORE__FERNET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: fernet-key
+              name: airflow-fernet-key
+        - name: AIRFLOW_HOME
+          value: /opt/airflow
+        - name: AIRFLOW__CORE__SQL_ALCHEMY_CONN
+          valueFrom:
+            secretKeyRef:
+              key: connection
+              name: airflow-metadata
+        - name: AIRFLOW__DATABASE__SQL_ALCHEMY_CONN
+          valueFrom:
+            secretKeyRef:
+              key: connection
+              name: airflow-metadata
+        - name: AIRFLOW_CONN_AIRFLOW_DB
+          valueFrom:
+            secretKeyRef:
+              key: connection
+              name: airflow-metadata
+        - name: AIRFLOW__WEBSERVER__SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: webserver-secret-key
+              name: airflow-webserver-secret-key
+        - name: AIRFLOW__CELERY__BROKER_URL
+          valueFrom:
+            secretKeyRef:
+              key: connection
+              name: airflow-broker-url
+        image: apache/airflow:2.8.3
+        imagePullPolicy: IfNotPresent
+        name: wait-for-airflow-migrations
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /opt/airflow/airflow.cfg
+          name: config
+          readOnly: true
+          subPath: airflow.cfg
+        - mountPath: /opt/airflow/config/airflow_local_settings.py
+          name: config
+          readOnly: true
+          subPath: airflow_local_settings.py
+      # - name: execute-dag-script
+      # image: python:3.9  # Use an appropriate Python image
+      # command: ["python", "/scripts/dag_script.py"]  # Command to execute the Python script
+      # volumeMounts:
+      #   - name: dag-script-volume
+      #     mountPath: /scripts
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 0
+        runAsUser: 50000
+      serviceAccount: airflow-worker
+      serviceAccountName: airflow-worker
+      terminationGracePeriodSeconds: 600
+      volumes:
+      - name: dag-script-volume
+        configMap:
+          name: dag-script
+      - name: elt-script
+        configMap:
+          name: elt-script
+      - configMap:
+          defaultMode: 420
+          name: airflow-config
+        name: config
+  updateStrategy:
+    rollingUpdate:
+      partition: 0
+    type: RollingUpdate
+  volumeClaimTemplates:
+  - apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: logs
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 100Gi
+      volumeMode: Filesystem
+    status:
+      phase: Pending

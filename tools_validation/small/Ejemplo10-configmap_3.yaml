@@ -1,0 +1,107 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: configuracion2
+data:
+  fichero1.properties: "user                    nginx;   # Usuario con el que se crean\
+    \ los subprocesos . P ej. Workers\nworker_processes        2;       # Numero de\
+    \ workers. Depende de las CPUs disponibles\nerror_log  /var/log/nginx/error.log\
+    \ warn;   # Ubicaci\xF3n fichero de log de errores . Con el nivel de severidad\n\
+    pid        /var/run/nginx.pid;              # Ubicaci\xF3n fichero que contiene\
+    \ el PID del master de nginx\n\nevents {\n    worker_connections  1024;      \
+    \        # N\xFAmero de hilos /Conexiones simultaneas atendibles por UN worker\n\
+    }\n\n## Parte de la configuraci\xF3n que alude al protocolo http\n\nhttp {\n \
+    \   include       /etc/nginx/mime.types;    # Tipos de archivos (asociados a extensiones)\
+    \ que nginx auto-reconoce\n    default_type  application/octet-stream; # Si no\
+    \ encuentra un tipo de datos en el fichero anterior, pon este. BINARIOS\n    log_format\
+    \  main  '$remote_addr - $remote_user [$time_local] \"$request\" '\n         \
+    \             '$status $body_bytes_sent \"$http_referer\" '\n                \
+    \      '\"$http_user_agent\" \"$http_x_forwarded_for\"';\n                # LISTADO\
+    \ DE VARIABLES EN NGINX: http://nginx.org/en/docs/varindex.html\n            \
+    \        # En este caso, al formato, le denominamos \"main\"... es un nombre con\
+    \ el que referirnos a \xE9l.\n\n    access_log  /var/log/nginx/access.log  main;\
+    \    # Ubicacion de un archivo donde se genere un log de accesos / Peticiones\
+    \ HTTP\n    sendfile        on;                             # C\xF3mo nginx lee\
+    \ los ficheros a la hora de mandarlos al cliente.\n                          \
+    \              # Con sendfile off => POR DEFECTO\n                           \
+    \                     # Nginx lee los ficheros a un buffer en RAM y desde ese\
+    \ buffer se van mandando al cliente\n                                        #\
+    \ Con sendfile on => NO ES POR DEFECTO\n                                     \
+    \           # Nginx lee los ficheros y seg\xFAn va leyendo lo va mandando al cliente,\
+    \ sin cargarlo a un buffer propio en RAM\n                                   \
+    \                 # ESTO VA GUAY EN LINUX. En otros SO..... bufffff\n    #tcp_nopush\
+    \     on;\n    keepalive_timeout  65;              # Tiempo que se va a mantener\
+    \ abierta la conexi\xF3n sin notificaciones del cliente\n    #gzip  on;\n\n  \
+    \  # Esto ser\xEDa un VIRTUAL HOST\n    server {\n        listen  80;        \
+    \         \n        server_name  localhost;     # El DNS a trav\xE9s del que se\
+    \ pueden recibir las peticiones adicionalmente\n        root /app1;          \
+    \       # La ruta (lo que hay detr\xE1s del puerto en la URL) buscala en una carpeta\
+    \ de mi Sistema de Archivos\n    }\n}\n"
+  fichero2.yaml: "user                    nginx;   # Usuario con el que se crean los\
+    \ subprocesos . P ej. Workers\nworker_processes        2;       # Numero de workers.\
+    \ Depende de las CPUs disponibles\nerror_log  /var/log/nginx/error.log warn; \
+    \  # Ubicaci\xF3n fichero de log de errores . Con el nivel de severidad\npid \
+    \       /var/run/nginx.pid;              # Ubicaci\xF3n fichero que contiene el\
+    \ PID del master de nginx\n\nevents {\n    worker_connections  1024;         \
+    \     # N\xFAmero de hilos /Conexiones simultaneas atendibles por UN worker\n\
+    }\n\n## Parte de la configuraci\xF3n que alude al protocolo http\n\nhttp {\n \
+    \   include       /etc/nginx/mime.types;    # Tipos de archivos (asociados a extensiones)\
+    \ que nginx auto-reconoce\n    default_type  application/octet-stream; # Si no\
+    \ encuentra un tipo de datos en el fichero anterior, pon este. BINARIOS\n    log_format\
+    \  main  '$remote_addr - $remote_user [$time_local] \"$request\" '\n         \
+    \             '$status $body_bytes_sent \"$http_referer\" '\n                \
+    \      '\"$http_user_agent\" \"$http_x_forwarded_for\"';\n                # LISTADO\
+    \ DE VARIABLES EN NGINX: http://nginx.org/en/docs/varindex.html\n            \
+    \        # En este caso, al formato, le denominamos \"main\"... es un nombre con\
+    \ el que referirnos a \xE9l.\n\n    access_log  /var/log/nginx/access.log  main;\
+    \    # Ubicacion de un archivo donde se genere un log de accesos / Peticiones\
+    \ HTTP\n    sendfile        on;                             # C\xF3mo nginx lee\
+    \ los ficheros a la hora de mandarlos al cliente.\n                          \
+    \              # Con sendfile off => POR DEFECTO\n                           \
+    \                     # Nginx lee los ficheros a un buffer en RAM y desde ese\
+    \ buffer se van mandando al cliente\n                                        #\
+    \ Con sendfile on => NO ES POR DEFECTO\n                                     \
+    \           # Nginx lee los ficheros y seg\xFAn va leyendo lo va mandando al cliente,\
+    \ sin cargarlo a un buffer propio en RAM\n                                   \
+    \                 # ESTO VA GUAY EN LINUX. En otros SO..... bufffff\n    #tcp_nopush\
+    \     on;\n    keepalive_timeout  65;              # Tiempo que se va a mantener\
+    \ abierta la conexi\xF3n sin notificaciones del cliente\n    #gzip  on;\n\n  \
+    \  # Esto ser\xEDa un VIRTUAL HOST\n    server {\n        listen  80;        \
+    \         \n        server_name  localhost;     # El DNS a trav\xE9s del que se\
+    \ pueden recibir las peticiones adicionalmente\n        root /app1;          \
+    \       # La ruta (lo que hay detr\xE1s del puerto en la URL) buscala en una carpeta\
+    \ de mi Sistema de Archivos\n    }\n}\n\n"
+  fichero3.yaml: "user                    nginx;   # Usuario con el que se crean los\
+    \ subprocesos . P ej. Workers\nworker_processes        2;       # Numero de workers.\
+    \ Depende de las CPUs disponibles\nerror_log  /var/log/nginx/error.log warn; \
+    \  # Ubicaci\xF3n fichero de log de errores . Con el nivel de severidad\npid \
+    \       /var/run/nginx.pid;              # Ubicaci\xF3n fichero que contiene el\
+    \ PID del master de nginx\n\nevents {\n    worker_connections  1024;         \
+    \     # N\xFAmero de hilos /Conexiones simultaneas atendibles por UN worker\n\
+    }\n\n## Parte de la configuraci\xF3n que alude al protocolo http\n\nhttp {\n \
+    \   include       /etc/nginx/mime.types;    # Tipos de archivos (asociados a extensiones)\
+    \ que nginx auto-reconoce\n    default_type  application/octet-stream; # Si no\
+    \ encuentra un tipo de datos en el fichero anterior, pon este. BINARIOS\n    log_format\
+    \  main  '$remote_addr - $remote_user [$time_local] \"$request\" '\n         \
+    \             '$status $body_bytes_sent \"$http_referer\" '\n                \
+    \      '\"$http_user_agent\" \"$http_x_forwarded_for\"';\n                # LISTADO\
+    \ DE VARIABLES EN NGINX: http://nginx.org/en/docs/varindex.html\n            \
+    \        # En este caso, al formato, le denominamos \"main\"... es un nombre con\
+    \ el que referirnos a \xE9l.\n\n    access_log  /var/log/nginx/access.log  main;\
+    \    # Ubicacion de un archivo donde se genere un log de accesos / Peticiones\
+    \ HTTP\n    sendfile        on;                             # C\xF3mo nginx lee\
+    \ los ficheros a la hora de mandarlos al cliente.\n                          \
+    \              # Con sendfile off => POR DEFECTO\n                           \
+    \                     # Nginx lee los ficheros a un buffer en RAM y desde ese\
+    \ buffer se van mandando al cliente\n                                        #\
+    \ Con sendfile on => NO ES POR DEFECTO\n                                     \
+    \           # Nginx lee los ficheros y seg\xFAn va leyendo lo va mandando al cliente,\
+    \ sin cargarlo a un buffer propio en RAM\n                                   \
+    \                 # ESTO VA GUAY EN LINUX. En otros SO..... bufffff\n    #tcp_nopush\
+    \     on;\n    keepalive_timeout  65;              # Tiempo que se va a mantener\
+    \ abierta la conexi\xF3n sin notificaciones del cliente\n    #gzip  on;\n\n  \
+    \  # Esto ser\xEDa un VIRTUAL HOST\n    server {\n        listen  80;        \
+    \         \n        server_name  localhost;     # El DNS a trav\xE9s del que se\
+    \ pueden recibir las peticiones adicionalmente\n        root /app1;          \
+    \       # La ruta (lo que hay detr\xE1s del puerto en la URL) buscala en una carpeta\
+    \ de mi Sistema de Archivos\n    }\n}"

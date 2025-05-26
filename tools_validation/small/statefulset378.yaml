@@ -1,0 +1,174 @@
+---
+# Source: elasticsearch/templates/coordinating/statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: elasticsearch-coordinating
+  namespace: "cti-svcs-cdso-gdk-169643"
+  labels:
+    app.kubernetes.io/instance: elasticsearch
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: elasticsearch
+    app.kubernetes.io/version: 8.12.0
+    helm.sh/chart: elasticsearch-19.17.2
+    app.kubernetes.io/component: coordinating-only
+    ## Istio Labels: https://istio.io/docs/ops/deployment/requirements/
+    app: coordinating-only
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: elasticsearch
+      app.kubernetes.io/name: elasticsearch
+      app.kubernetes.io/component: coordinating-only
+  updateStrategy:
+    type: RollingUpdate
+  serviceName: elasticsearch-coordinating-hl
+  podManagementPolicy: Parallel
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: elasticsearch
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: elasticsearch
+        app.kubernetes.io/version: 8.12.0
+        helm.sh/chart: elasticsearch-19.17.2
+        app.kubernetes.io/component: coordinating-only
+        ## Istio Labels: https://istio.io/docs/ops/deployment/requirements/
+        app: coordinating-only
+      annotations:
+        checksum/tls: 54506c7b0994db4b12c60b685f03286112fce320366fdcf6036b6674c279a469
+    spec:
+      serviceAccountName: elasticsearch-coordinating
+      
+      automountServiceAccountToken: false
+      affinity:
+        podAffinity:
+          
+        podAntiAffinity:
+          
+        nodeAffinity:
+          
+      securityContext:
+        fsGroup: 1001
+        fsGroupChangePolicy: Always
+        supplementalGroups: []
+        sysctls: []
+      initContainers:
+        ## Image that performs the sysctl operation to modify Kernel settings (needed sometimes to avoid boot errors)
+        - name: sysctl
+          image: docker.io/bitnami/os-shell:11-debian-11-r95
+          imagePullPolicy: "IfNotPresent"
+          command:
+            - /bin/bash
+            - -ec
+            - |
+              CURRENT=`sysctl -n vm.max_map_count`;
+              DESIRED="262144";
+              if [ "$DESIRED" -gt "$CURRENT" ]; then
+                  sysctl -w vm.max_map_count=262144;
+              fi;
+              CURRENT=`sysctl -n fs.file-max`;
+              DESIRED="65536";
+              if [ "$DESIRED" -gt "$CURRENT" ]; then
+                  sysctl -w fs.file-max=65536;
+              fi;
+          securityContext:
+            privileged: true
+            runAsUser: 0
+          resources:
+            limits: {}
+            requests: {}
+      containers:
+        - name: elasticsearch
+          image: docker.io/bitnami/elasticsearch:8.12.0-debian-11-r3
+          imagePullPolicy: "IfNotPresent"
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1001
+            seccompProfile:
+              type: RuntimeDefault
+          env:
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: BITNAMI_DEBUG
+              value: "false"
+            - name: ELASTICSEARCH_CLUSTER_NAME
+              value: "elastic"
+            - name: ELASTICSEARCH_IS_DEDICATED_NODE
+              value: "yes"
+            - name: ELASTICSEARCH_NODE_ROLES
+              value: ""
+            - name: ELASTICSEARCH_TRANSPORT_PORT_NUMBER
+              value: "9300"
+            - name: ELASTICSEARCH_HTTP_PORT_NUMBER
+              value: "9200"
+            - name: ELASTICSEARCH_CLUSTER_HOSTS
+              value: "elasticsearch-master-hl.cti-svcs-cdso-gdk-169643.svc.cluster.local,elasticsearch-coordinating-hl.cti-svcs-cdso-gdk-169643.svc.cluster.local,elasticsearch-data-hl.cti-svcs-cdso-gdk-169643.svc.cluster.local,elasticsearch-ingest-hl.cti-svcs-cdso-gdk-169643.svc.cluster.local,"
+            - name: ELASTICSEARCH_TOTAL_NODES
+              value: "4"
+            - name: ELASTICSEARCH_CLUSTER_MASTER_HOSTS
+              value: elasticsearch-master-0 elasticsearch-master-1 
+            - name: ELASTICSEARCH_MINIMUM_MASTER_NODES
+              value: "2"
+            - name: ELASTICSEARCH_ADVERTISED_HOSTNAME
+              value: "$(MY_POD_NAME).elasticsearch-coordinating-hl.cti-svcs-cdso-gdk-169643.svc.cluster.local"
+            - name: ELASTICSEARCH_HEAP_SIZE
+              value: "128m"
+            - name: ELASTICSEARCH_ENABLE_SECURITY
+              value: "true"
+            - name: ELASTICSEARCH_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                    name: elasticsearch
+                    key: elasticsearch-password
+            - name: ELASTICSEARCH_ENABLE_FIPS_MODE
+              value: "false"
+            - name: ELASTICSEARCH_TLS_VERIFICATION_MODE
+              value: "full"
+            - name: ELASTICSEARCH_ENABLE_REST_TLS
+              value: "true"
+            - name: ELASTICSEARCH_TLS_USE_PEM
+              value: "true"
+          ports:
+            - name: rest-api
+              containerPort: 9200
+            - name: transport
+              containerPort: 9300
+          livenessProbe:
+            failureThreshold: 5
+            initialDelaySeconds: 180
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+            tcpSocket:
+              port: rest-api
+          readinessProbe:
+            failureThreshold: 5
+            initialDelaySeconds: 90
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+            exec:
+              command:
+                - /opt/bitnami/scripts/elasticsearch/healthcheck.sh
+          resources:
+            limits: {}
+            requests:
+              cpu: 25m
+              memory: 256Mi
+          volumeMounts:
+            - name: data
+              mountPath: /bitnami/elasticsearch/data
+            - name: elasticsearch-certificates
+              mountPath: /opt/bitnami/elasticsearch/config/certs
+              readOnly: true
+      volumes:
+        - name: "data"
+          emptyDir: {}
+        - name: elasticsearch-certificates
+          secret:
+            secretName: elasticsearch-coordinating-crt
+            defaultMode: 256

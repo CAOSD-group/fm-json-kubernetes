@@ -1,0 +1,28 @@
+KubeLinter development
+
+C:\Users\CAOSD\projects\tools_validation\manifests_yamls\.cmp_2.yaml: (object: argocd/argocd-repo-server apps/v1, Kind=Deployment) The container "install-envsubst" is using an invalid container image, "tbalza/envsubst:latest". Please use images that are not blocked by the `BlockList` criteria : [".*:(latest)$" "^[^:]*$" "(.*/[^:]+)$"] (check: latest-tag, remediation: Use a container image with a specific tag other than latest.)
+
+C:\Users\CAOSD\projects\tools_validation\manifests_yamls\.cmp_2.yaml: (object: argocd/argocd-repo-server apps/v1, Kind=Deployment) object has no selector specified (check: mismatching-selector, remediation: Confirm that your deployment selector correctly matches the labels in its pod template.)
+
+C:\Users\CAOSD\projects\tools_validation\manifests_yamls\.cmp_2.yaml: (object: argocd/argocd-repo-server apps/v1, Kind=Deployment) container "install-envsubst" does not have a read-only root file system (check: no-read-only-root-fs, remediation: Set readOnlyRootFilesystem to true in the container securityContext.)
+
+C:\Users\CAOSD\projects\tools_validation\manifests_yamls\.cmp_2.yaml: (object: argocd/argocd-repo-server apps/v1, Kind=Deployment) container "argocd-repo-server" does not have a read-only root file system (check: no-read-only-root-fs, remediation: Set readOnlyRootFilesystem to true in the container securityContext.)
+
+C:\Users\CAOSD\projects\tools_validation\manifests_yamls\.cmp_2.yaml: (object: argocd/argocd-repo-server apps/v1, Kind=Deployment) container "install-envsubst" is not set to runAsNonRoot (check: run-as-non-root, remediation: Set runAsUser to a non-zero number and runAsNonRoot to true in your pod or container securityContext. Refer to https://kubernetes.io/docs/tasks/configure-pod-container/security-context/ for details.)
+
+C:\Users\CAOSD\projects\tools_validation\manifests_yamls\.cmp_2.yaml: (object: argocd/argocd-repo-server apps/v1, Kind=Deployment) container "install-envsubst" has cpu request 0 (check: unset-cpu-requirements, remediation: Set CPU requests for your container based on its requirements. Refer to https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits for details.)
+
+C:\Users\CAOSD\projects\tools_validation\manifests_yamls\.cmp_2.yaml: (object: argocd/argocd-repo-server apps/v1, Kind=Deployment) container "argocd-repo-server" has cpu request 0 (check: unset-cpu-requirements, remediation: Set CPU requests for your container based on its requirements. Refer to https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits for details.)
+
+C:\Users\CAOSD\projects\tools_validation\manifests_yamls\.cmp_2.yaml: (object: argocd/argocd-repo-server apps/v1, Kind=Deployment) container "install-envsubst" has memory limit 0 (check: unset-memory-requirements, remediation: Set memory limits for your container based on its requirements. Refer to https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits for details.)
+
+C:\Users\CAOSD\projects\tools_validation\manifests_yamls\.cmp_2.yaml: (object: argocd/argocd-repo-server apps/v1, Kind=Deployment) container "argocd-repo-server" has memory limit 0 (check: unset-memory-requirements, remediation: Set memory limits for your container based on its requirements. Refer to https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits for details.)
+
+C:\Users\CAOSD\projects\tools_validation\manifests_yamls\pod.yaml: (object: <no namespace>/nginx /v1, Kind=Pod) container "nginx" does not have a read-only root file system (check: no-read-only-root-fs, remediation: Set readOnlyRootFilesystem to true in the container securityContext.)
+
+C:\Users\CAOSD\projects\tools_validation\manifests_yamls\pod.yaml: (object: <no namespace>/nginx /v1, Kind=Pod) container "nginx" is not set to runAsNonRoot (check: run-as-non-root, remediation: Set runAsUser to a non-zero number and runAsNonRoot to true in your pod or container securityContext. Refer to https://kubernetes.io/docs/tasks/configure-pod-container/security-context/ for details.)
+
+C:\Users\CAOSD\projects\tools_validation\manifests_yamls\pod.yaml: (object: <no namespace>/nginx /v1, Kind=Pod) container "nginx" has cpu request 0 (check: unset-cpu-requirements, remediation: Set CPU requests for your container based on its requirements. Refer to https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits for details.)
+
+C:\Users\CAOSD\projects\tools_validation\manifests_yamls\pod.yaml: (object: <no namespace>/nginx /v1, Kind=Pod) container "nginx" has memory limit 0 (check: unset-memory-requirements, remediation: Set memory limits for your container based on its requirements. Refer to https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits for details.)
+

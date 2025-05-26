@@ -1,0 +1,193 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gvmd
+  namespace: gvm
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: gvmd
+  template:
+    metadata:
+      labels:
+        app: gvmd
+    spec:
+      nodeSelector:
+        type: edge1
+      initContainers:
+      - name: init-gvmd
+        image: busybox@sha256:023917ec6a886d0e8e15f28fb543515a5fcd8d938edb091e8147db4efed388ee
+        imagePullPolicy: IfNotPresent
+        command:
+        - sh
+        - -c
+        args:
+        - 'mkdir -p /var/lib/gvm/gvmd;
+
+          chown 1001:1001 /var/lib/gvm/gvmd;
+
+          chown 1001:1001 /var/lib/gvm;
+
+          chmod 755 /var/lib/gvm;
+
+          chown 1001:1001 /var/lib/gvm/data-objects;
+
+          chmod 777 /var/lib/gvm/data-objects;
+
+          '
+        volumeMounts:
+        - name: gvmd-data-mount
+          mountPath: /var/lib/gvm
+        - name: data-objects-mount
+          mountPath: /var/lib/gvm/data-objects/gvmd
+      - name: greenbone-feed-sync
+        image: greenbone/greenbone-feed-sync
+        command:
+        - sh
+        - -c
+        args:
+        - "set -e # Exit immediately if a command exits with a non-zero status.\n\n\
+          # chown commands\nchown 1001:1001 /var/lib/gvm/scap-data\nchown 1001:1001\
+          \ /var/lib/gvm/cert-data\n\n# SCAP data sync\necho \"Starting scap sync...\"\
+          \nif ! greenbone-feed-sync --type scap -vv; then\n  echo \"SCAP data sync\
+          \ failed, exiting...\"\n  exit 1\nfi\n\n# CERT data sync\necho \"Starting\
+          \ cert sync...\"\nif ! greenbone-feed-sync --type cert; then\n  echo \"\
+          CERT data sync failed, exiting...\"\n  exit 1\nfi\n\n# gvmd-data sync\n\
+          echo \"Starting gvmd-data sync...\"\nif ! greenbone-feed-sync --type gvmd-data\
+          \ -vv; then\n  echo \"gvmd-data sync failed, exiting...\"\n  exit 1\nfi\n\
+          \n# report-formats sync\necho \"Starting report-formats sync...\"\nif !\
+          \ greenbone-feed-sync --type report-formats -vv; then\n  echo \"gvmd-data\
+          \ sync failed, exiting...\"\n  exit 1\nfi\n"
+        volumeMounts:
+        - name: gvmd-data-mount
+          mountPath: /var/lib/gvm
+        - name: scap-data-mount
+          mountPath: /var/lib/gvm/scap-data/
+        - name: cert-data-mount
+          mountPath: /var/lib/gvm/cert-data
+        - name: data-objects-mount
+          mountPath: /var/lib/gvm/data-objects/gvmd
+      containers:
+      - name: gvmd
+        image: greenbone/gvmd@sha256:8ed324f538780b25585c194d0cc38406693e0c7cf4abeb1bb39ee6cd8cbce4fa
+        imagePullPolicy: IfNotPresent
+        command:
+        - /usr/local/bin/entrypoint
+        args:
+        - /mnt/gvmd-script/start-gvmd
+        volumeMounts:
+        - name: gvmd-data-mount
+          mountPath: /var/lib/gvm
+        - name: scap-data-mount
+          mountPath: /var/lib/gvm/scap-data/
+        - name: cert-data-mount
+          mountPath: /var/lib/gvm/cert-data
+        - name: data-objects-mount
+          mountPath: /var/lib/gvm/data-objects/gvmd
+        - name: gvmd-socket-mount
+          mountPath: /run/gvmd
+        - name: ospd-openvas-socket-client-mount
+          mountPath: /run/ospd
+        - name: psql-socket-mount
+          mountPath: /var/run/postgresql
+        - name: psql-data-mount
+          mountPath: /var/lib/postgresql
+        - name: start-gvmd-script-volume
+          mountPath: /mnt/gvmd-script
+        - name: gvmd-logging-conf-volume
+          mountPath: /etc/gvm/
+        resources:
+          requests:
+            memory: 2Gi
+            cpu: 500m
+          limits:
+            memory: 4Gi
+            cpu: '2'
+      - name: ospd-socat-client
+        image: alpine/socat@sha256:13740b3335ab993c685ff86297ccb24ed15f4e9a1e20d50ad0d1ea39a503ed66
+        imagePullPolicy: IfNotPresent
+        command:
+        - /bin/sh
+        - -c
+        args:
+        - "#!/bin/sh\n# Set umask to ensure group read/write/execute permissions for\
+          \ new files\numask 002\n\n# Change ownership of directory and setgid for\
+          \ inheritance\nchown 1001:1001 /run/ospd\nchmod g+s /run/ospd\n\n# Function\
+          \ to start socat\nstart_socat() {\n  # Remove the existing socket file,\
+          \ if it exists\n  rm -f /run/ospd/ospd-openvas.sock\n\n  # Start socat with\
+          \ retry on failure\n  while true; do\n    echo \"Starting socat...\"\n \
+          \   socat -d -d -v UNIX-LISTEN:/run/ospd/ospd-openvas.sock,reuseaddr,fork\
+          \ TCP:ospd-openvas-socat-service.gvm.svc.cluster.local:9390 # -d -d -d for\
+          \ full debug logging\n    echo \"socat terminated, restarting in 5 seconds...\"\
+          \n    sleep 5\n  done\n}\n\n# Start the socat function\nstart_socat\n"
+        volumeMounts:
+        - name: ospd-openvas-socket-client-mount
+          mountPath: /run/ospd
+        resources:
+          requests:
+            memory: 16Mi
+            cpu: 100m
+          limits:
+            memory: 64Mi
+            cpu: '1'
+      - name: gsa
+        image: greenbone/gsa@sha256:bd817922d58715397d76ed64e93901288889c8685158dace7109d6392b592232
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /login
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 2
+          successThreshold: 1
+          failureThreshold: 3
+        volumeMounts:
+        - name: gvmd-socket-mount
+          mountPath: /run/gvmd
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 200m
+            ephemeral-storage: 5Gi
+          limits:
+            memory: 256Mi
+            cpu: 500m
+            ephemeral-storage: 10Gi
+      volumes:
+      - name: gvmd-data-mount
+        persistentVolumeClaim:
+          claimName: gvmd-data-vol
+      - name: scap-data-mount
+        persistentVolumeClaim:
+          claimName: scap-data-vol
+      - name: cert-data-mount
+        persistentVolumeClaim:
+          claimName: cert-data-vol
+      - name: data-objects-mount
+        persistentVolumeClaim:
+          claimName: data-objects-vol
+      - name: psql-data-mount
+        persistentVolumeClaim:
+          claimName: psql-data-mount-pg-gvm-0
+      - name: psql-socket-mount
+        persistentVolumeClaim:
+          claimName: psql-socket-mount-pg-gvm-0
+      - name: gvmd-socket-mount
+        persistentVolumeClaim:
+          claimName: gvmd-socket-vol
+      - name: ospd-openvas-socket-client-mount
+        persistentVolumeClaim:
+          claimName: ospd-openvas-socket-client-vol
+      - name: start-gvmd-script-volume
+        configMap:
+          name: start-gvmd-script
+          defaultMode: 493
+      - name: gvmd-logging-conf-volume
+        configMap:
+          name: gvmd-logging-conf

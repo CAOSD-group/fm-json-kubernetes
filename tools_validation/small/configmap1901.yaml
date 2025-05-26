@@ -1,0 +1,202 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jenkins
+data:
+  jenkins.yaml: |-
+    jenkins:
+      agentProtocols:
+      - "JNLP4-connect"
+      - "Ping"
+      authorizationStrategy:
+        loggedInUsersCanDoAnything:
+          allowAnonymousRead: false
+      crumbIssuer:
+        standard:
+          excludeClientIPFromCrumb: false
+      disableRememberMe: false
+      disabledAdministrativeMonitors:
+      - "jenkins.diagnostics.ControllerExecutorsNoAgents"
+      labelAtoms:
+      - name: "built-in"
+      - name: "jenkins-swarm-b7f2t-076ddb17"
+      - name: "shared"
+      - name: "swarm"
+      markupFormatter: "plainText"
+      mode: NORMAL
+      myViewsTabBar: "standard"
+      nodeMonitors:
+      - "architecture"
+      - "clock"
+      - diskSpace:
+          freeSpaceThreshold: "1GiB"
+          freeSpaceWarningThreshold: "2GiB"
+      - "swapSpace"
+      - tmpSpace:
+          freeSpaceThreshold: "1GiB"
+          freeSpaceWarningThreshold: "2GiB"
+      - "responseTime"
+      numExecutors: 0
+      primaryView:
+        all:
+          name: "all"
+      projectNamingStrategy: "standard"
+      quietPeriod: 5
+      remotingSecurity:
+        enabled: true
+      scmCheckoutRetryCount: 0
+      securityRealm:
+        local:
+          allowsSignup: false
+          enableCaptcha: false
+          users:
+          - id: "admin"
+            name: "admin"
+            password: admin
+            properties:
+            - "userCommunityProperty"
+            - "consoleUrlProvider"
+            - "myView"
+            - preferredProvider:
+                providerId: "default"
+            - "theme"
+            - "timezone"
+            - "experimentalFlags"
+            - mailer:
+                emailAddress: "95112082@qq.com"
+            - "apiToken"
+            - "favorite"
+      slaveAgentPort: 32767
+      updateCenter:
+        sites:
+        - id: "default"
+          url: "https://updates.jenkins.io/update-center.json"
+      views:
+      - all:
+          name: "all"
+      viewsTabBar: "standard"
+    globalCredentialsConfiguration:
+      configuration:
+        providerFilter: "none"
+        typeFilter: "none"
+    appearance:
+      prism:
+        theme: PRISM
+      themeManager:
+        disableUserThemes: false
+    security:
+      apiToken:
+        creationOfLegacyTokenEnabled: false
+        tokenGenerationOnCreationEnabled: false
+        usageStatisticsEnabled: true
+      gitHooks:
+        allowedOnAgents: false
+        allowedOnController: false
+      gitHostKeyVerificationConfiguration:
+        sshHostKeyVerificationStrategy: "knownHostsFileVerificationStrategy"
+      sSHD:
+        port: -1
+    unclassified:
+      bitbucketEndpointConfiguration:
+        endpoints:
+        - bitbucketCloudEndpoint:
+            enableCache: false
+            manageHooks: false
+            repositoriesCacheDuration: 0
+            teamCacheDuration: 0
+      buildDiscarders:
+        configuredBuildDiscarders:
+        - "jobBuildDiscarder"
+      buildStepOperation:
+        enabled: false
+      email-ext:
+        adminRequiredForTemplateTesting: false
+        allowUnregisteredEnabled: false
+        charset: "UTF-8"
+        debugMode: false
+        defaultBody: |-
+          $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
+
+          Check console output at $BUILD_URL to view the results.
+        defaultSubject: "$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!"
+        defaultTriggerIds:
+        - "hudson.plugins.emailext.plugins.trigger.FailureTrigger"
+        maxAttachmentSize: -1
+        maxAttachmentSizeMb: -1
+        precedenceBulk: false
+        watchingEnabled: false
+      enrichedSummaryConfig:
+        enrichedSummaryEnabled: false
+        httpClientDelayBetweenRetriesInSeconds: 1
+        httpClientMaxRetries: 3
+        httpClientTimeoutInSeconds: 1
+      fingerprints:
+        fingerprintCleanupDisabled: false
+        storage: "file"
+      gitHubConfiguration:
+        apiRateLimitChecker: ThrottleForNormalize
+      gitHubPluginConfig:
+        hookUrl: "http://172.16.100.1:8080/jenkins/github-webhook/"
+      globalTimeOutConfiguration:
+        operations:
+        - "abortOperation"
+        overwriteable: false
+      injectionConfig:
+        allowUntrusted: false
+        checkForBuildAgentErrors: false
+        enabled: false
+        enforceUrl: false
+        injectCcudExtension: false
+        injectMavenExtension: false
+      junitTestResultStorage:
+        storage: "file"
+      location:
+        adminAddress: "没有配置邮箱地址 <nobody@nowhere>"
+        url: "http://172.16.100.1:8080/jenkins/"
+      mailer:
+        charset: "UTF-8"
+        useSsl: false
+        useTls: false
+      pollSCM:
+        pollingThreadCount: 10
+      prometheusConfiguration:
+        appendParamLabel: false
+        appendStatusLabel: false
+        collectCodeCoverage: false
+        collectDiskUsage: true
+        collectNodeStatus: true
+        collectingMetricsPeriodInSeconds: 120
+        countAbortedBuilds: true
+        countFailedBuilds: true
+        countNotBuiltBuilds: true
+        countSuccessfulBuilds: true
+        countUnstableBuilds: true
+        defaultNamespace: "default"
+        fetchTestResults: true
+        jobAttributeName: "jenkins_job"
+        path: "prometheus"
+        perBuildMetrics: false
+        processingDisabledBuilds: false
+        useAuthenticatedEndpoint: false
+      scmGit:
+        addGitTagAction: false
+        allowSecondFetch: false
+        createAccountBasedOnEmail: false
+        disableGitToolChooser: false
+        hideCredentials: false
+        showEntireCommitSummaryInChanges: false
+        useExistingAccountWithSameEmail: false
+      timestamper:
+        allPipelines: false
+        elapsedTimeFormat: "'<b>'HH:mm:ss.S'</b> '"
+        systemTimeFormat: "'<b>'HH:mm:ss'</b> '"
+      whitelist:
+        enabled: false
+    tool:
+      git:
+        installations:
+        - home: "git"
+          name: "Default"
+      mavenGlobalConfig:
+        globalSettingsProvider: "standard"
+        settingsProvider: "standard"

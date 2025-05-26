@@ -1,0 +1,242 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jenkins-configuration-as-code
+  namespace: kube-ops
+data:
+  configuration-as-code.yaml: |
+    jenkins:
+      agentProtocols:
+      - "JNLP4-connect"
+      - "Ping"
+      authorizationStrategy:
+        loggedInUsersCanDoAnything:
+          allowAnonymousRead: false
+      clouds:
+      - kubernetes:
+          containerCap: 10
+          containerCapStr: "10"
+          jenkinsTunnel: "jenkins-master-service.kube-ops.svc.cluster.local:50000"
+          jenkinsUrl: "http://jenkins-master-service.kube-ops.svc.cluster.local:8080"
+          name: "local-minikube"
+          namespace: "kube-ops"
+          serverUrl: "https://kubernetes.default.svc.cluster.local"
+          skipTlsVerify: true
+          templates:
+          - containers:
+            - args: "9999999"
+              command: "sleep"
+              image: "gradle:6.9.1-jdk11"
+              livenessProbe:
+                failureThreshold: 0
+                initialDelaySeconds: 0
+                periodSeconds: 0
+                successThreshold: 0
+                timeoutSeconds: 0
+              name: "gradle-6-jdk11"
+              workingDir: "/home/jenkins/agent"
+            - image: "jenkins/jnlp-agent-docker"
+              livenessProbe:
+                failureThreshold: 0
+                initialDelaySeconds: 0
+                periodSeconds: 0
+                successThreshold: 0
+                timeoutSeconds: 0
+              name: "jnlp"
+              privileged: true
+              runAsGroup: "999"
+              runAsUser: "1000"
+              workingDir: "/home/jenkins/agent"
+            - args: "9999999"
+              command: "sleep"
+              image: "dtzar/helm-kubectl:latest"
+              livenessProbe:
+                failureThreshold: 0
+                initialDelaySeconds: 0
+                periodSeconds: 0
+                successThreshold: 0
+                timeoutSeconds: 0
+              name: "helm-kubectl"
+              workingDir: "/home/jenkins/agent"
+            id: "df8ded6e-8043-4344-9ae7-f29a94247980"
+            label: "jenkins-agent"
+            name: "jenkins-agent-pod"
+            namespace: "kube-ops"
+            nodeUsageMode: NORMAL
+            serviceAccount: "jenkins-admin"
+            volumes:
+            - persistentVolumeClaim:
+                claimName: "jenkins-agent-pv-claim"
+                mountPath: "/home/gradle/.gradle"
+                readOnly: false
+            - hostPathVolume:
+                hostPath: "/var/run/docker.sock"
+                mountPath: "/var/run/docker.sock"
+                readOnly: true
+            yamlMergeStrategy: "override"
+      crumbIssuer:
+        standard:
+          excludeClientIPFromCrumb: false
+      disableRememberMe: false
+      disabledAdministrativeMonitors:
+      - "hudson.util.DoubleLaunchChecker"
+      labelAtoms:
+      - name: "built-in"
+      - name: "jenkins-agent"
+      - name: "jenkins-master"
+      labelString: "jenkins-master"
+      markupFormatter: "plainText"
+      mode: EXCLUSIVE
+      myViewsTabBar: "standard"
+      nodeMonitors:
+      - "architecture"
+      - "clock"
+      - diskSpace:
+          freeSpaceThreshold: "1GiB"
+          freeSpaceWarningThreshold: "2GiB"
+      - "swapSpace"
+      - tmpSpace:
+          freeSpaceThreshold: "1GiB"
+          freeSpaceWarningThreshold: "2GiB"
+      - "responseTime"
+      numExecutors: 2
+      primaryView:
+        all:
+          name: "all"
+      projectNamingStrategy: "standard"
+      quietPeriod: 5
+      remotingSecurity:
+        enabled: true
+      scmCheckoutRetryCount: 0
+      securityRealm:
+        local:
+          allowsSignup: false
+          enableCaptcha: false
+          users:
+          - id: "ellendan"
+            name: "ellendan"
+            properties:
+            - "consoleUrlProvider"
+            - "myView"
+            - preferredProvider:
+                providerId: "default"
+            - "theme"
+            - "timezone"
+            - "experimentalFlags"
+            - mailer:
+                emailAddress: "ellendan000@gmail.com"
+            - "apiToken"
+      slaveAgentPort: 50000
+      updateCenter:
+        sites:
+        - id: "default"
+          url: "https://updates.jenkins.io/update-center.json"
+      views:
+      - all:
+          name: "all"
+      viewsTabBar: "standard"
+    globalCredentialsConfiguration:
+      configuration:
+        providerFilter: "none"
+        typeFilter: "none"
+    appearance:
+      prism:
+        theme: PRISM
+      themeManager:
+        disableUserThemes: false
+    security:
+      apiToken:
+        creationOfLegacyTokenEnabled: false
+        tokenGenerationOnCreationEnabled: false
+        usageStatisticsEnabled: true
+      gitHooks:
+        allowedOnAgents: false
+        allowedOnController: false
+      gitHostKeyVerificationConfiguration:
+        sshHostKeyVerificationStrategy: "knownHostsFileVerificationStrategy"
+    unclassified:
+      buildDiscarders:
+        configuredBuildDiscarders:
+        - "jobBuildDiscarder"
+      buildStepOperation:
+        enabled: false
+      email-ext:
+        adminRequiredForTemplateTesting: false
+        allowUnregisteredEnabled: false
+        charset: "UTF-8"
+        debugMode: false
+        defaultBody: |-
+          $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
+
+          Check console output at $BUILD_URL to view the results.
+        defaultContentType: "text/plain"
+        defaultSubject: "$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!"
+        defaultTriggerIds:
+        - "hudson.plugins.emailext.plugins.trigger.FailureTrigger"
+        maxAttachmentSize: -1
+        maxAttachmentSizeMb: -1
+        precedenceBulk: false
+        watchingEnabled: false
+      enrichedSummaryConfig:
+        enrichedSummaryEnabled: false
+        httpClientDelayBetweenRetriesInSeconds: 1
+        httpClientMaxRetries: 3
+        httpClientTimeoutInSeconds: 1
+      fingerprints:
+        fingerprintCleanupDisabled: false
+        storage: "file"
+      gitHubConfiguration:
+        apiRateLimitChecker: ThrottleForNormalize
+      gitHubPluginConfig:
+        hookUrl: "http://jenkins-master-service.kube-ops.svc.cluster.local/github-webhook/"
+      globalTimeOutConfiguration:
+        operations:
+        - "abortOperation"
+        overwriteable: false
+      injectionConfig:
+        allowUntrusted: false
+        checkForBuildAgentErrors: false
+        enabled: false
+        enforceUrl: false
+        injectCcudExtension: false
+        injectMavenExtension: false
+      junitTestResultStorage:
+        storage: "file"
+      location:
+        adminAddress: "address not configured yet <nobody@nowhere>"
+        url: "http://jenkins-master-service.kube-ops.svc.cluster.local/"
+      mailer:
+        charset: "UTF-8"
+        useSsl: false
+        useTls: false
+      pollSCM:
+        pollingThreadCount: 10
+      scmGit:
+        addGitTagAction: false
+        allowSecondFetch: false
+        createAccountBasedOnEmail: false
+        disableGitToolChooser: false
+        hideCredentials: false
+        showEntireCommitSummaryInChanges: false
+        useExistingAccountWithSameEmail: false
+      sonarGlobalConfiguration:
+        buildWrapperEnabled: false
+        installations:
+        - credentialsId: "4809ba2e-742c-488d-a700-d351d063cc9f"
+          name: "demo-sonarqube-service"
+          serverUrl: "http://demo-sonarqube-service.kube-ops.svc.cluster.local:9000"
+          triggers:
+            skipScmCause: false
+            skipUpstreamCause: false
+      timestamper:
+        allPipelines: false
+        elapsedTimeFormat: "'<b>'HH:mm:ss.S'</b> '"
+        systemTimeFormat: "'<b>'HH:mm:ss'</b> '"
+    tool:
+      git:
+        installations:
+        - home: "git"
+          name: "Default"
+      mavenGlobalConfig:
+        globalSettingsProvider: "standard"
+        settingsProvider: "standard"

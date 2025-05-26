@@ -1,0 +1,105 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerTemplate
+metadata:
+  name: github-template
+  namespace: tekton-builds
+spec:
+  params:
+  - name: kind
+  - name: resourcename
+  - name: agnostnamespace
+  - name: resourcenamespace
+  - name: containerregistry
+  - name: githubpat
+  - name: gitbranch
+  - name: gitsubpath
+  - name: gitrevision
+  - name: gitrepo
+  - name: imagename
+  - name: dockerfile
+  - name: gitcommitter
+  - name: gitcommiturl
+  - name: gitrepourl
+  - name: gitreponame
+  - name: gitcommitmessage
+  - name: gitcommittimestamp
+  resourcetemplates:
+  - apiVersion: tekton.dev/v1beta1
+    kind: TaskRun
+    metadata:
+      generateName: github-run-
+    spec:
+      serviceAccountName: tekton-triggers-github-sa
+      workspaces:
+      - name: ws
+        emptyDir: {}
+      taskSpec:
+        workspaces:
+        - name: ws
+        steps:
+        - name: setup
+          image: bitnami/git:2.44.0
+          onError: continue
+          env:
+          - name: GIT_REPO
+            value: $(tt.params.gitrepo)
+          - name: GIT_BRANCH
+            value: $(tt.params.gitbranch)
+          - name: GIT_REVISION
+            value: $(tt.params.gitrevision)
+          - name: GIT_COMMITTER_USERNAME
+            value: $(tt.params.gitcommitter)
+          - name: SUB_PATH
+            value: $(tt.params.gitsubpath)
+          - name: GIT_COMMIT_URL
+            value: $(tt.params.gitcommiturl)
+          - name: GIT_REPO_URL
+            value: $(tt.params.gitrepourl)
+          - name: GIT_REPO_NAME
+            value: $(tt.params.gitreponame)
+          - name: GIT_COMMIT_MESSAGE
+            value: $(tt.params.gitcommitmessage)
+          - name: GIT_COMMIT_TIMESTAMP
+            value: $(tt.params.gitcommittimestamp)
+          script: "#!/bin/bash\nexport URL=$(echo $(tt.params.gitrepourl) | sed \"\
+            s|://|://$(tt.params.githubpat)@|\")\nexport REPO_NAME=$(basename -s .git\
+            \ \"$(tt.params.gitreponame)\")\ncd $(workspaces.ws.path)\n\n# Clone the\
+            \ repository and check for errors\nif ! git clone ${URL} -b $(tt.params.gitbranch);\
+            \ then\n  echo \"Failed to clone the repository. Exiting...\"\n  exit\
+            \ 0\nfi\n\ncd ${REPO_NAME}\n\n# Set the file dates to the same as the\
+            \ repo after cloning\ngit ls-tree -r --long HEAD | while read -r mode\
+            \ type object size filename; do\n  commit_date=$(git log -1 --format=\"\
+            %ct\" -- \"$filename\")\n  touch -d \"@$commit_date\" \"$filename\"\n\
+            done\n\n# Do not check commits if this is an initial manual run\nif [[\
+            \ ! $(context.taskRun.name) =~ \"manual-run-\" ]]; then\n  # If subpath\
+            \ is defined, then check for the changed files\n  if [ \"$(tt.params.gitsubpath)\"\
+            \ != \"\" ]; then\n    git diff --name-only $(git log -1 --pretty=%P $(tt.params.gitrevision)\
+            \ | awk '{print $1}')..$(tt.params.gitrevision) > /tmp/changed_files\n\
+            \    NUM_CHANGES=$(grep -c \"^$(tt.params.gitsubpath)\" /tmp/changed_files)\n\
+            \    # If there are not changes on this subpath, exit with Error, but\
+            \ onError is set to continue\n    if [ ${NUM_CHANGES} == 0 ]; then\n \
+            \     echo \"No changed files for this pipeline, exiting...\"\n      exit\
+            \ 1\n    fi\n  fi\nfi\n\necho \"$(tt.params.containerregistry)/$(tt.params.imagename):$(echo\
+            \ $(tt.params.gitrevision) | head -c 7)\" > $(workspaces.ws.path)/image\n"
+        - name: build
+          image: gcr.io/kaniko-project/executor:v1.21.1-debug
+          script: "#!/busybox/sh\n\nCANCEL_PIPELINE=$(cat $(steps.step-setup.exitCode.path))\n\
+            if [ ${CANCEL_PIPELINE} -eq 1 ]; then\n  echo \"Pipeline cancelled. No\
+            \ changes detected in repo subpath of this container...\"\n  exit 0\n\
+            fi\nexport IMAGE=$(cat $(workspaces.ws.path)/image)\nexport REPO_NAME=$(basename\
+            \ -s .git \"$(tt.params.gitreponame)\")\necho \"Context: $(workspaces.ws.path)/${REPO_NAME}/$(tt.params.gitsubpath)\"\
+            \necho \"Dockerfile: $(tt.params.dockerfile)\"\necho \"Image: ${IMAGE}\"\
+            \n/kaniko/executor \\\n  --destination=${IMAGE} \\\n  --context=$(workspaces.ws.path)/${REPO_NAME}/$(tt.params.gitsubpath)\
+            \ \\\n  --dockerfile=$(tt.params.dockerfile) \\\n  --cache=true \\\n \
+            \ --cache-repo=$(tt.params.containerregistry)/$(tt.params.imagename)-cache\
+            \ \\\n  --insecure\n"
+        - name: deploy
+          image: bitnami/kubectl:1.29.2
+          script: "#!/usr/bin/bash\n\nCANCEL_PIPELINE=$(cat $(steps.step-setup.exitCode.path))\n\
+            if [ ${CANCEL_PIPELINE} -eq 1 ]; then\n  echo \"Pipeline cancelled. No\
+            \ changes detected in repo subpath of this container...\"\n  exit 0\n\
+            fi\n\nexport IMAGE=$(cat $(workspaces.ws.path)/image | sed 's/registry.$(tt.params.agnostnamespace):5000/localhost:30050/')\n\
+            kubectl set image $(tt.params.kind)/$(tt.params.resourcename) $(tt.params.resourcename)=${IMAGE}\
+            \ -n $(tt.params.resourcenamespace)\nkubectl rollout status $(tt.params.kind)/$(tt.params.resourcename)\
+            \ -n $(tt.params.resourcenamespace) -w\nkubectl annotate $(tt.params.kind)/$(tt.params.resourcename)\
+            \ kubernetes.io/change-cause=\"Update image to ${IMAGE}\" -n $(tt.params.resourcenamespace)\n"

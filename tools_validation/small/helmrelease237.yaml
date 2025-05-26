@@ -1,0 +1,189 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.7.3/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: home-assistant
+  namespace: home-assistant
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.3
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        namespace: flux-system
+        name: bjw-s
+  interval: 1h
+  driftDetection:
+    mode: enabled
+  values:
+    controllers:
+      home-assistant:
+        containers:
+          app:
+            image:
+              repository: ghcr.io/home-assistant/home-assistant
+              tag: 2025.3.4@sha256:5d510569a2ceaa2fa8f8a34b91bddd36f5f7f03e4cb23e942f245e4a5a98bbef
+              pullPolicy: IfNotPresent
+            env:
+              TZ: America/Chicago
+              DATABASE_URL:
+                secretKeyRef:
+                  name: postgresql-app
+                  key: uri
+            probes:
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 5
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+            securityContext:
+              readOnlyRootFilesystem: true
+        pod:
+          annotations:
+            k8s.v1.cni.cncf.io/networks: ipvlan
+          labels:
+            policy.gabe565.com/egress-mosquitto: "true"
+            policy.gabe565.com/egress-nodes: "true"
+            policy.gabe565.com/egress-namespace: "true"
+            policy.gabe565.com/egress-world-with-lan: "true"
+            policy.gabe565.com/ingress-ingress: "true"
+            policy.gabe565.com/ingress-world: "true"
+          affinity: &affinity
+            podAffinity:
+              preferredDuringSchedulingIgnoredDuringExecution:
+                - weight: 100
+                  podAffinityTerm:
+                    topologyKey: kubernetes.io/hostname
+                    labelSelector:
+                      matchLabels:
+                        app.kubernetes.io/name: home-assistant
+      code:
+        containers:
+          app:
+            image:
+              repository: ghcr.io/coder/code-server
+              tag: 4.98.2@sha256:9ed588a05d4e81aa464e753a409bc3b2b93267323d1c3975fbddf6f9aef84c26
+              pullPolicy: IfNotPresent
+            args:
+              - --disable-telemetry
+              - --disable-update-check
+              - --auth=none
+              - --user-data-dir=/config/.vscode
+              - /config
+            resources:
+              limits:
+                cpu: 500m
+                memory: 500Mi
+            securityContext:
+              readOnlyRootFilesystem: true
+              runAsUser: 0
+        pod:
+          labels:
+            policy.gabe565.com/ingress-ingress: "true"
+          affinity: *affinity
+
+    persistence:
+      config:
+        enabled: true
+        retain: true
+        storageClass: longhorn-ssd
+        accessMode: ReadWriteOnce
+        size: 2Gi
+      tmp:
+        enabled: true
+        type: emptyDir
+      cache:
+        enabled: true
+        type: emptyDir
+        advancedMounts:
+          home-assistant:
+            app:
+              - path: /root/.cache
+                subPath: root
+              - path: /run
+                subPath: run
+      code-config:
+        enabled: true
+        type: emptyDir
+        advancedMounts:
+          code:
+            app:
+              - path: /root/.config
+
+    service:
+      home-assistant:
+        controller: home-assistant
+        primary: true
+        ports:
+          http:
+            port: 8123
+      external:
+        controller: home-assistant
+        type: LoadBalancer
+        loadBalancerIP: 192.168.1.224
+        externalTrafficPolicy: Local
+        ports:
+          sonos:
+            port: 1400
+      code:
+        controller: code
+        ports:
+          http:
+            port: 8080
+
+    ingress:
+      home-assistant:
+        enabled: true
+        annotations:
+          nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+        hosts:
+          - host: ${app_url}
+            paths:
+              - path: /
+                service:
+                  identifier: home-assistant
+                  port: http
+        tls:
+          - secretName: ${certificate_name}
+            hosts:
+              - ${app_url}
+              - www.${app_url}
+      redirect:
+        enabled: true
+        annotations:
+          nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+          nginx.ingress.kubernetes.io/temporal-redirect: https://${app_url}
+        hosts:
+          - host: ${old_app_url}
+            paths:
+              - path: /
+                pathType: Exact
+                service:
+                  identifier: home-assistant
+                  port: http
+        tls:
+          - secretName: ${old_certificate_name}
+            hosts:
+              - ${old_app_url}
+              - www.${old_app_url}
+      code:
+        enabled: true
+        annotations:
+          nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.1.0/24,10.42.0.0/16"
+        hosts:
+          - host: ${code_url}
+            paths:
+              - path: /
+                service:
+                  identifier: code
+                  port: http
+        tls:
+          - secretName: ${certificate_name}
+            hosts:
+              - ${code_url}

@@ -1,0 +1,186 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.7.3/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: esphome
+  namespace: esphome
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.3
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        namespace: flux-system
+        name: bjw-s
+  interval: 1h
+  driftDetection:
+    mode: enabled
+  values:
+    defaultPodOptions:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                topologyKey: kubernetes.io/hostname
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/name: esphome
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+        runAsGroup: 65534
+        seccompProfile: { type: RuntimeDefault }
+
+    controllers:
+      esphome:
+        containers:
+          app:
+            image:
+              repository: ghcr.io/esphome/esphome
+              tag: 2025.3.1@sha256:b07600859a8b5431e7777cf1d094c583c09b1334ef6d7fa2f15df12968a4919e
+              pullPolicy: IfNotPresent
+            env:
+              TZ: America/Chicago
+              # From https://github.com/ptr727/ESPHome-NonRoot
+              PLATFORMIO_CORE_DIR: /cache/pio
+              # ESPHome "build_path" option, default is "/config/.esphome/build/[project]"
+              ESPHOME_BUILD_PATH: /cache/build
+              # ESPHome "data_dir" option, default is "/config/.esphome"
+              ESPHOME_DATA_DIR: /cache/data
+              # Set pip cache directory, default is "~/.cache/pip"
+              PIP_CACHE_DIR: /cache/pip
+            probes:
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 5
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+            securityContext:
+              readOnlyRootFilesystem: true
+              allowPrivilegeEscalation: false
+              capabilities: { drop: [ALL] }
+        pod:
+          annotations:
+            k8s.v1.cni.cncf.io/networks: ipvlan
+          terminationGracePeriodSeconds: 1
+          dnsConfig:
+            nameservers:
+              - 192.168.1.221
+          dnsPolicy: None
+          labels:
+            policy.gabe565.com/egress-adguard-dns: "true"
+            policy.gabe565.com/egress-world-with-lan: "true"
+            policy.gabe565.com/ingress-ingress: "true"
+      code:
+        containers:
+          app:
+            image:
+              repository: ghcr.io/coder/code-server
+              tag: 4.98.2@sha256:9ed588a05d4e81aa464e753a409bc3b2b93267323d1c3975fbddf6f9aef84c26
+              pullPolicy: IfNotPresent
+            args:
+              - --disable-telemetry
+              - --disable-update-check
+              - --auth=none
+              - --user-data-dir=/cache
+              - --extensions-dir=/cache
+              - /config
+            resources:
+              limits:
+                cpu: 500m
+                memory: 500Mi
+            securityContext:
+              readOnlyRootFilesystem: true
+              allowPrivilegeEscalation: false
+              capabilities: { drop: [ALL] }
+        pod:
+          labels:
+            policy.gabe565.com/egress-world: "true"
+            policy.gabe565.com/ingress-ingress: "true"
+
+    service:
+      esphome:
+        controller: esphome
+        ports:
+          http:
+            port: 6052
+      code:
+        controller: code
+        ports:
+          http:
+            port: 8080
+
+    persistence:
+      config:
+        enabled: true
+        type: nfs
+        server: 192.168.1.240
+        path: /volume1/software/ESPHome
+      cache:
+        enabled: true
+        storageClass: longhorn-ssd
+        accessMode: ReadWriteOnce
+        size: 8Gi
+        advancedMounts:
+          esphome:
+            app:
+              - path: /cache
+                subPath: esphome
+          code:
+            app:
+              - path: /cache
+                subPath: code
+      tmp:
+        enabled: true
+        type: emptyDir
+        globalMounts:
+          - path: /nonexistent
+            subPath: home
+          - path: /tmp
+            subPath: tmp
+
+    ingress:
+      esphome:
+        enabled: true
+        annotations:
+          nginx.ingress.kubernetes.io/auth-url: |-
+            http://ak-outpost-gabernetes.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx
+          nginx.ingress.kubernetes.io/auth-signin: |-
+            https://$host/outpost.goauthentik.io/start
+          nginx.ingress.kubernetes.io/auth-response-headers: |-
+            Set-Cookie,X-authentik-username,X-authentik-groups,X-authentik-email,X-authentik-name,X-authentik-uid
+          nginx.ingress.kubernetes.io/auth-snippet: |
+            proxy_set_header X-Forwarded-Host $http_host;
+        hosts:
+          - host: ${app_url}
+            paths:
+              - path: /
+                service:
+                  identifier: esphome
+                  port: http
+        tls:
+          - secretName: ${certificate_name}
+            hosts:
+              - ${app_url}
+      code:
+        enabled: true
+        annotations:
+          nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.1.0/24,10.42.0.0/16"
+        hosts:
+          - host: ${code_url}
+            paths:
+              - path: /
+                service:
+                  identifier: code
+                  port: http
+        tls:
+          - secretName: ${certificate_name}
+            hosts:
+              - ${code_url}

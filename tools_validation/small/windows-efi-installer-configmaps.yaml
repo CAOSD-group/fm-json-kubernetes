@@ -1,0 +1,102 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: windows11-autounattend
+data:
+  autounattend.xml: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<unattend xmlns=\"\
+    urn:schemas-microsoft-com:unattend\" xmlns:wcm=\"http://schemas.microsoft.com/WMIConfig/2002/State\"\
+    >\n  <settings pass=\"windowsPE\">\n    <component name=\"Microsoft-Windows-International-Core-WinPE\"\
+    \ processorArchitecture=\"amd64\" publicKeyToken=\"31bf3856ad364e35\" language=\"\
+    neutral\" versionScope=\"nonSxS\">\n      <SetupUILanguage>\n        <UILanguage>en-US</UILanguage>\n\
+    \      </SetupUILanguage>\n      <InputLocale>0409:00000409</InputLocale>\n  \
+    \    <SystemLocale>en-US</SystemLocale>\n      <UILanguage>en-US</UILanguage>\n\
+    \      <UserLocale>en-US</UserLocale>\n    </component>\n    <component name=\"\
+    Microsoft-Windows-PnpCustomizationsWinPE\" processorArchitecture=\"amd64\" publicKeyToken=\"\
+    31bf3856ad364e35\" language=\"neutral\" versionScope=\"nonSxS\">\n      <DriverPaths>\n\
+    \        <PathAndCredentials wcm:action=\"add\" wcm:keyValue=\"1\">\n        \
+    \  <Path>E:\\viostor\\w11\\amd64</Path>\n        </PathAndCredentials>\n     \
+    \ </DriverPaths>\n    </component>\n    <component name=\"Microsoft-Windows-Setup\"\
+    \ processorArchitecture=\"amd64\" publicKeyToken=\"31bf3856ad364e35\" language=\"\
+    neutral\" versionScope=\"nonSxS\">\n      <DiskConfiguration>\n        <WillShowUI>Never</WillShowUI>\n\
+    \        <Disk wcm:action=\"add\">\n          <!-- https://foxpa.ws/win-10-11-unattended\
+    \ -->\n          <!-- https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-uefigpt-based-hard-drive-partitions?view=windows-11\
+    \ -->\n          <CreatePartitions>\n              <CreatePartition wcm:action=\"\
+    add\">\n                  <Order>1</Order>\n                  <Type>Primary</Type>\n\
+    \                  <Size>700</Size>\n              </CreatePartition>\n      \
+    \        <CreatePartition wcm:action=\"add\">\n                  <Order>2</Order>\n\
+    \                  <Type>EFI</Type>\n                  <Size>100</Size>\n    \
+    \          </CreatePartition>\n              <CreatePartition wcm:action=\"add\"\
+    >\n                  <Order>3</Order>\n                  <Type>MSR</Type>\n  \
+    \                <Size>128</Size>\n              </CreatePartition>\n        \
+    \      <CreatePartition wcm:action=\"add\">\n                  <Order>4</Order>\n\
+    \                  <Type>Primary</Type>\n                  <Extend>true</Extend>\n\
+    \              </CreatePartition>\n          </CreatePartitions>\n          <ModifyPartitions>\n\
+    \            <ModifyPartition wcm:action=\"add\">\n                <Order>1</Order>\n\
+    \                <PartitionID>1</PartitionID>\n                <Label>WINRE</Label>\n\
+    \                <Format>NTFS</Format>\n                <!-- https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/microsoft-windows-setup-diskconfiguration-disk-modifypartitions-modifypartition-typeid\
+    \ -->\n                <TypeID>DE94BBA4-06D1-4D40-A16A-BFD50179D6AC</TypeID>\n\
+    \            </ModifyPartition>\n            <ModifyPartition wcm:action=\"add\"\
+    >\n                <Order>2</Order>\n                <PartitionID>2</PartitionID>\n\
+    \                <Label>EFI</Label>\n                <Format>FAT32</Format>\n\
+    \            </ModifyPartition>\n            <ModifyPartition wcm:action=\"add\"\
+    >\n                <Order>3</Order>\n                <PartitionID>3</PartitionID>\n\
+    \            </ModifyPartition>\n            <ModifyPartition wcm:action=\"add\"\
+    >\n                <Order>4</Order>\n                <PartitionID>4</PartitionID>\n\
+    \                <Label>Windows</Label>\n                <Letter>C</Letter>\n\
+    \                <Format>NTFS</Format>\n            </ModifyPartition>\n     \
+    \     </ModifyPartitions>\n          <DiskID>0</DiskID>\n          <WillWipeDisk>true</WillWipeDisk>\n\
+    \        </Disk>\n      </DiskConfiguration>\n      <ImageInstall>\n        <OSImage>\n\
+    \          <InstallFrom>\n            <MetaData wcm:action=\"add\">\n        \
+    \      <Key>/Image/Description</Key>\n              <Value>Windows 11 Pro</Value>\n\
+    \            </MetaData>\n          </InstallFrom>\n          <InstallTo>\n  \
+    \          <DiskID>0</DiskID>\n            <PartitionID>4</PartitionID>\n    \
+    \      </InstallTo>\n        </OSImage>\n      </ImageInstall>\n      <UserData>\n\
+    \        <AcceptEula>true</AcceptEula>\n        <ProductKey>\n          <Key/>\n\
+    \        </ProductKey>\n      </UserData>\n    </component>\n  </settings>\n \
+    \ <settings pass=\"specialize\">\n    <component name=\"Microsoft-Windows-International-Core\"\
+    \ processorArchitecture=\"amd64\" publicKeyToken=\"31bf3856ad364e35\" language=\"\
+    neutral\" versionScope=\"nonSxS\">\n      <InputLocale>0409:00000409</InputLocale>\n\
+    \      <SystemLocale>en-US</SystemLocale>\n      <UILanguage>en-US</UILanguage>\n\
+    \      <UserLocale>en-US</UserLocale>\n    </component>\n  </settings>\n  <settings\
+    \ pass=\"oobeSystem\">\n    <component name=\"Microsoft-Windows-Deployment\" processorArchitecture=\"\
+    amd64\" publicKeyToken=\"31bf3856ad364e35\" language=\"neutral\" versionScope=\"\
+    nonSxS\">\n      <Reseal>\n        <Mode>Audit</Mode>\n      </Reseal>\n    </component>\n\
+    \  </settings>\n  <settings pass=\"auditUser\">\n    <component name=\"Microsoft-Windows-Deployment\"\
+    \ processorArchitecture=\"amd64\" publicKeyToken=\"31bf3856ad364e35\" language=\"\
+    neutral\" versionScope=\"nonSxS\">\n      <RunSynchronous>\n        <RunSynchronousCommand\
+    \ wcm:action=\"add\">\n          <Order>1</Order>\n          <Path>PowerShell\
+    \ -ExecutionPolicy Bypass -NoProfile F:\\post-install.ps1</Path>\n          <Description>Run\
+    \ post-install script</Description>\n        </RunSynchronousCommand>\n      </RunSynchronous>\n\
+    \      <Generalize>\n        <ForceShutdownNow>true</ForceShutdownNow>\n     \
+    \   <Mode>OOBE</Mode>\n      </Generalize>\n    </component>\n  </settings>\n\
+    </unattend>\n"
+  post-install.ps1: '# Install virtio guest drivers
+
+    # ADDLOCAL is specified to workaround a bug in virtio-win-0.1.217.iso
+
+    # See:
+
+    #   - https://github.com/virtio-win/virtio-win-guest-tools-installer/issues/33
+
+    #   - https://github.com/virtio-win/virtio-win-pkg-scripts/issues/60
+
+    Start-Process msiexec -Wait -ArgumentList "/i E:\virtio-win-gt-x64.msi /qn /passive
+    /norestart ADDLOCAL=FE_balloon_driver,FE_network_driver,FE_vioinput_driver,FE_viorng_driver,FE_vioscsi_driver,FE_vioserial_driver,FE_viostor_driver,FE_viofs_driver,FE_viogpudo_driver"
+
+
+    # Install qemu guest agent
+
+    Start-Process msiexec -Wait -ArgumentList "/i E:\guest-agent\qemu-ga-x86_64.msi
+    /qn /passive /norestart"
+
+
+    # Rename cached unattend.xml to avoid it is picked up by sysprep
+
+    mv C:\Windows\Panther\unattend.xml C:\Windows\Panther\unattend.install.xml
+
+
+    # Eject CD, to avoid that the unattend.xml on the CD is picked up by sysprep
+
+    (New-Object -COMObject Shell.Application).NameSpace(17).ParseName("F:").InvokeVerb("Eject")
+
+    '

@@ -1,0 +1,418 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: eu
+  namespace: testing
+spec:
+  podManagementPolicy: Parallel
+  replicas: 3
+  serviceName: eu
+  selector:
+    matchLabels:
+      node_class: eu
+  template:
+    metadata:
+      labels:
+        appType: octez-node
+        node_class: eu
+        baking_node: 'true'
+        rpc_node: 'true'
+    spec:
+      containers:
+      - name: octez-node
+        image: tezos/tezos:v15-release
+        imagePullPolicy: IfNotPresent
+        command:
+        - /bin/sh
+        args:
+        - -c
+        - "#!/bin/sh\n\nset -xe\n\n# ensure we can run octez-client commands without\
+          \ specifying client dir\nln -s /var/tezos/client /home/tezos/.tezos-client\n\
+          #\n# Not every error is fatal on start.\n# So, we try a few times with increasing\
+          \ delays:\n\nfor d in 1 1 5 10 20 60 120; do\n\t/usr/local/bin/octez-node\
+          \ run\t\t\t\t\\\n\t\t\t--bootstrap-threshold 0\t\t\t\\\n\t\t\t--config-file\
+          \ /etc/tezos/config.json\n\tsleep $d\ndone\n\n#\n# Keep the container alive\
+          \ for troubleshooting on failures:\n\nsleep 3600\n"
+        envFrom: null
+        env:
+        - name: DAEMON
+          value: octez-node
+        volumeMounts:
+        - mountPath: /etc/tezos
+          name: config-volume
+        - mountPath: /var/tezos
+          name: var-volume
+        ports:
+        - containerPort: 8732
+          name: tezos-rpc
+        - containerPort: 9732
+          name: tezos-net
+        - containerPort: 9932
+          name: metrics
+        readinessProbe:
+          httpGet:
+            path: /is_synced
+            port: 31732
+      - name: baker-0-013-ptjakart
+        image: tezos/tezos:v15-release
+        imagePullPolicy: IfNotPresent
+        command:
+        - /bin/sh
+        args:
+        - -c
+        - "set -ex\n\nTEZ_VAR=/var/tezos\nTEZ_BIN=/usr/local/bin\nCLIENT_DIR=\"$TEZ_VAR/client\"\
+          \nNODE_DIR=\"$TEZ_VAR/node\"\nNODE_DATA_DIR=\"$TEZ_VAR/node/data\"\nBAKER_EXTRA_ARGS_FROM_ENV=${BAKER_EXTRA_ARGS}\n\
+          \nproto_command=\"013-PtJakart\"\n\nmy_baker_account=\"$(sed -n \"$(($BAKER_INDEX\
+          \ + 1))p\" < /etc/tezos/baker-account )\"\n\nif [ \"${my_baker_account}\"\
+          \ == \"\" ]; then\n  while true; do\n    printf \"This container is not\
+          \ baking, but exists \"\n    printf \"due to uneven numer of bakers within\
+          \ the statefulset\\n\"\n    sleep 300\n  done\nfi\n\nper_block_vote_file=/etc/tezos/baker-config/${my_baker_account}-${proto_command}-per-block-votes.json\n\
+          \nif [ ! -f \"$per_block_vote_file\" ]; then\n  echo \"Error: $per_block_vote_file\
+          \ not found\" >&2\n  exit 1\nfi\n\nif [ \"$(cat $per_block_vote_file)\"\
+          \ == \"null\" ]; then\n  cat << EOF\nYou must pass per-block-votes (such\
+          \ as liquidity_baking_toggle_vote) in values.yaml, for example:\nprotocols:\n\
+          - command: ${proto_command}\n  vote:\n    liquidity_baking_toggle_vote:\
+          \ \"on\"\nEOF\n  exit 1\nfi\nextra_args=\"--votefile ${per_block_vote_file}\"\
+          \n\nif [ -f /etc/tezos/baker-config/${my_baker_account}_operations_pool\
+          \ ]; then\n  extra_args=\"${extra_args} --operations-pool $(cat /etc/tezos/baker-config/${my_baker_account}_operations_pool)\"\
+          \nfi\n\nif [ -f /etc/tezos/baker-config/${my_baker_account}_dal_node_rpc_url\
+          \ ]; then\n  extra_args=\"${extra_args} --dal-node $(cat /etc/tezos/baker-config/${my_baker_account}_dal_node_rpc_url)\"\
+          \nfi\n\nCLIENT=\"$TEZ_BIN/octez-client -d $CLIENT_DIR\"\nCMD=\"$TEZ_BIN/octez-baker-$proto_command\
+          \ -d $CLIENT_DIR\"\n\n# ensure we can run octez-client commands without\
+          \ specifying client dir\nln -s /var/tezos/client /home/tezos/.tezos-client\n\
+          \nwhile ! $CLIENT rpc get chains/main/blocks/head; do\n    sleep 5\ndone\n\
+          \nexec $CMD run with local node $NODE_DATA_DIR ${extra_args} ${BAKER_EXTRA_ARGS_FROM_ENV}\
+          \ ${my_baker_account}\n"
+        envFrom: null
+        env:
+        - name: DAEMON
+          value: baker
+        - name: BAKER_INDEX
+          value: '0'
+        volumeMounts:
+        - mountPath: /etc/tezos
+          name: config-volume
+        - mountPath: /var/tezos
+          name: var-volume
+        - mountPath: /etc/tezos/baker-config
+          name: baker-config
+      - name: baker-1-013-ptjakart
+        image: tezos/tezos:v15-release
+        imagePullPolicy: IfNotPresent
+        command:
+        - /bin/sh
+        args:
+        - -c
+        - "set -ex\n\nTEZ_VAR=/var/tezos\nTEZ_BIN=/usr/local/bin\nCLIENT_DIR=\"$TEZ_VAR/client\"\
+          \nNODE_DIR=\"$TEZ_VAR/node\"\nNODE_DATA_DIR=\"$TEZ_VAR/node/data\"\nBAKER_EXTRA_ARGS_FROM_ENV=${BAKER_EXTRA_ARGS}\n\
+          \nproto_command=\"013-PtJakart\"\n\nmy_baker_account=\"$(sed -n \"$(($BAKER_INDEX\
+          \ + 1))p\" < /etc/tezos/baker-account )\"\n\nif [ \"${my_baker_account}\"\
+          \ == \"\" ]; then\n  while true; do\n    printf \"This container is not\
+          \ baking, but exists \"\n    printf \"due to uneven numer of bakers within\
+          \ the statefulset\\n\"\n    sleep 300\n  done\nfi\n\nper_block_vote_file=/etc/tezos/baker-config/${my_baker_account}-${proto_command}-per-block-votes.json\n\
+          \nif [ ! -f \"$per_block_vote_file\" ]; then\n  echo \"Error: $per_block_vote_file\
+          \ not found\" >&2\n  exit 1\nfi\n\nif [ \"$(cat $per_block_vote_file)\"\
+          \ == \"null\" ]; then\n  cat << EOF\nYou must pass per-block-votes (such\
+          \ as liquidity_baking_toggle_vote) in values.yaml, for example:\nprotocols:\n\
+          - command: ${proto_command}\n  vote:\n    liquidity_baking_toggle_vote:\
+          \ \"on\"\nEOF\n  exit 1\nfi\nextra_args=\"--votefile ${per_block_vote_file}\"\
+          \n\nif [ -f /etc/tezos/baker-config/${my_baker_account}_operations_pool\
+          \ ]; then\n  extra_args=\"${extra_args} --operations-pool $(cat /etc/tezos/baker-config/${my_baker_account}_operations_pool)\"\
+          \nfi\n\nif [ -f /etc/tezos/baker-config/${my_baker_account}_dal_node_rpc_url\
+          \ ]; then\n  extra_args=\"${extra_args} --dal-node $(cat /etc/tezos/baker-config/${my_baker_account}_dal_node_rpc_url)\"\
+          \nfi\n\nCLIENT=\"$TEZ_BIN/octez-client -d $CLIENT_DIR\"\nCMD=\"$TEZ_BIN/octez-baker-$proto_command\
+          \ -d $CLIENT_DIR\"\n\n# ensure we can run octez-client commands without\
+          \ specifying client dir\nln -s /var/tezos/client /home/tezos/.tezos-client\n\
+          \nwhile ! $CLIENT rpc get chains/main/blocks/head; do\n    sleep 5\ndone\n\
+          \nexec $CMD run with local node $NODE_DATA_DIR ${extra_args} ${BAKER_EXTRA_ARGS_FROM_ENV}\
+          \ ${my_baker_account}\n"
+        envFrom: null
+        env:
+        - name: DAEMON
+          value: baker
+        - name: BAKER_INDEX
+          value: '1'
+        volumeMounts:
+        - mountPath: /etc/tezos
+          name: config-volume
+        - mountPath: /var/tezos
+          name: var-volume
+        - mountPath: /etc/tezos/baker-config
+          name: baker-config
+      - name: baker-2-013-ptjakart
+        image: tezos/tezos:v15-release
+        imagePullPolicy: IfNotPresent
+        command:
+        - /bin/sh
+        args:
+        - -c
+        - "set -ex\n\nTEZ_VAR=/var/tezos\nTEZ_BIN=/usr/local/bin\nCLIENT_DIR=\"$TEZ_VAR/client\"\
+          \nNODE_DIR=\"$TEZ_VAR/node\"\nNODE_DATA_DIR=\"$TEZ_VAR/node/data\"\nBAKER_EXTRA_ARGS_FROM_ENV=${BAKER_EXTRA_ARGS}\n\
+          \nproto_command=\"013-PtJakart\"\n\nmy_baker_account=\"$(sed -n \"$(($BAKER_INDEX\
+          \ + 1))p\" < /etc/tezos/baker-account )\"\n\nif [ \"${my_baker_account}\"\
+          \ == \"\" ]; then\n  while true; do\n    printf \"This container is not\
+          \ baking, but exists \"\n    printf \"due to uneven numer of bakers within\
+          \ the statefulset\\n\"\n    sleep 300\n  done\nfi\n\nper_block_vote_file=/etc/tezos/baker-config/${my_baker_account}-${proto_command}-per-block-votes.json\n\
+          \nif [ ! -f \"$per_block_vote_file\" ]; then\n  echo \"Error: $per_block_vote_file\
+          \ not found\" >&2\n  exit 1\nfi\n\nif [ \"$(cat $per_block_vote_file)\"\
+          \ == \"null\" ]; then\n  cat << EOF\nYou must pass per-block-votes (such\
+          \ as liquidity_baking_toggle_vote) in values.yaml, for example:\nprotocols:\n\
+          - command: ${proto_command}\n  vote:\n    liquidity_baking_toggle_vote:\
+          \ \"on\"\nEOF\n  exit 1\nfi\nextra_args=\"--votefile ${per_block_vote_file}\"\
+          \n\nif [ -f /etc/tezos/baker-config/${my_baker_account}_operations_pool\
+          \ ]; then\n  extra_args=\"${extra_args} --operations-pool $(cat /etc/tezos/baker-config/${my_baker_account}_operations_pool)\"\
+          \nfi\n\nif [ -f /etc/tezos/baker-config/${my_baker_account}_dal_node_rpc_url\
+          \ ]; then\n  extra_args=\"${extra_args} --dal-node $(cat /etc/tezos/baker-config/${my_baker_account}_dal_node_rpc_url)\"\
+          \nfi\n\nCLIENT=\"$TEZ_BIN/octez-client -d $CLIENT_DIR\"\nCMD=\"$TEZ_BIN/octez-baker-$proto_command\
+          \ -d $CLIENT_DIR\"\n\n# ensure we can run octez-client commands without\
+          \ specifying client dir\nln -s /var/tezos/client /home/tezos/.tezos-client\n\
+          \nwhile ! $CLIENT rpc get chains/main/blocks/head; do\n    sleep 5\ndone\n\
+          \nexec $CMD run with local node $NODE_DATA_DIR ${extra_args} ${BAKER_EXTRA_ARGS_FROM_ENV}\
+          \ ${my_baker_account}\n"
+        envFrom: null
+        env:
+        - name: DAEMON
+          value: baker
+        - name: BAKER_INDEX
+          value: '2'
+        volumeMounts:
+        - mountPath: /etc/tezos
+          name: config-volume
+        - mountPath: /var/tezos
+          name: var-volume
+        - mountPath: /etc/tezos/baker-config
+          name: baker-config
+      - name: baker-3-013-ptjakart
+        image: tezos/tezos:v15-release
+        imagePullPolicy: IfNotPresent
+        command:
+        - /bin/sh
+        args:
+        - -c
+        - "set -ex\n\nTEZ_VAR=/var/tezos\nTEZ_BIN=/usr/local/bin\nCLIENT_DIR=\"$TEZ_VAR/client\"\
+          \nNODE_DIR=\"$TEZ_VAR/node\"\nNODE_DATA_DIR=\"$TEZ_VAR/node/data\"\nBAKER_EXTRA_ARGS_FROM_ENV=${BAKER_EXTRA_ARGS}\n\
+          \nproto_command=\"013-PtJakart\"\n\nmy_baker_account=\"$(sed -n \"$(($BAKER_INDEX\
+          \ + 1))p\" < /etc/tezos/baker-account )\"\n\nif [ \"${my_baker_account}\"\
+          \ == \"\" ]; then\n  while true; do\n    printf \"This container is not\
+          \ baking, but exists \"\n    printf \"due to uneven numer of bakers within\
+          \ the statefulset\\n\"\n    sleep 300\n  done\nfi\n\nper_block_vote_file=/etc/tezos/baker-config/${my_baker_account}-${proto_command}-per-block-votes.json\n\
+          \nif [ ! -f \"$per_block_vote_file\" ]; then\n  echo \"Error: $per_block_vote_file\
+          \ not found\" >&2\n  exit 1\nfi\n\nif [ \"$(cat $per_block_vote_file)\"\
+          \ == \"null\" ]; then\n  cat << EOF\nYou must pass per-block-votes (such\
+          \ as liquidity_baking_toggle_vote) in values.yaml, for example:\nprotocols:\n\
+          - command: ${proto_command}\n  vote:\n    liquidity_baking_toggle_vote:\
+          \ \"on\"\nEOF\n  exit 1\nfi\nextra_args=\"--votefile ${per_block_vote_file}\"\
+          \n\nif [ -f /etc/tezos/baker-config/${my_baker_account}_operations_pool\
+          \ ]; then\n  extra_args=\"${extra_args} --operations-pool $(cat /etc/tezos/baker-config/${my_baker_account}_operations_pool)\"\
+          \nfi\n\nif [ -f /etc/tezos/baker-config/${my_baker_account}_dal_node_rpc_url\
+          \ ]; then\n  extra_args=\"${extra_args} --dal-node $(cat /etc/tezos/baker-config/${my_baker_account}_dal_node_rpc_url)\"\
+          \nfi\n\nCLIENT=\"$TEZ_BIN/octez-client -d $CLIENT_DIR\"\nCMD=\"$TEZ_BIN/octez-baker-$proto_command\
+          \ -d $CLIENT_DIR\"\n\n# ensure we can run octez-client commands without\
+          \ specifying client dir\nln -s /var/tezos/client /home/tezos/.tezos-client\n\
+          \nwhile ! $CLIENT rpc get chains/main/blocks/head; do\n    sleep 5\ndone\n\
+          \nexec $CMD run with local node $NODE_DATA_DIR ${extra_args} ${BAKER_EXTRA_ARGS_FROM_ENV}\
+          \ ${my_baker_account}\n"
+        envFrom: null
+        env:
+        - name: DAEMON
+          value: baker
+        - name: BAKER_INDEX
+          value: '3'
+        volumeMounts:
+        - mountPath: /etc/tezos
+          name: config-volume
+        - mountPath: /var/tezos
+          name: var-volume
+        - mountPath: /etc/tezos/baker-config
+          name: baker-config
+      - name: baker-4-013-ptjakart
+        image: tezos/tezos:v15-release
+        imagePullPolicy: IfNotPresent
+        command:
+        - /bin/sh
+        args:
+        - -c
+        - "set -ex\n\nTEZ_VAR=/var/tezos\nTEZ_BIN=/usr/local/bin\nCLIENT_DIR=\"$TEZ_VAR/client\"\
+          \nNODE_DIR=\"$TEZ_VAR/node\"\nNODE_DATA_DIR=\"$TEZ_VAR/node/data\"\nBAKER_EXTRA_ARGS_FROM_ENV=${BAKER_EXTRA_ARGS}\n\
+          \nproto_command=\"013-PtJakart\"\n\nmy_baker_account=\"$(sed -n \"$(($BAKER_INDEX\
+          \ + 1))p\" < /etc/tezos/baker-account )\"\n\nif [ \"${my_baker_account}\"\
+          \ == \"\" ]; then\n  while true; do\n    printf \"This container is not\
+          \ baking, but exists \"\n    printf \"due to uneven numer of bakers within\
+          \ the statefulset\\n\"\n    sleep 300\n  done\nfi\n\nper_block_vote_file=/etc/tezos/baker-config/${my_baker_account}-${proto_command}-per-block-votes.json\n\
+          \nif [ ! -f \"$per_block_vote_file\" ]; then\n  echo \"Error: $per_block_vote_file\
+          \ not found\" >&2\n  exit 1\nfi\n\nif [ \"$(cat $per_block_vote_file)\"\
+          \ == \"null\" ]; then\n  cat << EOF\nYou must pass per-block-votes (such\
+          \ as liquidity_baking_toggle_vote) in values.yaml, for example:\nprotocols:\n\
+          - command: ${proto_command}\n  vote:\n    liquidity_baking_toggle_vote:\
+          \ \"on\"\nEOF\n  exit 1\nfi\nextra_args=\"--votefile ${per_block_vote_file}\"\
+          \n\nif [ -f /etc/tezos/baker-config/${my_baker_account}_operations_pool\
+          \ ]; then\n  extra_args=\"${extra_args} --operations-pool $(cat /etc/tezos/baker-config/${my_baker_account}_operations_pool)\"\
+          \nfi\n\nif [ -f /etc/tezos/baker-config/${my_baker_account}_dal_node_rpc_url\
+          \ ]; then\n  extra_args=\"${extra_args} --dal-node $(cat /etc/tezos/baker-config/${my_baker_account}_dal_node_rpc_url)\"\
+          \nfi\n\nCLIENT=\"$TEZ_BIN/octez-client -d $CLIENT_DIR\"\nCMD=\"$TEZ_BIN/octez-baker-$proto_command\
+          \ -d $CLIENT_DIR\"\n\n# ensure we can run octez-client commands without\
+          \ specifying client dir\nln -s /var/tezos/client /home/tezos/.tezos-client\n\
+          \nwhile ! $CLIENT rpc get chains/main/blocks/head; do\n    sleep 5\ndone\n\
+          \nexec $CMD run with local node $NODE_DATA_DIR ${extra_args} ${BAKER_EXTRA_ARGS_FROM_ENV}\
+          \ ${my_baker_account}\n"
+        envFrom: null
+        env:
+        - name: DAEMON
+          value: baker
+        - name: BAKER_INDEX
+          value: '4'
+        volumeMounts:
+        - mountPath: /etc/tezos
+          name: config-volume
+        - mountPath: /var/tezos
+          name: var-volume
+        - mountPath: /etc/tezos/baker-config
+          name: baker-config
+      - name: logger
+        image: ghcr.io/tacoinfra/tezos-k8s-utils:main
+        imagePullPolicy: IfNotPresent
+        args:
+        - logger
+        envFrom:
+        - configMapRef:
+            name: tezos-config
+        env:
+        - name: MY_POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: MY_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: MY_POD_TYPE
+          value: node
+        - name: MY_NODE_CLASS
+          value: eu
+        - name: DAEMON
+          value: logger
+        volumeMounts:
+        - mountPath: /etc/tezos
+          name: config-volume
+        - mountPath: /var/tezos
+          name: var-volume
+      - name: sidecar
+        image: ghcr.io/tacoinfra/tezos-k8s-utils:main
+        imagePullPolicy: IfNotPresent
+        args:
+        - sidecar
+        envFrom:
+        - configMapRef:
+            name: tezos-config
+        env:
+        - name: MY_POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: MY_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: MY_POD_TYPE
+          value: node
+        - name: MY_NODE_CLASS
+          value: eu
+        - name: DAEMON
+          value: sidecar
+        volumeMounts:
+        - mountPath: /etc/tezos
+          name: config-volume
+        - mountPath: /var/tezos
+          name: var-volume
+        resources:
+          limits:
+            memory: 100Mi
+          requests:
+            memory: 80Mi
+      initContainers:
+      - name: config-generator
+        image: ghcr.io/tacoinfra/tezos-k8s-utils:main
+        imagePullPolicy: IfNotPresent
+        args:
+        - config-generator
+        envFrom:
+        - configMapRef:
+            name: tezos-config
+        env:
+        - name: MY_POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: MY_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: MY_POD_TYPE
+          value: node
+        - name: MY_NODE_CLASS
+          value: eu
+        - name: DAEMON
+          value: config-generator
+        volumeMounts:
+        - mountPath: /etc/tezos
+          name: config-volume
+        - mountPath: /var/tezos
+          name: var-volume
+        - mountPath: /etc/secret-volume
+          name: tezos-accounts
+      - name: wait-for-dns
+        image: ghcr.io/tacoinfra/tezos-k8s-utils:main
+        imagePullPolicy: IfNotPresent
+        args:
+        - wait-for-dns
+        envFrom:
+        - configMapRef:
+            name: tezos-config
+        env:
+        - name: DAEMON
+          value: wait-for-dns
+        volumeMounts:
+        - mountPath: /etc/tezos
+          name: config-volume
+        - mountPath: /var/tezos
+          name: var-volume
+      - name: upgrade-storage
+        image: tezos/tezos:v15-release
+        imagePullPolicy: IfNotPresent
+        command:
+        - /bin/sh
+        args:
+        - -c
+        - "set -ex\n\nif [ ! -e /var/tezos/node/data/context/store.dict ]\nthen\n\
+          \  printf \"No store in data dir found, probably initial start, doing nothing.\"\
+          \n  exit 0\nfi\noctez-node upgrade storage --config /etc/tezos/config.json\n"
+        envFrom: null
+        env:
+        - name: DAEMON
+          value: upgrade-storage
+        volumeMounts:
+        - mountPath: /etc/tezos
+          name: config-volume
+        - mountPath: /var/tezos
+          name: var-volume
+      securityContext:
+        fsGroup: 1000
+      volumes:
+      - emptyDir: {}
+        name: config-volume
+      - name: tezos-accounts
+        secret:
+          secretName: tezos-secret
+      - name: baker-config
+        configMap:
+          name: baker-config
+  volumeClaimTemplates:
+  - metadata:
+      name: var-volume
+      namespace: testing
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 15Gi
