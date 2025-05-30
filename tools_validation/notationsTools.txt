@@ -1,0 +1,48 @@
+Pruebas sobre validacion de las herramientas.
+Sobre el folder de archivos small: 1788
+1º Kube-linter: True = 1625 ,False = 163
+2º Kube-score: True = 1176 ,False = 612
+3º Kyverno: True = 1196, False = 592
+4º OPA Gatekeeper: 
+
+
+
+
+
+
+Referencias URL:
+
+KubeLinter [
+https://thomasthornton.cloud/2024/01/31/enforcing-kubernetes-best-practices-and-simplifying-kubernetes-configuration-validation-with-kube-linter-and-github-actions/
+https://devopslearning.medium.com/end-to-end-llmops-pipeline-part-7-validating-kubernetes-manifests-with-kube-score-fa60a19f6581
+
+https://github.com/zegl/kube-score?tab=readme-ov-file
+
+
+
+Dowload kube-score:
+https://github.com/zegl/kube-score/releases
+]
+
+Otros:
+https://medium.com/@dangreenlee_/continually-validate-kubernetes-manifests-using-kubeconform-and-githubactions-ed74ed3ba4ca
+
+**Kyverno
+Se ha descargado directamente el ejecutable y se ha usado Kyverno CLI para la validacion de los YAMLS. Requiere de politicas para validar... se ha usado el folder por defecto Best Practices.
+Por el momento, la que mas tarda en validar... apply en cada archivo y comprobar todas las politicas de best-practices...aunmenta el t de validacion estatica:: Muchos minutos solo para 1.7k de archivos
+https://kyverno.io/docs/introduction/#quick-start
+Descarga del ejecutable desde: https://github.com/kyverno/kyverno/releases
+Politicas por defecto y usadas: https://kyverno.io/policies/?policytypes=validate
+Repo politicas: https://github.com/kyverno/policies?tab=readme-ov-file
+
+**Gatekeeper
+La herramienta a ver ahora es Gatekeeper, como en la anterior se ha descargado el ejecutable del CLI directamente para evaluar los ficheros YAML localmente. En este caso
+se llama gator CLI.
+The gator CLI is a tool for evaluating Gatekeeper ConstraintTemplates and Constraints in a local environment.
+Instalacion final mediante Go y el comando: go install github.com/open-policy-agent/gatekeeper/v3/cmd/gator@master
+Repo de las politicas por defecto: https://github.com/open-policy-agent/gatekeeper-library.git
+
+
+Gatekeeper, gator. Al no tener unas politicas definidas/predeterminadas se estan usando las localizadas en el repositorio de gatekeeper-library/library/general/ pero
+parece que no funcionan del todo bien... No invalidan ningun archivo de los que se ha probado.. ** Revisar.  
+

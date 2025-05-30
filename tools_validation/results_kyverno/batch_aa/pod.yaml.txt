@@ -1,0 +1,50 @@
+
+Applying 61 policy rule(s) to 1 resource(s)...
+
+policy add-safe-to-evict applied to default/Pod/nginx:
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  namespace: default
+spec:
+  containers:
+  - image: nginx:1.14.2
+    name: nginx
+    ports:
+    - containerPort: 80
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+skipped mutate policy add-safe-to-evict -> resource default/Pod/nginx
+
+skipped mutate policy add-safe-to-evict -> resource default/Pod/nginx
+policy disallow-default-namespace -> resource default/Pod/nginx failed:
+1 - validate-namespace validation error: Using 'default' namespace is not allowed. rule validate-namespace failed at path /metadata/namespace/
+
+policy drop-all-capabilities -> resource default/Pod/nginx failed:
+1 - require-drop-all validation failure: Containers must drop `ALL` capabilities.
+
+policy drop-cap-net-raw -> resource default/Pod/nginx failed:
+1 - require-drop-cap-net-raw validation failure: Containers must drop the `CAP_NET_RAW` capability.
+
+policy require-labels -> resource default/Pod/nginx failed:
+1 - check-for-labels validation error: The label `app.kubernetes.io/name` is required. rule check-for-labels failed at path /metadata/labels/
+
+policy require-requests-limits -> resource default/Pod/nginx failed:
+1 - validate-resources validation error: CPU and memory resource requests and memory limits are required for containers. rule validate-resources failed at path /spec/containers/0/resources/
+
+policy require-pod-probes -> resource default/Pod/nginx failed:
+1 - validate-probes validation failure: Liveness, readiness, or startup probes are required for all containers.
+
+policy require-ro-rootfs -> resource default/Pod/nginx failed:
+1 - validate-readOnlyRootFilesystem validation error: Root filesystem must be read-only. rule validate-readOnlyRootFilesystem failed at path /spec/containers/0/securityContext/
+
+policy restrict-image-registries -> resource default/Pod/nginx failed:
+1 - validate-registries validation error: Unknown image registry. rule validate-registries failed at path /spec/containers/0/image/
+
+
+pass: 7, fail: 8, warn: 0, error: 0, skip: 2 
