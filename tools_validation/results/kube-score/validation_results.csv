@@ -1,0 +1,6 @@
+file,valid,issues
+.cmp_1.yaml,True,
+.cmp_2.yaml,False,[CRITICAL] Container Image Tag; [CRITICAL] Pod NetworkPolicy; [CRITICAL] Container Image Pull Policy; [CRITICAL] Container Security Context ReadOnlyRootFilesystem; [CRITICAL] Container Resources; [CRITICAL] Container Ephemeral Storage Request and Limit; [CRITICAL] Container Security Context User Group ID; [CRITICAL] Deployment Pod Selector labels match template metadata labels; [CRITICAL] Deployment has PodDisruptionBudget; [WARNING] Deployment has host PodAntiAffinity
+0-dashboard_10.yaml,True,
+00_claims.yaml,True,
+pod.yaml,False,[CRITICAL] Pod NetworkPolicy; [CRITICAL] Container Image Pull Policy; [CRITICAL] Container Security Context ReadOnlyRootFilesystem; [CRITICAL] Container Resources; [CRITICAL] Container Ephemeral Storage Request and Limit; [CRITICAL] Container Security Context User Group ID

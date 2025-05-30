@@ -1,0 +1,4 @@
+
+##### FILE: 01-contour-config.yaml #####
+reading: reading from stdin: reading: reading yaml source: error unmarshaling JSON: while decoding JSON: json: cannot unmarshal string into Go value of type map[string]interface {}
+

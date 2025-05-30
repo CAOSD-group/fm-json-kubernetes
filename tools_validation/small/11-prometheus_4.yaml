@@ -1,0 +1,242 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-server-conf
+  namespace: observability
+  labels:
+    name: prometheus-server-conf
+data:
+  prometheus.rules: "groups:\n- name: devopscube demo alert\n  rules:\n  - alert:\
+    \ High Pod Memory\n    expr: sum(container_memory_usage_bytes) > 1\n    for: 1m\n\
+    \    labels:\n      severity: slack\n    annotations:\n      summary: High Memory\
+    \ Usage"
+  prometheus.yml: "global:\n  scrape_interval: 5s\n  evaluation_interval: 5s\n  keep_dropped_targets:\
+    \ 100\nalerting:\n  alertmanagers:\n  - scheme: http\n    static_configs:\n  \
+    \  - targets:\n      - \"alertmanager.monitoring.svc:9093\"\n# Scrape config for\
+    \ API servers.\n#\n# Kubernetes exposes API servers as endpoints to the default/kubernetes\n\
+    # service so this uses `endpoints` role and uses relabelling to only keep\n# the\
+    \ endpoints associated with the default/kubernetes service using the\n# default\
+    \ named port `https`. This works for single API server deployments as\n# well\
+    \ as HA API server deployments.\nscrape_configs:\n  - job_name: \"kubernetes-apiservers\"\
+    \n\n    kubernetes_sd_configs:\n      - role: endpoints\n\n    # Default to scraping\
+    \ over https. If required, just disable this or change to\n    # `http`.\n   \
+    \ scheme: https\n\n    # This TLS & authorization config is used to connect to\
+    \ the actual scrape\n    # endpoints for cluster components. This is separate\
+    \ to discovery auth\n    # configuration because discovery & scraping are two\
+    \ separate concerns in\n    # Prometheus. The discovery auth config is automatic\
+    \ if Prometheus runs inside\n    # the cluster. Otherwise, more config options\
+    \ have to be provided within the\n    # <kubernetes_sd_config>.\n    tls_config:\n\
+    \      ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt\n      #\
+    \ If your node certificates are self-signed or use a different CA to the\n   \
+    \   # master CA, then disable certificate verification below. Note that\n    \
+    \  # certificate verification is an integral part of a secure infrastructure\n\
+    \      # so this should only be disabled in a controlled environment. You can\n\
+    \      # disable certificate verification by uncommenting the line below.\n  \
+    \    #\n      # insecure_skip_verify: true\n    authorization:\n      credentials_file:\
+    \ /var/run/secrets/kubernetes.io/serviceaccount/token\n\n    # Keep only the default/kubernetes\
+    \ service endpoints for the https port. This\n    # will add targets for each\
+    \ API server which Kubernetes adds an endpoint to\n    # the default/kubernetes\
+    \ service.\n    relabel_configs:\n      - source_labels:\n          [\n      \
+    \      __meta_kubernetes_namespace,\n            __meta_kubernetes_service_name,\n\
+    \            __meta_kubernetes_endpoint_port_name,\n          ]\n        action:\
+    \ keep\n        regex: default;kubernetes;https\n\n  # Scrape config for nodes\
+    \ (kubelet).\n  - job_name: \"kubernetes-nodes\"\n\n    # Default to scraping\
+    \ over https. If required, just disable this or change to\n    # `http`.\n   \
+    \ scheme: https\n\n    # This TLS & authorization config is used to connect to\
+    \ the actual scrape\n    # endpoints for cluster components. This is separate\
+    \ to discovery auth\n    # configuration because discovery & scraping are two\
+    \ separate concerns in\n    # Prometheus. The discovery auth config is automatic\
+    \ if Prometheus runs inside\n    # the cluster. Otherwise, more config options\
+    \ have to be provided within the\n    # <kubernetes_sd_config>.\n    tls_config:\n\
+    \      ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt\n      #\
+    \ If your node certificates are self-signed or use a different CA to the\n   \
+    \   # master CA, then disable certificate verification below. Note that\n    \
+    \  # certificate verification is an integral part of a secure infrastructure\n\
+    \      # so this should only be disabled in a controlled environment. You can\n\
+    \      # disable certificate verification by uncommenting the line below.\n  \
+    \    #\n      # insecure_skip_verify: true\n    authorization:\n      credentials_file:\
+    \ /var/run/secrets/kubernetes.io/serviceaccount/token\n\n    kubernetes_sd_configs:\n\
+    \      - role: node\n\n    relabel_configs:\n      - action: labelmap\n      \
+    \  regex: __meta_kubernetes_node_label_(.+)\n\n  # Scrape config for Kubelet cAdvisor.\n\
+    \  #\n  # This is required for Kubernetes 1.7.3 and later, where cAdvisor metrics\n\
+    \  # (those whose names begin with 'container_') have been removed from the\n\
+    \  # Kubelet metrics endpoint.  This job scrapes the cAdvisor endpoint to\n  #\
+    \ retrieve those metrics.\n  #\n  # In Kubernetes 1.7.0-1.7.2, these metrics are\
+    \ only exposed on the cAdvisor\n  # HTTP endpoint; use the \"/metrics\" endpoint\
+    \ on the 4194 port of nodes. In\n  # that case (and ensure cAdvisor's HTTP server\
+    \ hasn't been disabled with the\n  # --cadvisor-port=0 Kubelet flag).\n  #\n \
+    \ # This job is not necessary and should be removed in Kubernetes 1.6 and\n  #\
+    \ earlier versions, or it will cause the metrics to be scraped twice.\n  - job_name:\
+    \ \"kubernetes-cadvisor\"\n\n    # Default to scraping over https. If required,\
+    \ just disable this or change to\n    # `http`.\n    scheme: https\n\n    # Starting\
+    \ Kubernetes 1.7.3 the cAdvisor metrics are under /metrics/cadvisor.\n    # Kubernetes\
+    \ CIS Benchmark recommends against enabling the insecure HTTP\n    # servers of\
+    \ Kubernetes, therefore the cAdvisor metrics on the secure handler\n    # are\
+    \ used.\n    metrics_path: /metrics/cadvisor\n\n    # This TLS & authorization\
+    \ config is used to connect to the actual scrape\n    # endpoints for cluster\
+    \ components. This is separate to discovery auth\n    # configuration because\
+    \ discovery & scraping are two separate concerns in\n    # Prometheus. The discovery\
+    \ auth config is automatic if Prometheus runs inside\n    # the cluster. Otherwise,\
+    \ more config options have to be provided within the\n    # <kubernetes_sd_config>.\n\
+    \    tls_config:\n      ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt\n\
+    \      # If your node certificates are self-signed or use a different CA to the\n\
+    \      # master CA, then disable certificate verification below. Note that\n \
+    \     # certificate verification is an integral part of a secure infrastructure\n\
+    \      # so this should only be disabled in a controlled environment. You can\n\
+    \      # disable certificate verification by uncommenting the line below.\n  \
+    \    #\n      # insecure_skip_verify: true\n    authorization:\n      credentials_file:\
+    \ /var/run/secrets/kubernetes.io/serviceaccount/token\n\n    kubernetes_sd_configs:\n\
+    \      - role: node\n\n    relabel_configs:\n      - action: labelmap\n      \
+    \  regex: __meta_kubernetes_node_label_(.+)\n\n  # Example scrape config for service\
+    \ endpoints.\n  #\n  # The relabeling allows the actual service scrape endpoint\
+    \ to be configured\n  # for all or only some endpoints.\n  - job_name: \"kubernetes-service-endpoints\"\
+    \n\n    kubernetes_sd_configs:\n      - role: endpoints\n\n    relabel_configs:\n\
+    \      # Example relabel to scrape only endpoints that have\n      # \"example.io/should_be_scraped\
+    \ = true\" annotation.\n      #  - source_labels: [__meta_kubernetes_service_annotation_example_io_should_be_scraped]\n\
+    \      #    action: keep\n      #    regex: true\n      #\n      # Example relabel\
+    \ to customize metric path based on endpoints\n      # \"example.io/metric_path\
+    \ = <metric path>\" annotation.\n      #  - source_labels: [__meta_kubernetes_service_annotation_example_io_metric_path]\n\
+    \      #    action: replace\n      #    target_label: __metrics_path__\n     \
+    \ #    regex: (.+)\n      #\n      # Example relabel to scrape only single, desired\
+    \ port for the service based\n      # on endpoints \"example.io/scrape_port =\
+    \ <port>\" annotation.\n      #  - source_labels: [__address__, __meta_kubernetes_service_annotation_example_io_scrape_port]\n\
+    \      #    action: replace\n      #    regex: ([^:]+)(?::\\d+)?;(\\d+)\n    \
+    \  #    replacement: $1:$2\n      #    target_label: __address__\n      #\n  \
+    \    # Example relabel to configure scrape scheme for all service scrape targets\n\
+    \      # based on endpoints \"example.io/scrape_scheme = <scheme>\" annotation.\n\
+    \      #  - source_labels: [__meta_kubernetes_service_annotation_example_io_scrape_scheme]\n\
+    \      #    action: replace\n      #    target_label: __scheme__\n      #    regex:\
+    \ (https?)\n      - action: labelmap\n        regex: __meta_kubernetes_service_label_(.+)\n\
+    \      - source_labels: [__meta_kubernetes_namespace]\n        action: replace\n\
+    \        target_label: namespace\n      - source_labels: [__meta_kubernetes_service_name]\n\
+    \        action: replace\n        target_label: service\n\n  # Example scrape\
+    \ config for probing services via the Blackbox Exporter.\n  #\n  # The relabeling\
+    \ allows the actual service scrape endpoint to be configured\n  # for all or only\
+    \ some services.\n  - job_name: \"kubernetes-services\"\n\n    metrics_path: /probe\n\
+    \    params:\n      module: [http_2xx]\n\n    kubernetes_sd_configs:\n      -\
+    \ role: service\n\n    relabel_configs:\n      # Example relabel to probe only\
+    \ some services that have \"example.io/should_be_probed = true\" annotation\n\
+    \      #  - source_labels: [__meta_kubernetes_service_annotation_example_io_should_be_probed]\n\
+    \      #    action: keep\n      #    regex: true\n      - source_labels: [__address__]\n\
+    \        target_label: __param_target\n      - target_label: __address__\n   \
+    \     replacement: blackbox-exporter.example.com:9115\n      - source_labels:\
+    \ [__param_target]\n        target_label: instance\n      - action: labelmap\n\
+    \        regex: __meta_kubernetes_service_label_(.+)\n      - source_labels: [__meta_kubernetes_namespace]\n\
+    \        target_label: namespace\n      - source_labels: [__meta_kubernetes_service_name]\n\
+    \        target_label: service\n\n  # Example scrape config for probing ingresses\
+    \ via the Blackbox Exporter.\n  #\n  # The relabeling allows the actual ingress\
+    \ scrape endpoint to be configured\n  # for all or only some services.\n  - job_name:\
+    \ \"kubernetes-ingresses\"\n\n    metrics_path: /probe\n    params:\n      module:\
+    \ [http_2xx]\n\n    kubernetes_sd_configs:\n      - role: ingress\n\n    relabel_configs:\n\
+    \      # Example relabel to probe only some ingresses that have \"example.io/should_be_probed\
+    \ = true\" annotation\n      #  - source_labels: [__meta_kubernetes_ingress_annotation_example_io_should_be_probed]\n\
+    \      #    action: keep\n      #    regex: true\n      - source_labels:\n   \
+    \       [\n            __meta_kubernetes_ingress_scheme,\n            __address__,\n\
+    \            __meta_kubernetes_ingress_path,\n          ]\n        regex: (.+);(.+);(.+)\n\
+    \        replacement: ${1}://${2}${3}\n        target_label: __param_target\n\
+    \      - target_label: __address__\n        replacement: blackbox-exporter.example.com:9115\n\
+    \      - source_labels: [__param_target]\n        target_label: instance\n   \
+    \   - action: labelmap\n        regex: __meta_kubernetes_ingress_label_(.+)\n\
+    \      - source_labels: [__meta_kubernetes_namespace]\n        target_label: namespace\n\
+    \      - source_labels: [__meta_kubernetes_ingress_name]\n        target_label:\
+    \ ingress\n\n  # Example scrape config for pods\n  #\n  # The relabeling allows\
+    \ the actual pod scrape to be configured\n  # for all the declared ports (or port-free\
+    \ target if none is declared)\n  # or only some ports.\n  - job_name: \"kubernetes-pods\"\
+    \n\n    kubernetes_sd_configs:\n      - role: pod\n\n    relabel_configs:\n  \
+    \    # Example relabel to scrape only pods that have\n      # \"example.io/should_be_scraped\
+    \ = true\" annotation.\n      #  - source_labels: [__meta_kubernetes_pod_annotation_example_io_should_be_scraped]\n\
+    \      #    action: keep\n      #    regex: true\n      #\n      # Example relabel\
+    \ to customize metric path based on pod\n      # \"example.io/metric_path = <metric\
+    \ path>\" annotation.\n      #  - source_labels: [__meta_kubernetes_pod_annotation_example_io_metric_path]\n\
+    \      #    action: replace\n      #    target_label: __metrics_path__\n     \
+    \ #    regex: (.+)\n      #\n      # Example relabel to scrape only single, desired\
+    \ port for the pod\n      # based on pod \"example.io/scrape_port = <port>\" annotation.\n\
+    \      #  - source_labels: [__address__, __meta_kubernetes_pod_annotation_example_io_scrape_port]\n\
+    \      #    action: replace\n      #    regex: ([^:]+)(?::\\d+)?;(\\d+)\n    \
+    \  #    replacement: $1:$2\n      #    target_label: __address__\n      - action:\
+    \ labelmap\n        regex: __meta_kubernetes_pod_label_(.+)\n      - source_labels:\
+    \ [__meta_kubernetes_namespace]\n        action: replace\n        target_label:\
+    \ namespace\n      - source_labels: [__meta_kubernetes_pod_name]\n        action:\
+    \ replace\n        target_label: pod\n  - job_name: rabbitmq-http\n    honor_timestamps:\
+    \ true\n    scrape_interval: 15s\n    scrape_timeout: 14s\n    metrics_path: /metrics\n\
+    \    scheme: http\n    follow_redirects: true\n    relabel_configs:\n    - source_labels:\
+    \ [job]\n      separator: ;\n      regex: (.*)\n      target_label: __tmp_prometheus_job_name\n\
+    \      replacement: $1\n      action: replace\n    - source_labels: [__meta_kubernetes_service_label_app_kubernetes_io_component]\n\
+    \      separator: ;\n      regex: rabbitmq\n      replacement: $1\n      action:\
+    \ keep\n    - source_labels: [__meta_kubernetes_endpoint_port_name]\n      separator:\
+    \ ;\n      regex: prometheus\n      replacement: $1\n      action: keep\n    -\
+    \ source_labels: [__meta_kubernetes_endpoint_address_target_kind, __meta_kubernetes_endpoint_address_target_name]\n\
+    \      separator: ;\n      regex: Node;(.*)\n      target_label: node\n      replacement:\
+    \ ${1}\n      action: replace\n    - source_labels: [__meta_kubernetes_endpoint_address_target_kind,\
+    \ __meta_kubernetes_endpoint_address_target_name]\n      separator: ;\n      regex:\
+    \ Pod;(.*)\n      target_label: pod\n      replacement: ${1}\n      action: replace\n\
+    \    - source_labels: [__meta_kubernetes_namespace]\n      separator: ;\n    \
+    \  regex: (.*)\n      target_label: namespace\n      replacement: $1\n      action:\
+    \ replace\n    - source_labels: [__meta_kubernetes_service_name]\n      separator:\
+    \ ;\n      regex: (.*)\n      target_label: service\n      replacement: $1\n \
+    \     action: replace\n    - source_labels: [__meta_kubernetes_pod_name]\n   \
+    \   separator: ;\n      regex: (.*)\n      target_label: pod\n      replacement:\
+    \ $1\n      action: replace\n    - source_labels: [__meta_kubernetes_pod_container_name]\n\
+    \      separator: ;\n      regex: (.*)\n      target_label: container\n      replacement:\
+    \ $1\n      action: replace\n    - source_labels: [__meta_kubernetes_service_name]\n\
+    \      separator: ;\n      regex: (.*)\n      target_label: job\n      replacement:\
+    \ ${1}\n      action: replace\n    - separator: ;\n      regex: (.*)\n      target_label:\
+    \ endpoint\n      replacement: prometheus\n      action: replace\n    - source_labels:\
+    \ [__address__]\n      separator: ;\n      regex: (.*)\n      modulus: 1\n   \
+    \   target_label: __tmp_hash\n      replacement: $1\n      action: hashmod\n \
+    \   - source_labels: [__tmp_hash]\n      separator: ;\n      regex: \"0\"\n  \
+    \    replacement: $1\n      action: keep\n    kubernetes_sd_configs:\n    - role:\
+    \ endpoints\n      follow_redirects: true\n  - job_name: rabbitmq-https\n    honor_timestamps:\
+    \ true\n    scrape_interval: 15s\n    scrape_timeout: 14s\n    metrics_path: /metrics\n\
+    \    scheme: https\n    tls_config:\n      insecure_skip_verify: true\n    follow_redirects:\
+    \ true\n    relabel_configs:\n    - source_labels: [job]\n      separator: ;\n\
+    \      regex: (.*)\n      target_label: __tmp_prometheus_job_name\n      replacement:\
+    \ $1\n      action: replace\n    - source_labels: [__meta_kubernetes_service_label_app_kubernetes_io_component]\n\
+    \      separator: ;\n      regex: rabbitmq\n      replacement: $1\n      action:\
+    \ keep\n    - source_labels: [__meta_kubernetes_endpoint_port_name]\n      separator:\
+    \ ;\n      regex: prometheus-tls\n      replacement: $1\n      action: keep\n\
+    \    - source_labels: [__meta_kubernetes_endpoint_address_target_kind, __meta_kubernetes_endpoint_address_target_name]\n\
+    \      separator: ;\n      regex: Node;(.*)\n      target_label: node\n      replacement:\
+    \ ${1}\n      action: replace\n    - source_labels: [__meta_kubernetes_endpoint_address_target_kind,\
+    \ __meta_kubernetes_endpoint_address_target_name]\n      separator: ;\n      regex:\
+    \ Pod;(.*)\n      target_label: pod\n      replacement: ${1}\n      action: replace\n\
+    \    - source_labels: [__meta_kubernetes_namespace]\n      separator: ;\n    \
+    \  regex: (.*)\n      target_label: namespace\n      replacement: $1\n      action:\
+    \ replace\n    - source_labels: [__meta_kubernetes_service_name]\n      separator:\
+    \ ;\n      regex: (.*)\n      target_label: service\n      replacement: $1\n \
+    \     action: replace\n    - source_labels: [__meta_kubernetes_pod_name]\n   \
+    \   separator: ;\n      regex: (.*)\n      target_label: pod\n      replacement:\
+    \ $1\n      action: replace\n    - source_labels: [__meta_kubernetes_pod_container_name]\n\
+    \      separator: ;\n      regex: (.*)\n      target_label: container\n      replacement:\
+    \ $1\n      action: replace\n    - source_labels: [__meta_kubernetes_service_name]\n\
+    \      separator: ;\n      regex: (.*)\n      target_label: job\n      replacement:\
+    \ ${1}\n      action: replace\n    - separator: ;\n      regex: (.*)\n      target_label:\
+    \ endpoint\n      replacement: prometheus-tls\n      action: replace\n    - source_labels:\
+    \ [__address__]\n      separator: ;\n      regex: (.*)\n      modulus: 1\n   \
+    \   target_label: __tmp_hash\n      replacement: $1\n      action: hashmod\n \
+    \   - source_labels: [__tmp_hash]\n      separator: ;\n      regex: \"0\"\n  \
+    \    replacement: $1\n      action: keep\n    kubernetes_sd_configs:\n    - role:\
+    \ endpoints\n      follow_redirects: true\n  - job_name: rabbitmq-cluster-operator\n\
+    \    honor_timestamps: true\n    scrape_interval: 30s\n    scrape_timeout: 10s\n\
+    \    metrics_path: /metrics\n    scheme: http\n    follow_redirects: true\n  \
+    \  relabel_configs:\n    - source_labels: [job]\n      separator: ;\n      regex:\
+    \ (.*)\n      target_label: __tmp_prometheus_job_name\n      replacement: $1\n\
+    \      action: replace\n    - source_labels: [__meta_kubernetes_pod_label_app_kubernetes_io_component]\n\
+    \      separator: ;\n      regex: rabbitmq-cluster-operator\n      replacement:\
+    \ $1\n      action: keep\n    - source_labels: [__meta_kubernetes_pod_container_port_name]\n\
+    \      separator: ;\n      regex: metrics\n      replacement: $1\n      action:\
+    \ keep\n    - source_labels: [__meta_kubernetes_namespace]\n      separator: ;\n\
+    \      regex: (.*)\n      target_label: namespace\n      replacement: $1\n   \
+    \   action: replace\n    - source_labels: [__meta_kubernetes_pod_container_name]\n\
+    \      separator: ;\n      regex: (.*)\n      target_label: container\n      replacement:\
+    \ $1\n      action: replace\n    - source_labels: [__meta_kubernetes_pod_name]\n\
+    \      separator: ;\n      regex: (.*)\n      target_label: pod\n      replacement:\
+    \ $1\n      action: replace\n    - separator: ;\n      regex: (.*)\n      target_label:\
+    \ job\n      replacement: rabbitmq-cluster-operator\n      action: replace\n \
+    \   - separator: ;\n      regex: (.*)\n      target_label: endpoint\n      replacement:\
+    \ metrics\n      action: replace\n    - source_labels: [__address__]\n      separator:\
+    \ ;\n      regex: (.*)\n      modulus: 1\n      target_label: __tmp_hash\n   \
+    \   replacement: $1\n      action: hashmod\n    - source_labels: [__tmp_hash]\n\
+    \      separator: ;\n      regex: \"0\"\n      replacement: $1\n      action:\
+    \ keep\n    kubernetes_sd_configs:\n    - role: pod\n      follow_redirects: true\n\
+    \      namespaces:\n        names:\n        - rabbitmq-system"

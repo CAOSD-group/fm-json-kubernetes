@@ -1,0 +1,78 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-cluster-autoscaler
+  namespace: kube-system
+data:
+  autoscaler.json: "{\n  \"distribution\": \"external\",\n  \"plateform\": \"multipass\"\
+    ,\n  \"image-credential-provider-bin-dir\": \"/var/lib/rancher/credentialprovider/bin\"\
+    ,\n  \"image-credential-provider-config\": \"/var/lib/rancher/credentialprovider/config.yaml\"\
+    ,\n  \"listen\": \"unix:/var/run/cluster-autoscaler/autoscaler.sock\",\n  \"secret\"\
+    : \"multipass\",\n  \"minNode\": 0,\n  \"maxNode\": 9,\n  \"maxPods\": 110,\n\
+    \  \"maxNode-per-cycle\": 2,\n  \"nodegroup\": \"multipass-dev-external\",\n \
+    \ \"node-name-prefix\": \"autoscaled\",\n  \"managed-name-prefix\": \"managed\"\
+    ,\n  \"controlplane-name-prefix\": \"master\",\n  \"nodePrice\": 0,\n  \"podPrice\"\
+    : 0,\n  \"use-etc-hosts\": false,\n  \"use-cloudinit-config\": false,\n  \"cloudinit-file-owner\"\
+    : \"root:adm\",\n  \"cloudinit-file-mode\": 420,\n  \"allow-upgrade\": false,\n\
+    \  \"optionals\": {\n    \"pricing\": false,\n    \"getAvailableMachineTypes\"\
+    : false,\n    \"newNodeGroup\": false,\n    \"templateNodeInfo\": false,\n   \
+    \ \"createNodeGroup\": false,\n    \"deleteNodeGroup\": false\n  },\n  \"external\"\
+    : {\n    \"address\": \"192.168.122.10:6443\",\n    \"token\": \"....\",\n   \
+    \ \"join-command\": \"/usr/local/bin/join-cluster.sh\",\n    \"delete-command\"\
+    : \"/usr/local/bin/leave-cluster.sh\",\n    \"config-path\": \"/etc/external-cluster/config.yaml\"\
+    ,\n    \"extra-config\": {\n      \"ball\": \"same player\"\n    }\n  },\n  \"\
+    default-machine\": \"medium\",\n  \"cloud-init\": {\n    \"package_update\": false,\n\
+    \    \"package_upgrade\": false,\n    \"growpart\": {\n      \"ignore_growroot_disabled\"\
+    : false,\n      \"mode\": \"auto\",\n      \"devices\": [\n        \"/\"\n   \
+    \   ]\n    },\n    \"runcmd\": [\n    ]\n  },\n  \"ssh-infos\": {\n    \"wait-ssh-ready-seconds\"\
+    : 180,\n    \"user\": \"kubernetes\",\n    \"ssh-private-key\": \"/etc/ssh/id_rsa\"\
+    \n  },\n  \"autoscaling-options\": {\n    \"scaleDownUtilizationThreshold\": 0.5,\n\
+    \    \"scaleDownGpuUtilizationThreshold\": 0.5,\n    \"scaleDownUnneededTime\"\
+    : \"1m\",\n    \"scaleDownUnreadyTime\": \"1m\",\n    \"maxNodeProvisionTime\"\
+    : \"15m\",\n    \"zeroOrMaxNodeScaling\": false,\n    \"ignoreDaemonSetsUtilization\"\
+    : true\n  },\n  \"credential-provider-config\": {\n    \"apiVersion\": \"kubelet.config.k8s.io/v1\"\
+    ,\n    \"kind\": \"CredentialProviderConfig\",\n    \"providers\": [\n      {\n\
+    \        \"name\": \"ecr-credential-provider\",\n        \"matchImages\": [\n\
+    \          \"*.dkr.ecr.*.amazonaws.com\",\n          \"*.dkr.ecr.*.amazonaws.cn\"\
+    ,\n          \"*.dkr.ecr-fips.*.amazonaws.com\",\n          \"*.dkr.ecr.us-iso-east-1.c2s.ic.gov\"\
+    ,\n          \"*.dkr.ecr.us-isob-east-1.sc2s.sgov.gov\"\n        ],\n        \"\
+    defaultCacheDuration\": \"12h\",\n        \"apiVersion\": \"credentialprovider.kubelet.k8s.io/v1\"\
+    ,\n        \"args\": [\n          \"get-credentials\"\n        ],\n        \"\
+    env\": [\n          {\n            \"name\": \"AWS_ACCESS_KEY_ID\",\n        \
+    \    \"value\": \"<TO FILL>\"\n          },\n          {\n            \"name\"\
+    : \"AWS_SECRET_ACCESS_KEY\",\n            \"value\": \"<TO FILL>\"\n         \
+    \ }\n        ]\n      }\n    ]\n  }\n}\n"
+  grpc-config.json: "{\n  \"address\": \"unix:/var/run/cluster-autoscaler/autoscaler.sock\"\
+    ,\n  \"secret\": \"openstack\",\n  \"timeout\": 300\n}"
+  machines.json: "{\n    \"tiny\": {\n        \"memsize\": 2048,\n        \"vcpus\"\
+    : 2,\n        \"disksize\": 10240\n    },\n    \"small\": {\n        \"memsize\"\
+    : 4096,\n        \"vcpus\": 2,\n        \"disksize\": 20480\n    },\n    \"medium\"\
+    : {\n        \"memsize\": 4096,\n        \"vcpus\": 4,\n        \"disksize\":\
+    \ 20480\n    },\n    \"large\": {\n        \"memsize\": 8192,\n        \"vcpus\"\
+    : 4,\n        \"disksize\": 51200\n    },\n    \"xlarge\": {\n        \"memsize\"\
+    : 16384,\n        \"vcpus\": 4,\n        \"disksize\": 102400\n    },\n    \"\
+    2xlarge\": {\n        \"memsize\": 16384,\n        \"vcpus\": 8,\n        \"disksize\"\
+    : 102400\n    },\n    \"4xlarge\": {\n        \"memsize\": 32768,\n        \"\
+    vcpus\": 8,\n        \"disksize\": 102400\n    }\n}\n"
+  provider.json: "{\n  \"address\": \"10.0.0.21:5701\",\n  \"key\": \"/etc/ssl/certs/autoscaler-utility/client.key\"\
+    ,\n  \"cert\": \"/etc/ssl/certs/autoscaler-utility/client.crt\",\n  \"cacert\"\
+    : \"/etc/ssl/certs/autoscaler-utility/ca.crt\",\n  \"nodegroup\": \"multipass-dev-external\"\
+    ,\n  \"timeout\": 300,\n  \"template-name\": \"file:///home/stack/Projects/autoscaled-masterkube-multipass/images/noble-kubernetes-external-v1.30.2+k3s1-amd64.img\"\
+    ,\n  \"netplan-name\": \"10-custom.yaml\",\n  \"region\": \"home\",\n  \"zone\"\
+    : \"office\",\n  \"use-bind9\": true,\n  \"bind9-host\": \"192.168.2.1:53\",\n\
+    \  \"rndc-key-file\": \"/etc/cluster/rndc.key\",\n  \"network\": {\n    \"domain\"\
+    : \"aldunelabs.private\",\n    \"dns\": {\n      \"search\": [\n        \"aldunelabs.private\"\
+    \n      ],\n      \"nameserver\": [\n        \"192.168.2.1\"\n      ]\n    },\n\
+    \    \"interfaces\": [\n      {\n        \"enabled\": true,\n        \"primary\"\
+    : true,\n        \"exists\": false,\n        \"network\": \"virbr0\",\n      \
+    \  \"nic\": \"eth1\",\n        \"type\": \"manual\",\n        \"mac-address\"\
+    : \"generate\",\n        \"dhcp\": true,\n        \"use-dhcp-routes\": false,\n\
+    \        \"address\": \"192.168.122.13\",\n        \"netmask\": \"255.255.255.0\"\
+    ,\n        \"routes\": [\n          {\n            \"to\": \"default\",\n    \
+    \        \"via\": \"192.168.122.1\",\n            \"metric\": 250\n          }\n\
+    \        ]\n      },\n      {\n        \"enabled\": true,\n        \"primary\"\
+    : false,\n        \"exists\": true,\n        \"network\": \"mpbr0\",\n       \
+    \ \"nic\": \"eth0\",\n        \"type\": \"nat\",\n        \"dhcp\": true,\n  \
+    \      \"address\": \"DHCP\",\n        \"netmask\": \"\",\n        \"routes\"\
+    : []\n      }\n    ]\n  }\n}\n"
+  rndc.key: "key \"rndc-key\" {\n  algorithm hmac-sha256;\n  secret \"....\";\n};"

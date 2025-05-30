@@ -1,0 +1,190 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubeadm.kubernetes.io/kube-apiserver.advertise-address.endpoint: 192.168.49.2:8443
+    kubernetes.io/config.hash: 5a263ca86987d4c90becd5fc85bde7a1
+    kubernetes.io/config.mirror: 5a263ca86987d4c90becd5fc85bde7a1
+    kubernetes.io/config.seen: "2024-03-29T16:55:44.872804014Z"
+    kubernetes.io/config.source: file
+  creationTimestamp: "2024-03-29T16:55:48Z"
+  labels:
+    component: kube-apiserver
+    tier: control-plane
+  name: kube-apiserver-netrix-k8s-workshop
+  namespace: kube-system
+  ownerReferences:
+  - apiVersion: v1
+    controller: true
+    kind: Node
+    name: netrix-k8s-workshop
+    uid: 3c6bd5ff-7fea-4746-8a46-711487e64ab3
+  resourceVersion: "8695"
+  uid: 82b23449-a487-43c7-8d1c-f2e006400928
+spec:
+  containers:
+  - command:
+    - kube-apiserver
+    - --advertise-address=192.168.49.2
+    - --allow-privileged=true
+    - --authorization-mode=Node,RBAC
+    - --client-ca-file=/var/lib/minikube/certs/ca.crt
+    - --enable-admission-plugins=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,DefaultTolerationSeconds,NodeRestriction,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,ResourceQuota
+    - --enable-bootstrap-token-auth=true
+    - --etcd-cafile=/var/lib/minikube/certs/etcd/ca.crt
+    - --etcd-certfile=/var/lib/minikube/certs/apiserver-etcd-client.crt
+    - --etcd-keyfile=/var/lib/minikube/certs/apiserver-etcd-client.key
+    - --etcd-servers=https://127.0.0.1:2379
+    - --kubelet-client-certificate=/var/lib/minikube/certs/apiserver-kubelet-client.crt
+    - --kubelet-client-key=/var/lib/minikube/certs/apiserver-kubelet-client.key
+    - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+    - --proxy-client-cert-file=/var/lib/minikube/certs/front-proxy-client.crt
+    - --proxy-client-key-file=/var/lib/minikube/certs/front-proxy-client.key
+    - --requestheader-allowed-names=front-proxy-client
+    - --requestheader-client-ca-file=/var/lib/minikube/certs/front-proxy-ca.crt
+    - --requestheader-extra-headers-prefix=X-Remote-Extra-
+    - --requestheader-group-headers=X-Remote-Group
+    - --requestheader-username-headers=X-Remote-User
+    - --secure-port=8443
+    - --service-account-issuer=https://kubernetes.default.svc.cluster.local
+    - --service-account-key-file=/var/lib/minikube/certs/sa.pub
+    - --service-account-signing-key-file=/var/lib/minikube/certs/sa.key
+    - --service-cluster-ip-range=10.96.0.0/12
+    - --tls-cert-file=/var/lib/minikube/certs/apiserver.crt
+    - --tls-private-key-file=/var/lib/minikube/certs/apiserver.key
+    image: registry.k8s.io/kube-apiserver:v1.28.0
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      failureThreshold: 8
+      httpGet:
+        host: 192.168.49.2
+        path: /livez
+        port: 8443
+        scheme: HTTPS
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 15
+    name: kube-apiserver
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        host: 192.168.49.2
+        path: /readyz
+        port: 8443
+        scheme: HTTPS
+      periodSeconds: 1
+      successThreshold: 1
+      timeoutSeconds: 15
+    resources:
+      requests:
+        cpu: 250m
+    startupProbe:
+      failureThreshold: 24
+      httpGet:
+        host: 192.168.49.2
+        path: /livez
+        port: 8443
+        scheme: HTTPS
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 15
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /etc/ssl/certs
+      name: ca-certs
+      readOnly: true
+    - mountPath: /etc/ca-certificates
+      name: etc-ca-certificates
+      readOnly: true
+    - mountPath: /var/lib/minikube/certs
+      name: k8s-certs
+      readOnly: true
+    - mountPath: /usr/local/share/ca-certificates
+      name: usr-local-share-ca-certificates
+      readOnly: true
+    - mountPath: /usr/share/ca-certificates
+      name: usr-share-ca-certificates
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostNetwork: true
+  nodeName: netrix-k8s-workshop
+  preemptionPolicy: PreemptLowerPriority
+  priority: 2000001000
+  priorityClassName: system-node-critical
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext:
+    seccompProfile:
+      type: RuntimeDefault
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    operator: Exists
+  volumes:
+  - hostPath:
+      path: /etc/ssl/certs
+      type: DirectoryOrCreate
+    name: ca-certs
+  - hostPath:
+      path: /etc/ca-certificates
+      type: DirectoryOrCreate
+    name: etc-ca-certificates
+  - hostPath:
+      path: /var/lib/minikube/certs
+      type: DirectoryOrCreate
+    name: k8s-certs
+  - hostPath:
+      path: /usr/local/share/ca-certificates
+      type: DirectoryOrCreate
+    name: usr-local-share-ca-certificates
+  - hostPath:
+      path: /usr/share/ca-certificates
+      type: DirectoryOrCreate
+    name: usr-share-ca-certificates
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2024-03-29T19:20:58Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2024-03-29T19:21:11Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2024-03-29T19:21:11Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2024-03-29T19:20:58Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://7052fe2690860621d1e8afe0676fff3c1c36fa7dd0c6fa1a9fbe9fb297026fdc
+    image: registry.k8s.io/kube-apiserver:v1.28.0
+    imageID: docker-pullable://registry.k8s.io/kube-apiserver@sha256:ba59d8e826cb75bdbe206efdbfe2cf48f0e56ea8a2ad96740a10adf8afcfec6e
+    lastState:
+      terminated:
+        containerID: docker://4f7e862b47657005ab3870eb966c194bfaed3c14754d1ac4a85838456881674c
+        exitCode: 137
+        finishedAt: "2024-03-29T18:58:10Z"
+        reason: Error
+        startedAt: "2024-03-29T18:55:44Z"
+    name: kube-apiserver
+    ready: true
+    restartCount: 5
+    started: true
+    state:
+      running:
+        startedAt: "2024-03-29T19:20:59Z"
+  hostIP: 192.168.49.2
+  phase: Running
+  podIP: 192.168.49.2
+  podIPs:
+  - ip: 192.168.49.2
+  qosClass: Burstable
+  startTime: "2024-03-29T19:20:58Z"

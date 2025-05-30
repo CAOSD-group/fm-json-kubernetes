@@ -1,0 +1,150 @@
+apiVersion: hlf.kungfusoftware.es/v1alpha1
+kind: FabricPeer
+metadata:
+  creationTimestamp: null
+  name: org1-peer0
+  namespace: default
+spec:
+  affinity: null
+  couchDBexporter: null
+  couchdb:
+    externalCouchDB: null
+    image: couchdb
+    password: couchdb
+    pullPolicy: ""
+    tag: 3.1.1
+    user: couchdb
+  deliveryClientaddressOverrides: null
+  discovery:
+    period: 60s
+    touchPeriod: 60s
+  dockerSocketPath: ""
+  env: null
+  external_chaincode_builder: false
+  externalBuilders:
+  - name: ccaas_builder
+    path: /opt/hyperledger/ccaas_builder
+    propagateEnvironment:
+    - CHAINCODE_AS_A_SERVICE_BUILDER_CONFIG
+  externalEndpoint: peer0-org1.workshop.adityajoshi.online:443
+  fsServer: null
+  gatewayApi:
+    gatewayName: hlf-gateway
+    gatewayNamespace: default
+    port: 443
+  gossip:
+    aliveExpirationTimeout: ""
+    aliveTimeInterval: ""
+    bootstrap: ""
+    endpoint: ""
+    externalEndpoint: peer0-org1.workshop.adityajoshi.online:443
+    orgLeader: true
+    reconnectInterval: ""
+    responseWaitTime: ""
+    useLeaderElection: false
+  grpcProxy: null
+  hostAliases: null
+  hosts:
+  - peer0-org1.workshop.adityajoshi.online
+  image: hyperledger/fabric-peer
+  imagePullPolicy: Always
+  imagePullSecrets: null
+  istio:
+    hosts:
+    - peer0-org1.workshop.adityajoshi.online
+    ingressGateway: ingressgateway
+    port: 443
+  logging:
+    cauthdsl: info
+    gossip: info
+    grpc: info
+    ledger: info
+    level: info
+    msp: info
+    peer: info
+    policies: info
+  mspID: Org1MSP
+  peerVolumeMounts: null
+  podAnnotations: null
+  podLabels: null
+  replicas: 1
+  resources:
+    chaincode:
+      limits:
+        cpu: "1"
+        memory: 100Mi
+      requests:
+        cpu: 10m
+        memory: 10m
+    couchdb:
+      limits:
+        cpu: "1"
+        memory: 512Mi
+      requests:
+        cpu: 10m
+        memory: 10m
+    couchdbExporter: null
+    peer:
+      limits:
+        cpu: "1"
+        memory: 512Mi
+      requests:
+        cpu: 10m
+        memory: 128Mi
+    proxy: null
+  secret:
+    enrollment:
+      component:
+        cahost: org1-ca.workshop.adityajoshi.online
+        caname: ca
+        caport: 443
+        catls:
+          cacert: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUNjekNDQWhtZ0F3SUJBZ0lSQVBLeVZJVG96WVpjUGw0QjlacVp3Z2t3Q2dZSUtvWkl6ajBFQXdJd1VqRVQKTUJFR0ExVUVCaE1LUTJGc2FXWnZjbTVwWVRFSk1BY0dBMVVFQnhNQU1Ra3dCd1lEVlFRSkV3QXhGREFTQmdOVgpCQW9UQzBoNWNHVnliR1ZrWjJWeU1ROHdEUVlEVlFRTEV3WkdZV0p5YVdNd0hoY05NalF3TlRFME1UZzBPVE01CldoY05NelF3TlRFMU1UZzBPVE01V2pCU01STXdFUVlEVlFRR0V3cERZV3hwWm05eWJtbGhNUWt3QndZRFZRUUgKRXdBeENUQUhCZ05WQkFrVEFERVVNQklHQTFVRUNoTUxTSGx3WlhKc1pXUm5aWEl4RHpBTkJnTlZCQXNUQmtaaApZbkpwWXpCWk1CTUdCeXFHU000OUFnRUdDQ3FHU000OUF3RUhBMElBQkNvZld4QUkvTm5RazJXOWw3eTNTbnI2CmpLeFlTZEwvTklOcytzSHVJRnVGdENBMFQycUNpNjNvS3RqMWFKQ2dRV3I1REt5RWJuTVpYMUU3bllIbW54Q2oKZ2M4d2djd3dEZ1lEVlIwUEFRSC9CQVFEQWdHbU1CMEdBMVVkSlFRV01CUUdDQ3NHQVFVRkJ3TUNCZ2dyQmdFRgpCUWNEQVRBUEJnTlZIUk1CQWY4RUJUQURBUUgvTUNrR0ExVWREZ1FpQkNEWVVlcWFNanVvaHpPSVdrUDNGTHkvCjNvWEM2NTBUZDV0QURUNmZRZFJ3WERCZkJnTlZIUkVFV0RCV2dnbHNiMk5oYkdodmMzU0NCMjl5WnpFdFkyR0MKRDI5eVp6RXRZMkV1WkdWbVlYVnNkSUlqYjNKbk1TMWpZUzUzYjNKcmMyaHZjQzVoWkdsMGVXRnFiM05vYVM1dgpibXhwYm1XSEJIOEFBQUdIQkk5dStuSXdDZ1lJS29aSXpqMEVBd0lEU0FBd1JRSWhBSXhJL2hTRnB6b2QxSG92Cm1jM3BmT3N1MEh1TFFHUCtmV0Q0WFR4bVVGcUJBaUJGSk1Bc29mdzduRlBEM2RuaU1HYzdjTG5VWUdQQUtCWGMKeHZnUnJlOVQzZz09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+          secretRef: null
+        enrollid: peer
+        enrollsecret: peerpw
+        external: null
+      tls:
+        cahost: org1-ca.workshop.adityajoshi.online
+        caname: tlsca
+        caport: 443
+        catls:
+          cacert: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUNjekNDQWhtZ0F3SUJBZ0lSQVBLeVZJVG96WVpjUGw0QjlacVp3Z2t3Q2dZSUtvWkl6ajBFQXdJd1VqRVQKTUJFR0ExVUVCaE1LUTJGc2FXWnZjbTVwWVRFSk1BY0dBMVVFQnhNQU1Ra3dCd1lEVlFRSkV3QXhGREFTQmdOVgpCQW9UQzBoNWNHVnliR1ZrWjJWeU1ROHdEUVlEVlFRTEV3WkdZV0p5YVdNd0hoY05NalF3TlRFME1UZzBPVE01CldoY05NelF3TlRFMU1UZzBPVE01V2pCU01STXdFUVlEVlFRR0V3cERZV3hwWm05eWJtbGhNUWt3QndZRFZRUUgKRXdBeENUQUhCZ05WQkFrVEFERVVNQklHQTFVRUNoTUxTSGx3WlhKc1pXUm5aWEl4RHpBTkJnTlZCQXNUQmtaaApZbkpwWXpCWk1CTUdCeXFHU000OUFnRUdDQ3FHU000OUF3RUhBMElBQkNvZld4QUkvTm5RazJXOWw3eTNTbnI2CmpLeFlTZEwvTklOcytzSHVJRnVGdENBMFQycUNpNjNvS3RqMWFKQ2dRV3I1REt5RWJuTVpYMUU3bllIbW54Q2oKZ2M4d2djd3dEZ1lEVlIwUEFRSC9CQVFEQWdHbU1CMEdBMVVkSlFRV01CUUdDQ3NHQVFVRkJ3TUNCZ2dyQmdFRgpCUWNEQVRBUEJnTlZIUk1CQWY4RUJUQURBUUgvTUNrR0ExVWREZ1FpQkNEWVVlcWFNanVvaHpPSVdrUDNGTHkvCjNvWEM2NTBUZDV0QURUNmZRZFJ3WERCZkJnTlZIUkVFV0RCV2dnbHNiMk5oYkdodmMzU0NCMjl5WnpFdFkyR0MKRDI5eVp6RXRZMkV1WkdWbVlYVnNkSUlqYjNKbk1TMWpZUzUzYjNKcmMyaHZjQzVoWkdsMGVXRnFiM05vYVM1dgpibXhwYm1XSEJIOEFBQUdIQkk5dStuSXdDZ1lJS29aSXpqMEVBd0lEU0FBd1JRSWhBSXhJL2hTRnB6b2QxSG92Cm1jM3BmT3N1MEh1TFFHUCtmV0Q0WFR4bVVGcUJBaUJGSk1Bc29mdzduRlBEM2RuaU1HYzdjTG5VWUdQQUtCWGMKeHZnUnJlOVQzZz09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+          secretRef: null
+        csr:
+          cn: ""
+          hosts:
+          - 127.0.0.1
+          - localhost
+          - 143.110.250.114
+          - 143.110.246.70
+          - 143.110.250.221
+          - org1-peer0
+          - org1-peer0.default
+          - peer0-org1.workshop.adityajoshi.online
+        enrollid: peer
+        enrollsecret: peerpw
+        external: null
+  service:
+    type: ClusterIP
+  serviceMonitor: null
+  stateDb: couchdb
+  storage:
+    chaincode:
+      accessMode: ReadWriteOnce
+      size: 5Gi
+      storageClass: do-block-storage
+    couchdb:
+      accessMode: ReadWriteOnce
+      size: 5Gi
+      storageClass: do-block-storage
+    peer:
+      accessMode: ReadWriteOnce
+      size: 5Gi
+      storageClass: do-block-storage
+  tag: 2.4.6
+  tolerations: null
+  traefik: null
+  updateCertificateTime: null
+  volumes: null
+

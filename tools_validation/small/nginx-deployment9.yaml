@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-confs
+  namespace: nextcloud
+data:
+  nginx.conf: "#user  www-data;\nworker_processes  auto;\n\nerror_log  /var/log/nginx/error.log\
+    \ warn;\npid        /var/run/nginx.pid;\n\n\nevents {\n    worker_connections\
+    \  1024;\n}\n\n\nhttp {\n    include       /etc/nginx/mime.types;\n    default_type\
+    \  application/octet-stream;\n\n    log_format  main  '$remote_addr - $remote_user\
+    \ [$time_local] \"$request\" '\n                      '$status $body_bytes_sent\
+    \ \"$http_referer\" '\n                      '\"$http_user_agent\" \"$http_x_forwarded_for\"\
+    ';\n\n    access_log  /var/log/nginx/access.log  main;\n\n    sendfile       \
+    \ on;\n    #tcp_nopush     on;\n\n    keepalive_timeout  65;\n\n    #gzip  on;\n\
+    \    fastcgi_buffers 16 16k; \n    fastcgi_buffer_size 32k;\n    include /etc/nginx/conf.d/*.conf;\n\
+    \n}\n"
+  default.conf.template: "server {\n    listen       80;\n    root  $WEBROOT;\n  \
+    \  $INCLUDE\n}\n"
+  nextcloud.include.template: "index  index.php ;\n\nadd_header Referrer-Policy \"\
+    no-referrer\" always;\nadd_header X-Content-Type-Options \"nosniff\" always;\n\
+    add_header X-Download-Options \"noopen\" always;\nadd_header X-Frame-Options \"\
+    SAMEORIGIN\" always;\nadd_header X-Permitted-Cross-Domain-Policies \"none\" always;\n\
+    add_header X-Robots-Tag \"none\" always;\nadd_header X-XSS-Protection \"1; mode=block\"\
+    \ always;\n\nfastcgi_hide_header X-Powered-By;\n\nlocation = /robots.txt {\nallow\
+    \ all;\nlog_not_found off;\naccess_log off;\n}\nlocation = /.well-known/carddav\
+    \ {\n  return 301 $scheme://$host:$server_port/remote.php/dav;\n}\nlocation =\
+    \ /.well-known/caldav {\n  return 301 $scheme://$host:$server_port/remote.php/dav;\n\
+    }\n    client_max_body_size 512M;\n    fastcgi_buffers 64 4K;\n# Enable gzip but\
+    \ do not remove ETag headers\ngzip on;\ngzip_vary on;\ngzip_comp_level 4;\ngzip_min_length\
+    \ 256;\ngzip_proxied expired no-cache no-store private no_last_modified no_etag\
+    \ auth;\ngzip_types application/atom+xml application/javascript application/json\
+    \ application/ld+json application/manifest+json application/rss+xml application/vnd.geo+json\
+    \ application/vnd.ms-fontobject application/x-font-ttf application/x-web-app-manifest+json\
+    \ application/xhtml+xml application/xml font/opentype image/bmp image/svg+xml\
+    \ image/x-icon text/cache-manifest text/css text/plain text/vcard text/vnd.rim.location.xloc\
+    \ text/vtt text/x-component text/x-cross-domain-policy;\n\n\nlocation / {\n  \
+    \  rewrite ^ /index.php;\n}\n\nlocation ~ ^\\/(?:build|tests|config|lib|3rdparty|templates|data)\\\
+    / {\n    deny all;\n}\nlocation ~ ^\\/(?:\\.|autotest|occ|issue|indie|db_|console)\
+    \ {\n    deny all;\n}\n\nlocation ~ ^\\/(?:index|remote|public|cron|core\\/ajax\\\
+    /update|status|ocs\\/v[12]|updater\\/.+|oc[ms]-provider\\/.+)\\.php(?:$|\\/) {\n\
+    \    fastcgi_index index.php;\n    include fastcgi_params;\n    fastcgi_pass $PHP_SOCKET;\n\
+    \    fastcgi_split_path_info ^(.+\\.php)(/.+)$;\n    fastcgi_param PATH_INFO $fastcgi_path_info;\n\
+    \    fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;\n    fastcgi_param\
+    \ SCRIPT_FILENAME $document_root$fastcgi_script_name;\n    ########\n    try_files\
+    \ $fastcgi_script_name =404;\n    include fastcgi_params;\n    fastcgi_param HTTPS\
+    \ on;\n    fastcgi_read_timeout 86400;\n    # Avoid sending the security headers\
+    \ twice\n    fastcgi_param modHeadersAvailable true;\n    # Enable pretty urls\n\
+    \    fastcgi_param front_controller_active true;\n    #webdav mounts dont work\
+    \ with below\n    #fastcgi_intercept_errors on;\n    fastcgi_request_buffering\
+    \ off;\n    fastcgi_pass_request_headers on;\n    }\n\n\nlocation ~ ^\\/(?:updater|oc[ms]-provider)(?:$|\\\
+    /) {\n    try_files $uri/ =404;\n    index index.php;\n}\n\n# Adding the cache\
+    \ control header for js, css and map files\n# Make sure it is BELOW the PHP block\n\
+    location ~ \\.(?:css|js|woff2?|svg|gif|map)$ {\n    try_files $uri /index.php$request_uri;\n\
+    \    add_header Cache-Control \"public, max-age=15778463\";\n    # Add headers\
+    \ to serve security related headers (It is intended to\n    # have those duplicated\
+    \ to the ones above)\n    # Before enabling Strict-Transport-Security headers\
+    \ please read into\n    # this topic first.\n    #add_header Strict-Transport-Security\
+    \ \"max-age=15768000; includeSubDomains; preload;\" always;\n    #\n    # WARNING:\
+    \ Only add the preload option once you read about\n    # the consequences in https://hstspreload.org/.\
+    \ This option\n    # will add the domain to a hardcoded list that is shipped\n\
+    \    # in all major browsers and getting removed from this list\n    # could take\
+    \ several months.\n    add_header Referrer-Policy \"no-referrer\" always;\n  \
+    \  add_header X-Content-Type-Options \"nosniff\" always;\n    add_header X-Download-Options\
+    \ \"noopen\" always;\n    add_header X-Frame-Options \"SAMEORIGIN\" always;\n\
+    \    add_header X-Permitted-Cross-Domain-Policies \"none\" always;\n    add_header\
+    \ X-Robots-Tag \"none\" always;\n    add_header X-XSS-Protection \"1; mode=block\"\
+    \ always;\n\n    # Optional: Don't log access to assets\n    access_log off;\n\
+    }\n\nlocation ~ \\.(?:png|html|ttf|ico|jpg|jpeg|bcmap)$ {\n    try_files $uri\
+    \ /index.php$request_uri;\n    # Optional: Don't log access to other assets\n\
+    \    access_log off;\n}\n"

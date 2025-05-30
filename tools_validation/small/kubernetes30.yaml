@@ -1,0 +1,340 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+data:
+  postgresql.conf: "# PostgreSQL configuration file\n#\n# This file consists of lines\
+    \ of the form:\n#\n#   name = value\n#\n# (The \"=\" is optional.)  Whitespace\
+    \ may be used.  Comments are introduced with\n# \"#\" anywhere on a line.  The\
+    \ complete list of parameter names and allowed\n# values can be found in the PostgreSQL\
+    \ documentation.\n\n#------------------------------------------------------------------------------\n\
+    # FILE LOCATIONS\n#------------------------------------------------------------------------------\n\
+    \ndata_directory = '/var/lib/postgresql/data'\nhba_file = '/etc/postgresql/pg_hba.conf'\n\
+    ident_file = '/etc/postgresql/pg_ident.conf'\n\n#------------------------------------------------------------------------------\n\
+    # CONNECTIONS AND AUTHENTICATION\n#------------------------------------------------------------------------------\n\
+    \n# - Connection Settings -\n\nlisten_addresses = '*'          # what IP address(es)\
+    \ to listen on;\n                                # comma-separated list of addresses;\n\
+    \                                # defaults to 'localhost'; use '*' for all\n\
+    \                                # (change requires restart)\nport = 5432    \
+    \                 # (change requires restart)\nmax_connections = 100         \
+    \  # (change requires restart)\n#superuser_reserved_connections = 3 # (change\
+    \ requires restart)\n#unix_socket_directories = '/var/run/postgresql' # comma-separated\
+    \ list of directories\n\n# - Security and Authentication -\n\n#authentication_timeout\
+    \ = 1min  # 1s-600s\nssl = on                        # (change requires restart)\n\
+    #ssl_cert_file = '/etc/ssl/certs/ssl-cert-snakeoil.pem' # (change requires restart)\n\
+    #ssl_key_file = '/etc/ssl/private/ssl-cert-snakeoil.key' # (change requires restart)\n\
+    #ssl_ca_file = '/etc/ssl/certs/ca-certificates.crt'  # (change requires restart)\n\
+    #ssl_ciphers = 'HIGH:MEDIUM:+3DES:!aNULL' # allowed SSL ciphers\n#ssl_prefer_server_ciphers\
+    \ = on     # (change requires restart)\n#ssl_ecdh_curve = 'prime256v1'      #\
+    \ (change requires restart)\n#ssl_min_protocol_version = 'TLSv1.2'  # (change\
+    \ requires restart)\n#ssl_max_protocol_version = 'TLSv1.3'  # (change requires\
+    \ restart)\n#ssl_dh_params_file = ''            # (change requires restart)\n\
+    #ssl_passphrase_command = ''        # (change requires restart)\n#ssl_passphrase_command_supports_reload\
+    \ = off  # (change requires restart)\n#ssl_passphrase_command_supports_reload\
+    \ = off  # (change requires restart)\n\n#------------------------------------------------------------------------------\n\
+    # QUERY TUNING\n#------------------------------------------------------------------------------\n\
+    \n# - Planner Method Configuration -\n\n#enable_bitmapscan = on\n#enable_hashagg\
+    \ = on\n#enable_hashjoin = on\n#enable_indexscan = on\n#enable_indexonlyscan =\
+    \ on\n#enable_material = on\n#enable_mergejoin = on\n#enable_nestloop = on\n#enable_parallel_append\
+    \ = on\n#enable_parallel_hash = on\n#enable_partitionwise_aggregate = off\n#enable_partitionwise_join\
+    \ = off\n#enable_seqscan = on\n#enable_sort = on\n#enable_tidscan = on\n\n# -\
+    \ Planner Cost Constants -\n\n#seq_page_cost = 1.0            # measured on an\
+    \ arbitrary scale\n#random_page_cost = 4.0         # same scale as above\n#cpu_tuple_cost\
+    \ = 0.01          # same scale as above\n#cpu_index_tuple_cost = 0.005   # same\
+    \ scale as above\n#cpu_operator_cost = 0.0025     # same scale as above\n#parallel_tuple_cost\
+    \ = 0.1      # same scale as above\n#parallel_setup_cost = 1000.0   # same scale\
+    \ as above\n\n#------------------------------------------------------------------------------\n\
+    # ERROR REPORTING AND LOGGING\n#------------------------------------------------------------------------------\n\
+    \n# - Where to Log -\n\nlog_destination = 'stderr'          # Valid values are\
+    \ combinations of\n                                    # stderr, csvlog, syslog,\
+    \ and eventlog,\n                                    # depending on platform.\
+    \  csvlog\n                                    # requires logging_collector to\
+    \ be on.\n\n# This is used when logging to stderr:\nlogging_collector = on   \
+    \           # Enable capturing of stderr and csvlog\n                        \
+    \            # into log files. Required to be on for\n                       \
+    \             # csvlogs.\n                                    # (change requires\
+    \ restart)\n\n# These are only used if logging_collector is on:\nlog_directory\
+    \ = 'pg_log'            # directory where log files are written,\n           \
+    \                         # can be absolute or relative to PGDATA\n#log_filename\
+    \ = 'postgresql-%Y-%m-%d_%H%M%S.log'  # log file name pattern,\n             \
+    \                       # can include strftime() escapes\n#log_file_mode = 0600\
+    \                # creation mode for log files,\n                            \
+    \        # begin with 0 to use octal notation\n#log_truncate_on_rotation = off\
+    \      # If on, an existing log file with the\n                              \
+    \      # same name as the new log file will be\n                             \
+    \       # truncated rather than appended to.\n                               \
+    \     # But such truncation only occurs on\n                                 \
+    \   # time-driven rotation, not on restarts\n                                \
+    \    # or size-driven rotation.  Default is\n                                \
+    \    # off, meaning append to existing files\n                               \
+    \     # in all cases.\n#log_rotation_age = 1d               # Automatic rotation\
+    \ of logfiles will\n                                    # happen after that time.\
+    \  0 disables.\n#log_rotation_size = 10MB            # Automatic rotation of logfiles\
+    \ will\n                                    # happen after that much log output.\n\
+    \                                    # 0 disables.\n\n# These are relevant when\
+    \ logging to syslog:\n#syslog_facility = 'LOCAL0'\n#syslog_ident = 'postgres'\n\
+    #syslog_sequence_numbers = on\n#syslog_split_messages = on\n\n# - What to Log\
+    \ -\n\n#client_min_messages = notice       # values in order of decreasing detail:\n\
+    \                                    #   debug5\n                            \
+    \        #   debug4\n                                    #   debug3\n        \
+    \                            #   debug2\n                                    #\
+    \   debug1\n                                    #   log\n                    \
+    \                #   notice\n                                    #   warning\n\
+    \                                    #   error\n\n#log_min_messages = warning\
+    \         # values in order of decreasing detail:\n                          \
+    \          #   debug5\n                                    #   debug4\n      \
+    \                              #   debug3\n                                  \
+    \  #   debug2\n                                    #   debug1\n              \
+    \                      #   info\n                                    #   notice\n\
+    \                                    #   warning\n                           \
+    \         #   error\n                                    #   log\n           \
+    \                         #   fatal\n                                    #   panic\n\
+    \n#log_min_error_statement = error    # values in order of increasing severity:\n\
+    \                                    #   debug5\n                            \
+    \        #   debug4\n                                    #   debug3\n        \
+    \                            #   debug2\n                                    #\
+    \   debug1\n                                    #   info\n                   \
+    \                 #   notice\n                                    #   warning\n\
+    \                                    #   error\n                             \
+    \       #   log\n                                    #   fatal\n             \
+    \                       #   panic (effectively off)\n\n#log_min_duration_statement\
+    \ = -1     # -1 is disabled, 0 logs all statements\n                         \
+    \           # and their durations, > 0 logs only\n                           \
+    \         # statements running at least this number\n                        \
+    \            # of milliseconds\n\n#silent_mode = off                   # DO NOT\
+    \ USE without syslog or\n                                    # logging_collector\n\
+    \                                    # (change requires restart)\n\n# - What to\
+    \ Log -\n#client_min_messages = notice       # values in order of decreasing detail:\n\
+    \                                    #   debug5\n                            \
+    \        #   debug4\n                                    #   debug3\n        \
+    \                            #   debug2\n                                    #\
+    \   debug1\n                                    #   log\n                    \
+    \                #   notice\n                                    #   warning\n\
+    \                                    #   error\n                             \
+    \       #   fatal\n                                    #   panic (effectively\
+    \ off)\n\n#log_min_messages = warning         # values in order of decreasing\
+    \ detail:\n                                    #   debug5\n                  \
+    \                  #   debug4\n                                    #   debug3\n\
+    \                                    #   debug2\n                            \
+    \        #   debug1\n                                    #   info\n          \
+    \                          #   notice\n                                    # \
+    \  warning\n                                    #   error\n                  \
+    \                  #   log\n                                    #   fatal\n  \
+    \                                  #   panic\n\n#log_min_error_statement = error\
+    \    # values in order of increasing severity:\n                             \
+    \       #   debug5\n                                    #   debug4\n         \
+    \                           #   debug3\n                                    #\
+    \   debug2\n                                    #   debug1\n                 \
+    \                   #   info\n                                    #   notice\n\
+    \                                    #   warning\n                           \
+    \         #   error\n                                    #   log\n           \
+    \                         #   fatal\n                                    #   panic\
+    \ (effectively off)\n\n#log_min_duration_statement = -1     # -1 is disabled,\
+    \ 0 logs all statements\n                                    # and their durations,\
+    \ > 0 logs only\n                                    # statements running at least\
+    \ this number\n                                    # of milliseconds\n\n#log_checkpoints\
+    \ = off\n#log_connections = off\n#log_disconnections = off\n#log_duration = off\n\
+    #log_error_verbosity = default      # terse, default, or verbose messages\n#log_hostname\
+    \ = off\n#log_line_prefix = ''               # special values:\n             \
+    \                       #   %a = application name\n                          \
+    \          #   %u = user name\n                                    #   %d = database\
+    \ name\n                                    #   %r = remote host and port\n  \
+    \                                  #   %h = remote host\n                    \
+    \                #   %p = process ID\n                                    #  \
+    \ %t = timestamp without milliseconds\n                                    # \
+    \  %m = timestamp with milliseconds\n                                    #   %i\
+    \ = command tag\n                                    #   %e = SQL state\n    \
+    \                                #   %c = session ID\n                       \
+    \             #   %l = session line number\n                                 \
+    \   #   %s = session start timestamp\n                                    #  \
+    \ %v = virtual transaction ID\n                                    #   %x = transaction\
+    \ ID (0 if none)\n                                    #   %q = stop here in non-session\n\
+    \                                    #        processes\n                    \
+    \                #   %% = '%'\n                                    # e.g. '<%u%%%d>\
+    \ '\n#log_lock_waits = off               # log lock waits >= deadlock_timeout\n\
+    #log_statement = 'none'             # none, ddl, mod, all\n                  \
+    \                  # none - statements are not logged\n                      \
+    \              # ddl - only data definition statements\n                     \
+    \               #       (create/alter/drop/truncate)\n                       \
+    \             # mod - ddl plus data-modifying\n                              \
+    \      #       statements (insert/update/delete)\n                           \
+    \         # all - all statements\n                                    # (change\
+    \ requires restart)\n#log_replication_commands = off\n#log_temp_files = -1   \
+    \             # log temporary files equal or larger\n                        \
+    \            # than the specified size in kilobytes;\n                       \
+    \             # -1 disables, 0 logs all temp files\n#log_timezone = '(defaults\
+    \ to server environment setting)' # actually, defaults to TZ environment\n   \
+    \                                 # setting (abbreviation TZ), but if TZ\n   \
+    \                                 # is not set, falls back to\n              \
+    \                      # \"DEFAULT_TIMEZONE\" environment\n                  \
+    \                  # variable, and if that's not set, falls\n                \
+    \                    # back to the timezone specified during\n               \
+    \                     # initdb\n#log_statement_stats = off\n\n#log_directory =\
+    \ '/var/log/postgresql' # directory where log files are written,\n           \
+    \                           # can be absolute or relative to PGDATA\n#log_filename\
+    \ = 'postgresql-%Y-%m-%d_%H%M%S.log' # log file name pattern,\n              \
+    \                        # can include strftime() escapes\n#log_file_mode = 0600\
+    \               # creation mode for log files,\n                             \
+    \         # begin with 0 to use octal notation\n#log_truncate_on_rotation = off\
+    \     # If on, an existing log file with the\n                               \
+    \       # same name as the new log file will be\n                            \
+    \          # truncated rather than appended to.\n                            \
+    \          # But such truncation only occurs on\n                            \
+    \          # time-driven rotation, not on restarts\n                         \
+    \             # or size-driven rotation.  Default is\n                       \
+    \               # off, meaning append to existing files\n                    \
+    \                  # in all cases.\n#log_rotation_age = 1d              # Automatic\
+    \ rotation of logfiles will\n                                      # happen after\
+    \ that time.  0 disables.\n#log_rotation_size = 0              # Automatic rotation\
+    \ of logfiles will\n                                      # happen after that\
+    \ much log output.\n                                      # 0 disables.\n#debug_print_parse\
+    \ = off\n#debug_print_rewritten = off\n#debug_print_plan = off\n#debug_pretty_print\
+    \ = on\n#log_checkpoints = off\n#log_connections = off\n#log_disconnections =\
+    \ off\n#log_duration = off\n#log_error_verbosity = default\n#log_hostname = off\n\
+    #log_line_prefix = '%m [%p] %q%u@%d ' # special values:\n                    \
+    \                  #   %m = timestamp with milliseconds\n                    \
+    \                  #   %u = username\n                                      #\
+    \   %p = process ID\n                                      #   %d = database name\n\
+    \                                      #   %r = remote host and port\n       \
+    \                               #   %h = remote host\n                       \
+    \               #   %c = session ID\n                                      # \
+    \  %l = session line number\n                                      #   %s = session\
+    \ start timestamp\n                                      #   %v = virtual transaction\
+    \ ID\n                                      #   %x = transaction ID (0 if none)\n\
+    \                                      #   %q = stop here in non-session\n   \
+    \                                   #        processes\n                     \
+    \                 #   %% = '%'\n#log_lock_waits = off\n#log_statement = 'none'\n\
+    #log_replication_commands = off\n#log_temp_files = -1\n#log_timezone = '(defaults\
+    \ to server environment setting)'\n#log_statement_stats = off\n"
+  pg_hba.conf: '# PostgreSQL Client Authentication Configuration File
+
+    # ===================================================
+
+
+    # Refer to the "Client Authentication" section in the PostgreSQL
+
+    # documentation for a complete description of this file.  A short
+
+    # synopsis follows.
+
+
+    # This file controls: which hosts are allowed to connect, how clients
+
+    # are authenticated, which PostgreSQL user names they can use, which
+
+    # databases they can access.  Records take one of these forms:
+
+    #
+
+    # local      DATABASE  USER  METHOD  [OPTIONS]
+
+    # host       DATABASE  USER  ADDRESS  METHOD  [OPTIONS]
+
+    # hostssl    DATABASE  USER  ADDRESS  METHOD  [OPTIONS]
+
+    # hostnossl  DATABASE  USER  ADDRESS  METHOD  [OPTIONS]
+
+    #
+
+    # (The uppercase items must be replaced by actual values.)
+
+    #
+
+    # The first field is the connection type: "local" is a Unix-domain socket,
+
+    # "host" is either a plain or SSL-encrypted TCP/IP socket, "hostssl" is an
+
+    # SSL-encrypted TCP/IP socket, and "hostnossl" is a plain TCP/IP socket.
+
+    #
+
+    # DATABASE can be "all", "sameuser", "samerole", "replication", a
+
+    # database name, or a comma-separated list thereof. The "all" keyword does
+
+    # not match "replication". Access to replication must be enabled in a
+
+    # separate record (see example below).
+
+    #
+
+    # USER can be "all", a user name, a group name prefixed with "+", or a comma-
+
+    # separated list thereof.  In both the DATABASE and USER fields you can
+
+    # also write a file name prefixed with "@" to include names from a separate
+
+    # file.
+
+    #
+
+    # ADDRESS specifies the set of hosts the record matches.  It can be a host
+
+    # name, or it is made up of an IP address and a CIDR mask that is an integer
+
+    # (between 0 and 32 (IPv4) or 128 (IPv6) inclusive) that specifies the number
+
+    # of significant bits in the mask.  A host name that starts with a dot (.)
+
+    # means a suffix match. A separate file contains host name-to-address mappings.
+
+    #
+
+    # METHOD can be "trust", "reject", "md5", "password", "scram-sha-256",
+
+    # "gss", "sspi", "ident", "peer", "pam", "ldap", "radius" or "cert".  Note
+
+    # that "password" sends passwords in clear text; "md5" or "scram-sha-256"
+
+    # should be used for password-based authentication (MD5 is preferred for
+
+    # historical reasons).  "trust" does no authentication, and should not be
+
+    # used.  "peer" authentication is only available on operating systems
+
+    # providing the necessary PAM or ident support.
+
+    #
+
+    # OPTIONS are a set of options for the authentication in the format
+
+    # NAME=VALUE.  The available options depend on the different authentication
+
+    # methods -- refer to the "Client Authentication" section in the
+
+    # documentation for a list of which options are available for which
+
+    # authentication methods.
+
+
+    # Database administrative login by Unix domain socket
+
+    local   all             scrum-user-postgres                     peer
+
+
+    # TYPE  DATABASE        USER            ADDRESS                 METHOD
+
+
+    # "local" is for Unix domain socket connections only
+
+    local   all             all                                     trust
+
+    # IPv4 local connections:
+
+    host    all             all             127.0.0.1/32            trust
+
+    # IPv6 local connections:
+
+    host    all             all             ::1/128                 trust
+
+    # Allow replication connections from localhost, by a user with the
+
+    # replication privilege.
+
+    local   replication     all                                     trust
+
+    host    replication     all             127.0.0.1/32            trust
+
+    host    replication     all             ::1/128                 trust
+
+    '

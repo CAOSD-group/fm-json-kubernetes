@@ -1,0 +1,225 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  annotations:
+    meta.helm.sh/release-name: my-rabbitmq
+    meta.helm.sh/release-namespace: default
+  creationTimestamp: "2023-10-26T11:43:09Z"
+  generation: 1
+  labels:
+    app.kubernetes.io/instance: my-rabbitmq
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: rabbitmq
+    app.kubernetes.io/version: 3.12.7
+    helm.sh/chart: rabbitmq-12.3.0
+  name: my-rabbitmq
+  namespace: default
+  resourceVersion: "1433"
+  uid: a7fe5ec9-7f50-4d36-97f6-7401b0a0ea6d
+spec:
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Retain
+    whenScaled: Retain
+  podManagementPolicy: OrderedReady
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: my-rabbitmq
+      app.kubernetes.io/name: rabbitmq
+  serviceName: my-rabbitmq-headless
+  template:
+    metadata:
+      annotations:
+        checksum/config: 4b134db77671bb7949b6538be96dd16de25919d80587d145b48b093ca1a51ff1
+        checksum/secret: b95ba13218751e868b69e0a6c15ed75a020d0cd53c006e0c5a7484e6df263358
+      creationTimestamp: null
+      labels:
+        app.kubernetes.io/instance: my-rabbitmq
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: rabbitmq
+        app.kubernetes.io/version: 3.12.7
+        helm.sh/chart: rabbitmq-12.3.0
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/instance: my-rabbitmq
+                  app.kubernetes.io/name: rabbitmq
+              topologyKey: kubernetes.io/hostname
+            weight: 1
+      containers:
+      - env:
+        - name: BITNAMI_DEBUG
+          value: "false"
+        - name: MY_POD_IP
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: status.podIP
+        - name: MY_POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: MY_POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: K8S_SERVICE_NAME
+          value: my-rabbitmq-headless
+        - name: K8S_ADDRESS_TYPE
+          value: hostname
+        - name: RABBITMQ_FORCE_BOOT
+          value: "no"
+        - name: RABBITMQ_NODE_NAME
+          value: rabbit@$(MY_POD_NAME).$(K8S_SERVICE_NAME).$(MY_POD_NAMESPACE).svc.cluster.local
+        - name: K8S_HOSTNAME_SUFFIX
+          value: .$(K8S_SERVICE_NAME).$(MY_POD_NAMESPACE).svc.cluster.local
+        - name: RABBITMQ_MNESIA_DIR
+          value: /bitnami/rabbitmq/mnesia/$(RABBITMQ_NODE_NAME)
+        - name: RABBITMQ_LDAP_ENABLE
+          value: "no"
+        - name: RABBITMQ_LOGS
+          value: '-'
+        - name: RABBITMQ_ULIMIT_NOFILES
+          value: "65536"
+        - name: RABBITMQ_USE_LONGNAME
+          value: "true"
+        - name: RABBITMQ_ERL_COOKIE
+          valueFrom:
+            secretKeyRef:
+              key: rabbitmq-erlang-cookie
+              name: my-rabbitmq
+        - name: RABBITMQ_LOAD_DEFINITIONS
+          value: "no"
+        - name: RABBITMQ_DEFINITIONS_FILE
+          value: /app/load_definition.json
+        - name: RABBITMQ_SECURE_PASSWORD
+          value: "yes"
+        - name: RABBITMQ_USERNAME
+          value: user
+        - name: RABBITMQ_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: rabbitmq-password
+              name: my-rabbitmq
+        - name: RABBITMQ_PLUGINS
+          value: rabbitmq_management, rabbitmq_peer_discovery_k8s, rabbitmq_auth_backend_ldap
+        image: docker.io/bitnami/rabbitmq:3.12.7-debian-11-r0
+        imagePullPolicy: IfNotPresent
+        lifecycle:
+          preStop:
+            exec:
+              command:
+              - /bin/bash
+              - -ec
+              - |
+                if [[ -f /opt/bitnami/scripts/rabbitmq/nodeshutdown.sh ]]; then
+                    /opt/bitnami/scripts/rabbitmq/nodeshutdown.sh -t "120" -d "false"
+                else
+                    rabbitmqctl stop_app
+                fi
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -ec
+            - curl -f --user user:$RABBITMQ_PASSWORD 127.0.0.1:15672/api/health/checks/virtual-hosts
+          failureThreshold: 6
+          initialDelaySeconds: 120
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 20
+        name: rabbitmq
+        ports:
+        - containerPort: 5672
+          name: amqp
+          protocol: TCP
+        - containerPort: 25672
+          name: dist
+          protocol: TCP
+        - containerPort: 15672
+          name: stats
+          protocol: TCP
+        - containerPort: 4369
+          name: epmd
+          protocol: TCP
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -ec
+            - curl -f --user user:$RABBITMQ_PASSWORD 127.0.0.1:15672/api/health/checks/local-alarms
+          failureThreshold: 3
+          initialDelaySeconds: 10
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 20
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          runAsNonRoot: true
+          runAsUser: 1001
+          seccompProfile:
+            type: RuntimeDefault
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /bitnami/rabbitmq/conf
+          name: configuration
+        - mountPath: /bitnami/rabbitmq/mnesia
+          name: data
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 1001
+      serviceAccount: my-rabbitmq
+      serviceAccountName: my-rabbitmq
+      terminationGracePeriodSeconds: 120
+      volumes:
+      - name: configuration
+        projected:
+          defaultMode: 420
+          sources:
+          - secret:
+              name: my-rabbitmq-config
+  updateStrategy:
+    type: RollingUpdate
+  volumeClaimTemplates:
+  - apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      creationTimestamp: null
+      labels:
+        app.kubernetes.io/instance: my-rabbitmq
+        app.kubernetes.io/name: rabbitmq
+      name: data
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 8Gi
+      volumeMode: Filesystem
+    status:
+      phase: Pending
+status:
+  availableReplicas: 1
+  collisionCount: 0
+  currentReplicas: 1
+  currentRevision: my-rabbitmq-54c9946bc7
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1
+  updateRevision: my-rabbitmq-54c9946bc7
+  updatedReplicas: 1

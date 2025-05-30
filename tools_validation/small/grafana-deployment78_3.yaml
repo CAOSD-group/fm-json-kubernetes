@@ -1,0 +1,162 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboards
+  namespace: blog-system
+data:
+  blog.json: "{\n  \"annotations\": {\n  \"list\": [\n    {\n      \"builtIn\": 1,\n\
+    \      \"datasource\": {\n        \"type\": \"datasource\",\n        \"uid\":\
+    \ \"grafana\"\n      },\n      \"enable\": true,\n      \"hide\": true,\n    \
+    \  \"iconColor\": \"rgba(0, 211, 255, 1)\",\n      \"name\": \"Annotations & Alerts\"\
+    ,\n      \"target\": {\n        \"limit\": 100,\n        \"matchAny\": false,\n\
+    \        \"tags\": [],\n        \"type\": \"dashboard\"\n      },\n      \"type\"\
+    : \"dashboard\"\n    }\n  ]\n  },\n  \"description\": \"Just a non functional\
+    \ PoC (Not everything is working, just show casing something)\",\n  \"editable\"\
+    : true,\n  \"fiscalYearStartMonth\": 0,\n  \"graphTooltip\": 0,\n  \"id\": 3,\n\
+    \  \"iteration\": 1720957669523,\n  \"links\": [],\n  \"liveNow\": false,\n  \"\
+    panels\": [\n  {\n    \"datasource\": {\n      \"type\": \"prometheus\",\n   \
+    \   \"uid\": \"PBFA97CFB590B2093\"\n    },\n    \"fieldConfig\": {\n      \"defaults\"\
+    : {\n        \"mappings\": [],\n        \"thresholds\": {\n          \"mode\"\
+    : \"absolute\",\n          \"steps\": [\n            {\n              \"color\"\
+    : \"white\",\n              \"value\": null\n            }\n          ]\n    \
+    \    },\n        \"unit\": \"short\"\n      },\n      \"overrides\": []\n    },\n\
+    \    \"gridPos\": {\n      \"h\": 6,\n      \"w\": 4,\n      \"x\": 0,\n     \
+    \ \"y\": 0\n    },\n    \"id\": 4,\n    \"options\": {\n      \"colorMode\": \"\
+    value\",\n      \"graphMode\": \"none\",\n      \"justifyMode\": \"auto\",\n \
+    \     \"orientation\": \"auto\",\n      \"reduceOptions\": {\n        \"calcs\"\
+    : [\n          \"lastNotNull\"\n        ],\n        \"fields\": \"\",\n      \
+    \  \"values\": false\n      },\n      \"textMode\": \"auto\"\n    },\n    \"pluginVersion\"\
+    : \"8.5.27\",\n    \"targets\": [\n      {\n        \"datasource\": {\n      \
+    \    \"type\": \"prometheus\",\n          \"uid\": \"PBFA97CFB590B2093\"\n   \
+    \     },\n        \"expr\": \"count(slo:sli:ratio_rate$window{feature=~\\\"$feature\\\
+    \"})\",\n        \"interval\": \"\",\n        \"legendFormat\": \"\",\n      \
+    \  \"refId\": \"A\"\n      }\n    ],\n    \"title\": \"Count of SLIs\",\n    \"\
+    type\": \"stat\"\n  },\n  {\n    \"datasource\": {\n      \"type\": \"prometheus\"\
+    ,\n      \"uid\": \"PBFA97CFB590B2093\"\n    },\n    \"fieldConfig\": {\n    \
+    \  \"defaults\": {\n        \"mappings\": [],\n        \"thresholds\": {\n   \
+    \       \"mode\": \"absolute\",\n          \"steps\": [\n            {\n     \
+    \         \"color\": \"white\",\n              \"value\": null\n            }\n\
+    \          ]\n        },\n        \"unit\": \"short\"\n      },\n      \"overrides\"\
+    : []\n    },\n    \"gridPos\": {\n      \"h\": 6,\n      \"w\": 4,\n      \"x\"\
+    : 4,\n      \"y\": 0\n    },\n    \"id\": 5,\n    \"options\": {\n      \"colorMode\"\
+    : \"value\",\n      \"graphMode\": \"none\",\n      \"justifyMode\": \"auto\"\
+    ,\n      \"orientation\": \"auto\",\n      \"reduceOptions\": {\n        \"calcs\"\
+    : [\n          \"lastNotNull\"\n        ],\n        \"fields\": \"\",\n      \
+    \  \"values\": false\n      },\n      \"textMode\": \"auto\"\n    },\n    \"pluginVersion\"\
+    : \"8.5.27\",\n    \"targets\": [\n      {\n        \"datasource\": {\n      \
+    \    \"type\": \"prometheus\",\n          \"uid\": \"PBFA97CFB590B2093\"\n   \
+    \     },\n        \"expr\": \"count(count by(feature) (slo:sli:ratio_rate$window{feature=~\\\
+    \"$feature\\\"}))\",\n        \"interval\": \"\",\n        \"legendFormat\": \"\
+    \",\n        \"refId\": \"A\"\n      }\n    ],\n    \"title\": \"Count of Features\"\
+    ,\n    \"type\": \"stat\"\n  },\n  {\n    \"datasource\": {\n      \"type\": \"\
+    prometheus\",\n      \"uid\": \"PBFA97CFB590B2093\"\n    },\n    \"fieldConfig\"\
+    : {\n      \"defaults\": {\n        \"mappings\": [],\n        \"thresholds\"\
+    : {\n          \"mode\": \"absolute\",\n          \"steps\": [\n            {\n\
+    \              \"color\": \"green\",\n              \"value\": null\n        \
+    \    },\n            {\n              \"color\": \"red\",\n              \"value\"\
+    : 1\n            }\n          ]\n        },\n        \"unit\": \"short\"\n   \
+    \   },\n      \"overrides\": []\n    },\n    \"gridPos\": {\n      \"h\": 6,\n\
+    \      \"w\": 4,\n      \"x\": 8,\n      \"y\": 0\n    },\n    \"id\": 6,\n  \
+    \  \"options\": {\n      \"colorMode\": \"value\",\n      \"graphMode\": \"none\"\
+    ,\n      \"justifyMode\": \"auto\",\n      \"orientation\": \"auto\",\n      \"\
+    reduceOptions\": {\n        \"calcs\": [\n          \"lastNotNull\"\n        ],\n\
+    \        \"fields\": \"\",\n        \"values\": false\n      },\n      \"textMode\"\
+    : \"auto\"\n    },\n    \"pluginVersion\": \"8.5.27\",\n    \"targets\": [\n \
+    \     {\n        \"datasource\": {\n          \"type\": \"prometheus\",\n    \
+    \      \"uid\": \"PBFA97CFB590B2093\"\n        },\n        \"expr\": \"count(1\
+    \ - (1 - slo:sli:ratio_rate$window{feature=~\\\"$feature\\\"}) / (1 - $slo) <\
+    \ 0) or vector(0)\",\n        \"instant\": true,\n        \"interval\": \"\",\n\
+    \        \"legendFormat\": \"\",\n        \"refId\": \"A\"\n      }\n    ],\n\
+    \    \"title\": \"Consumed Budgets Count\",\n    \"type\": \"stat\"\n  },\n  {\n\
+    \    \"datasource\": {\n      \"type\": \"prometheus\",\n      \"uid\": \"PBFA97CFB590B2093\"\
+    \n    },\n    \"fieldConfig\": {\n      \"defaults\": {\n        \"custom\": {\n\
+    \          \"align\": \"auto\",\n          \"displayMode\": \"auto\",\n      \
+    \    \"inspect\": false\n        },\n        \"mappings\": [],\n        \"thresholds\"\
+    : {\n          \"mode\": \"absolute\",\n          \"steps\": [\n            {\n\
+    \              \"color\": \"red\",\n              \"value\": null\n          \
+    \  }\n          ]\n        },\n        \"unit\": \"percentunit\"\n      },\n \
+    \     \"overrides\": [\n        {\n          \"matcher\": {\n            \"id\"\
+    : \"byName\",\n            \"options\": \"Value\"\n          },\n          \"\
+    properties\": [\n            {\n              \"id\": \"displayName\",\n     \
+    \         \"value\": \"Remaining Budget\"\n            },\n            {\n   \
+    \           \"id\": \"unit\",\n              \"value\": \"percentunit\"\n    \
+    \        },\n            {\n              \"id\": \"thresholds\",\n          \
+    \    \"value\": {\n                \"mode\": \"absolute\",\n                \"\
+    steps\": [\n                  {\n                    \"color\": \"red\",\n   \
+    \                 \"value\": null\n                  },\n                  {\n\
+    \                    \"color\": \"#EAB839\",\n                    \"value\": 0\n\
+    \                  },\n                  {\n                    \"color\": \"\
+    green\",\n                    \"value\": 0.5\n                  }\n          \
+    \      ]\n              }\n            },\n            {\n              \"id\"\
+    : \"custom.displayMode\",\n              \"value\": \"color-background\"\n   \
+    \         }\n          ]\n        },\n        {\n          \"matcher\": {\n  \
+    \          \"id\": \"byName\",\n            \"options\": \"team\"\n          },\n\
+    \          \"properties\": [\n            {\n              \"id\": \"custom.width\"\
+    ,\n              \"value\": 116\n            }\n          ]\n        },\n    \
+    \    {\n          \"matcher\": {\n            \"id\": \"byName\",\n          \
+    \  \"options\": \"feature\"\n          },\n          \"properties\": [\n     \
+    \       {\n              \"id\": \"custom.width\",\n              \"value\": 144\n\
+    \            }\n          ]\n        },\n        {\n          \"matcher\": {\n\
+    \            \"id\": \"byName\",\n            \"options\": \"cluster\"\n     \
+    \     },\n          \"properties\": [\n            {\n              \"id\": \"\
+    custom.width\",\n              \"value\": 122\n            }\n          ]\n  \
+    \      },\n        {\n          \"matcher\": {\n            \"id\": \"byName\"\
+    ,\n            \"options\": \"Time\"\n          },\n          \"properties\":\
+    \ [\n            {\n              \"id\": \"custom.width\",\n              \"\
+    value\": 168\n            }\n          ]\n        },\n        {\n          \"\
+    matcher\": {\n            \"id\": \"byName\",\n            \"options\": \"slo_id\"\
+    \n          },\n          \"properties\": [\n            {\n              \"id\"\
+    : \"custom.width\",\n              \"value\": 349\n            }\n          ]\n\
+    \        },\n        {\n          \"matcher\": {\n            \"id\": \"byName\"\
+    ,\n            \"options\": \"Time\"\n          },\n          \"properties\":\
+    \ [\n            {\n              \"id\": \"custom.hidden\",\n              \"\
+    value\": true\n            }\n          ]\n        }\n      ]\n    },\n    \"\
+    gridPos\": {\n      \"h\": 14,\n      \"w\": 24,\n      \"x\": 0,\n      \"y\"\
+    : 6\n    },\n    \"id\": 2,\n    \"options\": {\n      \"footer\": {\n       \
+    \ \"fields\": \"\",\n        \"reducer\": [\n          \"sum\"\n        ],\n \
+    \       \"show\": false\n      },\n      \"showHeader\": true,\n      \"sortBy\"\
+    : [\n        {\n          \"desc\": false,\n          \"displayName\": \"Time\"\
+    \n        }\n      ]\n    },\n    \"pluginVersion\": \"8.5.27\",\n    \"targets\"\
+    : [\n      {\n        \"datasource\": {\n          \"type\": \"prometheus\",\n\
+    \          \"uid\": \"PBFA97CFB590B2093\"\n        },\n        \"expr\": \"1 -\
+    \ (1 - slo:sli:ratio_rate$window{feature=~\\\"$feature\\\"}) / (1 - $slo)\",\n\
+    \        \"format\": \"table\",\n        \"instant\": true,\n        \"interval\"\
+    : \"\",\n        \"legendFormat\": \"\",\n        \"refId\": \"A\"\n      }\n\
+    \    ],\n    \"title\": \"Remaining Error Budgets ($window window)\",\n    \"\
+    type\": \"table\"\n  }\n  ],\n  \"refresh\": \"30s\",\n  \"schemaVersion\": 36,\n\
+    \  \"style\": \"dark\",\n  \"tags\": [],\n  \"templating\": {\n  \"list\": [\n\
+    \    {\n      \"current\": {\n        \"selected\": false,\n        \"text\":\
+    \ [\n          \"All\"\n        ],\n        \"value\": [\n          \"$__all\"\
+    \n        ]\n      },\n      \"datasource\": {\n        \"type\": \"prometheus\"\
+    ,\n        \"uid\": \"PBFA97CFB590B2093\"\n      },\n      \"definition\": \"\
+    label_values(slo:sli:ratio_rate5m,feature)\",\n      \"hide\": 0,\n      \"includeAll\"\
+    : true,\n      \"multi\": true,\n      \"name\": \"feature\",\n      \"options\"\
+    : [],\n      \"query\": {\n        \"query\": \"label_values(slo:sli:ratio_rate5m,feature)\"\
+    ,\n        \"refId\": \"StandardVariableQuery\"\n      },\n      \"refresh\":\
+    \ 1,\n      \"regex\": \"\",\n      \"skipUrlSync\": false,\n      \"sort\": 0,\n\
+    \      \"tagValuesQuery\": \"\",\n      \"tagsQuery\": \"\",\n      \"type\":\
+    \ \"query\",\n      \"useTags\": false\n    },\n    {\n      \"current\": {\n\
+    \        \"selected\": true,\n        \"text\": \"0.9\",\n        \"value\": \"\
+    0.9\"\n      },\n      \"hide\": 0,\n      \"includeAll\": false,\n      \"label\"\
+    : \"SLO\",\n      \"multi\": false,\n      \"name\": \"slo\",\n      \"options\"\
+    : [\n        {\n          \"selected\": true,\n          \"text\": \"0.9\",\n\
+    \          \"value\": \"0.9\"\n        },\n        {\n          \"selected\":\
+    \ false,\n          \"text\": \"0.95\",\n          \"value\": \"0.95\"\n     \
+    \   },\n        {\n          \"selected\": false,\n          \"text\": \"0.98\"\
+    ,\n          \"value\": \"0.98\"\n        },\n        {\n          \"selected\"\
+    : false,\n          \"text\": \"0.99\",\n          \"value\": \"0.99\"\n     \
+    \   }\n      ],\n      \"query\": \"0.9,0.95,0.98,0.99\",\n      \"queryValue\"\
+    : \"\",\n      \"skipUrlSync\": false,\n      \"type\": \"custom\"\n    },\n \
+    \   {\n      \"current\": {\n        \"selected\": false,\n        \"text\": \"\
+    30m\",\n        \"value\": \"30m\"\n      },\n      \"hide\": 0,\n      \"includeAll\"\
+    : false,\n      \"label\": \"Window\",\n      \"multi\": false,\n      \"name\"\
+    : \"window\",\n      \"options\": [\n        {\n          \"selected\": false,\n\
+    \          \"text\": \"5m\",\n          \"value\": \"5m\"\n        },\n      \
+    \  {\n          \"selected\": true,\n          \"text\": \"30m\",\n          \"\
+    value\": \"30m\"\n        }\n      ],\n      \"query\": \"5m,30m\",\n      \"\
+    queryValue\": \"\",\n      \"skipUrlSync\": false,\n      \"type\": \"custom\"\
+    \n    }\n  ]\n  },\n  \"time\": {\n  \"from\": \"now-30m\",\n  \"to\": \"now\"\
+    \n  },\n  \"timepicker\": {\n  \"refresh_intervals\": [\n    \"10s\",\n    \"\
+    30s\",\n    \"1m\",\n    \"5m\",\n    \"15m\",\n    \"30m\",\n    \"1h\",\n  \
+    \  \"2h\",\n    \"1d\"\n  ]\n  },\n  \"timezone\": \"\",\n  \"title\": \"SLI Overview\"\
+    ,\n  \"uid\": \"3fXM8uLIk\",\n  \"version\": 6,\n  \"weekStart\": \"\"\n  }\n"

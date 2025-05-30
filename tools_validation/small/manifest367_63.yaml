@@ -1,0 +1,189 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: keycloak
+  namespace: default
+  labels:
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: keycloak
+    app.kubernetes.io/version: 24.0.3
+    helm.sh/chart: keycloak-21.0.3
+    app.kubernetes.io/component: keycloak
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  podManagementPolicy: Parallel
+  serviceName: keycloak-headless
+  updateStrategy:
+    rollingUpdate: {}
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: release-name
+      app.kubernetes.io/name: keycloak
+      app.kubernetes.io/component: keycloak
+  template:
+    metadata:
+      annotations:
+        checksum/configmap-env-vars: ff9be26129cf808378cfac6fb5f5dbeb635fc6dbf72187211324070d99ab014c
+        checksum/secrets: d1eb3f91ddb7915821cbda037e7d89d754ad42c9076927c09bfd52778ec0cf2b
+      labels:
+        app.kubernetes.io/instance: release-name
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: keycloak
+        app.kubernetes.io/version: 24.0.3
+        helm.sh/chart: keycloak-21.0.3
+        app.kubernetes.io/component: keycloak
+    spec:
+      serviceAccountName: keycloak
+      automountServiceAccountToken: true
+      affinity:
+        podAffinity: null
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/instance: release-name
+                  app.kubernetes.io/name: keycloak
+              topologyKey: kubernetes.io/hostname
+            weight: 1
+        nodeAffinity: null
+      securityContext:
+        fsGroup: 1001
+        fsGroupChangePolicy: Always
+        supplementalGroups: []
+        sysctls: []
+      enableServiceLinks: true
+      initContainers:
+      - name: init-quarkus-directory
+        image: docker.io/bitnami/keycloak:24.0.3-debian-12-r0
+        imagePullPolicy: IfNotPresent
+        command:
+        - /bin/bash
+        args:
+        - -ec
+        - '#!/bin/bash
+
+          cp -r /opt/bitnami/keycloak/lib/quarkus/* /quarkus
+
+          '
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          privileged: false
+          readOnlyRootFilesystem: true
+          runAsGroup: 1001
+          runAsNonRoot: true
+          runAsUser: 1001
+          seLinuxOptions: {}
+          seccompProfile:
+            type: RuntimeDefault
+        resources:
+          limits:
+            cpu: 750m
+            ephemeral-storage: 1024Mi
+            memory: 768Mi
+          requests:
+            cpu: 500m
+            ephemeral-storage: 50Mi
+            memory: 512Mi
+        volumeMounts:
+        - name: empty-dir
+          mountPath: /tmp
+          subPath: tmp-dir
+        - name: empty-dir
+          mountPath: /quarkus
+          subPath: app-quarkus-dir
+      containers:
+      - name: keycloak
+        image: docker.io/bitnami/keycloak:24.0.3-debian-12-r0
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          privileged: false
+          readOnlyRootFilesystem: true
+          runAsGroup: 1001
+          runAsNonRoot: true
+          runAsUser: 1001
+          seLinuxOptions: {}
+          seccompProfile:
+            type: RuntimeDefault
+        env:
+        - name: KUBERNETES_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: BITNAMI_DEBUG
+          value: 'false'
+        - name: KEYCLOAK_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: keycloak
+              key: admin-password
+        - name: KEYCLOAK_DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: keycloak-postgres
+              key: password
+        - name: KEYCLOAK_HTTP_RELATIVE_PATH
+          value: /
+        envFrom:
+        - configMapRef:
+            name: keycloak-env-vars
+        resources:
+          limits:
+            cpu: 750m
+            ephemeral-storage: 1024Mi
+            memory: 768Mi
+          requests:
+            cpu: 500m
+            ephemeral-storage: 50Mi
+            memory: 512Mi
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        - name: discovery
+          containerPort: 7800
+        livenessProbe:
+          failureThreshold: 3
+          initialDelaySeconds: 300
+          periodSeconds: 1
+          successThreshold: 1
+          timeoutSeconds: 5
+          httpGet:
+            path: /
+            port: http
+        readinessProbe:
+          failureThreshold: 3
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+          httpGet:
+            path: /realms/master
+            port: http
+        volumeMounts:
+        - name: empty-dir
+          mountPath: /tmp
+          subPath: tmp-dir
+        - name: empty-dir
+          mountPath: /opt/bitnami/keycloak/conf
+          subPath: app-conf-dir
+        - name: empty-dir
+          mountPath: /opt/bitnami/keycloak/lib/quarkus
+          subPath: app-quarkus-dir
+        - name: empty-dir
+          mountPath: /opt/bitnami/keycloak/data
+          subPath: app-data-dir
+      volumes:
+      - name: empty-dir
+        emptyDir: {}

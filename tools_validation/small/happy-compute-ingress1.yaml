@@ -1,0 +1,372 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name:  happy-compute-ingress
+  namespace: default
+  annotations:
+   cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  ingressClassName: traefik
+  tls:
+   - hosts:
+       - grafana.happycloudcomputing.com
+       - prometheus.happycloudcomputing.com
+       - wireguard.happycloudcomputing.com
+       - liveide.happycloudcomputing.com
+       - prodsk.happycloudcomputing.com
+       - prodpb.happycloudcomputing.com
+       - devsk.happycloudcomputing.com
+       - devpb.happycloudcomputing.com
+       - syncthing.happycloudcomputing.com
+       - umami.happycloudcomputing.com
+       - rapidbay.happycloudcomputing.com
+       - jackett.happycloudcomputing.com
+       - qbit.happycloudcomputing.com
+       - browser.happycloudcomputing.com
+       - penpot.happycloudcomputing.com
+       - nodered.happycloudcomputing.com  
+       - pinnwand.happycloudcomputing.com
+       - errorpages.happycloudcomputing.com
+       - pihole.happycloudcomputing.com
+       - vaultwarden.happycloudcomputing.com
+       - neko.happycloudcomputing.com
+       - ibga.happycloudcomputing.com
+       - glances.happycloudcomputing.com
+       - photoprism.happycloudcomputing.com
+       - activepc.happycloudcomputing.com
+       - flame.happycloudcomputing.com
+       - llama.happycloudcomputing.com
+       - gitea.happycloudcomputing.com
+       - codeserver.happycloudcomputing.com
+       - etherpad.happycloudcomputing.com 
+     secretName: happy-tls-secret
+  rules:
+  - host: grafana.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: grafana
+            port:
+              number: 80
+
+  - host: prometheus.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: prometheus-server
+            port:
+              number: 80
+
+  - host: wireguard.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: wireguard-ui
+            port:
+              number: 5000
+
+  - host: liveide.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: live-ide
+            port:
+              number: 8443
+
+  - host: prodsk.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: happy-computing-prod-sk
+            port:
+              number: 4173
+
+  - host: prodpb.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: happy-computing-prod-pb
+            port:
+              number: 8090
+
+  - host: devsk.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: happy-computing-dev-sk
+            port:
+              number: 5173
+
+  - host: devpb.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: happy-computing-dev-pb
+            port:
+              number: 8090
+
+  - host: syncthing.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: syncthing
+            port:
+              number: 8384
+
+  - host: umami.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: umami
+            port:
+              number: 3000
+
+  - host: rapidbay.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: rapidbay
+            port:
+              number: 5000
+
+  - host: jackett.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: jackett
+            port:
+              number: 9117
+
+  - host: qbit.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: qbittorrent-webui
+            port:
+              number: 8080
+
+  - host: browser.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: browserless-chrome
+            port:
+              number: 10194
+ 
+  - host: penpot.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: penpot-frontend
+            port:
+              number: 9001
+
+  - host: nodered.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: node-red
+            port:
+              number: 1880
+
+  - host: pinnwand.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: pinnwand
+            port:
+              number: 8000
+
+  - host: errorpages.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: happy-computing-error-pages
+            port:
+              number: 8080
+
+  - host: pihole.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: pihole-web
+            port:
+              number: 80
+
+  - host: vaultwarden.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: vaultwarden
+            port:
+              number: 8080
+
+  - host: photoprism.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: photoprism
+            port:
+              number: 2342
+
+  - host: glances.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: glances
+            port:
+              number: 61208
+
+  - host: ibga.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: ibga
+            port:
+              number: 5800
+
+  - host: activepc.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: activepieces
+            port:
+              number: 80
+
+  - host: flame.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: flame-app
+            port:
+              number: 10291
+
+  - host: llama.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: llama-app-llama-webui
+            port:
+              number: 8080
+
+  - host: gitea.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: gitea-app-http
+            port:
+              number: 3000
+
+  - host: codeserver.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: code-server
+            port:
+              number: 8443
+
+  - host: etherpad.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: etherpad
+            port:
+              number: 9001
+
+  - host: neko.happycloudcomputing.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: neko
+            port:
+              number: 10294

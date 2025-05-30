@@ -1,0 +1,272 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: superset-configmap
+  namespace: superset
+data:
+  run_server.sh: |
+    gunicorn \
+      --access-logfile - \
+      --bind 0.0.0.0:$WEBSERVER_PORT \
+      --error-logfile - \
+      --limit-request-field_size 0 \
+      --limit-request-line 0 \
+      --max-requests 0 \
+      --max-requests-jitter 0 \
+      --threads 20 \
+      --timeout $WEBSERVER_TIMEOUT \
+      --workers 10 \
+      --worker-class gevent \
+      "superset.app:create_app()"
+  init_superset.sh: |
+    if [ $INIT_JOB = "true" ]; then
+      superset db upgrade
+      superset init
+      superset fab create-admin \
+                     --username admin \
+                     --firstname Superset \
+                     --lastname Admin \
+                     --email admin@superset.com \
+                     --password admin \
+                     || true
+      superset load-examples
+    else
+      echo "INIT_JOB=$INIT_JOB.  Superset not initialised."
+    fi
+  superset_config.py: |
+    import json
+    import logging
+    import os
+    import requests
+    import subprocess
+    import sys
+
+    from cachelib.redis import RedisCache
+    from celery.schedules import crontab
+    from datetime import timedelta
+    
+    # ========== Log configuration ==========
+    LOG_LEVELS = {
+      "CRITICAL": 50,
+      "ERROR": 40,
+      "WARNING": 30,
+      "INFO": 20,
+      "DEBUG": 10,
+      "NOTSET": 0
+    }
+    LOGGER = logging.getLogger(__name__)
+    LOG_FORMAT = "%(asctime)s:%(levelname)s:%(name)s:%(message)s"
+    LOG_LEVEL = os.getenv("LOG_LEVEL", "DEBUG")
+    logging.basicConfig(
+      datefmt="%Y-%m-%dT%H:%M:%S",
+      format=LOG_FORMAT,
+      level=LOG_LEVELS.get(LOG_LEVEL),
+      stream=sys.stdout
+    )
+
+    # ========== Environment variables ==========
+    FLASK_SECRET = os.getenv("FLASK_SECRET", None)
+    POSTGRESQL_DATABASE = os.getenv("POSTGRESQL_DATABASE", None)
+    POSTGRESQL_HOST = os.getenv("POSTGRESQL_HOST", None)
+    POSTGRESQL_PASSWORD = os.getenv("POSTGRESQL_PASSWORD", None)
+    POSTGRESQL_PORT = os.getenv("POSTGRESQL_PORT", None)
+    POSTGRESQL_USERNAME = os.getenv("POSTGRESQL_USERNAME", None)
+    REDIS_CACHE_DATABASE = os.getenv("REDIS_CACHE_DATABASE", 0)
+    REDIS_CACHE_DATABASE_CHART = os.getenv("REDIS_CACHE_DATABASE_CHART", 1)
+    REDIS_CACHE_DATABASE_DATA = os.getenv("REDIS_CACHE_DATABASE_DATA", 2)
+    REDIS_CACHE_DATABASE_DASHBOARD = os.getenv("REDIS_CACHE_DATABASE_DASHBOARD", 3)
+    REDIS_CACHE_DATABASE_RESULTS = os.getenv("REDIS_CACHE_DATABASE_RESULTS", 4)
+    REDIS_HOST = os.getenv("REDIS_HOST", None)
+    REDIS_PASSWORD = os.getenv("REDIS_PASSWORD", None)
+    REDIS_PORT = os.getenv("REDIS_PORT", None)
+    WEBSERVER_PORT = os.getenv("WEBSERVER_PORT", None)
+    WEBSERVER_TIMEOUT = os.getenv("WEBSERVER_TIMEOUT", None)
+
+    missing_env_vars = []
+    if FLASK_SECRET is None:
+      missing_env_vars.append("FLASK_SECRET")
+    if POSTGRESQL_DATABASE is None:
+      missing_env_vars.append("POSTGRESQL_DATABASE")
+    if POSTGRESQL_HOST is None:
+      missing_env_vars.append("POSTGRESQL_HOST")
+    if POSTGRESQL_PASSWORD is None:
+      missing_env_vars.append("POSTGRESQL_PASSWORD")
+    if POSTGRESQL_PORT is None:
+      missing_env_vars.append("POSTGRESQL_PORT")
+    if POSTGRESQL_USERNAME is None:
+      missing_env_vars.append("POSTGRESQL_USERNAME")
+    if REDIS_HOST is None:
+      missing_env_vars.append("REDIS_HOST")
+    if REDIS_PASSWORD is None:
+      missing_env_vars.append("REDIS_PASSWORD")
+    if REDIS_PORT is None:
+      missing_env_vars.append("REDIS_PORT")
+    if WEBSERVER_PORT is None:
+      missing_env_vars.append("WEBSERVER_PORT")
+    if WEBSERVER_TIMEOUT is None:
+      missing_env_vars.append("WEBSERVER_TIMEOUT")
+    
+    if missing_env_vars:
+      raise ValueError(f"Missing mandatory environment variables: {missing_env_vars}")
+    
+    # ========== File system ==========
+    if "SUPERSET_HOME" in os.environ:
+      DATA_DIR = os.environ["SUPERSET_HOME"]
+    else:
+      DATA_DIR = os.path.expanduser("~/.superset")
+    if not os.path.exists(DATA_DIR):
+      os.makedirs(DATA_DIR)
+
+    # ========== Time rotate logger ==========
+    ENABLE_TIME_ROTATE = True
+    TIME_ROTATE_LOG_LEVEL = os.getenv("TIME_ROTATE_LOG_LEVEL", "DEBUG")
+
+    LOG_PATH = os.path.join(DATA_DIR, "superset.log")
+    subprocess.call(["touch", LOG_PATH])
+    LOG_PATH_EXISTS = os.path.exists(LOG_PATH)
+    LOGGER.info(f"LOG_PATH: {LOG_PATH}, os.path.exists(LOG_PATH): {LOG_PATH_EXISTS}")
+    if LOG_PATH_EXISTS:
+      FILENAME = LOG_PATH
+    else:
+      LOGGER.error(f"LOG_PATH: {LOG_PATH} does not exist.  Time rotate logger is not configured properly")
+
+    BACKUP_COUNT = 30
+    INTERVAL = 1
+    ROLLOVER = "midnight"
+
+    # ========== Feature flags ==========
+    FEATURE_FLAGS = {
+      "ALERT_REPORTS": True,
+      "ENABLE_TEMPLATE_PROCESSING": True,
+      "SQLLAB_BACKEND_PERSISTENCE": True
+    }
+
+    # ========== Charts ==========
+    MAPBOX_API_KEY = ""
+    ROW_LIMIT = 5000
+
+    # ========== Webserver ==========
+    SUPERSET_WEBSERVER_PORT = WEBSERVER_PORT
+    SUPERSET_WEBSERVER_TIMEOUT = WEBSERVER_TIMEOUT
+    WEBSERVER_BASEURL = f"http://superset-service:{SUPERSET_WEBSERVER_PORT}"
+    WEBSERVER_BASEURL_USER_FRIENDLY = f"http://localhost:{SUPERSET_WEBSERVER_PORT}"
+    WEBSERVER_OPTION_ARGS = [
+      "--headless"
+    ]
+
+    # ========== SQL lab ==========
+    SQLLAB_ASYNC_TIME_LIMIT_SEC = 300
+    SQLLAB_TIMEOUT = 600    
+
+    # ========== Flask ==========
+    SECRET_KEY = FLASK_SECRET
+    WTF_CRSF_ENABLED = True
+
+    # ========== Cache ==========
+    BASE_CACHE_CONFIG = {
+      "CACHE_DEFAULT_TIMEOUT": 86400,
+      "CACHE_REDIS_HOST": REDIS_HOST,
+      "CACHE_REDIS_PASSWORD": REDIS_PASSWORD,
+      "CACHE_REDIS_PORT": REDIS_PORT,
+      "CACHE_TYPE": "RedisCache"
+    }
+    
+    CACHE_CONFIG = BASE_CACHE_CONFIG.copy()
+    CACHE_CONFIG["CACHE_KEY_PREFIX"] = "superset_default"
+    CACHE_CONFIG["CACHE_REDIS_DATABASE"] = REDIS_CACHE_DATABASE
+    CACHE_CONFIG["CACHE_REDIS_URL"] = f"redis://default:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/{REDIS_CACHE_DATABASE}"
+
+    DATA_CACHE_CONFIG = BASE_CACHE_CONFIG.copy()
+    DATA_CACHE_CONFIG["CACHE_KEY_PREFIX"] = "superset_data"
+    DATA_CACHE_CONFIG["CACHE_REDIS_DATABASE"] = REDIS_CACHE_DATABASE_DATA
+    DATA_CACHE_CONFIG["CACHE_REDIS_URL"] = f"redis://default:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/{REDIS_CACHE_DATABASE_DATA}"
+
+    EXPLORE_FORM_DATA_CACHE_CONFIG = BASE_CACHE_CONFIG.copy()
+    EXPLORE_FORM_DATA_CACHE_CONFIG["CACHE_KEY_PREFIX"] = "superset_chart"
+    EXPLORE_FORM_DATA_CACHE_CONFIG["CACHE_REDIS_DATABASE"] = REDIS_CACHE_DATABASE_CHART
+    EXPLORE_FORM_DATA_CACHE_CONFIG["CACHE_REDIS_URL"] = f"redis://default:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/{REDIS_CACHE_DATABASE_CHART}"
+
+    FILTER_STATE_CACHE_CONFIG = BASE_CACHE_CONFIG.copy()
+    FILTER_STATE_CACHE_CONFIG["CACHE_KEY_PREFIX"] = "superset_dashboard"
+    FILTER_STATE_CACHE_CONFIG["CACHE_REDIS_DATABASE"] = REDIS_CACHE_DATABASE_DASHBOARD
+    FILTER_STATE_CACHE_CONFIG["CACHE_REDIS_URL"] = f"redis://default:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/{REDIS_CACHE_DATABASE_DASHBOARD}"
+
+    RESULTS_BACKEND = RedisCache(
+      db=REDIS_CACHE_DATABASE_RESULTS,
+      default_timeout=BASE_CACHE_CONFIG["CACHE_DEFAULT_TIMEOUT"],
+      host=REDIS_HOST,
+      key_prefix="superset_results",
+      password=REDIS_PASSWORD,
+      port=REDIS_PORT
+    )
+
+    # ========== Metadata ==========
+    SQLALCHEMY_DATABASE_URI = f"postgresql+psycopg2://{POSTGRESQL_USERNAME}:{POSTGRESQL_PASSWORD}@{POSTGRESQL_HOST}:{POSTGRESQL_PORT}/{POSTGRESQL_DATABASE}"
+
+    # ========== Celery ==========
+    class CeleryConfig(object):
+      beat_schedule = {
+        "email_reports.schedule_hourly": {
+          "schedule": crontab(minute=1, hour="*"),
+          "task": "email_reports.schedule_hourly"
+        },
+        "reports.prune_log": {
+          "schedule": crontab(minute=10, hour=0),
+          "task": "reports.prune_log"
+        },
+        "reports.scheduler": {
+          "schedule": crontab(minute="*", hour="*"),
+          "task": "reports.scheduler"
+        }
+      }
+      broker_url = CACHE_CONFIG["CACHE_REDIS_URL"]
+      imports = (
+        "superset.sql_lab",
+        "superset.tasks",
+        "superset.tasks.thumbnails"
+      )
+      result_backend = f"redis://default:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/{REDIS_CACHE_DATABASE_RESULTS}"
+      task_acks_late = True
+      task_annotations = {
+        "email_reports.send": {
+          "ignore_result": True,
+          "rate_limit": "1/s",
+          "soft_time_limit": int(timedelta(seconds=150).total_seconds()),
+          "time_limit": int(timedelta(seconds=120).total_seconds())
+        },
+        "sql_lab.get_sql_results": {
+          "rate_limit": "100/s"
+        }        
+      }
+      worker_log_level = "DEBUG"
+      worker_prefetch_multiplier = 10
+
+    CELERY_CONFIG = CeleryConfig
+
+    # ========== Selenium ==========
+    SCREENSHOT_LOAD_WAIT = 600
+    SCREENSHOT_LOCATE_WAIT = 100
+
+    # ========== Header security ==========
+    TALISMAN_CONFIG = {
+      "content_security_policy": {
+        "connect-src": ["'self'", "https://api.mapbox.com", "https://events.mapbox.com"],
+        "default-src": ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+        "img-src": ["'self'", "data:"],
+        "object-src": "'none'",
+        "worker-src": ["'self'", "blob:"]
+      },
+      "force_https": False
+    }
+    TALISMAN_ENABLED = True
+
+    # ========== Email ==========
+    ALERT_REPORTS_NOTIFICATION_DRY_RUN = True
+    EMAIL_NOTIFICATIONS = False
+    SMTP_HOST = "localhost"
+    SMTP_MAIL_FROM = "superset@superset.com"
+    SMTP_PORT = 25
+    SMTP_PASSWORD = "superset"
+    SMTP_SSL = False
+    SMTP_STARTTLS = True
+    SMTP_USER = "superset"

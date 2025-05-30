@@ -1,0 +1,64 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-server-conf
+  namespace: monitoring
+data:
+  prometheus.rules: ''
+  prometheus.yml: "global:\n  scrape_interval: 5s\n  evaluation_interval: 5s\nrule_files:\n\
+    \  - /etc/prometheus/prometheus.rules\n  - /run/prometheus-rules/kube-config/_alerts/*\n\
+    storage:\n  tsdb:\n    out_of_order_time_window: 1m\nalerting:\n  alertmanagers:\n\
+    \  - scheme: http\n    static_configs:\n    - targets:\n      - \"alertmanager.monitoring.svc:8080\"\
+    \nscrape_configs:\n  # - job_name: 'kubernetes-apiservers'  # Disabled due to\
+    \ the number of timeseries these create\n  #   kubernetes_sd_configs:\n  #   -\
+    \ role: endpoints\n  #   scheme: https\n  #   tls_config:\n  #     ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt\n\
+    \  #   bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token\n\
+    \  #   relabel_configs:\n  #   - source_labels: [__meta_kubernetes_namespace,\
+    \ __meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]\n  # \
+    \    action: keep\n  #     regex: default;kubernetes;https\n  - job_name: 'kubernetes-nodes'\n\
+    \    scheme: https\n    tls_config:\n      ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt\n\
+    \    bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token\n\
+    \    kubernetes_sd_configs:\n    - role: node\n    relabel_configs:\n    - target_label:\
+    \ __address__\n      replacement: kubernetes.default.svc:443\n    - source_labels:\
+    \ [__meta_kubernetes_node_name]\n      regex: (.+)\n      target_label: __metrics_path__\n\
+    \      replacement: /api/v1/nodes/${1}/proxy/metrics\n  - job_name: 'kubernetes-pods'\n\
+    \    kubernetes_sd_configs:\n    - role: pod\n    relabel_configs:\n    - source_labels:\
+    \ [__meta_kubernetes_pod_annotation_prometheus_io_scrape]\n      action: keep\n\
+    \      regex: true\n    - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]\n\
+    \      action: replace\n      target_label: __metrics_path__\n      regex: (.+)\n\
+    \    - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]\n\
+    \      action: replace\n      regex: ([^:]+)(?::\\d+)?;(\\d+)\n      replacement:\
+    \ $1:$2\n      target_label: __address__\n    - source_labels: [__meta_kubernetes_namespace]\n\
+    \      action: replace\n      target_label: kubernetes_namespace\n    - source_labels:\
+    \ [__meta_kubernetes_pod_name]\n      action: replace\n      target_label: kubernetes_pod_name\n\
+    \    - source_labels: [__meta_kubernetes_pod_label_app]\n      action: replace\n\
+    \      target_label: kubernetes_app_name\n    - source_labels: [__meta_kubernetes_pod_container_name]\n\
+    \      action: replace\n      target_label: kubernetes_container_name\n  - job_name:\
+    \ 'kube-state-metrics'\n    static_configs:\n      - targets: ['kube-state-metrics.kube-system.svc.cluster.local:8080']\n\
+    \  - job_name: 'kubernetes-cadvisor'\n    scheme: https\n    tls_config:\n   \
+    \   ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt\n    bearer_token_file:\
+    \ /var/run/secrets/kubernetes.io/serviceaccount/token\n    kubernetes_sd_configs:\n\
+    \    - role: node\n    relabel_configs:\n    - target_label: __address__\n   \
+    \   replacement: kubernetes.default.svc:443\n    - source_labels: [__meta_kubernetes_node_name]\n\
+    \      regex: (.+)\n      target_label: __metrics_path__\n      replacement: /api/v1/nodes/${1}/proxy/metrics/cadvisor\n\
+    \  - job_name: 'kubernetes-service-endpoints'\n    kubernetes_sd_configs:\n  \
+    \  - role: endpoints\n    relabel_configs:\n    - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scrape]\n\
+    \      action: keep\n      regex: true\n    - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scheme]\n\
+    \      action: replace\n      target_label: __scheme__\n      regex: (https?)\n\
+    \    - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_path]\n\
+    \      action: replace\n      target_label: __metrics_path__\n      regex: (.+)\n\
+    \    - source_labels: [__address__, __meta_kubernetes_service_annotation_prometheus_io_port]\n\
+    \      action: replace\n      target_label: __address__\n      regex: ([^:]+)(?::\\\
+    d+)?;(\\d+)\n      replacement: $1:$2\n    - source_labels: [__meta_kubernetes_namespace]\n\
+    \      action: replace\n      target_label: kubernetes_namespace\n    - source_labels:\
+    \ [__meta_kubernetes_service_name]\n      action: replace\n      target_label:\
+    \ kubernetes_name\n  - job_name: 'netbox-devices'\n    relabel_configs:\n    -\
+    \ source_labels: [__meta_netbox_primary_ip4, __address__]\n      regex: ([0-9A-Z.:]+);[^:]+:([0-9]+)\n\
+    \      target_label: __address__\n      replacement: ${1}:$2\n      action: replace\n\
+    \    - source_labels: [__address__]\n      action: keep\n      regex: ((?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\
+    .(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\
+    .(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?):[0-9]+)\n    - source_labels: [__meta_netbox_name]\n\
+    \      action: replace\n      target_label: netbox_device_name\n    http_sd_configs:\n\
+    \      - url: https://netbox.ing.k3s.brickyard.whitestar.systems/api/plugins/prometheus-sd/devices/?status=active\n\
+    \        authorization:\n          type: 'Token'\n          credentials_file:\
+    \ /run/secrets/netbox-token/netbox-token"

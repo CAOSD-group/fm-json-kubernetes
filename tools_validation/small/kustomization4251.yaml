@@ -1,0 +1,219 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/setup/0alertmanagerConfigCustomResourceDefinition.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/setup/0alertmanagerCustomResourceDefinition.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/setup/0podmonitorCustomResourceDefinition.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/setup/0probeCustomResourceDefinition.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/setup/0prometheusCustomResourceDefinition.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/setup/0prometheusruleCustomResourceDefinition.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/setup/0servicemonitorCustomResourceDefinition.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/setup/0thanosrulerCustomResourceDefinition.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/setup/namespace.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/alertmanager-alertmanager.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/alertmanager-networkPolicy.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/alertmanager-podDisruptionBudget.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/alertmanager-prometheusRule.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/alertmanager-secret.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/alertmanager-service.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/alertmanager-serviceAccount.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/alertmanager-serviceMonitor.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/blackboxExporter-clusterRole.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/blackboxExporter-clusterRoleBinding.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/blackboxExporter-configuration.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/blackboxExporter-deployment.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/blackboxExporter-networkPolicy.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/blackboxExporter-service.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/blackboxExporter-serviceAccount.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/blackboxExporter-serviceMonitor.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/grafana-config.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/grafana-dashboardDatasources.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/grafana-dashboardDefinitions.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/grafana-dashboardSources.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/grafana-deployment.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/grafana-networkPolicy.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/grafana-prometheusRule.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/grafana-service.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/grafana-serviceAccount.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/grafana-serviceMonitor.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/kubePrometheus-prometheusRule.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/kubeStateMetrics-clusterRole.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/kubeStateMetrics-clusterRoleBinding.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/kubeStateMetrics-deployment.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/kubeStateMetrics-networkPolicy.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/kubeStateMetrics-prometheusRule.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/kubeStateMetrics-service.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/kubeStateMetrics-serviceAccount.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/kubeStateMetrics-serviceMonitor.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/kubernetesControlPlane-prometheusRule.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/kubernetesControlPlane-serviceMonitorApiserver.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/kubernetesControlPlane-serviceMonitorCoreDNS.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/kubernetesControlPlane-serviceMonitorKubeControllerManager.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/kubernetesControlPlane-serviceMonitorKubeScheduler.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/kubernetesControlPlane-serviceMonitorKubelet.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/nodeExporter-clusterRole.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/nodeExporter-clusterRoleBinding.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/nodeExporter-daemonset.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/nodeExporter-networkPolicy.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/nodeExporter-prometheusRule.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/nodeExporter-service.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/nodeExporter-serviceAccount.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/nodeExporter-serviceMonitor.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheus-clusterRole.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheus-clusterRoleBinding.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheus-networkPolicy.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheus-podDisruptionBudget.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheus-prometheus.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheus-prometheusRule.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheus-roleBindingConfig.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheus-roleBindingSpecificNamespaces.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheus-roleConfig.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheus-roleSpecificNamespaces.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheus-service.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheus-serviceAccount.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheus-serviceMonitor.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheusAdapter-apiService.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheusAdapter-clusterRole.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheusAdapter-clusterRoleAggregatedMetricsReader.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheusAdapter-clusterRoleBinding.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheusAdapter-clusterRoleBindingDelegator.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheusAdapter-clusterRoleServerResources.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheusAdapter-configMap.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheusAdapter-deployment.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheusAdapter-networkPolicy.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheusAdapter-podDisruptionBudget.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheusAdapter-roleBindingAuthReader.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheusAdapter-service.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheusAdapter-serviceAccount.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheusAdapter-serviceMonitor.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheusOperator-clusterRole.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheusOperator-clusterRoleBinding.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheusOperator-deployment.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheusOperator-networkPolicy.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheusOperator-prometheusRule.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheusOperator-service.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheusOperator-serviceAccount.yaml
+- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.12.0/manifests/prometheusOperator-serviceMonitor.yaml
+- ./grafana.configmap.yaml
+- ./grafana.httproute.yaml
+- ./grafana.sealedsecret.yaml
+- ./grafana.volume.yaml
+
+patches:
+- target:
+    version: v1
+    kind: Prometheus
+    name: k8s
+    namespace: monitoring
+  patch: |
+    - op: add
+      path: /spec/storage
+      value:
+        volumeClaimTemplate:
+          spec:
+            resources:
+              requests:
+                storage: 10Gi
+- target:
+    version: v1
+    kind: Deployment
+    name: grafana
+    namespace: monitoring
+  patch: |
+    - op: replace
+      path: /spec/template/spec/volumes/0
+      value:
+        name: grafana-storage
+        persistentVolumeClaim:
+          claimName: grafana-storage
+    - op: add
+      path: /spec/template/spec/containers/0/envFrom
+      value:
+        - configMapRef:
+            name: grafana-config
+        - secretRef:
+            name: grafana-secret
+- target:
+    version: v1
+    kind: NetworkPolicy
+    name: grafana
+    namespace: monitoring
+  patch: |
+    - op: add
+      path: /spec/ingress/-
+      value:
+        from:
+        - namespaceSelector:
+            matchLabels:
+              name: istio-ingress
+        ports:
+        - port: 3000
+          protocol: TCP
+    - op: add
+      path: /spec/ingress/-
+      value:
+        from:
+        - namespaceSelector:
+            matchLabels:
+              name: kiali
+        ports:
+        - port: 3000
+          protocol: TCP
+- target:
+    version: v1
+    kind: NetworkPolicy
+    name: prometheus-k8s
+    namespace: monitoring
+  patch: |
+    - op: add
+      path: /spec/ingress/-
+      value:
+        from:
+        - namespaceSelector:
+            matchLabels:
+              name: kiali
+        ports:
+        - port: 9090
+          protocol: TCP
+- target:
+    version: v1
+    kind: Secret
+    name: grafana-datasources
+    namespace: monitoring
+  patch: |
+    - op: replace
+      path: /stringData/datasources.yaml
+      value: |-
+        {
+            "apiVersion": 1,
+            "datasources": [
+                {
+                    "access": "proxy",
+                    "editable": false,
+                    "name": "prometheus",
+                    "orgId": 1,
+                    "type": "prometheus",
+                    "url": "http://prometheus-k8s.monitoring.svc:9090",
+                    "version": 1
+                },
+                {
+                    "access": "proxy",
+                    "editable": false,
+                    "name": "loki",
+                    "orgId": 1,
+                    "type": "loki",
+                    "url": "http://loki.loki.svc:3100",
+                    "version": 1
+                }
+            ]
+        }
+- target:
+    version: v1
+    kind: CustomResourceDefinition
+    name: prometheuses.monitoring.coreos.com
+  patch: |-
+    - op: add
+      path: /metadata/annotations/argocd.argoproj.io~1sync-options
+      value: Replace=true
+- path: ./prometheus.clusterrole.yaml

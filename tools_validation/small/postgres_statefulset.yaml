@@ -1,0 +1,186 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  creationTimestamp: "2024-03-25T15:32:48Z"
+  generation: 1
+  labels:
+    app: postgres
+    index: "1"
+    replicationRole: primary
+  name: postgres-1
+  namespace: db
+  ownerReferences:
+  - apiVersion: kubegres.reactive-tech.io/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Kubegres
+    name: postgres
+    uid: 4b290982-db0c-4f07-849d-660b11474f37
+  resourceVersion: "13322"
+  uid: d91e02f3-92ce-4406-875d-8ae59b27af97
+spec:
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Retain
+    whenScaled: Retain
+  podManagementPolicy: OrderedReady
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: postgres
+      index: "1"
+  serviceName: postgres
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: postgres
+        index: "1"
+        replicationRole: primary
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - postgres
+              topologyKey: kubernetes.io/hostname
+            weight: 100
+      containers:
+      - args:
+        - -c
+        - config_file=/etc/postgres.conf
+        - -c
+        - hba_file=/etc/pg_hba.conf
+        env:
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: status.podIP
+        - name: PGDATA
+          value: /var/lib/postgresql/data/pgdata
+        - name: FOO
+          valueFrom:
+            secretKeyRef:
+              key: ca.crt
+              name: db-vault-client-certificate
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: superUserPassword
+              name: postgres-passwords
+        - name: POSTGRES_REPLICATION_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: replicationUserPassword
+              name: postgres-passwords
+        image: postgres:16.1
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - exec pg_isready -U postgres -h $POD_IP
+          failureThreshold: 10
+          initialDelaySeconds: 60
+          periodSeconds: 20
+          successThreshold: 1
+          timeoutSeconds: 15
+        name: postgres-1
+        ports:
+        - containerPort: 5432
+          protocol: TCP
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - exec pg_isready -U postgres -h $POD_IP
+          failureThreshold: 3
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 3
+        resources:
+          limits:
+            memory: 4Gi
+          requests:
+            cpu: 256m
+            memory: 1Gi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: postgres-db
+        - mountPath: /docker-entrypoint-initdb.d/primary_create_replication_role.sh
+          name: base-config
+          subPath: primary_create_replication_role.sh
+        - mountPath: /etc/postgres.conf
+          name: base-config
+          subPath: postgres.conf
+        - mountPath: /docker-entrypoint-initdb.d/primary_init_script.sh
+          name: base-config
+          subPath: primary_init_script.sh
+        - mountPath: /etc/pg_hba.conf
+          name: base-config
+          subPath: pg_hba.conf
+        - mountPath: /opt/vault/tls/vault
+          name: db-vault-client-certificate
+          readOnly: true
+        - mountPath: /etc/postgres-passwords
+          name: postgres-passwords
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 10
+      volumes:
+      - configMap:
+          defaultMode: 511
+          name: base-kubegres-config
+        name: base-config
+      - name: db-vault-client-certificate
+        secret:
+          defaultMode: 420
+          secretName: db-vault-client-certificate
+      - csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: postgres-passwords
+        name: postgres-passwords
+  updateStrategy:
+    rollingUpdate:
+      partition: 0
+    type: RollingUpdate
+  volumeClaimTemplates:
+  - apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      creationTimestamp: null
+      name: postgres-db
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 256Mi
+      storageClassName: kubedemo-block
+      volumeMode: Filesystem
+    status:
+      phase: Pending
+status:
+  availableReplicas: 0
+  collisionCount: 0
+  currentReplicas: 1
+  currentRevision: postgres-1-7974999889
+  observedGeneration: 1
+  replicas: 1
+  updateRevision: postgres-1-7974999889
+  updatedReplicas: 1

@@ -1,0 +1,69 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: apisix-gw-config.yaml
+  namespace: ingress-apisix
+data:
+  config.yaml: "deployment:\n  admin:\n    allow_admin:\n      - 127.0.0.0/24\n  \
+    \    - 0.0.0.0/0\n    admin_listen:\n      ip: 0.0.0.0\n      port: 9180\n  etcd:\n\
+    \    host:\n      - \"http://127.0.0.1:12379\"\n    prefix: \"/apisix\"\n    timeout:\
+    \ 60\n\napisix:\n  enable_control: true\n  enable_reuseport: true\n\n  stream_proxy:\n\
+    \    only: false\n    tcp:\n      - 9100\n      - addr: 9110\n        tls: true\n\
+    \    udp:\n      - 9200\n\n\nplugins:                          # plugin list (sorted\
+    \ by priority)\n  - real-ip                        # priority: 23000\n  - ai \
+    \                            # priority: 22900\n  - client-control           \
+    \      # priority: 22000\n  - proxy-control                  # priority: 21990\n\
+    \  - request-id                     # priority: 12015\n  - zipkin            \
+    \             # priority: 12011\n  #- skywalking                    # priority:\
+    \ 12010\n  #- opentelemetry                 # priority: 12009\n  - ext-plugin-pre-req\
+    \             # priority: 12000\n  - fault-injection                # priority:\
+    \ 11000\n  - mocking                        # priority: 10900\n  - serverless-pre-function\
+    \        # priority: 10000\n  #- batch-requests                # priority: 4010\n\
+    \  - cors                           # priority: 4000\n  - ip-restriction     \
+    \            # priority: 3000\n  - ua-restriction                 # priority:\
+    \ 2999\n  - referer-restriction            # priority: 2990\n  - csrf        \
+    \                   # priority: 2980\n  - uri-blocker                    # priority:\
+    \ 2900\n  - request-validation             # priority: 2800\n  - openid-connect\
+    \                 # priority: 2599\n  - cas-auth                       # priority:\
+    \ 2597\n  - authz-casbin                   # priority: 2560\n  - authz-casdoor\
+    \                  # priority: 2559\n  - wolf-rbac                      # priority:\
+    \ 2555\n  - ldap-auth                      # priority: 2540\n  - hmac-auth   \
+    \                   # priority: 2530\n  - basic-auth                     # priority:\
+    \ 2520\n  - jwt-auth                       # priority: 2510\n  - key-auth    \
+    \                   # priority: 2500\n  - consumer-restriction           # priority:\
+    \ 2400\n  - forward-auth                   # priority: 2002\n  - opa         \
+    \                   # priority: 2001\n  - authz-keycloak                 # priority:\
+    \ 2000\n  #- error-log-logger              # priority: 1091\n  - proxy-mirror\
+    \                   # priority: 1010\n  - proxy-cache                    # priority:\
+    \ 1009\n  - proxy-rewrite                  # priority: 1008\n  - workflow    \
+    \                   # priority: 1006\n  - api-breaker                    # priority:\
+    \ 1005\n  - limit-conn                     # priority: 1003\n  - limit-count \
+    \                   # priority: 1002\n  - limit-req                      # priority:\
+    \ 1001\n  #- node-status                   # priority: 1000\n  - gzip        \
+    \                   # priority: 995\n  - traffic-split                  # priority:\
+    \ 966\n  - redirect                       # priority: 900\n  - response-rewrite\
+    \               # priority: 899\n  - kafka-proxy                    # priority:\
+    \ 508\n  #- dubbo-proxy                   # priority: 507\n  - grpc-transcode\
+    \                 # priority: 506\n  - grpc-web                       # priority:\
+    \ 505\n  - public-api                     # priority: 501\n  - prometheus    \
+    \                 # priority: 500\n  - datadog                        # priority:\
+    \ 495\n  - elasticsearch-logger           # priority: 413\n  - echo          \
+    \                 # priority: 412\n  - loggly                         # priority:\
+    \ 411\n  - http-logger                    # priority: 410\n  - splunk-hec-logging\
+    \             # priority: 409\n  - skywalking-logger              # priority:\
+    \ 408\n  - google-cloud-logging           # priority: 407\n  - sls-logger    \
+    \                 # priority: 406\n  - tcp-logger                     # priority:\
+    \ 405\n  - kafka-logger                   # priority: 403\n  - rocketmq-logger\
+    \                # priority: 402\n  - syslog                         # priority:\
+    \ 401\n  - udp-logger                     # priority: 400\n  - file-logger   \
+    \                 # priority: 399\n  - clickhouse-logger              # priority:\
+    \ 398\n  - tencent-cloud-cls              # priority: 397\n  - inspect       \
+    \                 # priority: 200\n  #- log-rotate                    # priority:\
+    \ 100\n  # <- recommend to use priority (0, 100) for your custom plugins\n  -\
+    \ example-plugin                 # priority: 0\n  #- gm                      \
+    \      # priority: -43\n  - aws-lambda                     # priority: -1899\n\
+    \  - azure-functions                # priority: -1900\n  - openwhisk         \
+    \             # priority: -1901\n  - openfunction                   # priority:\
+    \ -1902\n  - serverless-post-function       # priority: -2000\n  - ext-plugin-post-req\
+    \            # priority: -3000\n  - ext-plugin-post-resp           # priority:\
+    \ -4000\n\nplugin_attr:\n  prometheus:\n    enable_export_server: false\n"

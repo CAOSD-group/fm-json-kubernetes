@@ -1,0 +1,157 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  serviceName: mysql
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      initContainers:
+      - name: init-mysql
+        image: mysql:5.7
+        command:
+        - bash
+        - -c
+        - "set -ex\n# \u57FA\u4E8E Pod \u5E8F\u53F7\u751F\u6210 MySQL \u670D\u52A1\
+          \u5668\u7684 ID\u3002\n[[ `hostname` =~ -([0-9]+)$ ]] || exit 1\nordinal=${BASH_REMATCH[1]}\n\
+          echo [mysqld] > /mnt/conf.d/server-id.cnf\n# \u6DFB\u52A0\u504F\u79FB\u91CF\
+          \u4EE5\u907F\u514D\u4F7F\u7528 server-id=0 \u8FD9\u4E00\u4FDD\u7559\u503C\
+          \u3002\necho server-id=$((100 + $ordinal)) >> /mnt/conf.d/server-id.cnf\n\
+          # Copy appropriate conf.d files from config-map to emptyDir.\n# \u5C06\u5408\
+          \u9002\u7684 conf.d \u6587\u4EF6\u4ECE config-map \u590D\u5236\u5230 emptyDir\u3002\
+          \nif [[ $ordinal -eq 0 ]]; then\n  cp /mnt/config-map/master.cnf /mnt/conf.d/\n\
+          else\n  cp /mnt/config-map/slave.cnf /mnt/conf.d/\nfi\n"
+        volumeMounts:
+        - name: conf
+          mountPath: /mnt/conf.d
+        - name: config-map
+          mountPath: /mnt/config-map
+      - name: clone-mysql
+        image: registry.cn-hangzhou.aliyuncs.com/chenby/xtrabackup:1.0
+        command:
+        - bash
+        - -c
+        - "set -ex\n# \u5982\u679C\u5DF2\u6709\u6570\u636E\uFF0C\u5219\u8DF3\u8FC7\
+          \u514B\u9686\u3002\n[[ -d /var/lib/mysql/mysql ]] && exit 0\n# \u8DF3\u8FC7\
+          \u4E3B\u5B9E\u4F8B\uFF08\u5E8F\u53F7\u7D22\u5F15 0\uFF09\u7684\u514B\u9686\
+          \u3002\n[[ `hostname` =~ -([0-9]+)$ ]] || exit 1\nordinal=${BASH_REMATCH[1]}\n\
+          [[ $ordinal -eq 0 ]] && exit 0\n# \u4ECE\u539F\u6765\u7684\u5BF9\u7B49\u8282\
+          \u70B9\u514B\u9686\u6570\u636E\u3002\nncat --recv-only mysql-$(($ordinal-1)).mysql\
+          \ 3307 | xbstream -x -C /var/lib/mysql\n# \u51C6\u5907\u5907\u4EFD\u3002\
+          \nxtrabackup --prepare --target-dir=/var/lib/mysql\n"
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/mysql
+          subPath: mysql
+        - name: conf
+          mountPath: /etc/mysql/conf.d
+      containers:
+      - name: mysql
+        image: mysql:5.7
+        env:
+        - name: MYSQL_ALLOW_EMPTY_PASSWORD
+          value: '1'
+        ports:
+        - name: mysql
+          containerPort: 3306
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/mysql
+          subPath: mysql
+        - name: conf
+          mountPath: /etc/mysql/conf.d
+        resources:
+          requests:
+            cpu: 1024m
+            memory: 1Gi
+        livenessProbe:
+          exec:
+            command:
+            - mysqladmin
+            - ping
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+        readinessProbe:
+          exec:
+            command:
+            - mysql
+            - -h
+            - 127.0.0.1
+            - -e
+            - SELECT 1
+          initialDelaySeconds: 5
+          periodSeconds: 2
+          timeoutSeconds: 1
+      - name: xtrabackup
+        image: registry.cn-hangzhou.aliyuncs.com/chenby/xtrabackup:1.0
+        ports:
+        - name: xtrabackup
+          containerPort: 3307
+        command:
+        - bash
+        - -c
+        - "set -ex\ncd /var/lib/mysql\n# \u786E\u5B9A\u514B\u9686\u6570\u636E\u7684\
+          \ binlog \u4F4D\u7F6E\uFF08\u5982\u679C\u6709\u7684\u8BDD\uFF09\u3002\n\
+          if [[ -f xtrabackup_slave_info && \"x$(<xtrabackup_slave_info)\" != \"x\"\
+          \ ]]; then\n  # XtraBackup \u5DF2\u7ECF\u751F\u6210\u4E86\u90E8\u5206\u7684\
+          \ \u201CCHANGE MASTER TO\u201D \u67E5\u8BE2\n  # \u56E0\u4E3A\u6211\u4EEC\
+          \u4ECE\u4E00\u4E2A\u73B0\u6709\u526F\u672C\u8FDB\u884C\u514B\u9686\u3002\
+          (\u9700\u8981\u5220\u9664\u672B\u5C3E\u7684\u5206\u53F7!)\n  cat xtrabackup_slave_info\
+          \ | sed -E 's/;$//g' > change_master_to.sql.in\n  # \u5728\u8FD9\u91CC\u8981\
+          \u5FFD\u7565 xtrabackup_binlog_info \uFF08\u5B83\u662F\u6CA1\u7528\u7684\
+          \uFF09\u3002\n  rm -f xtrabackup_slave_info xtrabackup_binlog_info\nelif\
+          \ [[ -f xtrabackup_binlog_info ]]; then\n  # \u6211\u4EEC\u76F4\u63A5\u4ECE\
+          \u4E3B\u5B9E\u4F8B\u8FDB\u884C\u514B\u9686\u3002\u89E3\u6790 binlog \u4F4D\
+          \u7F6E\u3002\n  [[ `cat xtrabackup_binlog_info` =~ ^(.*?)[[:space:]]+(.*?)$\
+          \ ]] || exit 1\n  rm -f xtrabackup_binlog_info xtrabackup_slave_info\n \
+          \ echo \"CHANGE MASTER TO MASTER_LOG_FILE='${BASH_REMATCH[1]}',\\\n    \
+          \    MASTER_LOG_POS=${BASH_REMATCH[2]}\" > change_master_to.sql.in\nfi\n\
+          # \u68C0\u67E5\u6211\u4EEC\u662F\u5426\u9700\u8981\u901A\u8FC7\u542F\u52A8\
+          \u590D\u5236\u6765\u5B8C\u6210\u514B\u9686\u3002\nif [[ -f change_master_to.sql.in\
+          \ ]]; then\n  echo \"Waiting for mysqld to be ready (accepting connections)\"\
+          \n  until mysql -h 127.0.0.1 -e \"SELECT 1\"; do sleep 1; done\n  echo \"\
+          Initializing replication from clone position\"\n  mysql -h 127.0.0.1 \\\n\
+          \        -e \"$(<change_master_to.sql.in), \\\n                MASTER_HOST='mysql-0.mysql',\
+          \ \\\n                MASTER_USER='root', \\\n                MASTER_PASSWORD='',\
+          \ \\\n                MASTER_CONNECT_RETRY=10; \\\n              START SLAVE;\"\
+          \ || exit 1\n  # \u5982\u679C\u5BB9\u5668\u91CD\u65B0\u542F\u52A8\uFF0C\u6700\
+          \u591A\u5C1D\u8BD5\u4E00\u6B21\u3002\n  mv change_master_to.sql.in change_master_to.sql.orig\n\
+          fi\n# \u5F53\u5BF9\u7B49\u70B9\u8BF7\u6C42\u65F6\uFF0C\u542F\u52A8\u670D\
+          \u52A1\u5668\u53D1\u9001\u5907\u4EFD\u3002\nexec ncat --listen --keep-open\
+          \ --send-only --max-conns=1 3307 -c \\\n  \"xtrabackup --backup --slave-info\
+          \ --stream=xbstream --host=127.0.0.1 --user=root\"\n"
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/mysql
+          subPath: mysql
+        - name: conf
+          mountPath: /etc/mysql/conf.d
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+      volumes:
+      - name: conf
+        emptyDir: {}
+      - name: config-map
+        configMap:
+          name: mysql
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+      annotations:
+        volume.beta.kubernetes.io/storage-class: nfs-storage
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi

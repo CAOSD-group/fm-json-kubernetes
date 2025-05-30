@@ -1,0 +1,259 @@
+kind: DaemonSet
+apiVersion: apps/v1
+metadata:
+  name: calico-node
+  namespace: kube-system
+  labels:
+    k8s-app: calico-node
+spec:
+  selector:
+    matchLabels:
+      k8s-app: calico-node
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        k8s-app: calico-node
+    spec:
+      nodeSelector:
+        kubernetes.io/os: linux
+      hostNetwork: true
+      tolerations:
+      - effect: NoSchedule
+        operator: Exists
+      - key: CriticalAddonsOnly
+        operator: Exists
+      - effect: NoExecute
+        operator: Exists
+      serviceAccountName: calico-node
+      terminationGracePeriodSeconds: 0
+      priorityClassName: system-node-critical
+      initContainers:
+      - name: upgrade-ipam
+        image: docker.io/calico/cni:v3.23.3
+        command:
+        - /opt/cni/bin/calico-ipam
+        - -upgrade
+        envFrom:
+        - configMapRef:
+            name: kubernetes-services-endpoint
+            optional: true
+        env:
+        - name: KUBERNETES_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: CALICO_NETWORKING_BACKEND
+          valueFrom:
+            configMapKeyRef:
+              name: calico-config
+              key: calico_backend
+        volumeMounts:
+        - mountPath: /var/lib/cni/networks
+          name: host-local-net-dir
+        - mountPath: /host/opt/cni/bin
+          name: cni-bin-dir
+        securityContext:
+          privileged: true
+      - name: install-cni
+        image: docker.io/calico/cni:v3.23.3
+        command:
+        - /opt/cni/bin/install
+        envFrom:
+        - configMapRef:
+            name: kubernetes-services-endpoint
+            optional: true
+        env:
+        - name: CNI_CONF_NAME
+          value: 10-calico.conflist
+        - name: CNI_NETWORK_CONFIG
+          valueFrom:
+            configMapKeyRef:
+              name: calico-config
+              key: cni_network_config
+        - name: KUBERNETES_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: CNI_MTU
+          valueFrom:
+            configMapKeyRef:
+              name: calico-config
+              key: veth_mtu
+        - name: SLEEP
+          value: 'false'
+        volumeMounts:
+        - mountPath: /host/opt/cni/bin
+          name: cni-bin-dir
+        - mountPath: /host/etc/cni/net.d
+          name: cni-net-dir
+        securityContext:
+          privileged: true
+      - name: mount-bpffs
+        image: docker.io/calico/node:v3.23.3
+        command:
+        - calico-node
+        - -init
+        - -best-effort
+        volumeMounts:
+        - mountPath: /sys/fs
+          name: sys-fs
+          mountPropagation: Bidirectional
+        - mountPath: /var/run/calico
+          name: var-run-calico
+          mountPropagation: Bidirectional
+        - mountPath: /nodeproc
+          name: nodeproc
+          readOnly: true
+        securityContext:
+          privileged: true
+      containers:
+      - name: calico-node
+        image: docker.io/calico/node:v3.23.3
+        envFrom:
+        - configMapRef:
+            name: kubernetes-services-endpoint
+            optional: true
+        env:
+        - name: DATASTORE_TYPE
+          value: kubernetes
+        - name: WAIT_FOR_DATASTORE
+          value: 'true'
+        - name: NODENAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: CALICO_NETWORKING_BACKEND
+          valueFrom:
+            configMapKeyRef:
+              name: calico-config
+              key: calico_backend
+        - name: CLUSTER_TYPE
+          value: k8s,bgp
+        - name: IP
+          value: autodetect
+        - name: CALICO_IPV4POOL_IPIP
+          value: Always
+        - name: CALICO_IPV4POOL_VXLAN
+          value: Never
+        - name: CALICO_IPV6POOL_VXLAN
+          value: Never
+        - name: FELIX_IPINIPMTU
+          valueFrom:
+            configMapKeyRef:
+              name: calico-config
+              key: veth_mtu
+        - name: FELIX_VXLANMTU
+          valueFrom:
+            configMapKeyRef:
+              name: calico-config
+              key: veth_mtu
+        - name: FELIX_WIREGUARDMTU
+          valueFrom:
+            configMapKeyRef:
+              name: calico-config
+              key: veth_mtu
+        - name: CALICO_DISABLE_FILE_LOGGING
+          value: 'true'
+        - name: FELIX_DEFAULTENDPOINTTOHOSTACTION
+          value: ACCEPT
+        - name: FELIX_IPV6SUPPORT
+          value: 'false'
+        - name: FELIX_HEALTHENABLED
+          value: 'true'
+        securityContext:
+          privileged: true
+        resources:
+          requests:
+            cpu: 250m
+        lifecycle:
+          preStop:
+            exec:
+              command:
+              - /bin/calico-node
+              - -shutdown
+        livenessProbe:
+          exec:
+            command:
+            - /bin/calico-node
+            - -felix-live
+            - -bird-live
+          periodSeconds: 10
+          initialDelaySeconds: 10
+          failureThreshold: 6
+          timeoutSeconds: 10
+        readinessProbe:
+          exec:
+            command:
+            - /bin/calico-node
+            - -felix-ready
+            - -bird-ready
+          periodSeconds: 10
+          timeoutSeconds: 10
+        volumeMounts:
+        - mountPath: /host/etc/cni/net.d
+          name: cni-net-dir
+          readOnly: false
+        - mountPath: /lib/modules
+          name: lib-modules
+          readOnly: true
+        - mountPath: /run/xtables.lock
+          name: xtables-lock
+          readOnly: false
+        - mountPath: /var/run/calico
+          name: var-run-calico
+          readOnly: false
+        - mountPath: /var/lib/calico
+          name: var-lib-calico
+          readOnly: false
+        - name: policysync
+          mountPath: /var/run/nodeagent
+        - name: bpffs
+          mountPath: /sys/fs/bpf
+        - name: cni-log-dir
+          mountPath: /var/log/calico/cni
+          readOnly: true
+      volumes:
+      - name: lib-modules
+        hostPath:
+          path: /lib/modules
+      - name: var-run-calico
+        hostPath:
+          path: /var/run/calico
+      - name: var-lib-calico
+        hostPath:
+          path: /var/lib/calico
+      - name: xtables-lock
+        hostPath:
+          path: /run/xtables.lock
+          type: FileOrCreate
+      - name: sys-fs
+        hostPath:
+          path: /sys/fs/
+          type: DirectoryOrCreate
+      - name: bpffs
+        hostPath:
+          path: /sys/fs/bpf
+          type: Directory
+      - name: nodeproc
+        hostPath:
+          path: /proc
+      - name: cni-bin-dir
+        hostPath:
+          path: /opt/cni/bin
+      - name: cni-net-dir
+        hostPath:
+          path: /etc/cni/net.d
+      - name: cni-log-dir
+        hostPath:
+          path: /var/log/calico/cni
+      - name: host-local-net-dir
+        hostPath:
+          path: /var/lib/cni/networks
+      - name: policysync
+        hostPath:
+          type: DirectoryOrCreate
+          path: /var/run/nodeagent

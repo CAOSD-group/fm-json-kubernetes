@@ -1,0 +1,235 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-initdb-config
+data:
+  initdb.sql: 'CREATE DATABASE movies;
+
+    use movies;
+
+    CREATE TABLE `movies` (`id` int(5) NOT NULL AUTO_INCREMENT, `title` varchar(255)
+    DEFAULT NULL, `director` varchar(255) DEFAULT NULL, PRIMARY KEY (id)) ENGINE=InnoDB
+
+    DEFAULT CHARSET=utf8;
+
+
+    INSERT INTO movies (title,director) VALUES("Following","Christopher Nolan");
+
+    INSERT INTO movies (title,director) VALUES("Pirates","Roman Polanski");
+
+    INSERT INTO movies (title,director) VALUES("Tora, Tora, Tora","Richard Fleischer");
+
+    INSERT INTO movies (title,director) VALUES("Darling Lili","Blake Edwards");
+
+    INSERT INTO movies (title,director) VALUES("12 Angry Men","Sidney Lumet");
+
+    INSERT INTO movies (title,director) VALUES("Twelve Monkeys","Terry Gilliam");
+
+    INSERT INTO movies (title,director) VALUES("1941","Steven Spielberg");
+
+    INSERT INTO movies (title,director) VALUES("2001: A Space Odyssey","Stanley Kubrick");
+
+    INSERT INTO movies (title,director) VALUES("20,000 Leagues Under the Sea","Richard
+    Fleischer");
+
+    INSERT INTO movies (title,director) VALUES("24 7: Twenty Four Seven","Shane Meadows");
+
+    INSERT INTO movies (title,director) VALUES("Twin Falls Idaho","Michael Polish");
+
+    INSERT INTO movies (title,director) VALUES("3 Men and a Baby","Leonard Nimoy");
+
+    INSERT INTO movies (title,director) VALUES("Four Rooms","Robert Rodriguez");
+
+    INSERT INTO movies (title,director) VALUES("The Four Seasons","Alan Alda");
+
+    INSERT INTO movies (title,director) VALUES("Four Weddings and a Funeral","Mike
+    Newell");
+
+    INSERT INTO movies (title,director) VALUES("Nine 1/2 Weeks","Adrian Lyne");
+
+    INSERT INTO movies (title,director) VALUES("The Abyss","James Cameron");
+
+    INSERT INTO movies (title,director) VALUES("Ace Ventura: Pet Detective","Tom Shadyac");
+
+    INSERT INTO movies (title,director) VALUES("Ace Ventura: When Nature Calls","Steve
+    Oedekerk");
+
+    INSERT INTO movies (title,director) VALUES("The Alamo","John Wayne");
+
+    INSERT INTO movies (title,director) VALUES("Alive","Frank Marshall");
+
+    INSERT INTO movies (title,director) VALUES("Amen","Costa-Gavras");
+
+    INSERT INTO movies (title,director) VALUES("American Graffiti","George Lucas");
+
+    INSERT INTO movies (title,director) VALUES("American Ninja 2: The Confrontation","Sam
+    Firstenberg");
+
+    INSERT INTO movies (title,director) VALUES("The American President","Rob Reiner");
+
+    INSERT INTO movies (title,director) VALUES("Annie Hall","Woody Allen");
+
+    INSERT INTO movies (title,director) VALUES("The Adventures of Huck Finn","Stephen
+    Sommers");
+
+    INSERT INTO movies (title,director) VALUES("The Apartment","Billy Wilder");
+
+    INSERT INTO movies (title,director) VALUES("Apocalypse Now","Francis Ford Coppola");
+
+    INSERT INTO movies (title,director) VALUES("Arachnophobia","Frank Marshall");
+
+    INSERT INTO movies (title,director) VALUES("Barry Lyndon","Stanley Kubrick");
+
+    INSERT INTO movies (title,director) VALUES("Babe","Chris Noonan");
+
+    INSERT INTO movies (title,director) VALUES("Baby''s Day Out","Patrick Read Johnson");
+
+    INSERT INTO movies (title,director) VALUES("Bound by Honor","Taylor Hackford");
+
+    INSERT INTO movies (title,director) VALUES("Back to the Future","Robert Zemeckis");
+
+    INSERT INTO movies (title,director) VALUES("Back to the Future Part II","Robert
+    Zemeckis");
+
+    INSERT INTO movies (title,director) VALUES("Back to the Future Part III","Robert
+    Zemeckis");
+
+    INSERT INTO movies (title,director) VALUES("Butch Cassidy and the Sundance Kid","George
+    Roy Hill");
+
+    INSERT INTO movies (title,director) VALUES("Bad Boys","Michael Bay");
+
+    INSERT INTO movies (title,director) VALUES("Body Double","Brian De Palma");
+
+    INSERT INTO movies (title,director) VALUES("Ben-Hur","William Wyler");
+
+    INSERT INTO movies (title,director) VALUES("Before Sunrise","Richard Linklater");
+
+    INSERT INTO movies (title,director) VALUES("Beauty and the Beast","Gary Trousdale");
+
+    INSERT INTO movies (title,director) VALUES("The Best Years of Our Lives","William
+    Wyler");
+
+    INSERT INTO movies (title,director) VALUES("Battle for the Planet of the Apes","Jack
+    Lee Thompson");
+
+    INSERT INTO movies (title,director) VALUES("Bogus","Norman Jewison");
+
+    INSERT INTO movies (title,director) VALUES("Beverly Hills Cop","Martin Brest");
+
+    INSERT INTO movies (title,director) VALUES("Beverly Hills Cop II","Tony Scott");
+
+    INSERT INTO movies (title,director) VALUES("Beverly Hills Cop III","John Landis");
+
+    INSERT INTO movies (title,director) VALUES("Big","Penny Marshall");
+
+    INSERT INTO movies (title,director) VALUES("The Big Parade","King Vidor");
+
+    INSERT INTO movies (title,director) VALUES("Boyz n the Hood","John Singleton");
+
+    INSERT INTO movies (title,director) VALUES("The Blue Bird","George Cukor");
+
+    INSERT INTO movies (title,director) VALUES("Blade Runner","Ridley Scott");
+
+    INSERT INTO movies (title,director) VALUES("The Blues Brothers","John Landis");
+
+    INSERT INTO movies (title,director) VALUES("Blow Out","Brian De Palma");
+
+    INSERT INTO movies (title,director) VALUES("Bound","Andy Wachowski");
+
+    INSERT INTO movies (title,director) VALUES("Bang","Jeff ""King Jeff"" Hollins");
+
+    INSERT INTO movies (title,director) VALUES("Bananas","Woody Allen");
+
+    INSERT INTO movies (title,director) VALUES("Bill & Ted''s Bogus Journey","Peter
+    Hewitt");
+
+    INSERT INTO movies (title,director) VALUES("The Ballad of Cable Hogue","Sam Peckinpah");
+
+    INSERT INTO movies (title,director) VALUES("The Bridge on the River Kwai","David
+    Lean");
+
+    INSERT INTO movies (title,director) VALUES("Born on the Fourth of July","Oliver
+    Stone");
+
+    INSERT INTO movies (title,director) VALUES("Basquiat","Julian Schnabel");
+
+    INSERT INTO movies (title,director) VALUES("Black Rain","Ridley Scott");
+
+    INSERT INTO movies (title,director) VALUES("Bottle Rocket","Wes Anderson");
+
+    INSERT INTO movies (title,director) VALUES("Braindead","Peter Jackson");
+
+    INSERT INTO movies (title,director) VALUES("The Bridges of Madison County","Clint
+    Eastwood");
+
+    INSERT INTO movies (title,director) VALUES("The Brothers McMullen","Edward Burns");
+
+    INSERT INTO movies (title,director) VALUES("Dracula","Francis Ford Coppola");
+
+    INSERT INTO movies (title,director) VALUES("Broken Arrow","John Woo");
+
+    INSERT INTO movies (title,director) VALUES("Braveheart","Mel Gibson");
+
+    INSERT INTO movies (title,director) VALUES("Brazil","Terry Gilliam");
+
+    INSERT INTO movies (title,director) VALUES("Blazing Saddles","Mel Brooks");
+
+    INSERT INTO movies (title,director) VALUES("Bill & Ted''s Excellent Adventure","Stephen
+    Herek");
+
+    INSERT INTO movies (title,director) VALUES("A Bridge Too Far","Sir Richard Attenborough");
+
+    INSERT INTO movies (title,director) VALUES("Beetle Juice","Tim Burton");
+
+    INSERT INTO movies (title,director) VALUES("Batman Returns","Tim Burton");
+
+    INSERT INTO movies (title,director) VALUES("Batman Forever","Joel Schumacher");
+
+    INSERT INTO movies (title,director) VALUES("Batman","Tim Burton");
+
+    INSERT INTO movies (title,director) VALUES("The Boys from Brazil","Franklin J.
+    Schaffner");
+
+    INSERT INTO movies (title,director) VALUES("Caddyshack","Harold Ramis");
+
+    INSERT INTO movies (title,director) VALUES("Cape Fear","Martin Scorsese");
+
+    INSERT INTO movies (title,director) VALUES("Clear and Present Danger","Phillip
+    Noyce");
+
+    INSERT INTO movies (title,director) VALUES("Carrie","Brian De Palma");
+
+    INSERT INTO movies (title,director) VALUES("Casino Royale","John Huston");
+
+    INSERT INTO movies (title,director) VALUES("The Cotton Club","Francis Ford Coppola");
+
+    INSERT INTO movies (title,director) VALUES("Close Encounters of the Third Kind","Steven
+    Spielberg");
+
+    INSERT INTO movies (title,director) VALUES("The Cable Guy","Ben Stiller");
+
+    INSERT INTO movies (title,director) VALUES("Chain Reaction","Andrew Davis");
+
+    INSERT INTO movies (title,director) VALUES("Chariots of Fire","Hugh Hudson");
+
+    INSERT INTO movies (title,director) VALUES("Cat on a Hot Tin Roof","Richard Brooks");
+
+    INSERT INTO movies (title,director) VALUES("Charge of the Light Brigade, The","Michael
+    Curtiz");
+
+    INSERT INTO movies (title,director) VALUES("Crooklyn","Spike Lee");
+
+    INSERT INTO movies (title,director) VALUES("Festen","Thomas Vinterberg");
+
+    INSERT INTO movies (title,director) VALUES("Cliffhanger","Renny Harlin");
+
+    INSERT INTO movies (title,director) VALUES("The Client","Joel Schumacher");
+
+    INSERT INTO movies (title,director) VALUES("The Calling","Michael C. Brown");
+
+    INSERT INTO movies (title,director) VALUES("Clueless","Amy Heckerling");
+
+    INSERT INTO movies (title,director) VALUES("The Color Purple","Steven Spielberg");
+
+    '
