@@ -1,6 +1,6 @@
 Pruebas sobre validacion de las herramientas.
 Sobre el folder de archivos small: 1788
-1º Kube-linter: True = 1625 ,False = 163
+1º Kube-linter: True = 1625 ,False = 163 // Ejecucion con 800 de batch => 599 False
 2º Kube-score: True = 1176 ,False = 612
 3º Kyverno: True = 1196, False = 592
 4º OPA Gatekeeper: 
