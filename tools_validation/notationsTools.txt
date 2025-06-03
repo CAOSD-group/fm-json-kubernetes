@@ -1,9 +1,10 @@
 Pruebas sobre validacion de las herramientas.
 Sobre el folder de archivos small: 1788
-1º Kube-linter: True = 1625 ,False = 163 // Ejecucion con 800 de batch => 599 False
+1º Kube-linter: True = 1625 ,False = 163
 2º Kube-score: True = 1176 ,False = 612
 3º Kyverno: True = 1196, False = 592
 4º OPA Gatekeeper: 
+5º Kubeconform: True = 1200 ,False = 588
 
 
 
@@ -46,3 +47,17 @@ Repo de las politicas por defecto: https://github.com/open-policy-agent/gatekeep
 Gatekeeper, gator. Al no tener unas politicas definidas/predeterminadas se estan usando las localizadas en el repositorio de gatekeeper-library/library/general/ pero
 parece que no funcionan del todo bien... No invalidan ningun archivo de los que se ha probado.. ** Revisar.  
 
+Se ha dejado por el momento la validacion con gator ya que suponia generar un conjunto de politicas en un folder personalizado. Lo unico es que politicas meter y para que,
+no se sabe de cara a unas politicas con caracter "general" y que funcione como una métrica válida.
+
+Comandos probados: gator test --filename=pod.yaml -f=gatekeeper-library/library/general/ --output=json, gator test --filename=manifests_yamls/ -f=gatekeeper-library/library/general/ --output=json
+
+Tiempo agregado a kubeLinter pero no a los demas. =! implementacion por el conjunto de carpetas..
+
+** kubeconform
+Se usa una validacion por carpeta, proceso similar al de KubeLinter. Se instalo directamente con Go, salida en formato json...
+
+https://github.com/yannh/kubeconform?tab=readme-ov-file#Installation
+
+2 tipos de errores: statusError-mayoritario, statusInvalid-minoritario
+Se ha agregado el tiempo medio por igual en los casos de valid true y False.

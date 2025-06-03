@@ -1,0 +1,1700 @@
+{
+  "resources": [
+    {
+      "filename": "./small/adguard-home.yaml",
+      "kind": "Application",
+      "name": "adguard-home",
+      "version": "argoproj.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Application"
+    },
+    {
+      "filename": "./small/allowed-capabilities1.yaml",
+      "kind": "ConstraintTemplate",
+      "name": "k8spspcapabilities",
+      "version": "templates.gatekeeper.sh/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ConstraintTemplate"
+    },
+    {
+      "filename": "./small/api-server-infraassessmentreport-expected.yaml",
+      "kind": "InfraAssessmentReport",
+      "name": "pod-my-pod-kube-apiserver",
+      "version": "aquasecurity.github.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for InfraAssessmentReport"
+    },
+    {
+      "filename": "./small/apiresourceschema-clusterworkspaces.tenancy.kcp.io.yaml",
+      "kind": "APIResourceSchema",
+      "name": "v221219-c92ed8152.clusterworkspaces.tenancy.kcp.io",
+      "version": "apis.kcp.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for APIResourceSchema"
+    },
+    {
+      "filename": "./small/apiresourceschema-shards.core.kcp.io.yaml",
+      "kind": "APIResourceSchema",
+      "name": "v230116-943e458f6.shards.core.kcp.io",
+      "version": "apis.kcp.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for APIResourceSchema"
+    },
+    {
+      "filename": "./small/apiresourceschema-logicalclusters.core.kcp.io.yaml",
+      "kind": "APIResourceSchema",
+      "name": "v230201-b085a04a.logicalclusters.core.kcp.io",
+      "version": "apis.kcp.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for APIResourceSchema"
+    },
+    {
+      "filename": "./small/apiresourceschema-partitionsets.topology.kcp.io.yaml",
+      "kind": "APIResourceSchema",
+      "name": "v230202-eee1a845.partitionsets.topology.kcp.io",
+      "version": "apis.kcp.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for APIResourceSchema"
+    },
+    {
+      "filename": "./small/apiresourceschema-workspaces.tenancy.kcp.io.yaml",
+      "kind": "APIResourceSchema",
+      "name": "v231119-434294a3b.workspaces.tenancy.kcp.io",
+      "version": "apis.kcp.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for APIResourceSchema"
+    },
+    {
+      "filename": "./small/apiresourceschema-workspacetypes.tenancy.kcp.io.yaml",
+      "kind": "APIResourceSchema",
+      "name": "v230313-2197e455a.workspacetypes.tenancy.kcp.io",
+      "version": "apis.kcp.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for APIResourceSchema"
+    },
+    {
+      "filename": "./small/apiserver.servicemonitor5.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-apiserver",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/apiserver.servicemonitor1.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-apiserver",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/apiserver.servicemonitor11.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-apiserver",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/apiserver.servicemonitor3.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-apiserver",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/apiserver.servicemonitor7.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-apiserver",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/apiserver.servicemonitor9.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-apiserver",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/app-of-apps20.yaml",
+      "kind": "Application",
+      "name": "deploykf-app-of-apps",
+      "version": "argoproj.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Application"
+    },
+    {
+      "filename": "./small/apps.v1beta1.Deployment.after_roundtrip4.yaml",
+      "kind": "Deployment",
+      "name": "3{{ generateName }}",
+      "version": "apps/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Deployment"
+    },
+    {
+      "filename": "./small/apps.v1beta1.Deployment.after_roundtrip7.yaml",
+      "kind": "Deployment",
+      "name": "3{{ generateName }}",
+      "version": "apps/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Deployment"
+    },
+    {
+      "filename": "./small/apps.v1beta1.Deployment13.yaml",
+      "kind": "Deployment",
+      "name": "3{{ generateName }}",
+      "version": "apps/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Deployment"
+    },
+    {
+      "filename": "./small/apps.v1beta1.Deployment25.yaml",
+      "kind": "Deployment",
+      "name": "3{{ generateName }}",
+      "version": "apps/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Deployment"
+    },
+    {
+      "filename": "./small/apps.v1beta1.StatefulSet.after_roundtrip4.yaml",
+      "kind": "StatefulSet",
+      "name": "3{{ generateName }}",
+      "version": "apps/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for StatefulSet"
+    },
+    {
+      "filename": "./small/apps.v1beta1.StatefulSet.after_roundtrip7.yaml",
+      "kind": "StatefulSet",
+      "name": "3{{ generateName }}",
+      "version": "apps/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for StatefulSet"
+    },
+    {
+      "filename": "./small/apps.v1beta1.StatefulSet25.yaml",
+      "kind": "StatefulSet",
+      "name": "3{{ generateName }}",
+      "version": "apps/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for StatefulSet"
+    },
+    {
+      "filename": "./small/apps.v1beta1.StatefulSet13.yaml",
+      "kind": "StatefulSet",
+      "name": "3{{ generateName }}",
+      "version": "apps/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for StatefulSet"
+    },
+    {
+      "filename": "./small/apps.v1beta2.DaemonSet.after_roundtrip4.yaml",
+      "kind": "DaemonSet",
+      "name": "3{{ generateName }}",
+      "version": "apps/v1beta2",
+      "status": "statusError",
+      "msg": "could not find schema for DaemonSet"
+    },
+    {
+      "filename": "./small/apps.v1beta2.DaemonSet25.yaml",
+      "kind": "DaemonSet",
+      "name": "3{{ generateName }}",
+      "version": "apps/v1beta2",
+      "status": "statusError",
+      "msg": "could not find schema for DaemonSet"
+    },
+    {
+      "filename": "./small/apps.v1beta2.DaemonSet.after_roundtrip7.yaml",
+      "kind": "DaemonSet",
+      "name": "3{{ generateName }}",
+      "version": "apps/v1beta2",
+      "status": "statusError",
+      "msg": "could not find schema for DaemonSet"
+    },
+    {
+      "filename": "./small/apps.v1beta2.DaemonSet13.yaml",
+      "kind": "DaemonSet",
+      "name": "3{{ generateName }}",
+      "version": "apps/v1beta2",
+      "status": "statusError",
+      "msg": "could not find schema for DaemonSet"
+    },
+    {
+      "filename": "./small/apps.v1beta2.Deployment.after_roundtrip4.yaml",
+      "kind": "Deployment",
+      "name": "3{{ generateName }}",
+      "version": "apps/v1beta2",
+      "status": "statusError",
+      "msg": "could not find schema for Deployment"
+    },
+    {
+      "filename": "./small/apps.v1beta2.Deployment13.yaml",
+      "kind": "Deployment",
+      "name": "3{{ generateName }}",
+      "version": "apps/v1beta2",
+      "status": "statusError",
+      "msg": "could not find schema for Deployment"
+    },
+    {
+      "filename": "./small/apps.v1beta2.Deployment25.yaml",
+      "kind": "Deployment",
+      "name": "3{{ generateName }}",
+      "version": "apps/v1beta2",
+      "status": "statusError",
+      "msg": "could not find schema for Deployment"
+    },
+    {
+      "filename": "./small/apps.v1beta2.Deployment.after_roundtrip7.yaml",
+      "kind": "Deployment",
+      "name": "3{{ generateName }}",
+      "version": "apps/v1beta2",
+      "status": "statusError",
+      "msg": "could not find schema for Deployment"
+    },
+    {
+      "filename": "./small/apps.v1beta2.ReplicaSet.after_roundtrip4.yaml",
+      "kind": "ReplicaSet",
+      "name": "3{{ generateName }}",
+      "version": "apps/v1beta2",
+      "status": "statusError",
+      "msg": "could not find schema for ReplicaSet"
+    },
+    {
+      "filename": "./small/apps.v1beta2.ReplicaSet25.yaml",
+      "kind": "ReplicaSet",
+      "name": "3{{ generateName }}",
+      "version": "apps/v1beta2",
+      "status": "statusError",
+      "msg": "could not find schema for ReplicaSet"
+    },
+    {
+      "filename": "./small/apps.v1beta2.ReplicaSet13.yaml",
+      "kind": "ReplicaSet",
+      "name": "3{{ generateName }}",
+      "version": "apps/v1beta2",
+      "status": "statusError",
+      "msg": "could not find schema for ReplicaSet"
+    },
+    {
+      "filename": "./small/apps.v1beta2.ReplicaSet.after_roundtrip7.yaml",
+      "kind": "ReplicaSet",
+      "name": "3{{ generateName }}",
+      "version": "apps/v1beta2",
+      "status": "statusError",
+      "msg": "could not find schema for ReplicaSet"
+    },
+    {
+      "filename": "./small/apps.v1beta2.StatefulSet.after_roundtrip4.yaml",
+      "kind": "StatefulSet",
+      "name": "3{{ generateName }}",
+      "version": "apps/v1beta2",
+      "status": "statusError",
+      "msg": "could not find schema for StatefulSet"
+    },
+    {
+      "filename": "./small/apps.v1beta2.StatefulSet13.yaml",
+      "kind": "StatefulSet",
+      "name": "3{{ generateName }}",
+      "version": "apps/v1beta2",
+      "status": "statusError",
+      "msg": "could not find schema for StatefulSet"
+    },
+    {
+      "filename": "./small/apps.v1beta2.StatefulSet.after_roundtrip7.yaml",
+      "kind": "StatefulSet",
+      "name": "3{{ generateName }}",
+      "version": "apps/v1beta2",
+      "status": "statusError",
+      "msg": "could not find schema for StatefulSet"
+    },
+    {
+      "filename": "./small/apps.v1beta2.StatefulSet25.yaml",
+      "kind": "StatefulSet",
+      "name": "3{{ generateName }}",
+      "version": "apps/v1beta2",
+      "status": "statusError",
+      "msg": "could not find schema for StatefulSet"
+    },
+    {
+      "filename": "./small/argo-secret.yaml",
+      "kind": "SealedSecret",
+      "name": "argocd-secret",
+      "version": "bitnami.com/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for SealedSecret"
+    },
+    {
+      "filename": "./small/asyncapi-example-api.yaml",
+      "kind": "API",
+      "name": "streetlights",
+      "version": "backstage.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for API"
+    },
+    {
+      "filename": "./small/autoscaling.v2beta2.HorizontalPodAutoscaler10.yaml",
+      "kind": "HorizontalPodAutoscaler",
+      "name": "3{{ generateName }}",
+      "version": "autoscaling/v2beta2",
+      "status": "statusError",
+      "msg": "could not find schema for HorizontalPodAutoscaler"
+    },
+    {
+      "filename": "./small/autoscaling.v2beta2.HorizontalPodAutoscaler28.yaml",
+      "kind": "HorizontalPodAutoscaler",
+      "name": "3{{ generateName }}",
+      "version": "autoscaling/v2beta2",
+      "status": "statusError",
+      "msg": "could not find schema for HorizontalPodAutoscaler"
+    },
+    {
+      "filename": "./small/autoscaling.v2beta2.HorizontalPodAutoscaler17.yaml",
+      "kind": "HorizontalPodAutoscaler",
+      "name": "3{{ generateName }}",
+      "version": "autoscaling/v2beta2",
+      "status": "statusError",
+      "msg": "could not find schema for HorizontalPodAutoscaler"
+    },
+    {
+      "filename": "./small/autoscaling.v2beta2.HorizontalPodAutoscaler16.yaml",
+      "kind": "HorizontalPodAutoscaler",
+      "name": "3{{ generateName }}",
+      "version": "autoscaling/v2beta2",
+      "status": "statusError",
+      "msg": "could not find schema for HorizontalPodAutoscaler"
+    },
+    {
+      "filename": "./small/autoscaling.v2beta2.HorizontalPodAutoscaler29.yaml",
+      "kind": "HorizontalPodAutoscaler",
+      "name": "3{{ generateName }}",
+      "version": "autoscaling/v2beta2",
+      "status": "statusError",
+      "msg": "could not find schema for HorizontalPodAutoscaler"
+    },
+    {
+      "filename": "./small/autoscaling.v2beta2.HorizontalPodAutoscaler39.yaml",
+      "kind": "HorizontalPodAutoscaler",
+      "name": "3{{ generateName }}",
+      "version": "autoscaling/v2beta2",
+      "status": "statusError",
+      "msg": "could not find schema for HorizontalPodAutoscaler"
+    },
+    {
+      "filename": "./small/autoscaling.v2beta2.HorizontalPodAutoscaler4.yaml",
+      "kind": "HorizontalPodAutoscaler",
+      "name": "3{{ generateName }}",
+      "version": "autoscaling/v2beta2",
+      "status": "statusError",
+      "msg": "could not find schema for HorizontalPodAutoscaler"
+    },
+    {
+      "filename": "./small/autoscaling.v2beta2.HorizontalPodAutoscaler40.yaml",
+      "kind": "HorizontalPodAutoscaler",
+      "name": "3{{ generateName }}",
+      "version": "autoscaling/v2beta2",
+      "status": "statusError",
+      "msg": "could not find schema for HorizontalPodAutoscaler"
+    },
+    {
+      "filename": "./small/autoscaling.v2beta2.HorizontalPodAutoscaler41.yaml",
+      "kind": "HorizontalPodAutoscaler",
+      "name": "3{{ generateName }}",
+      "version": "autoscaling/v2beta2",
+      "status": "statusError",
+      "msg": "could not find schema for HorizontalPodAutoscaler"
+    },
+    {
+      "filename": "./small/batch.v1beta1.CronJob.after_roundtrip4.yaml",
+      "kind": "CronJob",
+      "name": "3{{ generateName }}",
+      "version": "batch/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for CronJob"
+    },
+    {
+      "filename": "./small/batch.v1beta1.CronJob.after_roundtrip7.yaml",
+      "kind": "CronJob",
+      "name": "3{{ generateName }}",
+      "version": "batch/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for CronJob"
+    },
+    {
+      "filename": "./small/batch.v1beta1.CronJob13.yaml",
+      "kind": "CronJob",
+      "name": "3{{ generateName }}",
+      "version": "batch/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for CronJob"
+    },
+    {
+      "filename": "./small/batch.v1beta1.CronJob25.yaml",
+      "kind": "CronJob",
+      "name": "3{{ generateName }}",
+      "version": "batch/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for CronJob"
+    },
+    {
+      "filename": "./small/batch.v1beta1.JobTemplate.after_roundtrip.yaml",
+      "kind": "JobTemplate",
+      "name": "3{{ generateName }}",
+      "version": "batch/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for JobTemplate"
+    },
+    {
+      "filename": "./small/batch.v1beta1.JobTemplate7.yaml",
+      "kind": "JobTemplate",
+      "name": "3{{ generateName }}",
+      "version": "batch/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for JobTemplate"
+    },
+    {
+      "filename": "./small/batch.v1beta1.JobTemplate13.yaml",
+      "kind": "JobTemplate",
+      "name": "3{{ generateName }}",
+      "version": "batch/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for JobTemplate"
+    },
+    {
+      "filename": "./small/batch.v1beta1.JobTemplate.after_roundtrip1.yaml",
+      "kind": "JobTemplate",
+      "name": "3{{ generateName }}",
+      "version": "batch/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for JobTemplate"
+    },
+    {
+      "filename": "./small/batch.v2alpha1.CronJob.after_roundtrip.yaml",
+      "kind": "CronJob",
+      "name": "3{{ generateName }}",
+      "version": "batch/v2alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for CronJob"
+    },
+    {
+      "filename": "./small/batch.v2alpha1.CronJob3.yaml",
+      "kind": "CronJob",
+      "name": "3{{ generateName }}",
+      "version": "batch/v2alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for CronJob"
+    },
+    {
+      "filename": "./small/batch.v2alpha1.CronJob8.yaml",
+      "kind": "CronJob",
+      "name": "3{{ generateName }}",
+      "version": "batch/v2alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for CronJob"
+    },
+    {
+      "filename": "./small/batch.v2alpha1.CronJob.after_roundtrip1.yaml",
+      "kind": "CronJob",
+      "name": "3{{ generateName }}",
+      "version": "batch/v2alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for CronJob"
+    },
+    {
+      "filename": "./small/batch.v2alpha1.JobTemplate.after_roundtrip.yaml",
+      "kind": "JobTemplate",
+      "name": "3{{ generateName }}",
+      "version": "batch/v2alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for JobTemplate"
+    },
+    {
+      "filename": "./small/batch.v2alpha1.JobTemplate8.yaml",
+      "kind": "JobTemplate",
+      "name": "3{{ generateName }}",
+      "version": "batch/v2alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for JobTemplate"
+    },
+    {
+      "filename": "./small/batch.v2alpha1.JobTemplate3.yaml",
+      "kind": "JobTemplate",
+      "name": "3{{ generateName }}",
+      "version": "batch/v2alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for JobTemplate"
+    },
+    {
+      "filename": "./small/batch.v2alpha1.JobTemplate.after_roundtrip1.yaml",
+      "kind": "JobTemplate",
+      "name": "3{{ generateName }}",
+      "version": "batch/v2alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for JobTemplate"
+    },
+    {
+      "filename": "./small/bitbucket-pipeline_1.yaml",
+      "kind": "TriggerTemplate",
+      "name": "bitbucket-template",
+      "version": "triggers.tekton.dev/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for TriggerTemplate"
+    },
+    {
+      "filename": "./small/build12.yaml",
+      "kind": "Build",
+      "name": "",
+      "version": "builds.katanomi.dev/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Build"
+    },
+    {
+      "filename": "./small/certificates-apiresourceschema.yaml",
+      "kind": "APIResourceSchema",
+      "name": "today.certificaterequests.cert-manager.io",
+      "version": "apis.kcp.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for APIResourceSchema"
+    },
+    {
+      "filename": "./small/certificates-apiresourceschema_1.yaml",
+      "kind": "APIResourceSchema",
+      "name": "today.certificates.cert-manager.io",
+      "version": "apis.kcp.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for APIResourceSchema"
+    },
+    {
+      "filename": "./small/certificates-apiresourceschema_5.yaml",
+      "kind": "APIResourceSchema",
+      "name": "today.orders.acme.cert-manager.io",
+      "version": "apis.kcp.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for APIResourceSchema"
+    },
+    {
+      "filename": "./small/chat.sealed-secret.helm.yaml",
+      "kind": "SealedSecret",
+      "name": "chat-service-secret",
+      "version": "bitnami.com/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for SealedSecret"
+    },
+    {
+      "filename": "./small/chat.sealed-secret.helm1.yaml",
+      "kind": "SealedSecret",
+      "name": "chat-service-aws-secret",
+      "version": "bitnami.com/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for SealedSecret"
+    },
+    {
+      "filename": "./small/component1_1.yaml",
+      "kind": "API",
+      "name": "productpage-api",
+      "version": "backstage.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for API"
+    },
+    {
+      "filename": "./small/code-scan.yaml",
+      "kind": "Task",
+      "name": "sonarqube-scanner",
+      "version": "tekton.dev/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Task"
+    },
+    {
+      "filename": "./small/composition2.yaml",
+      "kind": "Composition",
+      "name": "magento2-gcp",
+      "version": "apiextensions.crossplane.io/v1",
+      "status": "statusError",
+      "msg": "could not find schema for Composition"
+    },
+    {
+      "filename": "./small/cms-operator.clusterserviceversion.yaml",
+      "kind": "ClusterServiceVersion",
+      "name": "cms-operator.v0.0.1",
+      "version": "operators.coreos.com/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for ClusterServiceVersion"
+    },
+    {
+      "filename": "./small/config-backup.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/config483.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/container-limits1.yaml",
+      "kind": "ConstraintTemplate",
+      "name": "k8scontainerlimits",
+      "version": "templates.gatekeeper.sh/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ConstraintTemplate"
+    },
+    {
+      "filename": "./small/controller-registration.yaml",
+      "kind": "ControllerDeployment",
+      "name": "oidc-apps-controller",
+      "version": "core.gardener.cloud/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for ControllerDeployment"
+    },
+    {
+      "filename": "./small/controller-registration1.yaml",
+      "kind": "ControllerDeployment",
+      "name": "oidc-apps-controller",
+      "version": "core.gardener.cloud/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for ControllerDeployment"
+    },
+    {
+      "filename": "./small/core.v1.PodStatusResult30.yaml",
+      "kind": "PodStatusResult",
+      "name": "generateNameValue{{ generateName }}",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for PodStatusResult"
+    },
+    {
+      "filename": "./small/core.v1.PodStatusResult33.yaml",
+      "kind": "PodStatusResult",
+      "name": "generateNameValue{{ generateName }}",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for PodStatusResult"
+    },
+    {
+      "filename": "./small/core.v1.PodStatusResult42.yaml",
+      "kind": "PodStatusResult",
+      "name": "generateNameValue{{ generateName }}",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for PodStatusResult"
+    },
+    {
+      "filename": "./small/core.v1.PodStatusResult45.yaml",
+      "kind": "PodStatusResult",
+      "name": "generateNameValue{{ generateName }}",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for PodStatusResult"
+    },
+    {
+      "filename": "./small/core.v1.PodStatusResult48.yaml",
+      "kind": "PodStatusResult",
+      "name": "generateNameValue{{ generateName }}",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for PodStatusResult"
+    },
+    {
+      "filename": "./small/core.v1.PodStatusResult50.yaml",
+      "kind": "PodStatusResult",
+      "name": "generateNameValue{{ generateName }}",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for PodStatusResult"
+    },
+    {
+      "filename": "./small/core.v1.PodStatusResult51.yaml",
+      "kind": "PodStatusResult",
+      "name": "generateNameValue{{ generateName }}",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for PodStatusResult"
+    },
+    {
+      "filename": "./small/core.v1.PodStatusResult53.yaml",
+      "kind": "PodStatusResult",
+      "name": "generateNameValue{{ generateName }}",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for PodStatusResult"
+    },
+    {
+      "filename": "./small/core.v1.PodStatusResult54.yaml",
+      "kind": "PodStatusResult",
+      "name": "generateNameValue{{ generateName }}",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for PodStatusResult"
+    },
+    {
+      "filename": "./small/core.v1.PodStatusResult56.yaml",
+      "kind": "PodStatusResult",
+      "name": "generateNameValue{{ generateName }}",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for PodStatusResult"
+    },
+    {
+      "filename": "./small/cronjob-configauditreport-expected.yaml",
+      "kind": "ConfigAuditReport",
+      "name": "cronjob-hello",
+      "version": "aquasecurity.github.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for ConfigAuditReport"
+    },
+    {
+      "filename": "./small/cron_dag_final.yaml",
+      "kind": "CronWorkflow",
+      "name": "cron-dag-spar-wf",
+      "version": "argoproj.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for CronWorkflow"
+    },
+    {
+      "filename": "./small/customizations1.yaml",
+      "kind": "ResourceInterpreterCustomization",
+      "name": "declarative-configuration-broadcastjob",
+      "version": "config.karmada.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for ResourceInterpreterCustomization"
+    },
+    {
+      "filename": "./small/customizations3.yaml",
+      "kind": "ResourceInterpreterCustomization",
+      "name": "declarative-configuration-daemonset",
+      "version": "config.karmada.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for ResourceInterpreterCustomization"
+    },
+    {
+      "filename": "./small/customizations14.yaml",
+      "kind": "ResourceInterpreterCustomization",
+      "name": "declarative-configuration-ocirepository",
+      "version": "config.karmada.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for ResourceInterpreterCustomization"
+    },
+    {
+      "filename": "./small/customizations2.yaml",
+      "kind": "ResourceInterpreterCustomization",
+      "name": "declarative-configuration-cloneset",
+      "version": "config.karmada.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for ResourceInterpreterCustomization"
+    },
+    {
+      "filename": "./small/customizations12.yaml",
+      "kind": "ResourceInterpreterCustomization",
+      "name": "declarative-configuration-helmchart",
+      "version": "config.karmada.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for ResourceInterpreterCustomization"
+    },
+    {
+      "filename": "./small/customizations4.yaml",
+      "kind": "ResourceInterpreterCustomization",
+      "name": "declarative-configuration-statefulset",
+      "version": "config.karmada.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for ResourceInterpreterCustomization"
+    },
+    {
+      "filename": "./small/customizations5.yaml",
+      "kind": "ResourceInterpreterCustomization",
+      "name": "declarative-configuration-workflow",
+      "version": "config.karmada.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for ResourceInterpreterCustomization"
+    },
+    {
+      "filename": "./small/customizations6.yaml",
+      "kind": "ResourceInterpreterCustomization",
+      "name": "declarative-configuration-helmrelease",
+      "version": "config.karmada.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for ResourceInterpreterCustomization"
+    },
+    {
+      "filename": "./small/customizations7.yaml",
+      "kind": "ResourceInterpreterCustomization",
+      "name": "declarative-configuration-kustomization",
+      "version": "config.karmada.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for ResourceInterpreterCustomization"
+    },
+    {
+      "filename": "./small/daemonset-configauditreport-expected.yaml",
+      "kind": "ConfigAuditReport",
+      "name": "daemonset-fluentd-elasticsearch",
+      "version": "aquasecurity.github.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for ConfigAuditReport"
+    },
+    {
+      "filename": "./small/dapr_sidecar_injector_deployment2.yaml",
+      "kind": "Deployment",
+      "name": "dapr-sidecar-injector",
+      "version": "apps/v1",
+      "status": "statusInvalid",
+      "msg": "problem validating schema. Check JSON formatting: jsonschema: '/spec/replicas' does not validate with https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone/deployment-apps-v1.json#/properties/spec/properties/replicas/type: expected integer or null, but got string",
+      "validationErrors": [
+        {
+          "path": "/spec/replicas",
+          "msg": "expected integer or null, but got string"
+        },
+        {
+          "path": "/spec/template/spec/containers/0",
+          "msg": ""
+        }
+      ]
+    },
+    {
+      "filename": "./small/definition4.yaml",
+      "kind": "CompositeResourceDefinition",
+      "name": "compositeclusters.devopstoolkitseries.com",
+      "version": "apiextensions.crossplane.io/v1",
+      "status": "statusError",
+      "msg": "could not find schema for CompositeResourceDefinition"
+    },
+    {
+      "filename": "./small/deploy-tp-eks.yaml",
+      "kind": "helm-install",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for helm-install"
+    },
+    {
+      "filename": "./small/deploy-tp-aks.yaml",
+      "kind": "helm-install",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for helm-install"
+    },
+    {
+      "filename": "./small/demo_v1alpha1_guestbook.yaml",
+      "kind": "Guestbook",
+      "name": "guestbook-sample",
+      "version": "demo.example.com/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Guestbook"
+    },
+    {
+      "filename": "./small/deploy-tp-gke.yaml",
+      "kind": "helm-install",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for helm-install"
+    },
+    {
+      "filename": "./small/deployment-canary1.yaml",
+      "kind": "Deployment",
+      "name": "dynamic_parameters-canary",
+      "version": "apps/v1",
+      "status": "statusInvalid",
+      "msg": "problem validating schema. Check JSON formatting: jsonschema: '/spec/replicas' does not validate with https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone/deployment-apps-v1.json#/properties/spec/properties/replicas/type: expected integer or null, but got string",
+      "validationErrors": [
+        {
+          "path": "/spec/replicas",
+          "msg": "expected integer or null, but got string"
+        },
+        {
+          "path": "/spec/template/spec",
+          "msg": ""
+        }
+      ]
+    },
+    {
+      "filename": "./small/deployment6356.yaml",
+      "kind": "Deployment",
+      "name": "dynamic_parameters",
+      "version": "apps/v1",
+      "status": "statusInvalid",
+      "msg": "problem validating schema. Check JSON formatting: jsonschema: '/spec/replicas' does not validate with https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone/deployment-apps-v1.json#/properties/spec/properties/replicas/type: expected integer or null, but got string",
+      "validationErrors": [
+        {
+          "path": "/spec/replicas",
+          "msg": "expected integer or null, but got string"
+        },
+        {
+          "path": "/spec/strategy",
+          "msg": "expected object or null, but got string"
+        },
+        {
+          "path": "/spec/template/spec",
+          "msg": ""
+        }
+      ]
+    },
+    {
+      "filename": "./small/deployment6374.yaml",
+      "kind": "Deployment",
+      "name": "dynamic_parameters",
+      "version": "apps/v1",
+      "status": "statusInvalid",
+      "msg": "problem validating schema. Check JSON formatting: jsonschema: '/metadata/annotations' does not validate with https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone/deployment-apps-v1.json#/properties/metadata/properties/annotations/type: expected object or null, but got string",
+      "validationErrors": [
+        {
+          "path": "/metadata/annotations",
+          "msg": "expected object or null, but got string"
+        },
+        {
+          "path": "/spec",
+          "msg": ""
+        }
+      ]
+    },
+    {
+      "filename": "./small/deployment6378.yaml",
+      "kind": "Deployment",
+      "name": "",
+      "version": "apps/v1",
+      "status": "statusInvalid",
+      "msg": "problem validating schema. Check JSON formatting: jsonschema: '/spec/replicas' does not validate with https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone/deployment-apps-v1.json#/properties/spec/properties/replicas/type: expected integer or null, but got string",
+      "validationErrors": [
+        {
+          "path": "/spec/replicas",
+          "msg": "expected integer or null, but got string"
+        }
+      ]
+    },
+    {
+      "filename": "./small/diff-cache.yaml",
+      "kind": "Application",
+      "name": "velero-test",
+      "version": "argoproj.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Application"
+    },
+    {
+      "filename": "./small/diff-cache1.yaml",
+      "kind": "Application",
+      "name": "velero-test",
+      "version": "argoproj.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Application"
+    },
+    {
+      "filename": "./small/deployment-referencing-non-existent-resources.yaml",
+      "kind": "Cleaner",
+      "name": "deployment-referencing-non-existent-resources",
+      "version": "apps.projectsveltos.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Cleaner"
+    },
+    {
+      "filename": "./small/deployment-referencing-non-existent-resources1.yaml",
+      "kind": "Cleaner",
+      "name": "deployment-referencing-non-existent-resources",
+      "version": "apps.projectsveltos.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Cleaner"
+    },
+    {
+      "filename": "./small/disallow-selinux11.yaml",
+      "kind": "ClusterPolicy",
+      "name": "disallow-selinux",
+      "version": "kyverno.io/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ClusterPolicy"
+    },
+    {
+      "filename": "./small/disallow-selinux9.yaml",
+      "kind": "ClusterPolicy",
+      "name": "disallow-selinux",
+      "version": "kyverno.io/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ClusterPolicy"
+    },
+    {
+      "filename": "./small/disallow-selinux3.yaml",
+      "kind": "ClusterPolicy",
+      "name": "disallow-selinux",
+      "version": "kyverno.io/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ClusterPolicy"
+    },
+    {
+      "filename": "./small/disallow-selinux7.yaml",
+      "kind": "ClusterPolicy",
+      "name": "disallow-selinux",
+      "version": "kyverno.io/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ClusterPolicy"
+    },
+    {
+      "filename": "./small/disallow-selinux5.yaml",
+      "kind": "ClusterPolicy",
+      "name": "disallow-selinux",
+      "version": "kyverno.io/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ClusterPolicy"
+    },
+    {
+      "filename": "./small/dummy-k8s-operator.clusterserviceversion.yaml",
+      "kind": "ClusterServiceVersion",
+      "name": "dummy-k8s-operator.v0.0.1",
+      "version": "operators.coreos.com/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for ClusterServiceVersion"
+    },
+    {
+      "filename": "./small/email-operator.clusterserviceversion.yaml",
+      "kind": "ClusterServiceVersion",
+      "name": "email-operator.v0.0.1",
+      "version": "operators.coreos.com/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for ClusterServiceVersion"
+    },
+    {
+      "filename": "./small/druid-cluster.yaml",
+      "kind": "Druid",
+      "name": "tiny-cluster",
+      "version": "druid.apache.org/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Druid"
+    },
+    {
+      "filename": "./small/extensions.v1beta1.DaemonSet.after_roundtrip4.yaml",
+      "kind": "DaemonSet",
+      "name": "3{{ generateName }}",
+      "version": "extensions/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for DaemonSet"
+    },
+    {
+      "filename": "./small/extensions.v1beta1.DaemonSet25.yaml",
+      "kind": "DaemonSet",
+      "name": "3{{ generateName }}",
+      "version": "extensions/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for DaemonSet"
+    },
+    {
+      "filename": "./small/extensions.v1beta1.DaemonSet13.yaml",
+      "kind": "DaemonSet",
+      "name": "3{{ generateName }}",
+      "version": "extensions/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for DaemonSet"
+    },
+    {
+      "filename": "./small/extensions.v1beta1.DaemonSet.after_roundtrip7.yaml",
+      "kind": "DaemonSet",
+      "name": "3{{ generateName }}",
+      "version": "extensions/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for DaemonSet"
+    },
+    {
+      "filename": "./small/extensions.v1beta1.Deployment.after_roundtrip7.yaml",
+      "kind": "Deployment",
+      "name": "3{{ generateName }}",
+      "version": "extensions/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Deployment"
+    },
+    {
+      "filename": "./small/extensions.v1beta1.Deployment.after_roundtrip4.yaml",
+      "kind": "Deployment",
+      "name": "3{{ generateName }}",
+      "version": "extensions/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Deployment"
+    },
+    {
+      "filename": "./small/extensions.v1beta1.Deployment25.yaml",
+      "kind": "Deployment",
+      "name": "3{{ generateName }}",
+      "version": "extensions/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Deployment"
+    },
+    {
+      "filename": "./small/extensions.v1beta1.Deployment13.yaml",
+      "kind": "Deployment",
+      "name": "3{{ generateName }}",
+      "version": "extensions/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Deployment"
+    },
+    {
+      "filename": "./small/extensions.v1beta1.ReplicaSet.after_roundtrip4.yaml",
+      "kind": "ReplicaSet",
+      "name": "3{{ generateName }}",
+      "version": "extensions/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for ReplicaSet"
+    },
+    {
+      "filename": "./small/extensions.v1beta1.ReplicaSet.after_roundtrip7.yaml",
+      "kind": "ReplicaSet",
+      "name": "3{{ generateName }}",
+      "version": "extensions/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for ReplicaSet"
+    },
+    {
+      "filename": "./small/extensions.v1beta1.ReplicaSet25.yaml",
+      "kind": "ReplicaSet",
+      "name": "3{{ generateName }}",
+      "version": "extensions/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for ReplicaSet"
+    },
+    {
+      "filename": "./small/extensions.v1beta1.ReplicaSet13.yaml",
+      "kind": "ReplicaSet",
+      "name": "3{{ generateName }}",
+      "version": "extensions/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for ReplicaSet"
+    },
+    {
+      "filename": "./small/git-clone-task.yaml",
+      "kind": "Task",
+      "name": "git-clone",
+      "version": "tekton.dev/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Task"
+    },
+    {
+      "filename": "./small/git-clone-task1.yaml",
+      "kind": "Task",
+      "name": "git-clone",
+      "version": "tekton.dev/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Task"
+    },
+    {
+      "filename": "./small/git-clone.yaml",
+      "kind": "Task",
+      "name": "git-clone",
+      "version": "tekton.dev/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Task"
+    },
+    {
+      "filename": "./small/git-clone1.yaml",
+      "kind": "Task",
+      "name": "git-clone",
+      "version": "tekton.dev/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Task"
+    },
+    {
+      "filename": "./small/github-pipeline_1.yaml",
+      "kind": "TriggerTemplate",
+      "name": "github-template",
+      "version": "triggers.tekton.dev/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for TriggerTemplate"
+    },
+    {
+      "filename": "./small/gitlab-pipeline_1.yaml",
+      "kind": "TriggerTemplate",
+      "name": "gitlab-template",
+      "version": "triggers.tekton.dev/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for TriggerTemplate"
+    },
+    {
+      "filename": "./small/gameserver_v1alpha1_dayz.yaml",
+      "kind": "Dayz",
+      "name": "dayz-sample",
+      "version": "gameserver.templarfelix.com/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Dayz"
+    },
+    {
+      "filename": "./small/generate2.yaml",
+      "kind": "Task",
+      "name": "ilab-generate",
+      "version": "tekton.dev/v1",
+      "status": "statusError",
+      "msg": "could not find schema for Task"
+    },
+    {
+      "filename": "./small/helm-release103.yaml",
+      "kind": "HelmRelease",
+      "name": "forgejo",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helm-release135.yaml",
+      "kind": "HelmRelease",
+      "name": "kube-prometheus-stack",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helm-release134.yaml",
+      "kind": "HelmRelease",
+      "name": "grafana",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helm-release104.yaml",
+      "kind": "HelmRelease",
+      "name": "gitlab",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helm-release110.yaml",
+      "kind": "HelmRelease",
+      "name": "zigbee2mqtt",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helm58.yaml",
+      "kind": "Application",
+      "name": "alloy",
+      "version": "argoproj.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Application"
+    },
+    {
+      "filename": "./small/helmrelease1046.yaml",
+      "kind": "HelmRelease",
+      "name": "gitlab",
+      "version": "helm.toolkit.fluxcd.io/v2beta1",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease1195.yaml",
+      "kind": "HelmRelease",
+      "name": "zigbee2mqtt",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease1035.yaml",
+      "kind": "HelmRelease",
+      "name": "kube-prometheus-stack",
+      "version": "helm.toolkit.fluxcd.io/v2beta2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease1063.yaml",
+      "kind": "HelmRelease",
+      "name": "grafana",
+      "version": "helm.toolkit.fluxcd.io/v2beta2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease1079.yaml",
+      "kind": "HelmRelease",
+      "name": "rook-ceph-cluster",
+      "version": "helm.toolkit.fluxcd.io/v2beta2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease1207.yaml",
+      "kind": "HelmRelease",
+      "name": "piped",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease1219.yaml",
+      "kind": "HelmRelease",
+      "name": "grafana",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease1268.yaml",
+      "kind": "HelmRelease",
+      "name": "grafana",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease1275.yaml",
+      "kind": "HelmRelease",
+      "name": "rook-ceph-cluster",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease1294.yaml",
+      "kind": "HelmRelease",
+      "name": "nextcloud",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease1334.yaml",
+      "kind": "HelmRelease",
+      "name": "piped",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease1399.yaml",
+      "kind": "HelmRelease",
+      "name": "grafana",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease1437.yaml",
+      "kind": "HelmRelease",
+      "name": "ebusd",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease1440.yaml",
+      "kind": "HelmRelease",
+      "name": "zigbee2mqtt",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease1446.yaml",
+      "kind": "HelmRelease",
+      "name": "multus",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease1466.yaml",
+      "kind": "HelmRelease",
+      "name": "multus",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease1472.yaml",
+      "kind": "HelmRelease",
+      "name": "minio",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease1491.yaml",
+      "kind": "HelmRelease",
+      "name": "adguard-home",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease1529.yaml",
+      "kind": "HelmRelease",
+      "name": "grafana",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease1542.yaml",
+      "kind": "HelmRelease",
+      "name": "rook-ceph-cluster",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease1574.yaml",
+      "kind": "HelmRelease",
+      "name": "grafana",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease1577.yaml",
+      "kind": "HelmRelease",
+      "name": "kube-prometheus-stack",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease1610.yaml",
+      "kind": "HelmRelease",
+      "name": "grafana",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease1615.yaml",
+      "kind": "HelmRelease",
+      "name": "rook-ceph-cluster",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease1669.yaml",
+      "kind": "HelmRelease",
+      "name": "kube-prometheus-stack",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease1720.yaml",
+      "kind": "HelmRelease",
+      "name": "kometa",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease1729.yaml",
+      "kind": "HelmRelease",
+      "name": "qbittorrent",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease1755.yaml",
+      "kind": "HelmRelease",
+      "name": "home-assistant",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease181.yaml",
+      "kind": "HelmRelease",
+      "name": "grafana",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease20.yaml",
+      "kind": "HelmRelease",
+      "name": "esphome",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease224.yaml",
+      "kind": "HelmRelease",
+      "name": "esphome",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease233.yaml",
+      "kind": "HelmRelease",
+      "name": "headscale",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease237.yaml",
+      "kind": "HelmRelease",
+      "name": "home-assistant",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease247.yaml",
+      "kind": "HelmRelease",
+      "name": "mattermost",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease286.yaml",
+      "kind": "HelmRelease",
+      "name": "qbittorrent",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease294.yaml",
+      "kind": "HelmRelease",
+      "name": "shlink",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease30.yaml",
+      "kind": "HelmRelease",
+      "name": "headscale",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease34.yaml",
+      "kind": "HelmRelease",
+      "name": "home-assistant",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease384.yaml",
+      "kind": "HelmRelease",
+      "name": "grafana",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease44.yaml",
+      "kind": "HelmRelease",
+      "name": "mattermost",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease499.yaml",
+      "kind": "HelmRelease",
+      "name": "kube-prometheus-stack",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease510.yaml",
+      "kind": "HelmRelease",
+      "name": "rook-ceph-cluster",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease541.yaml",
+      "kind": "HelmRelease",
+      "name": "kube-prometheus-stack",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease570.yaml",
+      "kind": "HelmRelease",
+      "name": "grafana",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease607.yaml",
+      "kind": "HelmRelease",
+      "name": "grafana",
+      "version": "helm.toolkit.fluxcd.io/v2beta2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease757.yaml",
+      "kind": "HelmRelease",
+      "name": "grafana",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease777.yaml",
+      "kind": "HelmRelease",
+      "name": "pihole",
+      "version": "helm.toolkit.fluxcd.io/v2beta2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease83.yaml",
+      "kind": "HelmRelease",
+      "name": "qbittorrent",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease833.yaml",
+      "kind": "HelmRelease",
+      "name": "kube-prometheus-stack",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease855.yaml",
+      "kind": "HelmRelease",
+      "name": "docker-mailserver",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease91.yaml",
+      "kind": "HelmRelease",
+      "name": "shlink",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease924.yaml",
+      "kind": "HelmRelease",
+      "name": "grafana",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    }
+  ],
+  "summary": {
+    "valid": 1929,
+    "invalid": 5,
+    "errors": 200,
+    "skipped": 0
+  }
+}

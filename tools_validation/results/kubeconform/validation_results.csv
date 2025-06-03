@@ -1,0 +1,1792 @@
+file,valid,status,msg,avg_validation_time_ms
+01-Prometheus1_1.yaml,True,valid,,0.1
+01-Prometheus2_1.yaml,True,valid,,0.1
+01-Prometheus3_1.yaml,True,valid,,0.1
+01-Prometheus_1.yaml,True,valid,,0.1
+01-contour-config.yaml,True,valid,,0.1
+01-kafka_1.yaml,True,valid,,0.1
+01-prom-configs-configmap.yaml,True,valid,,0.1
+02-Prometheus_1.yaml,True,valid,,0.1
+02-connect_4.yaml,True,valid,,0.1
+02-prometheus-configmap1.yaml,True,valid,,0.1
+02_EFK_7.yaml,True,valid,,0.1
+03-Prometheus-Node-Exporter1_1.yaml,True,valid,,0.1
+03-Prometheus-Node-Exporter2_1.yaml,True,valid,,0.1
+03-Prometheus-Node-Exporter3_1.yaml,True,valid,,0.1
+03-Prometheus-Node-Exporter_1.yaml,True,valid,,0.1
+04-prometheus-configmap.yaml,True,valid,,0.1
+04-prometheus-configmap1.yaml,True,valid,,0.1
+04-prometheus-configmap2.yaml,True,valid,,0.1
+04-prometheus-configmap3.yaml,True,valid,,0.1
+04-prometheus-configmap4.yaml,True,valid,,0.1
+04-prometheus-configmap5.yaml,True,valid,,0.1
+04_monitor_6.yaml,True,valid,,0.1
+10-mail-conf.yaml,True,valid,,0.1
+11-prometheus_4.yaml,True,valid,,0.1
+172.16_net_calico1_19.yaml,True,valid,,0.1
+172.16_net_calico_19.yaml,True,valid,,0.1
+2-config-map.yaml,True,valid,,0.1
+2-config-map1.yaml,True,valid,,0.1
+2-config-map2.yaml,True,valid,,0.1
+2-config-map3.yaml,True,valid,,0.1
+2-sts.yaml,True,valid,,0.1
+2.1.2_32.yaml,True,valid,,0.1
+2.1.2_33.yaml,True,valid,,0.1
+2.1.2_34.yaml,True,valid,,0.1
+20-imap-conf.yaml,True,valid,,0.1
+21_configmap.yaml,True,valid,,0.1
+3-statefulset.yaml,True,valid,,0.1
+3-statefulset1.yaml,True,valid,,0.1
+5-mongodb-statefulset.yaml,True,valid,,0.1
+5-mongodb-statefulset1.yaml,True,valid,,0.1
+90-sieve-conf.yaml,True,valid,,0.1
+Calico48_29.yaml,True,valid,,0.1
+ConfigMap-cilium-config.yaml,True,valid,,0.1
+DaemonSet-cilium.yaml,True,valid,,0.1
+Deployment-argocd-applicationset-controller.yaml,True,valid,,0.1
+Deployment-argocd-repo-server.yaml,True,valid,,0.1
+Deployment-argocd-server.yaml,True,valid,,0.1
+Ejemplo10-configmap1_3.yaml,True,valid,,0.1
+Ejemplo10-configmap_3.yaml,True,valid,,0.1
+EnableContainerInsights_10.yaml,True,valid,,0.1
+KIADA1_2.yaml,True,valid,,0.1
+KIADA_2.yaml,True,valid,,0.1
+StatefulSet-argocd-application-controller.yaml,True,valid,,0.1
+acl-jwt-custom.yaml,True,valid,,0.1
+addc_8.yaml,True,valid,,0.1
+adguard-home.yaml,False,statusError,could not find schema for Application,44.922
+allowed-capabilities1.yaml,False,statusError,could not find schema for ConstraintTemplate,44.922
+ama-metrics-prometheus-config-configmap.yaml,True,valid,,0.1
+ama-metrics-prometheus-config-configmap1.yaml,True,valid,,0.1
+ambassador-istio-configmap.yaml,True,valid,,0.1
+amf-configmap1.yaml,True,valid,,0.1
+amf-configmap2.yaml,True,valid,,0.1
+api-server-infraassessmentreport-expected.yaml,False,statusError,could not find schema for InfraAssessmentReport,44.922
+apim-configmap.yaml,True,valid,,0.1
+apiresourceschema-clusterworkspaces.tenancy.kcp.io.yaml,False,statusError,could not find schema for APIResourceSchema,44.922
+apiresourceschema-logicalclusters.core.kcp.io.yaml,False,statusError,could not find schema for APIResourceSchema,44.922
+apiresourceschema-partitionsets.topology.kcp.io.yaml,False,statusError,could not find schema for APIResourceSchema,44.922
+apiresourceschema-shards.core.kcp.io.yaml,False,statusError,could not find schema for APIResourceSchema,44.922
+apiresourceschema-workspaces.tenancy.kcp.io.yaml,False,statusError,could not find schema for APIResourceSchema,44.922
+apiresourceschema-workspacetypes.tenancy.kcp.io.yaml,False,statusError,could not find schema for APIResourceSchema,44.922
+apiserver.servicemonitor1.yaml,False,statusError,could not find schema for ServiceMonitor,44.922
+apiserver.servicemonitor11.yaml,False,statusError,could not find schema for ServiceMonitor,44.922
+apiserver.servicemonitor3.yaml,False,statusError,could not find schema for ServiceMonitor,44.922
+apiserver.servicemonitor5.yaml,False,statusError,could not find schema for ServiceMonitor,44.922
+apiserver.servicemonitor7.yaml,False,statusError,could not find schema for ServiceMonitor,44.922
+apiserver.servicemonitor9.yaml,False,statusError,could not find schema for ServiceMonitor,44.922
+app-of-apps20.yaml,False,statusError,could not find schema for Application,44.922
+app126_3.yaml,True,valid,,0.1
+app_logs.yaml,True,valid,,0.1
+app_logs1.yaml,True,valid,,0.1
+apps.v1.DaemonSet.after_roundtrip4.yaml,True,valid,,0.1
+apps.v1.DaemonSet.after_roundtrip7.yaml,True,valid,,0.1
+apps.v1.DaemonSet13.yaml,True,valid,,0.1
+apps.v1.DaemonSet25.yaml,True,valid,,0.1
+apps.v1.Deployment.after_roundtrip4.yaml,True,valid,,0.1
+apps.v1.Deployment.after_roundtrip7.yaml,True,valid,,0.1
+apps.v1.Deployment13.yaml,True,valid,,0.1
+apps.v1.Deployment25.yaml,True,valid,,0.1
+apps.v1.ReplicaSet.after_roundtrip4.yaml,True,valid,,0.1
+apps.v1.ReplicaSet.after_roundtrip7.yaml,True,valid,,0.1
+apps.v1.ReplicaSet13.yaml,True,valid,,0.1
+apps.v1.ReplicaSet25.yaml,True,valid,,0.1
+apps.v1.StatefulSet.after_roundtrip4.yaml,True,valid,,0.1
+apps.v1.StatefulSet.after_roundtrip7.yaml,True,valid,,0.1
+apps.v1.StatefulSet13.yaml,True,valid,,0.1
+apps.v1.StatefulSet25.yaml,True,valid,,0.1
+apps.v1beta1.Deployment.after_roundtrip4.yaml,False,statusError,could not find schema for Deployment,44.922
+apps.v1beta1.Deployment.after_roundtrip7.yaml,False,statusError,could not find schema for Deployment,44.922
+apps.v1beta1.Deployment13.yaml,False,statusError,could not find schema for Deployment,44.922
+apps.v1beta1.Deployment25.yaml,False,statusError,could not find schema for Deployment,44.922
+apps.v1beta1.StatefulSet.after_roundtrip4.yaml,False,statusError,could not find schema for StatefulSet,44.922
+apps.v1beta1.StatefulSet.after_roundtrip7.yaml,False,statusError,could not find schema for StatefulSet,44.922
+apps.v1beta1.StatefulSet13.yaml,False,statusError,could not find schema for StatefulSet,44.922
+apps.v1beta1.StatefulSet25.yaml,False,statusError,could not find schema for StatefulSet,44.922
+apps.v1beta2.DaemonSet.after_roundtrip4.yaml,False,statusError,could not find schema for DaemonSet,44.922
+apps.v1beta2.DaemonSet.after_roundtrip7.yaml,False,statusError,could not find schema for DaemonSet,44.922
+apps.v1beta2.DaemonSet13.yaml,False,statusError,could not find schema for DaemonSet,44.922
+apps.v1beta2.DaemonSet25.yaml,False,statusError,could not find schema for DaemonSet,44.922
+apps.v1beta2.Deployment.after_roundtrip4.yaml,False,statusError,could not find schema for Deployment,44.922
+apps.v1beta2.Deployment.after_roundtrip7.yaml,False,statusError,could not find schema for Deployment,44.922
+apps.v1beta2.Deployment13.yaml,False,statusError,could not find schema for Deployment,44.922
+apps.v1beta2.Deployment25.yaml,False,statusError,could not find schema for Deployment,44.922
+apps.v1beta2.ReplicaSet.after_roundtrip4.yaml,False,statusError,could not find schema for ReplicaSet,44.922
+apps.v1beta2.ReplicaSet.after_roundtrip7.yaml,False,statusError,could not find schema for ReplicaSet,44.922
+apps.v1beta2.ReplicaSet13.yaml,False,statusError,could not find schema for ReplicaSet,44.922
+apps.v1beta2.ReplicaSet25.yaml,False,statusError,could not find schema for ReplicaSet,44.922
+apps.v1beta2.StatefulSet.after_roundtrip4.yaml,False,statusError,could not find schema for StatefulSet,44.922
+apps.v1beta2.StatefulSet.after_roundtrip7.yaml,False,statusError,could not find schema for StatefulSet,44.922
+apps.v1beta2.StatefulSet13.yaml,False,statusError,could not find schema for StatefulSet,44.922
+apps.v1beta2.StatefulSet25.yaml,False,statusError,could not find schema for StatefulSet,44.922
+argo-cd.v2.10.6_42.yaml,True,valid,,0.1
+argo-cd.v2.10.6_44.yaml,True,valid,,0.1
+argo-cd.v2.10.6_45.yaml,True,valid,,0.1
+argo-cd.v2.10.6_48.yaml,True,valid,,0.1
+argo-cm-nodeport_43.yaml,True,valid,,0.1
+argo-cm-nodeport_47.yaml,True,valid,,0.1
+argo-cm-nodeport_48.yaml,True,valid,,0.1
+argo-cm-nodeport_49.yaml,True,valid,,0.1
+argo-dex.yaml,True,valid,,0.1
+argo-quick-start-minimal_37.yaml,True,valid,,0.1
+argo-secret.yaml,False,statusError,could not find schema for SealedSecret,44.922
+argocd-application-controller-deployment.yaml,True,valid,,0.1
+argocd-application-controller-deployment1.yaml,True,valid,,0.1
+argocd-application-controller-statefulset.yaml,True,valid,,0.1
+argocd-application-controller-statefulset4.yaml,True,valid,,0.1
+argocd-applicationset-controller-deployment.yaml,True,valid,,0.1
+argocd-applicationset-controller-deployment1.yaml,True,valid,,0.1
+argocd-repo-server-deployment.yaml,True,valid,,0.1
+argocd-repo-server-deployment3.yaml,True,valid,,0.1
+argocd-secret.enc.yaml,True,valid,,0.1
+argocd-server-deployment.yaml,True,valid,,0.1
+argocd-server-deployment3.yaml,True,valid,,0.1
+argocd-workload.yaml,True,valid,,0.1
+argocd-workload1.yaml,True,valid,,0.1
+argocd-workload1_3.yaml,True,valid,,0.1
+argocd-workload1_4.yaml,True,valid,,0.1
+argocd-workload1_5.yaml,True,valid,,0.1
+argocd-workload_3.yaml,True,valid,,0.1
+argocd-workload_4.yaml,True,valid,,0.1
+argocd-workload_5.yaml,True,valid,,0.1
+argocd.install1_45.yaml,True,valid,,0.1
+argocd.install1_49.yaml,True,valid,,0.1
+argocd.install1_50.yaml,True,valid,,0.1
+argocd.install1_51.yaml,True,valid,,0.1
+argocd.install_45.yaml,True,valid,,0.1
+argocd.install_49.yaml,True,valid,,0.1
+argocd.install_50.yaml,True,valid,,0.1
+argocd.install_51.yaml,True,valid,,0.1
+argocd.v2.8.11_41.yaml,True,valid,,0.1
+argocd.v2.8.11_45.yaml,True,valid,,0.1
+argocd.v2.8.11_46.yaml,True,valid,,0.1
+argocd.v2.8.11_47.yaml,True,valid,,0.1
+argocd13_45.yaml,True,valid,,0.1
+argocd13_49.yaml,True,valid,,0.1
+argocd13_50.yaml,True,valid,,0.1
+argocd13_51.yaml,True,valid,,0.1
+argocd44_43.yaml,True,valid,,0.1
+argocd44_47.yaml,True,valid,,0.1
+argocd44_48.yaml,True,valid,,0.1
+argocd44_49.yaml,True,valid,,0.1
+argocd45_43.yaml,True,valid,,0.1
+argocd45_47.yaml,True,valid,,0.1
+argocd45_48.yaml,True,valid,,0.1
+argocd45_49.yaml,True,valid,,0.1
+argocd4_45.yaml,True,valid,,0.1
+argocd4_49.yaml,True,valid,,0.1
+argocd4_50.yaml,True,valid,,0.1
+argocd4_51.yaml,True,valid,,0.1
+argocd50_46.yaml,True,valid,,0.1
+argocd50_47.yaml,True,valid,,0.1
+argocd50_48.yaml,True,valid,,0.1
+argocd63_43.yaml,True,valid,,0.1
+argocd63_47.yaml,True,valid,,0.1
+argocd63_48.yaml,True,valid,,0.1
+argocd63_49.yaml,True,valid,,0.1
+argocd_install_41.yaml,True,valid,,0.1
+argocd_install_45.yaml,True,valid,,0.1
+argocd_install_46.yaml,True,valid,,0.1
+argocd_install_47.yaml,True,valid,,0.1
+asyncapi-example-api.yaml,False,statusError,could not find schema for API,44.922
+autoscaler-custom10.yaml,True,valid,,0.1
+autoscaler-custom11.yaml,True,valid,,0.1
+autoscaler-custom12.yaml,True,valid,,0.1
+autoscaler-custom13.yaml,True,valid,,0.1
+autoscaler-custom14.yaml,True,valid,,0.1
+autoscaler-custom15.yaml,True,valid,,0.1
+autoscaler-custom16.yaml,True,valid,,0.1
+autoscaler-custom17.yaml,True,valid,,0.1
+autoscaler-custom18.yaml,True,valid,,0.1
+autoscaler-custom19.yaml,True,valid,,0.1
+autoscaler-custom20_2.yaml,True,valid,,0.1
+autoscaler-custom21_2.yaml,True,valid,,0.1
+autoscaler-custom22_2.yaml,True,valid,,0.1
+autoscaler-custom23_2.yaml,True,valid,,0.1
+autoscaler-custom24_2.yaml,True,valid,,0.1
+autoscaler-custom25.yaml,True,valid,,0.1
+autoscaler-custom26.yaml,True,valid,,0.1
+autoscaler-custom27.yaml,True,valid,,0.1
+autoscaler-custom28.yaml,True,valid,,0.1
+autoscaler-custom29.yaml,True,valid,,0.1
+autoscaler-custom5.yaml,True,valid,,0.1
+autoscaler-custom6.yaml,True,valid,,0.1
+autoscaler-custom7.yaml,True,valid,,0.1
+autoscaler-custom8.yaml,True,valid,,0.1
+autoscaler-custom9.yaml,True,valid,,0.1
+autoscaler10.yaml,True,valid,,0.1
+autoscaler11.yaml,True,valid,,0.1
+autoscaler12.yaml,True,valid,,0.1
+autoscaler13.yaml,True,valid,,0.1
+autoscaler14.yaml,True,valid,,0.1
+autoscaler15.yaml,True,valid,,0.1
+autoscaler16.yaml,True,valid,,0.1
+autoscaler17.yaml,True,valid,,0.1
+autoscaler18.yaml,True,valid,,0.1
+autoscaler19.yaml,True,valid,,0.1
+autoscaler20.yaml,True,valid,,0.1
+autoscaler21.yaml,True,valid,,0.1
+autoscaler22.yaml,True,valid,,0.1
+autoscaler23.yaml,True,valid,,0.1
+autoscaler24_2.yaml,True,valid,,0.1
+autoscaler25_2.yaml,True,valid,,0.1
+autoscaler26_2.yaml,True,valid,,0.1
+autoscaler27_2.yaml,True,valid,,0.1
+autoscaler28_2.yaml,True,valid,,0.1
+autoscaler29.yaml,True,valid,,0.1
+autoscaler30.yaml,True,valid,,0.1
+autoscaler31.yaml,True,valid,,0.1
+autoscaler32.yaml,True,valid,,0.1
+autoscaler33.yaml,True,valid,,0.1
+autoscaler9.yaml,True,valid,,0.1
+autoscaling.v2.HorizontalPodAutoscaler10.yaml,True,valid,,0.1
+autoscaling.v2.HorizontalPodAutoscaler13.yaml,True,valid,,0.1
+autoscaling.v2.HorizontalPodAutoscaler21.yaml,True,valid,,0.1
+autoscaling.v2.HorizontalPodAutoscaler4.yaml,True,valid,,0.1
+autoscaling.v2beta2.HorizontalPodAutoscaler10.yaml,False,statusError,could not find schema for HorizontalPodAutoscaler,44.922
+autoscaling.v2beta2.HorizontalPodAutoscaler16.yaml,False,statusError,could not find schema for HorizontalPodAutoscaler,44.922
+autoscaling.v2beta2.HorizontalPodAutoscaler17.yaml,False,statusError,could not find schema for HorizontalPodAutoscaler,44.922
+autoscaling.v2beta2.HorizontalPodAutoscaler28.yaml,False,statusError,could not find schema for HorizontalPodAutoscaler,44.922
+autoscaling.v2beta2.HorizontalPodAutoscaler29.yaml,False,statusError,could not find schema for HorizontalPodAutoscaler,44.922
+autoscaling.v2beta2.HorizontalPodAutoscaler39.yaml,False,statusError,could not find schema for HorizontalPodAutoscaler,44.922
+autoscaling.v2beta2.HorizontalPodAutoscaler4.yaml,False,statusError,could not find schema for HorizontalPodAutoscaler,44.922
+autoscaling.v2beta2.HorizontalPodAutoscaler40.yaml,False,statusError,could not find schema for HorizontalPodAutoscaler,44.922
+autoscaling.v2beta2.HorizontalPodAutoscaler41.yaml,False,statusError,could not find schema for HorizontalPodAutoscaler,44.922
+aws-k8s-cni_6.yaml,True,valid,,0.1
+azkv-pushsecret-certificate.yaml,True,valid,,0.1
+backend92.yaml,True,valid,,0.1
+backup-dashboard.yaml,True,valid,,0.1
+batch.v1.Job.after_roundtrip4.yaml,True,valid,,0.1
+batch.v1.Job.after_roundtrip7.yaml,True,valid,,0.1
+batch.v1.Job13.yaml,True,valid,,0.1
+batch.v1.Job25.yaml,True,valid,,0.1
+batch.v1beta1.CronJob.after_roundtrip4.yaml,False,statusError,could not find schema for CronJob,44.922
+batch.v1beta1.CronJob.after_roundtrip7.yaml,False,statusError,could not find schema for CronJob,44.922
+batch.v1beta1.CronJob13.yaml,False,statusError,could not find schema for CronJob,44.922
+batch.v1beta1.CronJob25.yaml,False,statusError,could not find schema for CronJob,44.922
+batch.v1beta1.JobTemplate.after_roundtrip.yaml,False,statusError,could not find schema for JobTemplate,44.922
+batch.v1beta1.JobTemplate.after_roundtrip1.yaml,False,statusError,could not find schema for JobTemplate,44.922
+batch.v1beta1.JobTemplate13.yaml,False,statusError,could not find schema for JobTemplate,44.922
+batch.v1beta1.JobTemplate7.yaml,False,statusError,could not find schema for JobTemplate,44.922
+batch.v2alpha1.CronJob.after_roundtrip.yaml,False,statusError,could not find schema for CronJob,44.922
+batch.v2alpha1.CronJob.after_roundtrip1.yaml,False,statusError,could not find schema for CronJob,44.922
+batch.v2alpha1.CronJob3.yaml,False,statusError,could not find schema for CronJob,44.922
+batch.v2alpha1.CronJob8.yaml,False,statusError,could not find schema for CronJob,44.922
+batch.v2alpha1.JobTemplate.after_roundtrip.yaml,False,statusError,could not find schema for JobTemplate,44.922
+batch.v2alpha1.JobTemplate.after_roundtrip1.yaml,False,statusError,could not find schema for JobTemplate,44.922
+batch.v2alpha1.JobTemplate3.yaml,False,statusError,could not find schema for JobTemplate,44.922
+batch.v2alpha1.JobTemplate8.yaml,False,statusError,could not find schema for JobTemplate,44.922
+bitbucket-pipeline_1.yaml,False,statusError,could not find schema for TriggerTemplate,44.922
+bookstore-configmap.yaml,True,valid,,0.1
+bookstore-tls.yaml,True,valid,,0.1
+build12.yaml,False,statusError,could not find schema for Build,44.922
+build3_42.yaml,True,valid,,0.1
+build3_46.yaml,True,valid,,0.1
+build3_47.yaml,True,valid,,0.1
+build3_48.yaml,True,valid,,0.1
+build8_42.yaml,True,valid,,0.1
+build8_46.yaml,True,valid,,0.1
+build8_47.yaml,True,valid,,0.1
+build8_48.yaml,True,valid,,0.1
+bunny-secret.yaml,True,valid,,0.1
+ca9.yaml,True,valid,,0.1
+caddy2_5.yaml,True,valid,,0.1
+calico-3.18.1_22.yaml,True,valid,,0.1
+calico-ipv6_31.yaml,True,valid,,0.1
+calico-typha_31.yaml,True,valid,,0.1
+calico-v3.28.1_29.yaml,True,valid,,0.1
+calico1.yaml,True,valid,,0.1
+calico10_29.yaml,True,valid,,0.1
+calico11_19.yaml,True,valid,,0.1
+calico13_19.yaml,True,valid,,0.1
+calico14_29.yaml,True,valid,,0.1
+calico16_25.yaml,True,valid,,0.1
+calico17_31.yaml,True,valid,,0.1
+calico18_27.yaml,True,valid,,0.1
+calico25_25.yaml,True,valid,,0.1
+calico26_29.yaml,True,valid,,0.1
+calico27_37.yaml,True,valid,,0.1
+calico29_37.yaml,True,valid,,0.1
+calico2_25.yaml,True,valid,,0.1
+calico30_19.yaml,True,valid,,0.1
+calico31_25.yaml,True,valid,,0.1
+calico32_25.yaml,True,valid,,0.1
+calico33_29.yaml,True,valid,,0.1
+calico34_22.yaml,True,valid,,0.1
+calico36_25.yaml,True,valid,,0.1
+calico37_25.yaml,True,valid,,0.1
+calico38_25.yaml,True,valid,,0.1
+calico39_25.yaml,True,valid,,0.1
+calico3_25.yaml,True,valid,,0.1
+calico40_25.yaml,True,valid,,0.1
+calico41_25.yaml,True,valid,,0.1
+calico42_22.yaml,True,valid,,0.1
+calico43_22.yaml,True,valid,,0.1
+calico44_25.yaml,True,valid,,0.1
+calico45_25.yaml,True,valid,,0.1
+calico46_37.yaml,True,valid,,0.1
+calico47_29.yaml,True,valid,,0.1
+calico4_19.yaml,True,valid,,0.1
+calico50_19.yaml,True,valid,,0.1
+calico51_25.yaml,True,valid,,0.1
+calico52_25.yaml,True,valid,,0.1
+calico53_25.yaml,True,valid,,0.1
+calico54_29.yaml,True,valid,,0.1
+calico55_25.yaml,True,valid,,0.1
+calico56_25.yaml,True,valid,,0.1
+calico57.yaml,True,valid,,0.1
+calico58_25.yaml,True,valid,,0.1
+calico59_25.yaml,True,valid,,0.1
+calico5_19.yaml,True,valid,,0.1
+calico6.yaml,True,valid,,0.1
+calico60_27.yaml,True,valid,,0.1
+calico61_29.yaml,True,valid,,0.1
+calico62_24.yaml,True,valid,,0.1
+calico63_37.yaml,True,valid,,0.1
+calico67_25.yaml,True,valid,,0.1
+calico68_29.yaml,True,valid,,0.1
+calico69_29.yaml,True,valid,,0.1
+calico70_29.yaml,True,valid,,0.1
+calico71_29.yaml,True,valid,,0.1
+calico72_25.yaml,True,valid,,0.1
+calico73_25.yaml,True,valid,,0.1
+calico74_29.yaml,True,valid,,0.1
+calico75_25.yaml,True,valid,,0.1
+calico76_29.yaml,True,valid,,0.1
+calico77_27.yaml,True,valid,,0.1
+calico78_29.yaml,True,valid,,0.1
+calico79_29.yaml,True,valid,,0.1
+calico7_25.yaml,True,valid,,0.1
+calico81_25.yaml,True,valid,,0.1
+calico82_25.yaml,True,valid,,0.1
+calico8_25.yaml,True,valid,,0.1
+calico9_19.yaml,True,valid,,0.1
+calico_19.yaml,True,valid,,0.1
+calico_cni1_37.yaml,True,valid,,0.1
+calico_cni_37.yaml,True,valid,,0.1
+canal-etcd_13.yaml,True,valid,,0.1
+canal1_31.yaml,True,valid,,0.1
+canal2_27.yaml,True,valid,,0.1
+canal3_31.yaml,True,valid,,0.1
+carina-csi-driver_templates_csi-node_25.yaml,True,valid,,0.1
+certificates-apiresourceschema.yaml,False,statusError,could not find schema for APIResourceSchema,44.922
+certificates-apiresourceschema_1.yaml,False,statusError,could not find schema for APIResourceSchema,44.922
+certificates-apiresourceschema_5.yaml,False,statusError,could not find schema for APIResourceSchema,44.922
+chat.sealed-secret.helm.yaml,False,statusError,could not find schema for SealedSecret,44.922
+chat.sealed-secret.helm1.yaml,False,statusError,could not find schema for SealedSecret,44.922
+cilium-cni1_12.yaml,True,valid,,0.1
+cilium-cni1_3.yaml,True,valid,,0.1
+cilium-cni_12.yaml,True,valid,,0.1
+cilium-cni_3.yaml,True,valid,,0.1
+cilium-workload.yaml,True,valid,,0.1
+cilium-workload1.yaml,True,valid,,0.1
+cilium10.yaml,True,valid,,0.1
+cilium21_12.yaml,True,valid,,0.1
+cilium21_3.yaml,True,valid,,0.1
+cilium22_12.yaml,True,valid,,0.1
+cilium22_3.yaml,True,valid,,0.1
+cilium39_11.yaml,True,valid,,0.1
+cilium39_4.yaml,True,valid,,0.1
+clickhouse-secrets.yaml,True,valid,,0.1
+cluster-ip10_2.yaml,True,valid,,0.1
+cluster-role-bindings.yaml,True,valid,,0.1
+cluster-role-bindings1.yaml,True,valid,,0.1
+cluster-role-bindings10.yaml,True,valid,,0.1
+cluster-role-bindings11.yaml,True,valid,,0.1
+cluster-role-bindings13.yaml,True,valid,,0.1
+cluster-role-bindings14.yaml,True,valid,,0.1
+cluster-role-bindings16.yaml,True,valid,,0.1
+cluster-role-bindings17.yaml,True,valid,,0.1
+cluster-role-bindings18.yaml,True,valid,,0.1
+cluster-role-bindings19.yaml,True,valid,,0.1
+cluster-role-bindings2.yaml,True,valid,,0.1
+cluster-role-bindings3.yaml,True,valid,,0.1
+cluster-role-bindings5.yaml,True,valid,,0.1
+cluster-role-bindings6.yaml,True,valid,,0.1
+cluster-role-bindings7.yaml,True,valid,,0.1
+cluster-role-bindings9.yaml,True,valid,,0.1
+cluster-roles.yaml,True,valid,,0.1
+cluster-roles1.yaml,True,valid,,0.1
+cluster-roles14.yaml,True,valid,,0.1
+cluster-roles15.yaml,True,valid,,0.1
+cluster-roles16.yaml,True,valid,,0.1
+cluster-roles17.yaml,True,valid,,0.1
+cluster-roles2.yaml,True,valid,,0.1
+cluster-roles22.yaml,True,valid,,0.1
+cluster-roles29.yaml,True,valid,,0.1
+cluster-roles3.yaml,True,valid,,0.1
+cluster-roles31.yaml,True,valid,,0.1
+cluster-roles32.yaml,True,valid,,0.1
+cluster-roles33.yaml,True,valid,,0.1
+cluster-roles34.yaml,True,valid,,0.1
+cluster-roles5.yaml,True,valid,,0.1
+cluster-roles6.yaml,True,valid,,0.1
+cluster-roles7.yaml,True,valid,,0.1
+cluster-roles8.yaml,True,valid,,0.1
+cms-operator.clusterserviceversion.yaml,False,statusError,could not find schema for ClusterServiceVersion,44.922
+cnpg-1.22.11_8.yaml,True,valid,,0.1
+cnpg-1.22.1_8.yaml,True,valid,,0.1
+cnpg-1.24.1_10.yaml,True,valid,,0.1
+code-scan.yaml,False,statusError,could not find schema for Task,44.922
+component1_1.yaml,False,statusError,could not find schema for API,44.922
+composite_4.yaml,True,valid,,0.1
+composition2.yaml,False,statusError,could not find schema for Composition,44.922
+config-backup.yaml,False,statusError,could not find schema for Config,44.922
+config-map115.yaml,True,valid,,0.1
+config-map20.yaml,True,valid,,0.1
+config-map5.yaml,True,valid,,0.1
+config-map81.yaml,True,valid,,0.1
+config483.yaml,False,statusError,could not find schema for Config,44.922
+config494.yaml,True,valid,,0.1
+configmap-config11.yaml,True,valid,,0.1
+configmap-jcasc.yaml,True,valid,,0.1
+configmap-pack_conf.yaml,True,valid,,0.1
+configmap-windows1_1.yaml,True,valid,,0.1
+configmap-windows_1.yaml,True,valid,,0.1
+configmap100.yaml,True,valid,,0.1
+configmap104.yaml,True,valid,,0.1
+configmap1049.yaml,True,valid,,0.1
+configmap1050.yaml,True,valid,,0.1
+configmap1051.yaml,True,valid,,0.1
+configmap1052.yaml,True,valid,,0.1
+configmap1224.yaml,True,valid,,0.1
+configmap138.yaml,True,valid,,0.1
+configmap1449.yaml,True,valid,,0.1
+configmap1450.yaml,True,valid,,0.1
+configmap1451.yaml,True,valid,,0.1
+configmap1452.yaml,True,valid,,0.1
+configmap1708.yaml,True,valid,,0.1
+configmap1709.yaml,True,valid,,0.1
+configmap1901.yaml,True,valid,,0.1
+configmap252.yaml,True,valid,,0.1
+configmap256.yaml,True,valid,,0.1
+configmap290.yaml,True,valid,,0.1
+configmap801.yaml,True,valid,,0.1
+configmap803.yaml,True,valid,,0.1
+configmap946.yaml,True,valid,,0.1
+container-azm-ms-agentconfig.yaml,True,valid,,0.1
+container-azm-ms-agentconfig1.yaml,True,valid,,0.1
+container-limits1.yaml,False,statusError,could not find schema for ConstraintTemplate,44.922
+contents1.yaml,True,valid,,0.1
+contour-deployment_3.yaml,True,valid,,0.1
+contour2_3.yaml,True,valid,,0.1
+controller-registration.yaml,False,statusError,could not find schema for ControllerDeployment,44.922
+controller-registration1.yaml,False,statusError,could not find schema for ControllerDeployment,44.922
+controller-role-bindings.yaml,True,valid,,0.1
+controller-role-bindings1.yaml,True,valid,,0.1
+controller-role-bindings10.yaml,True,valid,,0.1
+controller-role-bindings11.yaml,True,valid,,0.1
+controller-role-bindings13.yaml,True,valid,,0.1
+controller-role-bindings14.yaml,True,valid,,0.1
+controller-role-bindings15.yaml,True,valid,,0.1
+controller-role-bindings16.yaml,True,valid,,0.1
+controller-role-bindings17.yaml,True,valid,,0.1
+controller-role-bindings18.yaml,True,valid,,0.1
+controller-role-bindings2.yaml,True,valid,,0.1
+controller-role-bindings3.yaml,True,valid,,0.1
+controller-role-bindings4.yaml,True,valid,,0.1
+controller-role-bindings5.yaml,True,valid,,0.1
+controller-role-bindings6.yaml,True,valid,,0.1
+controller-role-bindings7.yaml,True,valid,,0.1
+controller-role-bindings8.yaml,True,valid,,0.1
+controller-role-bindings9.yaml,True,valid,,0.1
+controller-roles13.yaml,True,valid,,0.1
+controller-roles4.yaml,True,valid,,0.1
+controller-roles8.yaml,True,valid,,0.1
+controller22.yaml,True,valid,,0.1
+controller23.yaml,True,valid,,0.1
+controller24.yaml,True,valid,,0.1
+controller25.yaml,True,valid,,0.1
+controller26.yaml,True,valid,,0.1
+controller27.yaml,True,valid,,0.1
+controlplane-gateway_1.yaml,True,valid,,0.1
+core-install1_24.yaml,True,valid,,0.1
+core-install1_26.yaml,True,valid,,0.1
+core-install1_27.yaml,True,valid,,0.1
+core-install2_24.yaml,True,valid,,0.1
+core-install2_26.yaml,True,valid,,0.1
+core-install2_27.yaml,True,valid,,0.1
+core-install_26.yaml,True,valid,,0.1
+core-install_28.yaml,True,valid,,0.1
+core-install_29.yaml,True,valid,,0.1
+core.v1.PersistentVolume.yaml,True,valid,,0.1
+core.v1.PersistentVolume1.yaml,True,valid,,0.1
+core.v1.PersistentVolume11.yaml,True,valid,,0.1
+core.v1.PersistentVolume15.yaml,True,valid,,0.1
+core.v1.PersistentVolume18.yaml,True,valid,,0.1
+core.v1.PersistentVolume19.yaml,True,valid,,0.1
+core.v1.PersistentVolume2.yaml,True,valid,,0.1
+core.v1.PersistentVolume20.yaml,True,valid,,0.1
+core.v1.PersistentVolume21.yaml,True,valid,,0.1
+core.v1.PersistentVolume22.yaml,True,valid,,0.1
+core.v1.PersistentVolume23.yaml,True,valid,,0.1
+core.v1.PersistentVolume27.yaml,True,valid,,0.1
+core.v1.PersistentVolume3.yaml,True,valid,,0.1
+core.v1.PersistentVolume30.yaml,True,valid,,0.1
+core.v1.PersistentVolume31.yaml,True,valid,,0.1
+core.v1.PersistentVolume32.yaml,True,valid,,0.1
+core.v1.PersistentVolume33.yaml,True,valid,,0.1
+core.v1.PersistentVolume34.yaml,True,valid,,0.1
+core.v1.PersistentVolume35.yaml,True,valid,,0.1
+core.v1.PersistentVolume42.yaml,True,valid,,0.1
+core.v1.PersistentVolume43.yaml,True,valid,,0.1
+core.v1.PersistentVolume44.yaml,True,valid,,0.1
+core.v1.PersistentVolume45.yaml,True,valid,,0.1
+core.v1.PersistentVolume46.yaml,True,valid,,0.1
+core.v1.PersistentVolume47.yaml,True,valid,,0.1
+core.v1.PersistentVolume48.yaml,True,valid,,0.1
+core.v1.PersistentVolume49.yaml,True,valid,,0.1
+core.v1.PersistentVolume5.yaml,True,valid,,0.1
+core.v1.PersistentVolume50.yaml,True,valid,,0.1
+core.v1.PersistentVolume51.yaml,True,valid,,0.1
+core.v1.PersistentVolume52.yaml,True,valid,,0.1
+core.v1.PersistentVolume53.yaml,True,valid,,0.1
+core.v1.PersistentVolume54.yaml,True,valid,,0.1
+core.v1.PersistentVolume55.yaml,True,valid,,0.1
+core.v1.PersistentVolume56.yaml,True,valid,,0.1
+core.v1.PersistentVolume6.yaml,True,valid,,0.1
+core.v1.PersistentVolume7.yaml,True,valid,,0.1
+core.v1.PersistentVolume8.yaml,True,valid,,0.1
+core.v1.PersistentVolume9.yaml,True,valid,,0.1
+core.v1.Pod.after_roundtrip4.yaml,True,valid,,0.1
+core.v1.Pod.after_roundtrip7.yaml,True,valid,,0.1
+core.v1.Pod13.yaml,True,valid,,0.1
+core.v1.Pod25.yaml,True,valid,,0.1
+core.v1.PodStatusResult30.yaml,False,statusError,could not find schema for PodStatusResult,44.922
+core.v1.PodStatusResult33.yaml,False,statusError,could not find schema for PodStatusResult,44.922
+core.v1.PodStatusResult42.yaml,False,statusError,could not find schema for PodStatusResult,44.922
+core.v1.PodStatusResult45.yaml,False,statusError,could not find schema for PodStatusResult,44.922
+core.v1.PodStatusResult48.yaml,False,statusError,could not find schema for PodStatusResult,44.922
+core.v1.PodStatusResult50.yaml,False,statusError,could not find schema for PodStatusResult,44.922
+core.v1.PodStatusResult51.yaml,False,statusError,could not find schema for PodStatusResult,44.922
+core.v1.PodStatusResult53.yaml,False,statusError,could not find schema for PodStatusResult,44.922
+core.v1.PodStatusResult54.yaml,False,statusError,could not find schema for PodStatusResult,44.922
+core.v1.PodStatusResult56.yaml,False,statusError,could not find schema for PodStatusResult,44.922
+core.v1.PodTemplate.after_roundtrip4.yaml,True,valid,,0.1
+core.v1.PodTemplate.after_roundtrip7.yaml,True,valid,,0.1
+core.v1.PodTemplate12.yaml,True,valid,,0.1
+core.v1.PodTemplate13.yaml,True,valid,,0.1
+core.v1.PodTemplate14.yaml,True,valid,,0.1
+core.v1.PodTemplate24.yaml,True,valid,,0.1
+core.v1.PodTemplate25.yaml,True,valid,,0.1
+core.v1.PodTemplate26.yaml,True,valid,,0.1
+core.v1.ReplicationController.after_roundtrip4.yaml,True,valid,,0.1
+core.v1.ReplicationController.after_roundtrip7.yaml,True,valid,,0.1
+core.v1.ReplicationController13.yaml,True,valid,,0.1
+core.v1.ReplicationController25.yaml,True,valid,,0.1
+coredns11.yaml,True,valid,,0.1
+coredns12.yaml,True,valid,,0.1
+crdb-operator_4.yaml,True,valid,,0.1
+cron_dag_final.yaml,False,statusError,could not find schema for CronWorkflow,44.922
+cronjob-configauditreport-expected.yaml,False,statusError,could not find schema for ConfigAuditReport,44.922
+cronjob-expected-scan.yaml,True,valid,,0.1
+cs-db-br-script-cm.yaml,True,valid,,0.1
+csi-hostpath-plugin11_11.yaml,True,valid,,0.1
+csi-hostpath-plugin13_11.yaml,True,valid,,0.1
+csi-hostpath-plugin14_11.yaml,True,valid,,0.1
+csi-hostpath-plugin15_11.yaml,True,valid,,0.1
+csi-hostpath-plugin18_11.yaml,True,valid,,0.1
+csi-hostpath-plugin19_11.yaml,True,valid,,0.1
+csi-hostpath-plugin1_11.yaml,True,valid,,0.1
+csi-hostpath-plugin20_11.yaml,True,valid,,0.1
+csi-hostpath-plugin21_11.yaml,True,valid,,0.1
+csi-hostpath-plugin22_11.yaml,True,valid,,0.1
+csi-hostpath-plugin2_11.yaml,True,valid,,0.1
+csi-hostpath-plugin3_11.yaml,True,valid,,0.1
+csi-hostpath-plugin5_11.yaml,True,valid,,0.1
+csi-hostpath-plugin6_11.yaml,True,valid,,0.1
+csi-hostpath-plugin7_11.yaml,True,valid,,0.1
+csi-hostpath-plugin9_11.yaml,True,valid,,0.1
+csi-hostpath-plugin_11.yaml,True,valid,,0.1
+csi-node3.yaml,True,valid,,0.1
+customizations1.yaml,False,statusError,could not find schema for ResourceInterpreterCustomization,44.922
+customizations12.yaml,False,statusError,could not find schema for ResourceInterpreterCustomization,44.922
+customizations14.yaml,False,statusError,could not find schema for ResourceInterpreterCustomization,44.922
+customizations2.yaml,False,statusError,could not find schema for ResourceInterpreterCustomization,44.922
+customizations3.yaml,False,statusError,could not find schema for ResourceInterpreterCustomization,44.922
+customizations4.yaml,False,statusError,could not find schema for ResourceInterpreterCustomization,44.922
+customizations5.yaml,False,statusError,could not find schema for ResourceInterpreterCustomization,44.922
+customizations6.yaml,False,statusError,could not find schema for ResourceInterpreterCustomization,44.922
+customizations7.yaml,False,statusError,could not find schema for ResourceInterpreterCustomization,44.922
+daemonset-configauditreport-expected.yaml,False,statusError,could not find schema for ConfigAuditReport,44.922
+daemonset-expected-scan.yaml,True,valid,,0.1
+daemonset319.yaml,True,valid,,0.1
+daemonset367.yaml,True,valid,,0.1
+dapr_sidecar_injector_deployment2.yaml,False,statusInvalid,"problem validating schema. Check JSON formatting: jsonschema: '/spec/replicas' does not validate with https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone/deployment-apps-v1.json#/properties/spec/properties/replicas/type: expected integer or null, but got string",44.922
+dashboard-v1.yaml,True,valid,,0.1
+dashboard-v11.yaml,True,valid,,0.1
+dashboard-v2.yaml,True,valid,,0.1
+dashboard-v21.yaml,True,valid,,0.1
+dashboard15.yaml,True,valid,,0.1
+dashboards-trace.yaml,True,valid,,0.1
+definition4.yaml,False,statusError,could not find schema for CompositeResourceDefinition,44.922
+demo_v1alpha1_guestbook.yaml,False,statusError,could not find schema for Guestbook,44.922
+deploy-tp-aks.yaml,False,statusError,could not find schema for helm-install,44.922
+deploy-tp-eks.yaml,False,statusError,could not find schema for helm-install,44.922
+deploy-tp-gke.yaml,False,statusError,could not find schema for helm-install,44.922
+deployment-canary1.yaml,False,statusInvalid,"problem validating schema. Check JSON formatting: jsonschema: '/spec/replicas' does not validate with https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone/deployment-apps-v1.json#/properties/spec/properties/replicas/type: expected integer or null, but got string",44.922
+deployment-referencing-non-existent-resources.yaml,False,statusError,could not find schema for Cleaner,44.922
+deployment-referencing-non-existent-resources1.yaml,False,statusError,could not find schema for Cleaner,44.922
+deployment304.yaml,True,valid,,0.1
+deployment3534_1.yaml,True,valid,,0.1
+deployment4806.yaml,True,valid,,0.1
+deployment6356.yaml,False,statusInvalid,"problem validating schema. Check JSON formatting: jsonschema: '/spec/replicas' does not validate with https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone/deployment-apps-v1.json#/properties/spec/properties/replicas/type: expected integer or null, but got string",44.922
+deployment6374.yaml,False,statusInvalid,"problem validating schema. Check JSON formatting: jsonschema: '/spec/template/spec/hostNetwork' does not validate with https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone/deployment-apps-v1.json#/properties/spec/properties/template/properties/spec/properties/hostNetwork/type: expected boolean or null, but got string",44.922
+deployment6378.yaml,False,statusInvalid,"problem validating schema. Check JSON formatting: jsonschema: '/spec/replicas' does not validate with https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone/deployment-apps-v1.json#/properties/spec/properties/replicas/type: expected integer or null, but got string",44.922
+deployment849.yaml,True,valid,,0.1
+deprecated-secret-tls_1.yaml,True,valid,,0.1
+diff-cache.yaml,False,statusError,could not find schema for Application,44.922
+diff-cache1.yaml,False,statusError,could not find schema for Application,44.922
+dify-mirror-deployment_23.yaml,True,valid,,0.1
+disallow-selinux11.yaml,False,statusError,could not find schema for ClusterPolicy,44.922
+disallow-selinux3.yaml,False,statusError,could not find schema for ClusterPolicy,44.922
+disallow-selinux5.yaml,False,statusError,could not find schema for ClusterPolicy,44.922
+disallow-selinux7.yaml,False,statusError,could not find schema for ClusterPolicy,44.922
+disallow-selinux9.yaml,False,statusError,could not find schema for ClusterPolicy,44.922
+dovecot-conf.yaml,True,valid,,0.1
+dovecot-ldap-conf.yaml,True,valid,,0.1
+dovecot-sql-conf-ext.yaml,True,valid,,0.1
+dovecot-statefulset.yaml,True,valid,,0.1
+druid-cluster.yaml,False,statusError,could not find schema for Druid,44.922
+dummy-k8s-operator.clusterserviceversion.yaml,False,statusError,could not find schema for ClusterServiceVersion,44.922
+e2e-cm.yaml,True,valid,,0.1
+email-operator.clusterserviceversion.yaml,False,statusError,could not find schema for ClusterServiceVersion,44.922
+etcd-certs.yaml,True,valid,,0.1
+extensions.v1beta1.DaemonSet.after_roundtrip4.yaml,False,statusError,could not find schema for DaemonSet,44.922
+extensions.v1beta1.DaemonSet.after_roundtrip7.yaml,False,statusError,could not find schema for DaemonSet,44.922
+extensions.v1beta1.DaemonSet13.yaml,False,statusError,could not find schema for DaemonSet,44.922
+extensions.v1beta1.DaemonSet25.yaml,False,statusError,could not find schema for DaemonSet,44.922
+extensions.v1beta1.Deployment.after_roundtrip4.yaml,False,statusError,could not find schema for Deployment,44.922
+extensions.v1beta1.Deployment.after_roundtrip7.yaml,False,statusError,could not find schema for Deployment,44.922
+extensions.v1beta1.Deployment13.yaml,False,statusError,could not find schema for Deployment,44.922
+extensions.v1beta1.Deployment25.yaml,False,statusError,could not find schema for Deployment,44.922
+extensions.v1beta1.ReplicaSet.after_roundtrip4.yaml,False,statusError,could not find schema for ReplicaSet,44.922
+extensions.v1beta1.ReplicaSet.after_roundtrip7.yaml,False,statusError,could not find schema for ReplicaSet,44.922
+extensions.v1beta1.ReplicaSet13.yaml,False,statusError,could not find schema for ReplicaSet,44.922
+extensions.v1beta1.ReplicaSet25.yaml,False,statusError,could not find schema for ReplicaSet,44.922
+fdb-operator_templates_secrets_3.yaml,True,valid,,0.1
+flag_output_set_values.golden.yaml,True,valid,,0.1
+flagger-v1.yaml,True,valid,,0.1
+flagger-v11.yaml,True,valid,,0.1
+flow-visibility_templates_configmap_2.yaml,True,valid,,0.1
+fluentd-configmap3.yaml,True,valid,,0.1
+fluentd-es-configmap1.yaml,True,valid,,0.1
+fluentd-es-configmap5.yaml,True,valid,,0.1
+gameserver_v1alpha1_dayz.yaml,False,statusError,could not find schema for Dayz,44.922
+generate2.yaml,False,statusError,could not find schema for Task,44.922
+generated1_7.yaml,True,valid,,0.1
+generated_7.yaml,True,valid,,0.1
+git-clone-task.yaml,False,statusError,could not find schema for Task,44.922
+git-clone-task1.yaml,False,statusError,could not find schema for Task,44.922
+git-clone.yaml,False,statusError,could not find schema for Task,44.922
+git-clone1.yaml,False,statusError,could not find schema for Task,44.922
+gitea-config1_2.yaml,True,valid,,0.1
+gitea-config_2.yaml,True,valid,,0.1
+gitea2_3.yaml,True,valid,,0.1
+gitea_3.yaml,True,valid,,0.1
+github-deploy-key.sops6.yaml,True,valid,,0.1
+github-pipeline_1.yaml,False,statusError,could not find schema for TriggerTemplate,44.922
+gitlab-pipeline_1.yaml,False,statusError,could not find schema for TriggerTemplate,44.922
+gitlab-rails.sops.yaml,True,valid,,0.1
+grafana-dashboard-numbers-api-v2.yaml,True,valid,,0.1
+grafana-dashboard-numbers-api-v21.yaml,True,valid,,0.1
+grafana-dashboard-numbers-api-v22.yaml,True,valid,,0.1
+grafana-dashboard-numbers-api-v23.yaml,True,valid,,0.1
+grafana-deployment12.yaml,True,valid,,0.1
+grafana-deployment13.yaml,True,valid,,0.1
+grafana-deployment14.yaml,True,valid,,0.1
+grafana-deployment15.yaml,True,valid,,0.1
+grafana-deployment16.yaml,True,valid,,0.1
+grafana-deployment2.yaml,True,valid,,0.1
+grafana-deployment24.yaml,True,valid,,0.1
+grafana-deployment28.yaml,True,valid,,0.1
+grafana-deployment3.yaml,True,valid,,0.1
+grafana-deployment30.yaml,True,valid,,0.1
+grafana-deployment32.yaml,True,valid,,0.1
+grafana-deployment33.yaml,True,valid,,0.1
+grafana-deployment34.yaml,True,valid,,0.1
+grafana-deployment35.yaml,True,valid,,0.1
+grafana-deployment36.yaml,True,valid,,0.1
+grafana-deployment37.yaml,True,valid,,0.1
+grafana-deployment4.yaml,True,valid,,0.1
+grafana-deployment40.yaml,True,valid,,0.1
+grafana-deployment41.yaml,True,valid,,0.1
+grafana-deployment42.yaml,True,valid,,0.1
+grafana-deployment45_1.yaml,True,valid,,0.1
+grafana-deployment5.yaml,True,valid,,0.1
+grafana-deployment51.yaml,True,valid,,0.1
+grafana-deployment55.yaml,True,valid,,0.1
+grafana-deployment56.yaml,True,valid,,0.1
+grafana-deployment57.yaml,True,valid,,0.1
+grafana-deployment6.yaml,True,valid,,0.1
+grafana-deployment60.yaml,True,valid,,0.1
+grafana-deployment67.yaml,True,valid,,0.1
+grafana-deployment70.yaml,True,valid,,0.1
+grafana-deployment72.yaml,True,valid,,0.1
+grafana-deployment73.yaml,True,valid,,0.1
+grafana-deployment74.yaml,True,valid,,0.1
+grafana-deployment75.yaml,True,valid,,0.1
+grafana-deployment78_3.yaml,True,valid,,0.1
+grafana-deployment80.yaml,True,valid,,0.1
+grafana-deployment81.yaml,True,valid,,0.1
+grafana-deployment86.yaml,True,valid,,0.1
+grafana-deployment88.yaml,True,valid,,0.1
+grafana126.yaml,True,valid,,0.1
+graphite1_1.yaml,True,valid,,0.1
+graphite_1.yaml,True,valid,,0.1
+gvm-2204-basic_2.yaml,True,valid,,0.1
+gvm-2204-basic_21.yaml,True,valid,,0.1
+gvm-2204-remote-scanner-kilo_2.yaml,True,valid,,0.1
+gvm-2204-remote-scanner-kilo_22.yaml,True,valid,,0.1
+gvm-2204-remote-scanner-kilo_3.yaml,True,valid,,0.1
+happy-compute-ingress1.yaml,True,valid,,0.1
+harvester-rke2-clusterctl-mgmt001_12.yaml,True,valid,,0.1
+harvester-rke2-clusterctl-mgmt001_13.yaml,True,valid,,0.1
+harvester-rke2-clusterctl_12.yaml,True,valid,,0.1
+harvester-rke2-clusterctl_13.yaml,True,valid,,0.1
+helm-release103.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helm-release104.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helm-release110.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helm-release134.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helm-release135.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helm58.yaml,False,statusError,could not find schema for Application,44.922
+helmrelease1035.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease1046.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease1063.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease1079.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease1195.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease1207.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease1219.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease1268.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease1275.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease1294.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease1334.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease1399.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease1437.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease1440.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease1446.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease1466.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease1472.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease1491.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease1529.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease1542.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease1574.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease1577.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease1610.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease1615.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease1669.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease1720.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease1729.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease1755.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease181.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease20.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease224.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease233.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease237.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease247.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease286.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease294.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease30.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease34.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease384.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease44.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease499.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease510.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease541.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease570.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease607.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease757.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease777.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease83.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease833.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease855.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease91.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease924.yaml,False,statusError,could not find schema for HelmRelease,44.922
+helmrelease927.yaml,False,statusError,could not find schema for HelmRelease,19.0735
+helmrelease941.yaml,False,statusError,could not find schema for HelmRelease,19.0735
+helmrelease979.yaml,False,statusError,could not find schema for HelmRelease,19.0735
+hivems-hive-metastore-stateful.yaml,True,valid,,0.1
+hivems-postgresql-stateful.yaml,True,valid,,0.1
+httpd-cm.yaml,True,valid,,0.1
+httpd-configmap.yaml,True,valid,,0.1
+httpd-configmap1.yaml,True,valid,,0.1
+hwameistor_templates_local-storage_11.yaml,True,valid,,0.1
+hydra_deployment.yaml,True,valid,,0.1
+hydra_deployment1.yaml,True,valid,,0.1
+ibm_cp4a_cr_production_workflow.yaml,False,statusError,could not find schema for ICP4ACluster,19.0735
+infrastructure-labels-annotations_2.yaml,True,valid,,0.1
+ingress-gateway6.yaml,True,valid,,0.1
+ingress-nginx-controller5.yaml,False,statusInvalid,"problem validating schema. Check JSON formatting: jsonschema: '/status/podIPs/0/ip' does not validate with https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone/pod-v1.json#/properties/status/properties/podIPs/items/properties/ip/type: expected string, but got null",19.0735
+ingress1753.yaml,True,valid,,0.1
+ingressgateway_k8s_settings.golden.yaml,True,valid,,0.1
+ingressgateway_k8s_settings.golden_1.yaml,True,valid,,0.1
+init10.yaml,False,statusError,could not find schema for CiliumNode,19.0735
+init12.yaml,False,statusError,could not find schema for CiliumNode,19.0735
+init13.yaml,False,statusError,could not find schema for CiliumNode,19.0735
+init14.yaml,False,statusError,could not find schema for CiliumNode,19.0735
+init15.yaml,False,statusError,could not find schema for CiliumNode,19.0735
+init16.yaml,False,statusError,could not find schema for CiliumNode,19.0735
+init17.yaml,False,statusError,could not find schema for CiliumNode,19.0735
+init18.yaml,False,statusError,could not find schema for CiliumNode,19.0735
+init8.yaml,False,statusError,could not find schema for CiliumNode,19.0735
+init9.yaml,False,statusError,could not find schema for CiliumNode,19.0735
+install122_40.yaml,True,valid,,0.1
+install122_44.yaml,True,valid,,0.1
+install122_45.yaml,True,valid,,0.1
+install122_46.yaml,True,valid,,0.1
+install127_43.yaml,True,valid,,0.1
+install127_47.yaml,True,valid,,0.1
+install127_48.yaml,True,valid,,0.1
+install127_49.yaml,True,valid,,0.1
+install128_43.yaml,True,valid,,0.1
+install128_47.yaml,True,valid,,0.1
+install128_48.yaml,True,valid,,0.1
+install128_49.yaml,True,valid,,0.1
+install131_45.yaml,True,valid,,0.1
+install131_49.yaml,True,valid,,0.1
+install131_50.yaml,True,valid,,0.1
+install131_51.yaml,True,valid,,0.1
+install133_43.yaml,True,valid,,0.1
+install133_47.yaml,True,valid,,0.1
+install133_48.yaml,True,valid,,0.1
+install133_49.yaml,True,valid,,0.1
+install138_43.yaml,True,valid,,0.1
+install138_47.yaml,True,valid,,0.1
+install138_48.yaml,True,valid,,0.1
+install138_49.yaml,True,valid,,0.1
+install13_41.yaml,True,valid,,0.1
+install13_45.yaml,True,valid,,0.1
+install13_46.yaml,True,valid,,0.1
+install13_47.yaml,True,valid,,0.1
+install145_45.yaml,True,valid,,0.1
+install145_49.yaml,True,valid,,0.1
+install145_50.yaml,True,valid,,0.1
+install145_51.yaml,True,valid,,0.1
+install14_41.yaml,True,valid,,0.1
+install14_45.yaml,True,valid,,0.1
+install14_46.yaml,True,valid,,0.1
+install14_47.yaml,True,valid,,0.1
+install17_33.yaml,True,valid,,0.1
+install17_36.yaml,True,valid,,0.1
+install17_37.yaml,True,valid,,0.1
+install17_38.yaml,True,valid,,0.1
+install1_33.yaml,True,valid,,0.1
+install1_36.yaml,True,valid,,0.1
+install1_37.yaml,True,valid,,0.1
+install1_38.yaml,True,valid,,0.1
+install29_41.yaml,True,valid,,0.1
+install29_45.yaml,True,valid,,0.1
+install29_46.yaml,True,valid,,0.1
+install29_47.yaml,True,valid,,0.1
+install30_41.yaml,True,valid,,0.1
+install30_45.yaml,True,valid,,0.1
+install30_46.yaml,True,valid,,0.1
+install30_47.yaml,True,valid,,0.1
+install33_41.yaml,True,valid,,0.1
+install33_45.yaml,True,valid,,0.1
+install33_46.yaml,True,valid,,0.1
+install33_47.yaml,True,valid,,0.1
+install34_41.yaml,True,valid,,0.1
+install34_45.yaml,True,valid,,0.1
+install34_46.yaml,True,valid,,0.1
+install34_47.yaml,True,valid,,0.1
+install36_41.yaml,True,valid,,0.1
+install36_45.yaml,True,valid,,0.1
+install36_46.yaml,True,valid,,0.1
+install36_47.yaml,True,valid,,0.1
+install37_41.yaml,True,valid,,0.1
+install37_45.yaml,True,valid,,0.1
+install37_46.yaml,True,valid,,0.1
+install37_47.yaml,True,valid,,0.1
+install39_41.yaml,True,valid,,0.1
+install39_45.yaml,True,valid,,0.1
+install39_46.yaml,True,valid,,0.1
+install39_47.yaml,True,valid,,0.1
+install51_41.yaml,True,valid,,0.1
+install51_45.yaml,True,valid,,0.1
+install51_46.yaml,True,valid,,0.1
+install51_47.yaml,True,valid,,0.1
+install53_45.yaml,True,valid,,0.1
+install53_49.yaml,True,valid,,0.1
+install53_50.yaml,True,valid,,0.1
+install53_51.yaml,True,valid,,0.1
+integration-grafana-logs.yaml,True,valid,,0.1
+invalid_cluster_certificate_both.yaml,False,statusError,could not find schema for Config,19.0735
+invalid_cluster_proxyurl.yaml,False,statusError,could not find schema for Config,19.0735
+invalid_cluster_proxyurl_scheme.yaml,False,statusError,could not find schema for Config,19.0735
+invalid_cluster_server.yaml,False,statusError,could not find schema for Config,19.0735
+invalid_clusters_duplicate.yaml,False,statusError,could not find schema for Config,19.0735
+invalid_clusters_name.yaml,False,statusError,could not find schema for Config,19.0735
+invalid_context_cluster.yaml,False,statusError,could not find schema for Config,19.0735
+invalid_context_cluster_missing.yaml,False,statusError,could not find schema for Config,19.0735
+invalid_context_namespace_format.yaml,False,statusError,could not find schema for Config,19.0735
+invalid_context_namespace_length.yaml,False,statusError,could not find schema for Config,19.0735
+invalid_context_user.yaml,False,statusError,could not find schema for Config,19.0735
+invalid_context_user_missing.yaml,False,statusError,could not find schema for Config,19.0735
+invalid_contexts_context.yaml,False,statusError,could not find schema for Config,19.0735
+invalid_contexts_duplicate.yaml,False,statusError,could not find schema for Config,19.0735
+invalid_contexts_name.yaml,False,statusError,could not find schema for Config,19.0735
+invalid_contexts_required.yaml,False,statusError,could not find schema for Config,19.0735
+invalid_current_context.yaml,False,statusError,could not find schema for Config,19.0735
+invalid_user_certificate_both.yaml,False,statusError,could not find schema for Config,19.0735
+invalid_user_clientkey_both.yaml,False,statusError,could not find schema for Config,19.0735
+invalid_user_impersonating.yaml,False,statusError,could not find schema for Config,19.0735
+invalid_users_duplicate.yaml,False,statusError,could not find schema for Config,19.0735
+invalid_users_name.yaml,False,statusError,could not find schema for Config,19.0735
+invidious-postgresql-init-configmap.yaml,True,valid,,0.1
+job-configauditreport-expected.yaml,False,statusError,could not find schema for ConfigAuditReport,19.0735
+job-expected-scan.yaml,True,valid,,0.1
+jwtchecker.yaml,True,valid,,0.1
+k8s-dev.sealedsecret.yaml,False,statusError,could not find schema for SealedSecret,19.0735
+k8s-metrics_15.yaml,False,statusError,could not find schema for OpenTelemetryCollector,19.0735
+k8s-monitoring.yaml,False,statusError,could not find schema for HelmRelease,19.0735
+k8s.rules1.yaml,False,statusError,could not find schema for PrometheusRule,19.0735
+k8s.rules5.yaml,False,statusError,could not find schema for PrometheusRule,19.0735
+k8ssandra1_29.yaml,True,valid,,0.1
+k8ssandra_29.yaml,True,valid,,0.1
+kafka-persistent1_4.yaml,True,valid,,0.1
+kafka17_1.yaml,True,valid,,0.1
+kiada-ssl.kiada-test2-namespace1_2.yaml,True,valid,,0.1
+kiada-ssl.kiada-test2-namespace_2.yaml,True,valid,,0.1
+kiada-ssl1_2.yaml,True,valid,,0.1
+kiada-ssl_2.yaml,True,valid,,0.1
+kiada-stable-and-canary1_5.yaml,True,valid,,0.1
+kiada-stable-and-canary_5.yaml,True,valid,,0.1
+knative_serving_0.18.0_21.yaml,True,valid,,0.1
+knative_serving_0.18.0_22.yaml,True,valid,,0.1
+kong-conf4.yaml,True,valid,,0.1
+kratos_deployment.yaml,True,valid,,0.1
+kratos_deployment1.yaml,True,valid,,0.1
+kraven-org-production-tls.sops.yaml,True,valid,,0.1
+kraven-org-staging-tls.sops.yaml,True,valid,,0.1
+kserve1_9.yaml,True,valid,,0.1
+kube-apiserver-availability.rules1.yaml,False,statusError,could not find schema for PrometheusRule,19.0735
+kube-apiserver-availability.rules5.yaml,False,statusError,could not find schema for PrometheusRule,19.0735
+kube-apiserver-burnrate.rules1.yaml,False,statusError,could not find schema for PrometheusRule,19.0735
+kube-apiserver-burnrate.rules5.yaml,False,statusError,could not find schema for PrometheusRule,19.0735
+kube-apiserver-minikube.yaml,True,valid,,0.1
+kube-fieldforge.clusterserviceversion.yaml,False,statusError,could not find schema for ClusterServiceVersion,19.0735
+kube-gateway-ambient-redirect_2.yaml,True,valid,,0.1
+kube-prometheus-helm.yaml,False,statusError,could not find schema for Application,19.0735
+kube_apiserver_service_monitor.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubeconfig-unit.yaml,False,statusError,could not find schema for Config,19.0735
+kubeconfig26.yaml,False,statusError,could not find schema for Config,19.0735
+kubeconfig27.yaml,False,statusError,could not find schema for Config,19.0735
+kubeconfig28.yaml,False,statusError,could not find schema for Config,19.0735
+kubeconfig4.yaml,False,statusError,could not find schema for Config,19.0735
+kubeconfig8.yaml,False,statusError,could not find schema for Config,19.0735
+kubeless-v1.0.71_6.yaml,True,valid,,0.1
+kubeless-v1.0.72_6.yaml,True,valid,,0.1
+kubeless-v1.0.73_6.yaml,True,valid,,0.1
+kubeless-v1.0.7_6.yaml,True,valid,,0.1
+kubeless-v1.0.8.yaml,True,valid,,0.1
+kubelet-servicemonitor.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubelet.servicemonitor.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubelet.servicemonitor1.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubelet.servicemonitor10.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubelet.servicemonitor11.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubelet.servicemonitor2.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubelet.servicemonitor3.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubelet.servicemonitor4.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubelet.servicemonitor5.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubelet.servicemonitor6.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubelet.servicemonitor7.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubelet.servicemonitor8.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubelet.servicemonitor9.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetes-manifest.yaml,True,valid,,0.1
+kubernetes-serviceMonitorApiserver.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetes-serviceMonitorApiserver1.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetes-serviceMonitorApiserver2.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetes-serviceMonitorApiserver3.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetes-serviceMonitorApiserver4.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetes-serviceMonitorApiserver5.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetes-serviceMonitorKubeControllerManager.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetes-serviceMonitorKubeControllerManager1.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetes-serviceMonitorKubeControllerManager2.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetes-serviceMonitorKubeControllerManager3.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetes-serviceMonitorKubeControllerManager4.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetes-serviceMonitorKubeControllerManager5.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetes-serviceMonitorKubelet.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetes-serviceMonitorKubelet1.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetes-serviceMonitorKubelet2.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetes-serviceMonitorKubelet3.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetes-serviceMonitorKubelet4.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetes-serviceMonitorKubelet5.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetes30.yaml,True,valid,,0.1
+kubernetesControlPlane-serviceMonitorApiserver.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorApiserver1.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorApiserver10.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorApiserver11.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorApiserver12.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorApiserver13.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorApiserver2.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorApiserver3.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorApiserver4.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorApiserver5.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorApiserver6.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorApiserver7.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorApiserver8.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorApiserver9.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorKubeControllerManager.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorKubeControllerManager1.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorKubeControllerManager10.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorKubeControllerManager11.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorKubeControllerManager12.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorKubeControllerManager13.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorKubeControllerManager2.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorKubeControllerManager3.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorKubeControllerManager4.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorKubeControllerManager5.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorKubeControllerManager6.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorKubeControllerManager7.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorKubeControllerManager8.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorKubeControllerManager9.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorKubelet.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorKubelet1.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorKubelet10.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorKubelet11.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorKubelet12.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorKubelet13.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorKubelet2.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorKubelet3.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorKubelet4.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorKubelet5.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorKubelet6.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorKubelet7.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorKubelet8.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubernetesControlPlane-serviceMonitorKubelet9.yaml,False,statusError,could not find schema for ServiceMonitor,19.0735
+kubevirt-operator-v1.3.1_7.yaml,True,valid,,0.1
+kubevirt-operator1_7.yaml,True,valid,,0.1
+kubevirt-operator2_7.yaml,True,valid,,0.1
+kubevirt-operator3_7.yaml,True,valid,,0.1
+kubevirt-operator4_7.yaml,True,valid,,0.1
+kubevirt-operator5_7.yaml,True,valid,,0.1
+kubevirt-operator6_7.yaml,True,valid,,0.1
+kubevirt-operator8_7.yaml,True,valid,,0.1
+kubevirt-operator_7.yaml,True,valid,,0.1
+kubewell-ingress-operator.clusterserviceversion.yaml,False,statusError,could not find schema for ClusterServiceVersion,19.0735
+kustomization1009.yaml,False,statusError,could not find schema for Kustomization,19.0735
+kustomization1447.yaml,False,statusError,could not find schema for Kustomization,19.0735
+kustomization2068.yaml,False,statusError,could not find schema for Kustomization,19.0735
+kustomization2641.yaml,False,statusError,could not find schema for Kustomization,19.0735
+kustomization2668.yaml,False,statusError,could not find schema for Kustomization,19.0735
+kustomization2679.yaml,False,statusError,could not find schema for Kustomization,19.0735
+kustomization2702.yaml,False,statusError,could not find schema for Kustomization,19.0735
+kustomization3707.yaml,False,statusError,could not find schema for Kustomization,19.0735
+kustomization389.yaml,False,statusError,could not find schema for Kustomization,19.0735
+kustomization4004.yaml,False,statusError,could not find schema for Kustomization,19.0735
+kustomization4251.yaml,False,statusError,could not find schema for Kustomization,19.0735
+kustomization4917.yaml,False,statusError,could not find schema for Kustomization,19.0735
+kustomization5713.yaml,False,statusError,could not find schema for Kustomization,19.0735
+kustomization6162.yaml,False,statusError,could not find schema for Kustomization,19.0735
+kustomization6843.yaml,False,statusError,could not find schema for Kustomization,19.0735
+kustomization9222.yaml,False,statusError,could not find schema for Kustomization,19.0735
+kustomization9533.yaml,False,statusError,could not find schema for Kustomization,19.0735
+kustomization9992.yaml,False,statusError,could not find schema for Kustomization,19.0735
+kyverno-generate-role1.yaml,True,valid,,0.1
+lgtm1_29.yaml,True,valid,,0.1
+linkerd-edge-20.10.11_54.yaml,True,valid,,0.1
+linkerd-edge-20.10.11_59.yaml,True,valid,,0.1
+linkerd-edge-20.10.11_62.yaml,True,valid,,0.1
+linkerd-edge-20.10.11_66.yaml,True,valid,,0.1
+linkerd-edge-20.10.11_71.yaml,True,valid,,0.1
+linkerd-edge-20.10.11_73.yaml,True,valid,,0.1
+linkerd-edge-20.10.11_77.yaml,True,valid,,0.1
+linkerd-edge-20.10.11_80.yaml,True,valid,,0.1
+linkerd-edge-20.10.11_88.yaml,True,valid,,0.1
+linkerd-edge-20.10.11_96.yaml,True,valid,,0.1
+linkerd-edge-20.10.1_54.yaml,True,valid,,0.1
+linkerd-edge-20.10.1_59.yaml,True,valid,,0.1
+linkerd-edge-20.10.1_62.yaml,True,valid,,0.1
+linkerd-edge-20.10.1_66.yaml,True,valid,,0.1
+linkerd-edge-20.10.1_71.yaml,True,valid,,0.1
+linkerd-edge-20.10.1_73.yaml,True,valid,,0.1
+linkerd-edge-20.10.1_77.yaml,True,valid,,0.1
+linkerd-edge-20.10.1_80.yaml,True,valid,,0.1
+linkerd-edge-20.10.1_88.yaml,True,valid,,0.1
+linkerd-edge-20.10.1_96.yaml,True,valid,,0.1
+ll_3.yaml,True,valid,,0.1
+loadtest_template_basic_all_languages.yaml,False,statusError,could not find schema for LoadTest,19.0735
+loadtest_template_prebuilt_all_languages.yaml,False,statusError,could not find schema for LoadTest,19.0735
+loadtest_template_psm_proxied_basic_all_languages.yaml,False,statusError,could not find schema for LoadTest,19.0735
+loadtest_template_psm_proxied_prebuilt_all_languages.yaml,False,statusError,could not find schema for LoadTest,19.0735
+loadtest_template_psm_proxyless_basic_all_languages.yaml,False,statusError,could not find schema for LoadTest,19.0735
+loadtest_template_psm_proxyless_prebuilt_all_languages.yaml,False,statusError,could not find schema for LoadTest,19.0735
+local-lan-vernal-dev-tls.sealedsecret.yaml,False,statusError,could not find schema for SealedSecret,19.0735
+local-storage7.yaml,True,valid,,0.1
+mainnet.expect_5.yaml,True,valid,,0.1
+mainnet2.expect_6.yaml,True,valid,,0.1
+mainnet2.expect_7.yaml,True,valid,,0.1
+manifest221_1.yaml,True,valid,,0.1
+manifest222_10.yaml,True,valid,,0.1
+manifest367_62.yaml,True,valid,,0.1
+manifest367_63.yaml,True,valid,,0.1
+manifest367_64.yaml,True,valid,,0.1
+manifest367_65.yaml,True,valid,,0.1
+manifest367_67.yaml,True,valid,,0.1
+manifest385_10.yaml,True,valid,,0.1
+manifest402_9.yaml,True,valid,,0.1
+manifest96_1.yaml,True,valid,,0.1
+manifest97_10.yaml,True,valid,,0.1
+manifests18_22.yaml,True,valid,,0.1
+manifests18_57.yaml,True,valid,,0.1
+manifests68.yaml,True,valid,,0.1
+manual-sa_2.yaml,True,valid,,0.1
+mariadb-operator_16.yaml,True,valid,,0.1
+mariadb_node1-configmap.yaml,True,valid,,0.1
+mariadb_node2-configmap.yaml,True,valid,,0.1
+mariadb_node3-configmap.yaml,True,valid,,0.1
+matrix-hookshot.yaml,False,statusError,could not find schema for Application,19.0735
+memcached-operator.clusterserviceversion.yaml,False,statusError,could not find schema for ClusterServiceVersion,19.0735
+merge-probers.yaml,True,valid,,0.1
+metrics310_1.yaml,True,valid,,0.1
+metrics31_1.yaml,True,valid,,0.1
+metrics3_1.yaml,True,valid,,0.1
+meu-rabbit-mq_8.yaml,True,valid,,0.1
+mlquickstarts.yaml,False,statusError,could not find schema for Quickstarts,19.0735
+mlquickstarts1.yaml,False,statusError,could not find schema for Quickstarts,19.0735
+mlquickstarts10.yaml,False,statusError,could not find schema for Quickstarts,19.0735
+mlquickstarts11.yaml,False,statusError,could not find schema for Quickstarts,19.0735
+mlquickstarts12.yaml,False,statusError,could not find schema for Quickstarts,19.0735
+mlquickstarts13.yaml,False,statusError,could not find schema for Quickstarts,19.0735
+mlquickstarts14.yaml,False,statusError,could not find schema for Quickstarts,19.0735
+mlquickstarts2.yaml,False,statusError,could not find schema for Quickstarts,19.0735
+mlquickstarts3.yaml,False,statusError,could not find schema for Quickstarts,19.0735
+mlquickstarts4.yaml,False,statusError,could not find schema for Quickstarts,19.0735
+mlquickstarts5.yaml,False,statusError,could not find schema for Quickstarts,19.0735
+mlquickstarts6.yaml,False,statusError,could not find schema for Quickstarts,19.0735
+mlquickstarts7.yaml,False,statusError,could not find schema for Quickstarts,19.0735
+mlquickstarts8.yaml,False,statusError,could not find schema for Quickstarts,19.0735
+mlquickstarts9.yaml,False,statusError,could not find schema for Quickstarts,19.0735
+mongo-exported.yaml,True,valid,,0.1
+mongo-exported1.yaml,True,valid,,0.1
+multi-container-pod16.yaml,True,valid,,0.1
+my-tls-secret.yaml,True,valid,,0.1
+mysql-ha-read-write-separation_3.yaml,True,valid,,0.1
+mysql-statefulset11.yaml,True,valid,,0.1
+mysql-statefulset13.yaml,True,valid,,0.1
+mysql-statefulset2.yaml,True,valid,,0.1
+mysql-statefulset3.yaml,True,valid,,0.1
+mysql-statefulset4.yaml,True,valid,,0.1
+mysql-statefulset5.yaml,True,valid,,0.1
+mysql-statefulset6.yaml,True,valid,,0.1
+mysql-statefulset7.yaml,True,valid,,0.1
+mysql-statefulset9.yaml,True,valid,,0.1
+mysql1_2.yaml,True,valid,,0.1
+mysql20.yaml,True,valid,,0.1
+mysql6_2.yaml,True,valid,,0.1
+namespace-install1_36.yaml,True,valid,,0.1
+namespace-install1_40.yaml,True,valid,,0.1
+namespace-install1_41.yaml,True,valid,,0.1
+namespace-install1_42.yaml,True,valid,,0.1
+namespace-install4_34.yaml,True,valid,,0.1
+namespace-install4_38.yaml,True,valid,,0.1
+namespace-install4_39.yaml,True,valid,,0.1
+namespace-install4_40.yaml,True,valid,,0.1
+neko-deployment.yaml,True,valid,,0.1
+neko-service.yaml,True,valid,,0.1
+netbox-deployment.yaml,True,valid,,0.1
+netbox-deployment1.yaml,True,valid,,0.1
+netbox-startup-configmap.yaml,True,valid,,0.1
+netbox-startup-configmap1.yaml,True,valid,,0.1
+networking.amazon-vpc-routed-eni-k8s-1.161_6.yaml,True,valid,,0.1
+networking.amazon-vpc-routed-eni-k8s-1.16_6.yaml,True,valid,,0.1
+newrelic-agent-operator.clusterserviceversion.yaml,False,statusError,could not find schema for ClusterServiceVersion,19.0735
+nextcloud-cm-subdir.yaml,True,valid,,0.1
+nextcloud-cm-subdir1.yaml,True,valid,,0.1
+nextcloud1.yaml,True,valid,,0.1
+nextcloud1_4.yaml,True,valid,,0.1
+nextcloud4.yaml,True,valid,,0.1
+nextcloud4_4.yaml,True,valid,,0.1
+nginx-config49.yaml,True,valid,,0.1
+nginx-deployment31.yaml,True,valid,,0.1
+nginx-deployment9.yaml,True,valid,,0.1
+node-pod.yaml,True,valid,,0.1
+node10.yaml,True,valid,,0.1
+node100.yaml,True,valid,,0.1
+node101.yaml,True,valid,,0.1
+node102.yaml,True,valid,,0.1
+node104.yaml,True,valid,,0.1
+node105.yaml,True,valid,,0.1
+node106.yaml,True,valid,,0.1
+node107.yaml,True,valid,,0.1
+node108.yaml,True,valid,,0.1
+node111.yaml,True,valid,,0.1
+node112.yaml,True,valid,,0.1
+node114.yaml,True,valid,,0.1
+node115.yaml,True,valid,,0.1
+node116.yaml,True,valid,,0.1
+node13.yaml,True,valid,,0.1
+node19.yaml,True,valid,,0.1
+node20.yaml,True,valid,,0.1
+node22.yaml,True,valid,,0.1
+node23.yaml,True,valid,,0.1
+node25.yaml,True,valid,,0.1
+node26.yaml,True,valid,,0.1
+node28.yaml,True,valid,,0.1
+node29.yaml,True,valid,,0.1
+node3.yaml,True,valid,,0.1
+node32.yaml,True,valid,,0.1
+node33.yaml,True,valid,,0.1
+node34.yaml,True,valid,,0.1
+node35.yaml,True,valid,,0.1
+node37.yaml,True,valid,,0.1
+node38.yaml,True,valid,,0.1
+node4.yaml,True,valid,,0.1
+node40.yaml,True,valid,,0.1
+node41.yaml,True,valid,,0.1
+node42.yaml,True,valid,,0.1
+node43.yaml,True,valid,,0.1
+node44.yaml,True,valid,,0.1
+node45.yaml,True,valid,,0.1
+node46.yaml,True,valid,,0.1
+node49.yaml,True,valid,,0.1
+node51.yaml,True,valid,,0.1
+node53.yaml,True,valid,,0.1
+node54.yaml,True,valid,,0.1
+node56.yaml,True,valid,,0.1
+node57.yaml,True,valid,,0.1
+node6.yaml,True,valid,,0.1
+node75.yaml,True,valid,,0.1
+node77.yaml,True,valid,,0.1
+node78.yaml,True,valid,,0.1
+node80.yaml,True,valid,,0.1
+node81.yaml,True,valid,,0.1
+node82.yaml,True,valid,,0.1
+node83.yaml,True,valid,,0.1
+node84.yaml,True,valid,,0.1
+node86.yaml,True,valid,,0.1
+node87.yaml,True,valid,,0.1
+node88.yaml,True,valid,,0.1
+node89.yaml,True,valid,,0.1
+node9.yaml,True,valid,,0.1
+node90.yaml,True,valid,,0.1
+node91.yaml,True,valid,,0.1
+node92.yaml,True,valid,,0.1
+node93.yaml,True,valid,,0.1
+node94.yaml,True,valid,,0.1
+node95.yaml,True,valid,,0.1
+node97.yaml,True,valid,,0.1
+node98.yaml,True,valid,,0.1
+node99.yaml,True,valid,,0.1
+node_v1alpha1_relay_2.yaml,True,valid,,0.1
+nss-managed-bedrock-core-role.yaml,True,valid,,0.1
+nssf-configmap1.yaml,True,valid,,0.1
+oidc-apps-controller-registration.yaml,False,statusError,could not find schema for ControllerDeployment,19.0735
+oidc-apps-controller-registration1.yaml,False,statusError,could not find schema for ControllerDeployment,19.0735
+ollama-pod.yaml,True,valid,,0.1
+open_3.yaml,True,valid,,0.1
+opentelemetrycollector.yaml,False,statusError,could not find schema for OpenTelemetryCollector,19.0735
+opentelemetrycollector2.yaml,False,statusError,could not find schema for OpenTelemetryCollector,19.0735
+operator.clusterserviceversion.yaml,False,statusError,could not find schema for ClusterServiceVersion,19.0735
+oracle-database-operator_14.yaml,True,valid,,0.1
+otel3_3.yaml,True,valid,,0.1
+outline-sealedsecret.yaml,False,statusError,could not find schema for SealedSecret,19.0735
+paperless-secret.yaml,False,statusError,could not find schema for SealedSecret,19.0735
+patch-globalrole-workspace-manager.yaml,False,statusError,could not find schema for GlobalRole,19.0735
+peer0-org1.yaml,False,statusError,could not find schema for FabricPeer,19.0735
+peer0-org2.yaml,False,statusError,could not find schema for FabricPeer,19.0735
+persistentvolumesusage17.yaml,False,statusError,could not find schema for GrafanaDashboard,19.0735
+pod-configauditreport-expected.yaml,False,statusError,could not find schema for ConfigAuditReport,19.0735
+pod-expected-scan.yaml,True,valid,,0.1
+pod-total17.yaml,False,statusError,could not find schema for GrafanaDashboard,19.0735
+pod873.yaml,True,valid,,0.1
+pod_baseline.yaml,True,valid,,0.1
+pod_baseline1.yaml,True,valid,,0.1
+pod_baseline11.yaml,True,valid,,0.1
+pod_baseline12.yaml,True,valid,,0.1
+pod_baseline13.yaml,True,valid,,0.1
+pod_baseline14.yaml,True,valid,,0.1
+pod_baseline15.yaml,True,valid,,0.1
+pod_baseline2.yaml,True,valid,,0.1
+pod_baseline3.yaml,True,valid,,0.1
+pod_baseline4.yaml,True,valid,,0.1
+pod_baseline5.yaml,True,valid,,0.1
+pod_baseline6.yaml,True,valid,,0.1
+pod_baseline7.yaml,True,valid,,0.1
+pod_baseline8.yaml,True,valid,,0.1
+pod_baseline9.yaml,True,valid,,0.1
+pod_initContainerStatuses.yaml,True,valid,,0.1
+pod_restricted.yaml,True,valid,,0.1
+pod_restricted1.yaml,True,valid,,0.1
+pod_restricted11.yaml,True,valid,,0.1
+pod_restricted12.yaml,True,valid,,0.1
+pod_restricted13.yaml,True,valid,,0.1
+pod_restricted14.yaml,True,valid,,0.1
+pod_restricted15.yaml,True,valid,,0.1
+pod_restricted2.yaml,True,valid,,0.1
+pod_restricted3.yaml,True,valid,,0.1
+pod_restricted4.yaml,True,valid,,0.1
+pod_restricted5.yaml,True,valid,,0.1
+pod_restricted6.yaml,True,valid,,0.1
+pod_restricted7.yaml,True,valid,,0.1
+pod_restricted8.yaml,True,valid,,0.1
+pod_restricted9.yaml,True,valid,,0.1
+pods-with-expired-certificates.yaml,False,statusError,could not find schema for Cleaner,19.0735
+pods-with-expired-certificates1.yaml,False,statusError,could not find schema for Cleaner,19.0735
+pods-with-outdated-secret-data.yaml,False,statusError,could not find schema for Cleaner,19.0735
+pods-with-outdated-secret-data1.yaml,False,statusError,could not find schema for Cleaner,19.0735
+policies4_4.yaml,True,valid,,0.1
+policies4_5.yaml,True,valid,,0.1
+policies4_6.yaml,True,valid,,0.1
+policies4_7.yaml,True,valid,,0.1
+policies4_8.yaml,True,valid,,0.1
+policy10.yaml,True,valid,,0.1
+policy6.yaml,True,valid,,0.1
+policy7.yaml,True,valid,,0.1
+policy8.yaml,True,valid,,0.1
+policy9.yaml,True,valid,,0.1
+postfix-mastercf.yaml,True,valid,,0.1
+postgres-conf.yaml,True,valid,,0.1
+postgres_configmap.yaml,True,valid,,0.1
+postgres_statefulset.yaml,True,valid,,0.1
+pp-o11y-full1.yaml,False,statusError,could not find schema for helm-install,19.0735
+private-chain.expect_14.yaml,True,valid,,0.1
+private-chain.expect_3.yaml,True,valid,,0.1
+profile-demo88.yaml,False,statusError,could not find schema for IstioOperator,19.0735
+profile-demo89.yaml,False,statusError,could not find schema for IstioOperator,19.0735
+project-tenant.yaml,False,statusError,could not find schema for RoleTemplate,19.0735
+project-tenant1.yaml,False,statusError,could not find schema for RoleTemplate,19.0735
+project-tenant2.yaml,False,statusError,could not find schema for RoleTemplate,19.0735
+prom-configmap.yaml,True,valid,,0.1
+prometheus-config-map.yaml,True,valid,,0.1
+prometheus-configmap4.yaml,True,valid,,0.1
+prometheus-configmap5.yaml,True,valid,,0.1
+prometheus-deployment18_2.yaml,True,valid,,0.1
+prometheus-grafana.yaml,False,statusError,could not find schema for Template,19.0735
+prometheus113_1.yaml,True,valid,,0.1
+prometheus124_1.yaml,True,valid,,0.1
+prometheus128_6.yaml,True,valid,,0.1
+prometheus135_1.yaml,True,valid,,0.1
+prometheus144_1.yaml,True,valid,,0.1
+prometheus162_1.yaml,True,valid,,0.1
+prometheus203_1.yaml,True,valid,,0.1
+prometheus205_3.yaml,True,valid,,0.1
+prometheus206_1.yaml,True,valid,,0.1
+prometheus211_1.yaml,True,valid,,0.1
+prometheus213_1.yaml,True,valid,,0.1
+prometheus215_1.yaml,True,valid,,0.1
+prometheus216_1.yaml,True,valid,,0.1
+prometheus225_1.yaml,True,valid,,0.1
+prometheus226.yaml,True,valid,,0.1
+prometheus231_1.yaml,True,valid,,0.1
+prometheus266_1.yaml,True,valid,,0.1
+prometheus270_1.yaml,True,valid,,0.1
+prometheus272_1.yaml,True,valid,,0.1
+prometheus280_1.yaml,True,valid,,0.1
+prometheus290_1.yaml,True,valid,,0.1
+prometheus293_1.yaml,True,valid,,0.1
+prometheus297_1.yaml,True,valid,,0.1
+prometheus310_1.yaml,True,valid,,0.1
+prometheus35_1.yaml,True,valid,,0.1
+prometheus37_6.yaml,True,valid,,0.1
+prometheus5_1.yaml,True,valid,,0.1
+prometheus61.yaml,False,statusError,could not find schema for OpenTelemetryCollector,19.0735
+prometheus66_1.yaml,True,valid,,0.1
+prometheus79_1.yaml,True,valid,,0.1
+prometheus7_6.yaml,True,valid,,0.1
+prometheus_component-render_manifest.golden_19.yaml,True,valid,,0.1
+prometheus_config.yaml,True,valid,,0.1
+prometheus_vm1_1.yaml,True,valid,,0.1
+prometheus_vm2_1.yaml,True,valid,,0.1
+prometheus_vm3_1.yaml,True,valid,,0.1
+prometheus_vm4_1.yaml,True,valid,,0.1
+prometheus_vm5_1.yaml,True,valid,,0.1
+prometheus_vm_1.yaml,True,valid,,0.1
+prometheus_vm_tls1_1.yaml,True,valid,,0.1
+prometheus_vm_tls2_1.yaml,True,valid,,0.1
+prometheus_vm_tls3_1.yaml,True,valid,,0.1
+prometheus_vm_tls4_1.yaml,True,valid,,0.1
+prometheus_vm_tls5_1.yaml,True,valid,,0.1
+prometheus_vm_tls_1.yaml,True,valid,,0.1
+promethues2_2.yaml,True,valid,,0.1
+promethues4_2.yaml,True,valid,,0.1
+promethues_2.yaml,True,valid,,0.1
+pull-request-comment.yaml,False,statusError,could not find schema for Task,19.0735
+pull-request-comment1.yaml,False,statusError,could not find schema for Task,19.0735
+pull-request-comment2.yaml,False,statusError,could not find schema for Task,19.0735
+pull-request-comment3.yaml,False,statusError,could not find schema for Task,19.0735
+pull-secret1.yaml,True,valid,,0.1
+quality-definition-resizings.yaml,True,valid,,0.1
+quay2.yaml,True,valid,,0.1
+rbac132_1.yaml,True,valid,,0.1
+reactsealedsecret.yaml,False,statusError,could not find schema for SealedSecret,19.0735
+redis-cluster2_1.yaml,True,valid,,0.1
+release180_39.yaml,True,valid,,0.1
+release302.yaml,False,statusError,could not find schema for HelmRelease,19.0735
+release307.yaml,False,statusError,could not find schema for HelmRelease,19.0735
+release428.yaml,False,statusError,could not find schema for HelmRelease,19.0735
+rendered_11.yaml,True,valid,,0.1
+rendered_12.yaml,True,valid,,0.1
+rendered_15.yaml,True,valid,,0.1
+replicaset-configauditreport-expected.yaml,False,statusError,could not find schema for ConfigAuditReport,19.0735
+replicaset-expected-scan.yaml,True,valid,,0.1
+replicationcontroller-configauditreport-expected.yaml,False,statusError,could not find schema for ConfigAuditReport,19.0735
+replicationcontroller-expected-scan.yaml,True,valid,,0.1
+resource792_45.yaml,True,valid,,0.1
+resource792_49.yaml,True,valid,,0.1
+resource792_50.yaml,True,valid,,0.1
+resource792_51.yaml,True,valid,,0.1
+resource793_45.yaml,True,valid,,0.1
+resource793_49.yaml,True,valid,,0.1
+resource793_50.yaml,True,valid,,0.1
+resource793_51.yaml,True,valid,,0.1
+reverse-proxy-certificate.yaml,True,valid,,0.1
+role-tenant.yaml,True,valid,,0.1
+role-tenant1.yaml,True,valid,,0.1
+role-tenant2.yaml,True,valid,,0.1
+role188.yaml,True,valid,,0.1
+role898.yaml,True,valid,,0.1
+rosa-hcp-deprovision.yaml,False,statusError,could not find schema for Task,19.0735
+rosa-hcp-deprovision1.yaml,False,statusError,could not find schema for Task,19.0735
+rosa-hcp-deprovision2.yaml,False,statusError,could not find schema for Task,19.0735
+rosa-hcp-provision.yaml,False,statusError,could not find schema for Task,19.0735
+rosa-hcp-provision1.yaml,False,statusError,could not find schema for Task,19.0735
+rosa-hcp-provision2.yaml,False,statusError,could not find schema for Task,19.0735
+scope.yaml,False,statusError,could not find schema for ClusterRoleBinding,19.0735
+scope1.yaml,False,statusError,could not find schema for ClusterRoleBinding,19.0735
+scripts-cm1.yaml,True,valid,,0.1
+sealed-secret11.yaml,False,statusError,could not find schema for SealedSecret,19.0735
+sealed-secret13.yaml,False,statusError,could not find schema for SealedSecret,19.0735
+sealed-secret15.yaml,False,statusError,could not find schema for SealedSecret,19.0735
+sealed-secret21.yaml,False,statusError,could not find schema for SealedSecret,19.0735
+sealed-secret24.yaml,False,statusError,could not find schema for SealedSecret,19.0735
+sealed-secret25.yaml,False,statusError,could not find schema for SealedSecret,19.0735
+sealed-secret9.yaml,False,statusError,could not find schema for SealedSecret,19.0735
+sealed-secrets-dev_3.yaml,False,statusError,could not find schema for SealedSecret,19.0735
+sealed-secrets-keypair.yaml,True,valid,,0.1
+sealed-secrets-prod_3.yaml,False,statusError,could not find schema for SealedSecret,19.0735
+sealedsecret-tls-crt.yaml,False,statusError,could not find schema for SealedSecret,19.0735
+secret-oauth.sops.yaml,True,valid,,0.1
+secret-tls19.yaml,True,valid,,0.1
+secret.kiada-tls.yaml,True,valid,,0.1
+secret.kiada-tls1.yaml,True,valid,,0.1
+secret.kiada-tls10.yaml,True,valid,,0.1
+secret.kiada-tls11.yaml,True,valid,,0.1
+secret.kiada-tls12.yaml,True,valid,,0.1
+secret.kiada-tls13.yaml,True,valid,,0.1
+secret.kiada-tls14.yaml,True,valid,,0.1
+secret.kiada-tls15.yaml,True,valid,,0.1
+secret.kiada-tls2.yaml,True,valid,,0.1
+secret.kiada-tls3.yaml,True,valid,,0.1
+secret.kiada-tls4.yaml,True,valid,,0.1
+secret.kiada-tls5.yaml,True,valid,,0.1
+secret.kiada-tls6.yaml,True,valid,,0.1
+secret.kiada-tls7.yaml,True,valid,,0.1
+secret.kiada-tls8.yaml,True,valid,,0.1
+secret.kiada-tls9.yaml,True,valid,,0.1
+secret.sops111.yaml,True,valid,,0.1
+secret.sops145_1.yaml,True,valid,,0.1
+secret.sops155.yaml,True,valid,,0.1
+secret1150.yaml,False,statusError,"could not find schema for ENC[AES256_GCM,data:4tSE6E6B,iv:04kC7NF+52NGTUii125urKTpJlN0VFXGiJx72CC+R2c=,tag:U+LNlcbIgJUCrVqgxVnyKg==,type:str]",19.0735
+secret542.yaml,True,valid,,0.1
+secret543.yaml,True,valid,,0.1
+secrets-configuration.yaml,True,valid,,0.1
+secrets-configuration_1.yaml,True,valid,,0.1
+secrets-configuration_2.yaml,True,valid,,0.1
+secrets-configuration_3.yaml,True,valid,,0.1
+secrets379.yaml,True,valid,,0.1
+secrets456.yaml,True,valid,,0.1
+secure-app1_3.yaml,True,valid,,0.1
+secure-ingress-step2_1.yaml,True,valid,,0.1
+server-mp-secret.yaml,True,valid,,0.1
+server-secret10.yaml,True,valid,,0.1
+server-tls-secret.yaml,True,valid,,0.1
+server-tls-secret1.yaml,True,valid,,0.1
+server_config_map.yaml,True,valid,,0.1
+service-ca-deployment_7.yaml,True,valid,,0.1
+settings.k8s.io.v1alpha1.PodPreset.after_roundtrip.yaml,False,statusError,could not find schema for PodPreset,19.0735
+settings.k8s.io.v1alpha1.PodPreset.after_roundtrip1.yaml,False,statusError,could not find schema for PodPreset,19.0735
+settings.k8s.io.v1alpha1.PodPreset.yaml,False,statusError,could not find schema for PodPreset,19.0735
+settings.k8s.io.v1alpha1.PodPreset1.yaml,False,statusError,could not find schema for PodPreset,19.0735
+settings.k8s.io.v1alpha1.PodPreset2.yaml,False,statusError,could not find schema for PodPreset,19.0735
+settings.k8s.io.v1alpha1.PodPreset3.yaml,False,statusError,could not find schema for PodPreset,19.0735
+settings.k8s.io.v1alpha1.PodPreset4.yaml,False,statusError,could not find schema for PodPreset,19.0735
+settings.k8s.io.v1alpha1.PodPreset5.yaml,False,statusError,could not find schema for PodPreset,19.0735
+settings.k8s.io.v1alpha1.PodPreset6.yaml,False,statusError,could not find schema for PodPreset,19.0735
+settings.k8s.io.v1alpha1.PodPreset7.yaml,False,statusError,could not find schema for PodPreset,19.0735
+settings.k8s.io.v1alpha1.PodPreset8.yaml,False,statusError,could not find schema for PodPreset,19.0735
+sharding.kustomization.yaml,False,statusError,could not find schema for Kustomization,19.0735
+shrek-cm.yaml,True,valid,,0.1
+shrek-cm1.yaml,True,valid,,0.1
+sofa-mesh-demo_2.yaml,True,valid,,0.1
+sofa-mesh-demo_5.yaml,True,valid,,0.1
+sonar1_12.yaml,True,valid,,0.1
+sonar_12.yaml,True,valid,,0.1
+stale-secrets-watch.clusterserviceversion.yaml,False,statusError,could not find schema for ClusterServiceVersion,19.0735
+state11.yaml,True,valid,,0.1
+state12.yaml,True,valid,,0.1
+state13.yaml,True,valid,,0.1
+state2.yaml,True,valid,,0.1
+state21.yaml,True,valid,,0.1
+state22.yaml,True,valid,,0.1
+state3.yaml,True,valid,,0.1
+state31.yaml,True,valid,,0.1
+state32.yaml,True,valid,,0.1
+state4.yaml,True,valid,,0.1
+state41.yaml,True,valid,,0.1
+state42.yaml,True,valid,,0.1
+statefulset-expected-scan.yaml,True,valid,,0.1
+statefulset-my-rabbitmq.yaml,True,valid,,0.1
+statefulset-my-rabbitmq1.yaml,True,valid,,0.1
+statefulset219.yaml,True,valid,,0.1
+statefulset378.yaml,True,valid,,0.1
+statefulset379.yaml,True,valid,,0.1
+statefulset380.yaml,True,valid,,0.1
+statefulset381.yaml,True,valid,,0.1
+statefulset389.yaml,True,valid,,0.1
+statefulset440.yaml,True,valid,,0.1
+statefulset449.yaml,True,valid,,0.1
+statefulsets5.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment.after_roundtrip.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment.after_roundtrip1.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment1.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment10.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment11.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment12.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment13.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment14.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment15.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment16.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment17.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment18.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment19.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment2.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment20.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment21.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment22.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment23.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment24.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment25.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment26.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment27.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment28.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment29.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment3.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment30.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment31.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment32.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment33.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment34.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment35.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment39.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment4.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment40.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment41.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment42.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment43.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment44.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment45.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment46.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment47.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment48.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment49.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment5.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment50.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment51.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment52.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment53.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment54.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment55.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment56.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment6.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment7.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment8.yaml,True,valid,,0.1
+storage.k8s.io.v1.VolumeAttachment9.yaml,True,valid,,0.1
+storage.k8s.io.v1alpha1.VolumeAttachment.after_roundtrip.yaml,False,statusError,could not find schema for VolumeAttachment,19.0735
+storage.k8s.io.v1alpha1.VolumeAttachment.after_roundtrip1.yaml,False,statusError,could not find schema for VolumeAttachment,19.0735
+storage.k8s.io.v1alpha1.VolumeAttachment.yaml,False,statusError,could not find schema for VolumeAttachment,19.0735
+storage.k8s.io.v1alpha1.VolumeAttachment1.yaml,False,statusError,could not find schema for VolumeAttachment,19.0735
+storage.k8s.io.v1alpha1.VolumeAttachment10.yaml,False,statusError,could not find schema for VolumeAttachment,19.0735
+storage.k8s.io.v1alpha1.VolumeAttachment11.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment12.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment13.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment14.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment15.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment16.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment17.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment18.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment19.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment2.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment20.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment21.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment22.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment23.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment24.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment25.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment26.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment27.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment28.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment29.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment3.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment30.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment31.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment32.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment33.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment34.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment35.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment39.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment4.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment40.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment41.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment42.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment43.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment44.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment45.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment46.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment47.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment48.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment49.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment5.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment50.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment51.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment52.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment53.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment54.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment55.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment56.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment6.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment7.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment8.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1alpha1.VolumeAttachment9.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment.after_roundtrip.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment.after_roundtrip1.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment1.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment10.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment11.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment12.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment13.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment14.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment15.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment16.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment17.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment18.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment19.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment2.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment20.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment21.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment22.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment23.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment24.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment25.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment26.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment27.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment28.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment29.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment3.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment30.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment31.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment32.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment33.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment34.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment35.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment39.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment4.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment40.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment41.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment42.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment43.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment44.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment45.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment46.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment47.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment48.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment49.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment5.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment50.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment51.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment52.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment53.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment54.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment55.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment56.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment6.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment7.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment8.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+storage.k8s.io.v1beta1.VolumeAttachment9.yaml,False,statusError,could not find schema for VolumeAttachment,13.8768
+streetlights-api.yaml,False,statusError,could not find schema for API,13.8768
+sts-mysql.yaml,True,valid,,0.1
+sts-mysql1.yaml,True,valid,,0.1
+surrealdb-schema.sealed-secret.yaml,False,statusError,could not find schema for SealedSecret,13.8768
+surrealdb-schema.sealed-secret1.yaml,False,statusError,could not find schema for SealedSecret,13.8768
+sv-config.yaml,True,valid,,0.1
+tasks32_1.yaml,False,statusError,could not find schema for Task,13.8768
+tekton-pipelines-controller-deploy.yaml,True,valid,,0.1
+tekton1_39.yaml,True,valid,,0.1
+tekton2_45.yaml,True,valid,,0.1
+template-1_6.yaml,True,valid,,0.1
+test-metadata.yaml,False,statusError,could not find schema for Task,13.8768
+test-metadata2.yaml,False,statusError,could not find schema for Task,13.8768
+test_clusterrole.yaml,True,valid,,0.1
+test_clusterrole1.yaml,True,valid,,0.1
+theodolite-benchmark-kstreams.yaml,False,statusError,could not find schema for benchmark,13.8768
+tls-secret51.yaml,True,valid,,0.1
+tls-secret51_1.yaml,True,valid,,0.1
+tls-secret51_2.yaml,True,valid,,0.1
+tls-secret51_3.yaml,True,valid,,0.1
+tls-wildcard-lan-stamx-nl.yaml,False,statusError,could not find schema for SealedSecret,13.8768
+tls-wildcard-lan-stamx-nl1.yaml,False,statusError,could not find schema for SealedSecret,13.8768
+tls-wildcard-stamx-nl.yaml,False,statusError,could not find schema for SealedSecret,13.8768
+tls-wildcard-stamx-nl1.yaml,False,statusError,could not find schema for SealedSecret,13.8768
+today.apiresourceschemas1_2.yaml,False,statusError,could not find schema for APIResourceSchema,13.8768
+today.apiresourceschemas_2.yaml,False,statusError,could not find schema for APIResourceSchema,13.8768
+tour.sealed-secret.helm.yaml,False,statusError,could not find schema for SealedSecret,13.8768
+tour.sealed-secret.helm1.yaml,False,statusError,could not find schema for SealedSecret,13.8768
+tp-base-on-prem-https.yaml,False,statusError,could not find schema for helm-install,13.8768
+tp-base-on-prem-https1.yaml,False,statusError,could not find schema for helm-install,13.8768
+tp-base-on-prem.yaml,False,statusError,could not find schema for helm-install,13.8768
+tp-base-on-prem1.yaml,False,statusError,could not find schema for helm-install,13.8768
+traefik17.yaml,True,valid,,0.1
+tretboot_1.yaml,True,valid,,0.1
+trigger-jenkins-job.yaml,False,statusError,could not find schema for Task,13.8768
+upgrade-example.yaml,False,statusError,could not find schema for Guestbook,13.8768
+v0.13.10.metallb-frr1_23.yaml,True,valid,,0.1
+v0.13.10.metallb-frr_23.yaml,True,valid,,0.1
+v0.13.12.metallb-frr1_23.yaml,True,valid,,0.1
+v0.13.12.metallb-frr_23.yaml,True,valid,,0.1
+v0.13.4.metallb-frr_24.yaml,True,valid,,0.1
+v0.13.7.metallb-frr_22.yaml,True,valid,,0.1
+v0.13.9.metallb-frr_22.yaml,True,valid,,0.1
+valid.yaml,False,statusError,could not find schema for Config,13.8768
+valid_multi.yaml,False,statusError,could not find schema for Config,13.8768
+validatingwebhookconfiguration-02.yaml,True,valid,,0.1
+vector-config.yaml,True,valid,,0.1
+vsphere-csi-driver_11.yaml,False,statusInvalid,"problem validating schema. Check JSON formatting: jsonschema: '/spec/replicas' does not validate with https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone/deployment-apps-v1.json#/properties/spec/properties/replicas/type: expected integer or null, but got string",13.8768
+waypoint-no-network-label_2.yaml,True,valid,,0.1
+weave-daemonset-k8s.yaml,True,valid,,0.1
+weave-daemonset-k8s1.yaml,True,valid,,0.1
+weave-daemonset-k8s10.yaml,True,valid,,0.1
+weave-daemonset-k8s11.yaml,True,valid,,0.1
+weave-daemonset-k8s12.yaml,True,valid,,0.1
+weave-daemonset-k8s13.yaml,True,valid,,0.1
+weave-daemonset-k8s14.yaml,True,valid,,0.1
+weave-daemonset-k8s15.yaml,True,valid,,0.1
+weave-daemonset-k8s16.yaml,True,valid,,0.1
+weave-daemonset-k8s2.yaml,True,valid,,0.1
+weave-daemonset-k8s3.yaml,True,valid,,0.1
+weave-daemonset-k8s4.yaml,True,valid,,0.1
+weave-daemonset-k8s5.yaml,True,valid,,0.1
+weave-daemonset-k8s6.yaml,True,valid,,0.1
+weave-daemonset-k8s7.yaml,True,valid,,0.1
+weave-daemonset-k8s8.yaml,True,valid,,0.1
+weave-daemonset-k8s9.yaml,True,valid,,0.1
+weave.yaml,True,valid,,0.1
+webhook-configuration1.yaml,True,valid,,0.1
+windows-bios-installer-configmaps.yaml,True,valid,,0.1
+windows-bios-installer-pipeline.yaml,False,statusError,could not find schema for Pipeline,13.8768
+windows-efi-installer-configmaps.yaml,True,valid,,0.1
+windows-efi-installer-configmaps_1.yaml,True,valid,,0.1
+windows-efi-installer-pipeline.yaml,False,statusError,could not find schema for Pipeline,13.8768
+worker-sts.yaml,True,valid,,0.1
+write_checks_1.yaml,True,valid,,0.1
+wso2am-conf.yaml,True,valid,,0.1
+xld.clusterserviceversion.yaml,False,statusError,could not find schema for ClusterServiceVersion,13.8768
+xlr.clusterserviceversion.yaml,False,statusError,could not find schema for ClusterServiceVersion,13.8768
+xrd1.yaml,False,statusError,could not find schema for CompositeResourceDefinition,13.8768
+your-spotify.yaml,False,statusError,could not find schema for HelmRelease,13.8768
+your-spotify1.yaml,False,statusError,could not find schema for HelmRelease,13.8768
+
+VÁLIDOS,INVÁLIDOS,TOTAL,,
+1200,588,1788,,

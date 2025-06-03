@@ -1,0 +1,2148 @@
+{
+  "resources": [
+    {
+      "filename": "./small/helmrelease941.yaml",
+      "kind": "HelmRelease",
+      "name": "rook-ceph-cluster",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease927.yaml",
+      "kind": "HelmRelease",
+      "name": "kps",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/helmrelease979.yaml",
+      "kind": "HelmRelease",
+      "name": "kube-prometheus-stack",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/ibm_cp4a_cr_production_workflow.yaml",
+      "kind": "ICP4ACluster",
+      "name": "icp4adeploy",
+      "version": "icp4a.ibm.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ICP4ACluster"
+    },
+    {
+      "filename": "./small/ingress-nginx-controller5.yaml",
+      "kind": "Pod",
+      "name": "ingress-nginx-controller-768f948f8f-{{ generateName }}",
+      "version": "v1",
+      "status": "statusInvalid",
+      "msg": "problem validating schema. Check JSON formatting: jsonschema: '/status/hostIPs/0/ip' does not validate with https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone/pod-v1.json#/properties/status/properties/hostIPs/items/properties/ip/type: expected string, but got null",
+      "validationErrors": [
+        {
+          "path": "/status/hostIPs/0/ip",
+          "msg": "expected string, but got null"
+        },
+        {
+          "path": "/status/podIPs/0/ip",
+          "msg": "expected string, but got null"
+        }
+      ]
+    },
+    {
+      "filename": "./small/init10.yaml",
+      "kind": "CiliumNode",
+      "name": "cilium-nodes-control-plane",
+      "version": "cilium.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for CiliumNode"
+    },
+    {
+      "filename": "./small/init12.yaml",
+      "kind": "CiliumNode",
+      "name": "dual-stack-worker",
+      "version": "cilium.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for CiliumNode"
+    },
+    {
+      "filename": "./small/init10.yaml",
+      "kind": "CiliumNode",
+      "name": "cilium-nodes-worker",
+      "version": "cilium.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for CiliumNode"
+    },
+    {
+      "filename": "./small/init12.yaml",
+      "kind": "CiliumNode",
+      "name": "dual-stack-worker2",
+      "version": "cilium.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for CiliumNode"
+    },
+    {
+      "filename": "./small/init12.yaml",
+      "kind": "CiliumNode",
+      "name": "dual-stack-control-plane",
+      "version": "cilium.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for CiliumNode"
+    },
+    {
+      "filename": "./small/init13.yaml",
+      "kind": "CiliumNode",
+      "name": "dual-stack-control-plane",
+      "version": "cilium.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for CiliumNode"
+    },
+    {
+      "filename": "./small/init13.yaml",
+      "kind": "CiliumNode",
+      "name": "dual-stack-worker",
+      "version": "cilium.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for CiliumNode"
+    },
+    {
+      "filename": "./small/init13.yaml",
+      "kind": "CiliumNode",
+      "name": "dual-stack-worker2",
+      "version": "cilium.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for CiliumNode"
+    },
+    {
+      "filename": "./small/init14.yaml",
+      "kind": "CiliumNode",
+      "name": "dual-stack-control-plane",
+      "version": "cilium.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for CiliumNode"
+    },
+    {
+      "filename": "./small/init14.yaml",
+      "kind": "CiliumNode",
+      "name": "dual-stack-worker",
+      "version": "cilium.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for CiliumNode"
+    },
+    {
+      "filename": "./small/init14.yaml",
+      "kind": "CiliumNode",
+      "name": "dual-stack-worker2",
+      "version": "cilium.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for CiliumNode"
+    },
+    {
+      "filename": "./small/init15.yaml",
+      "kind": "CiliumNode",
+      "name": "graceful-term-control-plane",
+      "version": "cilium.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for CiliumNode"
+    },
+    {
+      "filename": "./small/init16.yaml",
+      "kind": "CiliumNode",
+      "name": "nodeport-control-plane",
+      "version": "cilium.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for CiliumNode"
+    },
+    {
+      "filename": "./small/init16.yaml",
+      "kind": "CiliumNode",
+      "name": "nodeport-worker",
+      "version": "cilium.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for CiliumNode"
+    },
+    {
+      "filename": "./small/init16.yaml",
+      "kind": "CiliumNode",
+      "name": "nodeport-worker2",
+      "version": "cilium.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for CiliumNode"
+    },
+    {
+      "filename": "./small/init17.yaml",
+      "kind": "CiliumNode",
+      "name": "nodeport-control-plane",
+      "version": "cilium.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for CiliumNode"
+    },
+    {
+      "filename": "./small/init17.yaml",
+      "kind": "CiliumNode",
+      "name": "nodeport-worker",
+      "version": "cilium.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for CiliumNode"
+    },
+    {
+      "filename": "./small/init17.yaml",
+      "kind": "CiliumNode",
+      "name": "nodeport-worker2",
+      "version": "cilium.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for CiliumNode"
+    },
+    {
+      "filename": "./small/init18.yaml",
+      "kind": "CiliumNode",
+      "name": "nodeport-control-plane",
+      "version": "cilium.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for CiliumNode"
+    },
+    {
+      "filename": "./small/init18.yaml",
+      "kind": "CiliumNode",
+      "name": "nodeport-worker",
+      "version": "cilium.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for CiliumNode"
+    },
+    {
+      "filename": "./small/init18.yaml",
+      "kind": "CiliumNode",
+      "name": "nodeport-worker2",
+      "version": "cilium.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for CiliumNode"
+    },
+    {
+      "filename": "./small/init8.yaml",
+      "kind": "CiliumNode",
+      "name": "cilium-nodes-control-plane",
+      "version": "cilium.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for CiliumNode"
+    },
+    {
+      "filename": "./small/init8.yaml",
+      "kind": "CiliumNode",
+      "name": "cilium-nodes-worker",
+      "version": "cilium.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for CiliumNode"
+    },
+    {
+      "filename": "./small/init9.yaml",
+      "kind": "CiliumNode",
+      "name": "cilium-nodes-control-plane",
+      "version": "cilium.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for CiliumNode"
+    },
+    {
+      "filename": "./small/init9.yaml",
+      "kind": "CiliumNode",
+      "name": "cilium-nodes-worker",
+      "version": "cilium.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for CiliumNode"
+    },
+    {
+      "filename": "./small/invalid_clusters_duplicate.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/invalid_cluster_proxyurl.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/invalid_clusters_name.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/invalid_cluster_proxyurl_scheme.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/invalid_cluster_certificate_both.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/invalid_cluster_server.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/invalid_contexts_context.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/invalid_contexts_duplicate.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/invalid_contexts_name.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/invalid_contexts_required.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/invalid_context_cluster.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/invalid_context_cluster_missing.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/invalid_context_namespace_format.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/invalid_context_namespace_length.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/invalid_context_user.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/invalid_context_user_missing.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/invalid_current_context.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/invalid_users_duplicate.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/invalid_users_name.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/invalid_user_certificate_both.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/invalid_user_clientkey_both.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/invalid_user_impersonating.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/job-configauditreport-expected.yaml",
+      "kind": "ConfigAuditReport",
+      "name": "job-pi",
+      "version": "aquasecurity.github.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for ConfigAuditReport"
+    },
+    {
+      "filename": "./small/k8s-dev.sealedsecret.yaml",
+      "kind": "SealedSecret",
+      "name": "k8s-dev",
+      "version": "bitnami.com/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for SealedSecret"
+    },
+    {
+      "filename": "./small/k8s-monitoring.yaml",
+      "kind": "HelmRelease",
+      "name": "k8s-monitoring",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/k8s-metrics_15.yaml",
+      "kind": "OpenTelemetryCollector",
+      "name": "kube-otel-stack-metrics",
+      "version": "opentelemetry.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for OpenTelemetryCollector"
+    },
+    {
+      "filename": "./small/k8s.rules1.yaml",
+      "kind": "PrometheusRule",
+      "name": "kube-prometheus-stack-k8s.rules",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for PrometheusRule"
+    },
+    {
+      "filename": "./small/k8s.rules5.yaml",
+      "kind": "PrometheusRule",
+      "name": "kube-prometheus-stack-k8s.rules",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for PrometheusRule"
+    },
+    {
+      "filename": "./small/kube-apiserver-availability.rules1.yaml",
+      "kind": "PrometheusRule",
+      "name": "kube-prometheus-stack-kube-apiserver-availability.rules",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for PrometheusRule"
+    },
+    {
+      "filename": "./small/kube-apiserver-availability.rules5.yaml",
+      "kind": "PrometheusRule",
+      "name": "kube-prometheus-stack-kube-apiserver-availability.rules",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for PrometheusRule"
+    },
+    {
+      "filename": "./small/kube-apiserver-burnrate.rules1.yaml",
+      "kind": "PrometheusRule",
+      "name": "kube-prometheus-stack-kube-apiserver-burnrate.rules",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for PrometheusRule"
+    },
+    {
+      "filename": "./small/kube-apiserver-burnrate.rules5.yaml",
+      "kind": "PrometheusRule",
+      "name": "kube-prometheus-stack-kube-apiserver-burnrate.rules",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for PrometheusRule"
+    },
+    {
+      "filename": "./small/kubeconfig-unit.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/kubeconfig26.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/kube-fieldforge.clusterserviceversion.yaml",
+      "kind": "ClusterServiceVersion",
+      "name": "kube-fieldforge.v0.0.2",
+      "version": "operators.coreos.com/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for ClusterServiceVersion"
+    },
+    {
+      "filename": "./small/kubeconfig27.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/kubeconfig28.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/kubeconfig4.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/kubeconfig8.yaml",
+      "kind": "Config",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for Config"
+    },
+    {
+      "filename": "./small/kube-prometheus-helm.yaml",
+      "kind": "Application",
+      "name": "kube-prometheus-stack",
+      "version": "argoproj.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Application"
+    },
+    {
+      "filename": "./small/kubelet-servicemonitor.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubelet.servicemonitor11.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubelet.servicemonitor2.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubelet.servicemonitor3.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubelet.servicemonitor.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubelet.servicemonitor1.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubelet.servicemonitor10.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubelet.servicemonitor4.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubelet.servicemonitor5.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubelet.servicemonitor6.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubelet.servicemonitor7.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubelet.servicemonitor8.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubelet.servicemonitor9.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetes-serviceMonitorApiserver.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-apiserver",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetes-serviceMonitorApiserver1.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-apiserver",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetes-serviceMonitorApiserver2.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-apiserver",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetes-serviceMonitorApiserver3.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-apiserver",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetes-serviceMonitorApiserver4.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-apiserver",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetes-serviceMonitorApiserver5.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-apiserver",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetes-serviceMonitorKubeControllerManager.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-controller-manager",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetes-serviceMonitorKubeControllerManager1.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-controller-manager",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetes-serviceMonitorKubeControllerManager2.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-controller-manager",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetes-serviceMonitorKubeControllerManager3.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-controller-manager",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetes-serviceMonitorKubeControllerManager4.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-controller-manager",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetes-serviceMonitorKubeControllerManager5.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-controller-manager",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetes-serviceMonitorKubelet.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetes-serviceMonitorKubelet1.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetes-serviceMonitorKubelet2.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetes-serviceMonitorKubelet3.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetes-serviceMonitorKubelet4.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetes-serviceMonitorKubelet5.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorApiserver.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-apiserver",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorApiserver1.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-apiserver",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorApiserver10.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-apiserver",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorApiserver11.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-apiserver",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorApiserver12.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-apiserver",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorApiserver13.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-apiserver",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorApiserver2.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-apiserver",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorApiserver3.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-apiserver",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorApiserver4.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-apiserver",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorApiserver5.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-apiserver",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorApiserver6.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-apiserver",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorApiserver7.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-apiserver",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorApiserver8.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-apiserver",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorApiserver9.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-apiserver",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorKubeControllerManager.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-controller-manager",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorKubeControllerManager1.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-controller-manager",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorKubeControllerManager10.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-controller-manager",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorKubeControllerManager11.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-controller-manager",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorKubeControllerManager12.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-controller-manager",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorKubeControllerManager13.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-controller-manager",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorKubeControllerManager2.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-controller-manager",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorKubeControllerManager3.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-controller-manager",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorKubeControllerManager4.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-controller-manager",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorKubeControllerManager5.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-controller-manager",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorKubeControllerManager6.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-controller-manager",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorKubeControllerManager7.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-controller-manager",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorKubeControllerManager8.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-controller-manager",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorKubeControllerManager9.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-controller-manager",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorKubelet.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorKubelet1.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorKubelet10.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorKubelet11.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorKubelet12.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorKubelet13.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorKubelet2.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorKubelet3.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorKubelet4.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorKubelet5.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorKubelet6.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorKubelet7.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorKubelet8.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubernetesControlPlane-serviceMonitorKubelet9.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kubelet",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kubewell-ingress-operator.clusterserviceversion.yaml",
+      "kind": "ClusterServiceVersion",
+      "name": "ingrix-ingress-operator.v0.5.1",
+      "version": "operators.coreos.com/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for ClusterServiceVersion"
+    },
+    {
+      "filename": "./small/kube_apiserver_service_monitor.yaml",
+      "kind": "ServiceMonitor",
+      "name": "kube-apiserver",
+      "version": "monitoring.coreos.com/v1",
+      "status": "statusError",
+      "msg": "could not find schema for ServiceMonitor"
+    },
+    {
+      "filename": "./small/kustomization1009.yaml",
+      "kind": "Kustomization",
+      "name": "",
+      "version": "kustomize.config.k8s.io/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Kustomization"
+    },
+    {
+      "filename": "./small/kustomization1447.yaml",
+      "kind": "Kustomization",
+      "name": "",
+      "version": "kustomize.config.k8s.io/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Kustomization"
+    },
+    {
+      "filename": "./small/kustomization2641.yaml",
+      "kind": "Kustomization",
+      "name": "",
+      "version": "kustomize.config.k8s.io/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Kustomization"
+    },
+    {
+      "filename": "./small/kustomization2068.yaml",
+      "kind": "Kustomization",
+      "name": "",
+      "version": "kustomize.config.k8s.io/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Kustomization"
+    },
+    {
+      "filename": "./small/kustomization2668.yaml",
+      "kind": "Kustomization",
+      "name": "",
+      "version": "kustomize.config.k8s.io/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Kustomization"
+    },
+    {
+      "filename": "./small/kustomization2679.yaml",
+      "kind": "Kustomization",
+      "name": "",
+      "version": "kustomize.config.k8s.io/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Kustomization"
+    },
+    {
+      "filename": "./small/kustomization2702.yaml",
+      "kind": "Kustomization",
+      "name": "",
+      "version": "kustomize.config.k8s.io/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Kustomization"
+    },
+    {
+      "filename": "./small/kustomization3707.yaml",
+      "kind": "Kustomization",
+      "name": "",
+      "version": "kustomize.config.k8s.io/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Kustomization"
+    },
+    {
+      "filename": "./small/kustomization389.yaml",
+      "kind": "Kustomization",
+      "name": "",
+      "version": "kustomize.config.k8s.io/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Kustomization"
+    },
+    {
+      "filename": "./small/kustomization4004.yaml",
+      "kind": "Kustomization",
+      "name": "",
+      "version": "kustomize.config.k8s.io/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Kustomization"
+    },
+    {
+      "filename": "./small/kustomization4251.yaml",
+      "kind": "Kustomization",
+      "name": "",
+      "version": "kustomize.config.k8s.io/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Kustomization"
+    },
+    {
+      "filename": "./small/kustomization4917.yaml",
+      "kind": "Kustomization",
+      "name": "",
+      "version": "kustomize.config.k8s.io/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Kustomization"
+    },
+    {
+      "filename": "./small/kustomization5713.yaml",
+      "kind": "Kustomization",
+      "name": "",
+      "version": "kustomize.config.k8s.io/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Kustomization"
+    },
+    {
+      "filename": "./small/kustomization6162.yaml",
+      "kind": "Kustomization",
+      "name": "",
+      "version": "kustomize.config.k8s.io/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Kustomization"
+    },
+    {
+      "filename": "./small/kustomization6843.yaml",
+      "kind": "Kustomization",
+      "name": "",
+      "version": "kustomize.config.k8s.io/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Kustomization"
+    },
+    {
+      "filename": "./small/kustomization9222.yaml",
+      "kind": "Kustomization",
+      "name": "",
+      "version": "kustomize.config.k8s.io/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Kustomization"
+    },
+    {
+      "filename": "./small/kustomization9533.yaml",
+      "kind": "Kustomization",
+      "name": "",
+      "version": "kustomize.config.k8s.io/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Kustomization"
+    },
+    {
+      "filename": "./small/kustomization9992.yaml",
+      "kind": "Kustomization",
+      "name": "",
+      "version": "kustomize.config.k8s.io/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Kustomization"
+    },
+    {
+      "filename": "./small/loadtest_template_basic_all_languages.yaml",
+      "kind": "LoadTest",
+      "name": "basic_all_languages",
+      "version": "e2etest.grpc.io/v1",
+      "status": "statusError",
+      "msg": "could not find schema for LoadTest"
+    },
+    {
+      "filename": "./small/loadtest_template_psm_proxied_prebuilt_all_languages.yaml",
+      "kind": "LoadTest",
+      "name": "psm_proxied_prebuilt_all_languages",
+      "version": "e2etest.grpc.io/v1",
+      "status": "statusError",
+      "msg": "could not find schema for LoadTest"
+    },
+    {
+      "filename": "./small/loadtest_template_psm_proxied_basic_all_languages.yaml",
+      "kind": "LoadTest",
+      "name": "psm_proxied_all_languages",
+      "version": "e2etest.grpc.io/v1",
+      "status": "statusError",
+      "msg": "could not find schema for LoadTest"
+    },
+    {
+      "filename": "./small/loadtest_template_prebuilt_all_languages.yaml",
+      "kind": "LoadTest",
+      "name": "prebuilt_all_languages",
+      "version": "e2etest.grpc.io/v1",
+      "status": "statusError",
+      "msg": "could not find schema for LoadTest"
+    },
+    {
+      "filename": "./small/loadtest_template_psm_proxyless_basic_all_languages.yaml",
+      "kind": "LoadTest",
+      "name": "psm_proxyless_all_languages",
+      "version": "e2etest.grpc.io/v1",
+      "status": "statusError",
+      "msg": "could not find schema for LoadTest"
+    },
+    {
+      "filename": "./small/loadtest_template_psm_proxyless_prebuilt_all_languages.yaml",
+      "kind": "LoadTest",
+      "name": "psm_proxyless_prebuilt_all_languages",
+      "version": "e2etest.grpc.io/v1",
+      "status": "statusError",
+      "msg": "could not find schema for LoadTest"
+    },
+    {
+      "filename": "./small/local-lan-vernal-dev-tls.sealedsecret.yaml",
+      "kind": "SealedSecret",
+      "name": "local.lan.vernal.dev-tls",
+      "version": "bitnami.com/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for SealedSecret"
+    },
+    {
+      "filename": "./small/matrix-hookshot.yaml",
+      "kind": "Application",
+      "name": "matrix-hookshot",
+      "version": "argoproj.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Application"
+    },
+    {
+      "filename": "./small/memcached-operator.clusterserviceversion.yaml",
+      "kind": "ClusterServiceVersion",
+      "name": "memcached-operator.v0.0.1",
+      "version": "operators.coreos.com/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for ClusterServiceVersion"
+    },
+    {
+      "filename": "./small/mlquickstarts.yaml",
+      "kind": "Quickstarts",
+      "name": "",
+      "version": "project.jenkins-x.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Quickstarts"
+    },
+    {
+      "filename": "./small/mlquickstarts11.yaml",
+      "kind": "Quickstarts",
+      "name": "",
+      "version": "project.jenkins-x.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Quickstarts"
+    },
+    {
+      "filename": "./small/mlquickstarts12.yaml",
+      "kind": "Quickstarts",
+      "name": "",
+      "version": "project.jenkins-x.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Quickstarts"
+    },
+    {
+      "filename": "./small/mlquickstarts1.yaml",
+      "kind": "Quickstarts",
+      "name": "",
+      "version": "project.jenkins-x.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Quickstarts"
+    },
+    {
+      "filename": "./small/mlquickstarts10.yaml",
+      "kind": "Quickstarts",
+      "name": "",
+      "version": "project.jenkins-x.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Quickstarts"
+    },
+    {
+      "filename": "./small/mlquickstarts13.yaml",
+      "kind": "Quickstarts",
+      "name": "",
+      "version": "project.jenkins-x.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Quickstarts"
+    },
+    {
+      "filename": "./small/mlquickstarts14.yaml",
+      "kind": "Quickstarts",
+      "name": "",
+      "version": "project.jenkins-x.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Quickstarts"
+    },
+    {
+      "filename": "./small/mlquickstarts2.yaml",
+      "kind": "Quickstarts",
+      "name": "",
+      "version": "project.jenkins-x.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Quickstarts"
+    },
+    {
+      "filename": "./small/mlquickstarts3.yaml",
+      "kind": "Quickstarts",
+      "name": "",
+      "version": "project.jenkins-x.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Quickstarts"
+    },
+    {
+      "filename": "./small/mlquickstarts4.yaml",
+      "kind": "Quickstarts",
+      "name": "",
+      "version": "project.jenkins-x.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Quickstarts"
+    },
+    {
+      "filename": "./small/mlquickstarts5.yaml",
+      "kind": "Quickstarts",
+      "name": "",
+      "version": "project.jenkins-x.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Quickstarts"
+    },
+    {
+      "filename": "./small/mlquickstarts6.yaml",
+      "kind": "Quickstarts",
+      "name": "",
+      "version": "project.jenkins-x.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Quickstarts"
+    },
+    {
+      "filename": "./small/mlquickstarts7.yaml",
+      "kind": "Quickstarts",
+      "name": "",
+      "version": "project.jenkins-x.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Quickstarts"
+    },
+    {
+      "filename": "./small/mlquickstarts8.yaml",
+      "kind": "Quickstarts",
+      "name": "",
+      "version": "project.jenkins-x.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Quickstarts"
+    },
+    {
+      "filename": "./small/mlquickstarts9.yaml",
+      "kind": "Quickstarts",
+      "name": "",
+      "version": "project.jenkins-x.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Quickstarts"
+    },
+    {
+      "filename": "./small/newrelic-agent-operator.clusterserviceversion.yaml",
+      "kind": "ClusterServiceVersion",
+      "name": "k8s-agents-operator.v0.0.0",
+      "version": "operators.coreos.com/v1alpha2",
+      "status": "statusError",
+      "msg": "could not find schema for ClusterServiceVersion"
+    },
+    {
+      "filename": "./small/opentelemetrycollector.yaml",
+      "kind": "OpenTelemetryCollector",
+      "name": "adot-container-ci",
+      "version": "opentelemetry.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for OpenTelemetryCollector"
+    },
+    {
+      "filename": "./small/opentelemetrycollector2.yaml",
+      "kind": "OpenTelemetryCollector",
+      "name": "adot-container-ci",
+      "version": "opentelemetry.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for OpenTelemetryCollector"
+    },
+    {
+      "filename": "./small/oidc-apps-controller-registration.yaml",
+      "kind": "ControllerDeployment",
+      "name": "oidc-apps-controller",
+      "version": "core.gardener.cloud/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for ControllerDeployment"
+    },
+    {
+      "filename": "./small/oidc-apps-controller-registration1.yaml",
+      "kind": "ControllerDeployment",
+      "name": "oidc-apps-controller",
+      "version": "core.gardener.cloud/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for ControllerDeployment"
+    },
+    {
+      "filename": "./small/operator.clusterserviceversion.yaml",
+      "kind": "ClusterServiceVersion",
+      "name": "operator.v0.0.1",
+      "version": "operators.coreos.com/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for ClusterServiceVersion"
+    },
+    {
+      "filename": "./small/outline-sealedsecret.yaml",
+      "kind": "SealedSecret",
+      "name": "outline-secrets",
+      "version": "bitnami.com/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for SealedSecret"
+    },
+    {
+      "filename": "./small/paperless-secret.yaml",
+      "kind": "SealedSecret",
+      "name": "paperless-secret",
+      "version": "bitnami.com/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for SealedSecret"
+    },
+    {
+      "filename": "./small/patch-globalrole-workspace-manager.yaml",
+      "kind": "GlobalRole",
+      "name": "workspaces-manager",
+      "version": "iam.kubesphere.io/v1alpha2",
+      "status": "statusError",
+      "msg": "could not find schema for GlobalRole"
+    },
+    {
+      "filename": "./small/pod-configauditreport-expected.yaml",
+      "kind": "ConfigAuditReport",
+      "name": "pod-my-pod",
+      "version": "aquasecurity.github.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for ConfigAuditReport"
+    },
+    {
+      "filename": "./small/peer0-org1.yaml",
+      "kind": "FabricPeer",
+      "name": "org1-peer0",
+      "version": "hlf.kungfusoftware.es/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for FabricPeer"
+    },
+    {
+      "filename": "./small/peer0-org2.yaml",
+      "kind": "FabricPeer",
+      "name": "org2-peer0",
+      "version": "hlf.kungfusoftware.es/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for FabricPeer"
+    },
+    {
+      "filename": "./small/pods-with-expired-certificates1.yaml",
+      "kind": "Cleaner",
+      "name": "list-pods-with-expired-certificates",
+      "version": "apps.projectsveltos.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Cleaner"
+    },
+    {
+      "filename": "./small/pods-with-expired-certificates.yaml",
+      "kind": "Cleaner",
+      "name": "list-pods-with-expired-certificates",
+      "version": "apps.projectsveltos.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Cleaner"
+    },
+    {
+      "filename": "./small/pods-with-outdated-secret-data.yaml",
+      "kind": "Cleaner",
+      "name": "list-pods-with-outdated-secret-data",
+      "version": "apps.projectsveltos.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Cleaner"
+    },
+    {
+      "filename": "./small/pods-with-outdated-secret-data1.yaml",
+      "kind": "Cleaner",
+      "name": "list-pods-with-outdated-secret-data",
+      "version": "apps.projectsveltos.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for Cleaner"
+    },
+    {
+      "filename": "./small/persistentvolumesusage17.yaml",
+      "kind": "GrafanaDashboard",
+      "name": "persistentvolumesusage",
+      "version": "grafana.integreatly.org/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for GrafanaDashboard"
+    },
+    {
+      "filename": "./small/pod-total17.yaml",
+      "kind": "GrafanaDashboard",
+      "name": "pod-total",
+      "version": "grafana.integreatly.org/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for GrafanaDashboard"
+    },
+    {
+      "filename": "./small/pp-o11y-full1.yaml",
+      "kind": "helm-install",
+      "name": "",
+      "version": "v1",
+      "status": "statusError",
+      "msg": "could not find schema for helm-install"
+    },
+    {
+      "filename": "./small/project-tenant.yaml",
+      "kind": "RoleTemplate",
+      "name": "project-tenant",
+      "version": "management.cattle.io/v3",
+      "status": "statusError",
+      "msg": "could not find schema for RoleTemplate"
+    },
+    {
+      "filename": "./small/project-tenant1.yaml",
+      "kind": "RoleTemplate",
+      "name": "project-tenant",
+      "version": "management.cattle.io/v3",
+      "status": "statusError",
+      "msg": "could not find schema for RoleTemplate"
+    },
+    {
+      "filename": "./small/project-tenant2.yaml",
+      "kind": "RoleTemplate",
+      "name": "project-tenant",
+      "version": "management.cattle.io/v3",
+      "status": "statusError",
+      "msg": "could not find schema for RoleTemplate"
+    },
+    {
+      "filename": "./small/profile-demo88.yaml",
+      "kind": "IstioOperator",
+      "name": "",
+      "version": "install.istio.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for IstioOperator"
+    },
+    {
+      "filename": "./small/profile-demo89.yaml",
+      "kind": "IstioOperator",
+      "name": "",
+      "version": "install.istio.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for IstioOperator"
+    },
+    {
+      "filename": "./small/prometheus-grafana.yaml",
+      "kind": "Template",
+      "name": "prometheus-grafana",
+      "version": "template.openshift.io/v1",
+      "status": "statusError",
+      "msg": "could not find schema for Template"
+    },
+    {
+      "filename": "./small/pull-request-comment.yaml",
+      "kind": "Task",
+      "name": "pull-request-commenter",
+      "version": "tekton.dev/v1",
+      "status": "statusError",
+      "msg": "could not find schema for Task"
+    },
+    {
+      "filename": "./small/pull-request-comment3.yaml",
+      "kind": "Task",
+      "name": "pull-request-commenter",
+      "version": "tekton.dev/v1",
+      "status": "statusError",
+      "msg": "could not find schema for Task"
+    },
+    {
+      "filename": "./small/pull-request-comment1.yaml",
+      "kind": "Task",
+      "name": "pull-request-commenter",
+      "version": "tekton.dev/v1",
+      "status": "statusError",
+      "msg": "could not find schema for Task"
+    },
+    {
+      "filename": "./small/pull-request-comment2.yaml",
+      "kind": "Task",
+      "name": "pull-request-commenter",
+      "version": "tekton.dev/v1",
+      "status": "statusError",
+      "msg": "could not find schema for Task"
+    },
+    {
+      "filename": "./small/reactsealedsecret.yaml",
+      "kind": "SealedSecret",
+      "name": "hari-dev-ssl",
+      "version": "bitnami.com/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for SealedSecret"
+    },
+    {
+      "filename": "./small/release302.yaml",
+      "kind": "HelmRelease",
+      "name": "harbor",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/prometheus61.yaml",
+      "kind": "OpenTelemetryCollector",
+      "name": "prometheus",
+      "version": "opentelemetry.io/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for OpenTelemetryCollector"
+    },
+    {
+      "filename": "./small/release307.yaml",
+      "kind": "HelmRelease",
+      "name": "nextcloud",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/release428.yaml",
+      "kind": "HelmRelease",
+      "name": "grafana",
+      "version": "helm.toolkit.fluxcd.io/v2",
+      "status": "statusError",
+      "msg": "could not find schema for HelmRelease"
+    },
+    {
+      "filename": "./small/replicaset-configauditreport-expected.yaml",
+      "kind": "ConfigAuditReport",
+      "name": "replicaset-wordpress-84bbf6f4dd",
+      "version": "aquasecurity.github.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for ConfigAuditReport"
+    },
+    {
+      "filename": "./small/replicationcontroller-configauditreport-expected.yaml",
+      "kind": "ConfigAuditReport",
+      "name": "replicationcontroller-nginx",
+      "version": "aquasecurity.github.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for ConfigAuditReport"
+    },
+    {
+      "filename": "./small/rosa-hcp-deprovision.yaml",
+      "kind": "Task",
+      "name": "collect-artifacts-deprovision-rosa",
+      "version": "tekton.dev/v1",
+      "status": "statusError",
+      "msg": "could not find schema for Task"
+    },
+    {
+      "filename": "./small/rosa-hcp-deprovision1.yaml",
+      "kind": "Task",
+      "name": "collect-artifacts-deprovision-rosa",
+      "version": "tekton.dev/v1",
+      "status": "statusError",
+      "msg": "could not find schema for Task"
+    },
+    {
+      "filename": "./small/rosa-hcp-deprovision2.yaml",
+      "kind": "Task",
+      "name": "collect-artifacts-deprovision-rosa",
+      "version": "tekton.dev/v1",
+      "status": "statusError",
+      "msg": "could not find schema for Task"
+    },
+    {
+      "filename": "./small/rosa-hcp-provision.yaml",
+      "kind": "Task",
+      "name": "rosa-hcp-provision",
+      "version": "tekton.dev/v1",
+      "status": "statusError",
+      "msg": "could not find schema for Task"
+    },
+    {
+      "filename": "./small/rosa-hcp-provision1.yaml",
+      "kind": "Task",
+      "name": "rosa-hcp-provision",
+      "version": "tekton.dev/v1",
+      "status": "statusError",
+      "msg": "could not find schema for Task"
+    },
+    {
+      "filename": "./small/rosa-hcp-provision2.yaml",
+      "kind": "Task",
+      "name": "rosa-hcp-provision",
+      "version": "tekton.dev/v1",
+      "status": "statusError",
+      "msg": "could not find schema for Task"
+    },
+    {
+      "filename": "./small/scope.yaml",
+      "kind": "Deployment",
+      "name": "weave-scope-app",
+      "version": "apps/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Deployment"
+    },
+    {
+      "filename": "./small/scope.yaml",
+      "kind": "DaemonSet",
+      "name": "weave-scope-agent",
+      "version": "extensions/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for DaemonSet"
+    },
+    {
+      "filename": "./small/scope.yaml",
+      "kind": "ClusterRoleBinding",
+      "name": "weave-scope",
+      "version": "rbac.authorization.k8s.io/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for ClusterRoleBinding"
+    },
+    {
+      "filename": "./small/scope1.yaml",
+      "kind": "ClusterRoleBinding",
+      "name": "weave-scope",
+      "version": "rbac.authorization.k8s.io/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for ClusterRoleBinding"
+    },
+    {
+      "filename": "./small/scope1.yaml",
+      "kind": "Deployment",
+      "name": "weave-scope-app",
+      "version": "apps/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Deployment"
+    },
+    {
+      "filename": "./small/scope1.yaml",
+      "kind": "DaemonSet",
+      "name": "weave-scope-agent",
+      "version": "extensions/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for DaemonSet"
+    },
+    {
+      "filename": "./small/scope.yaml",
+      "kind": "ClusterRole",
+      "name": "weave-scope",
+      "version": "rbac.authorization.k8s.io/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for ClusterRole"
+    },
+    {
+      "filename": "./small/sealed-secret11.yaml",
+      "kind": "SealedSecret",
+      "name": "bookstack-env",
+      "version": "bitnami.com/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for SealedSecret"
+    },
+    {
+      "filename": "./small/scope1.yaml",
+      "kind": "ClusterRole",
+      "name": "weave-scope",
+      "version": "rbac.authorization.k8s.io/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for ClusterRole"
+    },
+    {
+      "filename": "./small/sealed-secret13.yaml",
+      "kind": "SealedSecret",
+      "name": "factorio-config",
+      "version": "bitnami.com/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for SealedSecret"
+    },
+    {
+      "filename": "./small/sealed-secret15.yaml",
+      "kind": "SealedSecret",
+      "name": "grafana-secrets",
+      "version": "bitnami.com/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for SealedSecret"
+    },
+    {
+      "filename": "./small/sealed-secret21.yaml",
+      "kind": "SealedSecret",
+      "name": "lubelogger-env",
+      "version": "bitnami.com/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for SealedSecret"
+    },
+    {
+      "filename": "./small/sealed-secret24.yaml",
+      "kind": "SealedSecret",
+      "name": "paperless-env",
+      "version": "bitnami.com/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for SealedSecret"
+    },
+    {
+      "filename": "./small/sealed-secret25.yaml",
+      "kind": "SealedSecret",
+      "name": "pgadmin-env",
+      "version": "bitnami.com/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for SealedSecret"
+    },
+    {
+      "filename": "./small/sealed-secret9.yaml",
+      "kind": "SealedSecret",
+      "name": "adsb-env",
+      "version": "bitnami.com/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for SealedSecret"
+    },
+    {
+      "filename": "./small/sealed-secrets-dev_3.yaml",
+      "kind": "SealedSecret",
+      "name": "ca-key-pair",
+      "version": "bitnami.com/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for SealedSecret"
+    },
+    {
+      "filename": "./small/sealed-secrets-prod_3.yaml",
+      "kind": "SealedSecret",
+      "name": "ca-key-pair",
+      "version": "bitnami.com/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for SealedSecret"
+    },
+    {
+      "filename": "./small/sealedsecret-tls-crt.yaml",
+      "kind": "SealedSecret",
+      "name": "secret-tls-crt",
+      "version": "bitnami.com/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for SealedSecret"
+    },
+    {
+      "filename": "./small/secret1150.yaml",
+      "kind": "ENC[AES256_GCM,data:4tSE6E6B,iv:04kC7NF+52NGTUii125urKTpJlN0VFXGiJx72CC+R2c=,tag:U+LNlcbIgJUCrVqgxVnyKg==,type:str]",
+      "name": "ENC[AES256_GCM,data:n4GC4tcOXzb8uK5Z4Ma6yhx6,iv:xIAarRO687cTeYXioCYulZSseT8W5sk/kt97Pa+r28Q=,tag:DEsE0RVC+ChgGwzCzjKoiA==,type:str]",
+      "version": "ENC[AES256_GCM,data:Ogk=,iv:B3Xf2oKCepsg15r8dw9eMgQPglJYjY+sbPf/KEVC+K0=,tag:RRP8kgFphXqnS4y0M0mCcg==,type:str]",
+      "status": "statusError",
+      "msg": "could not find schema for ENC[AES256_GCM,data:4tSE6E6B,iv:04kC7NF+52NGTUii125urKTpJlN0VFXGiJx72CC+R2c=,tag:U+LNlcbIgJUCrVqgxVnyKg==,type:str]"
+    },
+    {
+      "filename": "./small/settings.k8s.io.v1alpha1.PodPreset.after_roundtrip.yaml",
+      "kind": "PodPreset",
+      "name": "3{{ generateName }}",
+      "version": "settings.k8s.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for PodPreset"
+    },
+    {
+      "filename": "./small/settings.k8s.io.v1alpha1.PodPreset1.yaml",
+      "kind": "PodPreset",
+      "name": "3{{ generateName }}",
+      "version": "settings.k8s.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for PodPreset"
+    },
+    {
+      "filename": "./small/settings.k8s.io.v1alpha1.PodPreset.after_roundtrip1.yaml",
+      "kind": "PodPreset",
+      "name": "3{{ generateName }}",
+      "version": "settings.k8s.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for PodPreset"
+    },
+    {
+      "filename": "./small/settings.k8s.io.v1alpha1.PodPreset.yaml",
+      "kind": "PodPreset",
+      "name": "3{{ generateName }}",
+      "version": "settings.k8s.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for PodPreset"
+    },
+    {
+      "filename": "./small/settings.k8s.io.v1alpha1.PodPreset2.yaml",
+      "kind": "PodPreset",
+      "name": "3{{ generateName }}",
+      "version": "settings.k8s.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for PodPreset"
+    },
+    {
+      "filename": "./small/settings.k8s.io.v1alpha1.PodPreset3.yaml",
+      "kind": "PodPreset",
+      "name": "3{{ generateName }}",
+      "version": "settings.k8s.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for PodPreset"
+    },
+    {
+      "filename": "./small/settings.k8s.io.v1alpha1.PodPreset4.yaml",
+      "kind": "PodPreset",
+      "name": "3{{ generateName }}",
+      "version": "settings.k8s.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for PodPreset"
+    },
+    {
+      "filename": "./small/settings.k8s.io.v1alpha1.PodPreset5.yaml",
+      "kind": "PodPreset",
+      "name": "3{{ generateName }}",
+      "version": "settings.k8s.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for PodPreset"
+    },
+    {
+      "filename": "./small/settings.k8s.io.v1alpha1.PodPreset6.yaml",
+      "kind": "PodPreset",
+      "name": "3{{ generateName }}",
+      "version": "settings.k8s.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for PodPreset"
+    },
+    {
+      "filename": "./small/settings.k8s.io.v1alpha1.PodPreset7.yaml",
+      "kind": "PodPreset",
+      "name": "3{{ generateName }}",
+      "version": "settings.k8s.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for PodPreset"
+    },
+    {
+      "filename": "./small/settings.k8s.io.v1alpha1.PodPreset8.yaml",
+      "kind": "PodPreset",
+      "name": "3{{ generateName }}",
+      "version": "settings.k8s.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for PodPreset"
+    },
+    {
+      "filename": "./small/sharding.kustomization.yaml",
+      "kind": "Kustomization",
+      "name": "",
+      "version": "kustomize.config.k8s.io/v1beta1",
+      "status": "statusError",
+      "msg": "could not find schema for Kustomization"
+    },
+    {
+      "filename": "./small/stale-secrets-watch.clusterserviceversion.yaml",
+      "kind": "ClusterServiceVersion",
+      "name": "stale-secrets-watch.v1.0.0",
+      "version": "operators.coreos.com/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for ClusterServiceVersion"
+    },
+    {
+      "filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment.after_roundtrip.yaml",
+      "kind": "VolumeAttachment",
+      "name": "3{{ generateName }}",
+      "version": "storage.k8s.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for VolumeAttachment"
+    },
+    {
+      "filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment.yaml",
+      "kind": "VolumeAttachment",
+      "name": "generateNameValue{{ generateName }}",
+      "version": "storage.k8s.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for VolumeAttachment"
+    },
+    {
+      "filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment.after_roundtrip1.yaml",
+      "kind": "VolumeAttachment",
+      "name": "3{{ generateName }}",
+      "version": "storage.k8s.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for VolumeAttachment"
+    },
+    {
+      "filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment1.yaml",
+      "kind": "VolumeAttachment",
+      "name": "generateNameValue{{ generateName }}",
+      "version": "storage.k8s.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for VolumeAttachment"
+    },
+    {
+      "filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment10.yaml",
+      "kind": "VolumeAttachment",
+      "name": "3{{ generateName }}",
+      "version": "storage.k8s.io/v1alpha1",
+      "status": "statusError",
+      "msg": "could not find schema for VolumeAttachment"
+    }
+  ],
+  "summary": {
+    "valid": 627,
+    "invalid": 1,
+    "errors": 265,
+    "skipped": 0
+  }
+}
