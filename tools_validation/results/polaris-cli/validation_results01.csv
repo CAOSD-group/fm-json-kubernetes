@@ -1,0 +1,6 @@
+file,valid,avg_validation_time_ms,failed_checks
+.cmp_1.yaml,true,81,
+.cmp_2.yaml,false,81,deploymentMissingReplicas;metadataAndInstanceMismatched;missingPodDisruptionBudget;automountServiceAccountToken;missingNetworkPolicy;priorityClassNotSet;topologySpreadConstraint
+0-dashboard_10.yaml,false,81,clusterrolebindingClusterAdmin;clusterrolebindingPodExecAttach
+00_claims.yaml,true,81,
+pod.yaml,false,81,metadataAndInstanceMismatched;automountServiceAccountToken;missingNetworkPolicy;priorityClassNotSet;topologySpreadConstraint

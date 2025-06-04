@@ -5,7 +5,7 @@ Sobre el folder de archivos small: 1788
 3º Kyverno: True = 1196, False = 592
 4º OPA Gatekeeper: 
 5º Kubeconform: True = 1200 ,False = 588
-
+6º Kubevious:
 
 
 
@@ -61,3 +61,43 @@ https://github.com/yannh/kubeconform?tab=readme-ov-file#Installation
 
 2 tipos de errores: statusError-mayoritario, statusInvalid-minoritario
 Se ha agregado el tiempo medio por igual en los casos de valid true y False.
+
+
+** Kubevious:
+
+Repo: https://github.com/kubevious/kubevious
+https://github.com/kubevious/cli
+Kubernetes without disasters
+Kubevious CLI is a standalone tool that validates YAML manifests for syntax, semantics, conflicts, compliance, and security best practices violations
+Instalacion kubevious-win-x64.exe:
+ https://github.com/kubevious/cli?tab=readme-ov-file#-option-3-precompiled-binaries
+
+Actualmente no es práctico ni confiable validar manifiestos offline con Kubevious CLI usando lint o guard, al menos no con versiones modernas de Kubernetes.
+Para nuestro objetivo de validación estructural y semántica sería mejor usar datree (aparte de kubeconform y kube-score), que también aplica políticas de buenas prácticas y es muy completo.
+
+
+** Polaris:
+https://polaris.docs.fairwinds.com/
+Polaris is an open source policy engine for Kubernetes that validates and remediates resource configuration.
+It includes 30+ built in configuration policies, as well as the ability to build custom policies with JSON Schema
+https://polaris.docs.fairwinds.com/infrastructure-as-code/#install-the-cli
+Polaris can be used on the command line to audit local Kubernetes manifests stored in YAML files.
+This is particularly helpful for running Polaris against your infrastructure-as-code as part of a CI/CD pipeline.
+Descarga desde el release.
+https://github.com/fairwindsops/polaris/releases
+
+Se ejecuta individualmente ya que, aunque permita la ejecucion por carpeta solo muestra un resumen de todos los resultados
+unificados, siendo imposible comprobar que fallos corresponden a cada archivo o cual es valido si quiera.
+
+
+
+** Datree:  
+
+https://github.com/datreeio/datree
+No es compatible con K8s 1.26+ de forma garantizada. Esta Deprecated desde el Junio de 2023
+
+Datree (pronounced /da-tree/) was built to secure Kubernetes workloads by blocking the deployment of misconfigured resources. Since July 2023,
+the commercial company that supports and actively maintains this project has been closed.
+https://www.datree.io/
+Se ha descartado su uso por ello... hasta la pagina de Get Started esta caida.
+
