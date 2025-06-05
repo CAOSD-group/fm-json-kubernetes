@@ -50,8 +50,9 @@ def extract_constraints_template_onlyAllowed(description, feature_key):
         ## Se definen los otros 2 casos posibles de valores. No estan presentes en las descripciones que se obtienen por lo que se agregan directamente
         policy_OnFailure = f"{feature_with_spec}_OnFailure"
         policy_Never = f"{feature_with_spec}_Never" 
-
-        return f"({feature_key} => {policy_Always} & !{policy_Never} & !{policy_OnFailure})"
+	(io_k8s_api_apps_v1_Deployment_spec_template_spec_restartPolicy_Always => io_k8s_api_apps_v1_Deployment_spec_template) & (!io_k8s_api_apps_v1_Deployment_spec_template_spec_restartPolicy_OnFailure) & (!io_k8s_api_apps_v1_Deployment_spec_template_spec_restartPolicy_Never)
+        #return f"({feature_key} => {policy_Always} & !{policy_Never} & !{policy_OnFailure})"
+        return f"({policy_Always} => {feature_key}) & (!{policy_Never}) & (!{policy_OnFailure})"
 
     elif 'values are' in description: ### Caso en el que hay 2 valores posibles para template.spec.restartPolicy: Never y OnFailure
         policies_match = template_spec_policies_pattern02.findall(description) # Se obtienen los valores del caso de las descripciones
@@ -59,7 +60,8 @@ def extract_constraints_template_onlyAllowed(description, feature_key):
         if len(policies_match) < 2:
             raise ValueError(f"Se esperaban al menos dos valores en la descripción: {description}")
         allowed_policies = [f"{feature_with_spec}_{policy}" for policy in policies_match]
-        return f"({feature_key} => {' | '.join(allowed_policies)}) & !{policies_Always}"
+        #return f"({feature_key} => {' | '.join(allowed_policies)}) & !{policies_Always}"
+        return f"({' | '.join(allowed_policies)}  => {feature_key}) & (!{policies_Always})" ## New case correct
     
     # Si no se cumple ninguno de los casos
     raise ValueError(f"Descripción inesperada para {feature_key}: {description}")
@@ -213,7 +215,7 @@ def extract_constraints_operator(description, feature_key):
     # Inicializar las variables para almacenar los valores de las restricciones
     required_value = None
 
-    if  operator_match01 and 'is Exists,' not in description:
+    if operator_match01 and 'is Exists,' not in description:
         # Capturar la propiedad y el valor de "Required when"
         type_property01 = operator_match01[0] # Captura los primeros valores del par "In or NotIn"
         type_property02 = operator_match01[1] # Captura los primeros valores del par "Exists or DoesNotExist"
@@ -228,7 +230,7 @@ def extract_constraints_operator(description, feature_key):
     elif 'is Exists' in description: ## Caso en el que solo hay un valor y se usa una captura diferente (32 descripciones)
         operator_match02 = operator_if_pattern02.search(description)
         required_value = operator_match02.group(1)
-        uvl_rule = f"{feature_without_lastProperty}_operator_{required_value} => {feature_key}"
+        uvl_rule = f"{feature_without_lastProperty}_operator_{required_value} => !{feature_key}"
 
     if uvl_rule is not None:
         return uvl_rule
@@ -569,7 +571,7 @@ def convert_to_uvl_with_nlp(feature_key, description, type_data):
             print("NADA")
         elif "conditions may not be" in description or "Details about a waiting" in description or "TCPSocket is NOT" in description:
             constraint = extract_constraints_multiple_conditions(description, feature_key)
-            print("FUNKA BIEN?")
+            print("conditions may not be execute?")
             uvl_rule = constraint
         elif "template.spec.restartPolicy" in description in description:
             uvl_rule = extract_constraints_template_onlyAllowed(description, feature_key)
@@ -613,6 +615,9 @@ def convert_to_uvl_with_nlp(feature_key, description, type_data):
 # Ruta del archivo JSON
 json_file_path = './descriptions_01.json'
 output_file_path = './restrictions02.txt'
+
+#json_file_path = './kubernetes-mapped-v1.32/descriptions_01.json'
+#output_file_path = './kubernetes-mapped-v1.32/restrictions02.txt'
 
 
 # Cargar datos

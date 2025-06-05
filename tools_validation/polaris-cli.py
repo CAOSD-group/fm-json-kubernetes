@@ -4,7 +4,7 @@ import csv
 from pathlib import Path
 
 results_dir = "./results_polaris-cli"
-csv_output = './results/polaris-cli/validation_results.csv'
+csv_output = './results/polaris-cli/validation_results01.csv'
 timing_file = os.path.join(results_dir, "batch_times.txt")
 
 
@@ -33,8 +33,8 @@ for filename in os.listdir(results_dir):
                 continue
 
         # Tiempo medio por archivo
-        avg_time = batch_times.get(batch_id, 0) // len(data) if data else 0
-
+        avg_time = round(batch_times.get(batch_id, 0) / len(data), 2) if data else 0.0
+        #round(batch_durations[batch_index] / actual_count, 4)
         for obj in data:
             source = obj.get("SourceName", "unknown").split("/")[-1]
             failed_ids = []
@@ -50,7 +50,7 @@ for filename in os.listdir(results_dir):
 
                     # ContainerResults
                     container_results = pod_result.get("ContainerResults", [])
-                    print(f"ESTA VACIO? {container_results}")
+                    #print(f"ESTA VACIO? {container_results}")
                     if isinstance(container_results, list):
                         for container in container_results:
                             container_checks = container.get("Results", {})
@@ -74,5 +74,3 @@ writer.writerow(["VÁLIDOS", "INVÁLIDOS", "TOTAL", "", ""])
 valid_count = sum(1 for r in results.values() if r["valid"])
 total = len(results)
 writer.writerow([valid_count, total - valid_count, total, "", ""])"""
-
-
