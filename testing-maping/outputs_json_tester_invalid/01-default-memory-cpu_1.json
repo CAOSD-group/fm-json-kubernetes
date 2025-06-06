@@ -1,0 +1,34 @@
+{
+    "filename": "01-default-memory-cpu_1.yaml",
+    "apiVersion": "v1",
+    "config": {
+        "io_k8s_api_core_v1_LimitRange_apiVersion": "v1",
+        "io_k8s_api_core_v1_LimitRange_kind": "LimitRange",
+        "io_k8s_api_core_v1_LimitRange_metadata": {
+            "io_k8s_api_core_v1_LimitRange_metadata_name": "limit-range-memory-cpu",
+            "io_k8s_api_core_v1_LimitRange_metadata_namespace": "ns-dev"
+        },
+        "io_k8s_api_core_v1_LimitRange_spec": {
+            "io_k8s_api_core_v1_LimitRange_spec_limits": [
+                {
+                    "io_k8s_api_core_v1_LimitRange_spec_limits_type": "Container",
+
+                    "io_k8s_api_core_v1_LimitRange_spec_limits_default": [
+                        {
+                            "io_k8s_api_core_v1_LimitRange_spec_limits_default_asString": "memory:512Mi"
+                        }
+                    ],
+                    "io_k8s_api_core_v1_LimitRange_spec_limits_defaultRequest": [
+                        {
+                            "io_k8s_api_core_v1_LimitRange_spec_limits_defaultRequest_asString": "memory:256Mi"
+                        },
+                        {
+                            "io_k8s_api_core_v1_LimitRange_spec_limits_defaultRequest_asNumber": 1
+                        }
+                    ]
+                    
+                }
+            ]
+        }
+    }
+}
