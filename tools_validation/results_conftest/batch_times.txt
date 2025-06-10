@@ -1,0 +1,7 @@
+batch_aa,255
+batch_aa,187
+batch_aa,132
+batch_aa,133
+batch_aa,6103
+batch_ab,5766
+batch_ac,1281

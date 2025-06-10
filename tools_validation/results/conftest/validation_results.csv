@@ -1,0 +1,6 @@
+file,valid,avg_validation_time_ms,failed_messages
+00_claims.yaml,true,26.6,
+pod.yaml,true,26.6,
+.cmp_1.yaml,true,26.6,
+.cmp_2.yaml,false,26.6,Containers must not run as root;Containers must not run as root in Deployment argocd-repo-server;Containers must provide app label for pod selectors;Deployment argocd-repo-server must provide app/release labels for pod selectors;argocd-repo-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels;Found deployment argocd-repo-server but deployments are not allowed
+0-dashboard_10.yaml,true,26.6,

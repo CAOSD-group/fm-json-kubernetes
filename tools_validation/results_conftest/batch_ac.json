@@ -1,0 +1,1092 @@
+[
+	{
+		"filename": "./small/vector-config.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/weave-daemonset-k8s6.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment43.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment46.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment45.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/surrealdb-schema.sealed-secret.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/tasks32_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/today.apiresourceschemas1_2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/weave-daemonset-k8s12.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment29.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/test-metadata.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/valid_multi.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/vsphere-csi-driver_11.yaml",
+		"namespace": "main",
+		"successes": 2,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment vsphere-csi-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment vsphere-csi-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "vsphere-csi-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment vsphere-csi-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment45.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/v0.13.4.metallb-frr_24.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/weave-daemonset-k8s9.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/weave.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/windows-efi-installer-configmaps_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/sts-mysql1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment27.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment32.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment47.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment11.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment27.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment4.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/sv-config.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/surrealdb-schema.sealed-secret1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment12.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment21.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/test_clusterrole.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/valid.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/validatingwebhookconfiguration-02.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/weave-daemonset-k8s16.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/weave-daemonset-k8s3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment11.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment7.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment24.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment53.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment56.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/traefik17.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/windows-bios-installer-pipeline.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/your-spotify1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment28.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/streetlights-api.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/upgrade-example.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/windows-efi-installer-pipeline.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment17.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment29.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment44.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/template-1_6.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/tp-base-on-prem-https.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/trigger-jenkins-job.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment13.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment51.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment39.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/theodolite-benchmark-kstreams.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/windows-bios-installer-configmaps.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment15.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment16.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment22.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment31.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/tls-secret51_2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/today.apiresourceschemas_2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/v0.13.7.metallb-frr_22.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment6.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/tls-wildcard-lan-stamx-nl1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/tour.sealed-secret.helm.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/weave-daemonset-k8s13.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment23.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment24.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment55.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/tls-secret51_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/tp-base-on-prem1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment19.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment54.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment15.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment42.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment49.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/v0.13.10.metallb-frr1_23.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/weave-daemonset-k8s8.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/windows-efi-installer-configmaps.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/tp-base-on-prem.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/v0.13.12.metallb-frr1_23.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/xld.clusterserviceversion.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment18.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment20.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment10.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment30.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment32.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment34.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment41.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment55.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/webhook-configuration1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment35.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment41.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/tls-secret51_3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/tp-base-on-prem-https1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/write_checks_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment39.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment4.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment16.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment50.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/v0.13.9.metallb-frr_22.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/weave-daemonset-k8s1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment26.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/sts-mysql.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/tekton-pipelines-controller-deploy.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment tekton-pipelines-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment tekton-pipelines-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "tekton-pipelines-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment tekton-pipelines-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/tekton2_45.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Found deployment tekton-pipelines-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			},
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment tekton-pipelines-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment tekton-pipelines-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "tekton-pipelines-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/test_clusterrole1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/wso2am-conf.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment14.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment48.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment56.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment6.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment20.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/v0.13.12.metallb-frr_23.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment21.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment13.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment31.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment40.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/tls-wildcard-stamx-nl1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/weave-daemonset-k8s11.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment25.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment53.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment51.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/weave-daemonset-k8s2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/weave-daemonset-k8s5.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/weave-daemonset-k8s7.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment34.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment44.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment25.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment52.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment7.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/worker-sts.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/xrd1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment18.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment28.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment42.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment.after_roundtrip.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment17.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment48.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment54.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/weave-daemonset-k8s4.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment33.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment35.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/tekton1_39.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/test-metadata2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/weave-daemonset-k8s14.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment49.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment5.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment8.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment8.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/tls-wildcard-lan-stamx-nl.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/weave-daemonset-k8s15.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment30.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment9.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment26.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment33.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/tls-wildcard-stamx-nl.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/weave-daemonset-k8s.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment.after_roundtrip1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment43.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/tls-secret51.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/waypoint-no-network-label_2.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment namespace-istio-waypoint",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment namespace-istio-waypoint must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "namespace-istio-waypoint must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment namespace-istio-waypoint but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/your-spotify.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment14.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment23.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment46.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment9.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment12.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/tour.sealed-secret.helm1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/tretboot_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/v0.13.10.metallb-frr_23.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/weave-daemonset-k8s10.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/xlr.clusterserviceversion.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment52.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment19.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment22.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment40.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment50.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment47.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1beta1.VolumeAttachment5.yaml",
+		"namespace": "main",
+		"successes": 7
+	}
+]

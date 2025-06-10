@@ -3,13 +3,14 @@ Sobre el folder de archivos small: 1788
 1º Kube-linter: True = 1625 ,False = 163
 2º Kube-score: True = 1176 ,False = 612
 3º Kyverno: True = 1196, False = 592
-4º OPA Gatekeeper: 
-5º Kubeconform: True = 1200 ,False = 588
-6º Kubevious:
-
-
-
-
+4º OPA Gatekeeper: Sin un conjunto de politicas claras
+5º Kubeconform: True = 1200, False = 588
+6º Kubevious[DEPRECATED]:
+7º Polaris: True = 1155, False = 633
+8º Datree: [DEPRECATED] desde el Junio de 2023
+9º ConfigLint: Sin actualizaciones desde Junio de 2020
+10º: Conftest: True = 1529, False = 259
+10º Terrascan: 
 
 Referencias URL:
 
@@ -83,13 +84,15 @@ It includes 30+ built in configuration policies, as well as the ability to build
 https://polaris.docs.fairwinds.com/infrastructure-as-code/#install-the-cli
 Polaris can be used on the command line to audit local Kubernetes manifests stored in YAML files.
 This is particularly helpful for running Polaris against your infrastructure-as-code as part of a CI/CD pipeline.
+https://polaris.docs.fairwinds.com/cli/
 Descarga desde el release.
 https://github.com/fairwindsops/polaris/releases
 
 Se ejecuta individualmente ya que, aunque permita la ejecucion por carpeta solo muestra un resumen de todos los resultados
 unificados, siendo imposible comprobar que fallos corresponden a cada archivo o cual es valido si quiera.
 
-
+****Pendiente:
+Modificar salida del json para que solo se muestren los false" // Probar, demasiadas lineas para 1,8k de archivos => 200k
 
 ** Datree:  
 
@@ -101,3 +104,51 @@ the commercial company that supports and actively maintains this project has bee
 https://www.datree.io/
 Se ha descartado su uso por ello... hasta la pagina de Get Started esta caida.
 
+
+** ConfigLint:
+https://github.com/stelligent/config-lint?tab=readme-ov-file
+No se actualiza desde el 2020. Es decir, se puede dar casi como obseleta... No creo que sirva de referencia para la validacion de los yamls.
+Documentacion caida, 
+https://github.com/stelligent/config-lint/releases/tag/v1.6.0
+Ultimo release en: released this Jun 25, 2020
+
+** Conftest:
+https://github.com/open-policy-agent/conftest
+Conftest helps you write tests against structured configuration data. Using Conftest you can write tests for your Kubernetes configuration, Tekton pipeline definitions,
+Terraform code, Serverless configs or any other config files.
+
+Opciones:
+https://www.conftest.dev/options/
+Instalacion:
+https://github.com/open-policy-agent/conftest/releases
+
+Politicas de ejemplo para kubernetes:
+https://github.com/open-policy-agent/conftest/tree/master/examples/kubernetes/policy
+** Checkov:
+
+** Terrascan:
+https://github.com/tenable/terrascan
+Terrascan is a static code analyzer for Infrastructure as Code
+Terrascan is a static code analyzer for Infrastructure as Code. It can be installed and run in a number of different ways, and is most commonly used in automated pipelines
+to identify policy violations before insecure infrastructure is provisioned
+Opciones terrascan
+init = Initializes Terrascan by downloading the latest Rego policies into ~/.terrascan. The scan command will implicitly run this before a scan if it detects that there are no policies found.
+scan = scans Infrastructure as code files based on the policies contained within the “.terrascan” directory
+server = Starts the Terrascan’s API server
+
+Instalar Terrascan:
+https://github.com/tenable/terrascan/releases
+
+https://runterrascan.io/docs/_print/#pg-3370a37a26a8434b9f282b1985d6791f
+
+Se usa la opcion -i para definir el tipo de archivos que se van a validar
+Ejecucion archivo solo:
+.\terrascan.exe scan -f manifests_yamls\pod.yaml -i k8s -o json
+
+** Trivy:
+https://github.com/aquasecurity/trivy
+
+https://trivy.dev/latest/getting-started/installation/
+Instalacion:
+
+https://trivy.dev/latest/getting-started/

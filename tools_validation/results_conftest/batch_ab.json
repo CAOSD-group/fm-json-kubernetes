@@ -1,0 +1,8102 @@
+[
+	{
+		"filename": "./small/policies4_6.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus-grafana.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pull-secret1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secret543.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/settings.k8s.io.v1alpha1.PodPreset5.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install14_46.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/install34_47.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorKubeControllerManager.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/manifest222_10.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mlquickstarts4.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mlquickstarts5.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node93.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/persistentvolumesusage17.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/k8s-metrics_15.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus272_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus297_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/role-tenant2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/statefulsets5.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install131_51.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install14_45.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Found deployment argocd-repo-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			},
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-repo-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-repo-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-repo-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/install51_46.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/meu-rabbit-mq_8.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mlquickstarts11.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node32.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus213_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/settings.k8s.io.v1alpha1.PodPreset7.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/helmrelease979.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install131_50.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/linkerd-edge-20.10.11_96.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment linkerd-prometheus",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment linkerd-prometheus must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "linkerd-prometheus must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment linkerd-prometheus but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/netbox-deployment1.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Found deployment netbox but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			},
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment netbox",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment netbox must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "netbox must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/node28.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus_vm2_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secret.kiada-tls.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment50.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kiada-ssl1_2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kube-apiserver-minikube.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorKubelet4.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/matrix-hookshot.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/namespace-install4_38.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-repo-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-repo-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-repo-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-repo-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/pods-with-outdated-secret-data.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment42.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node107.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node19.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod_baseline1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/state3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install133_48.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/k8s.rules1.yaml",
+		"namespace": "main",
+		"successes": 14
+	},
+	{
+		"filename": "./small/node75.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod_baseline13.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/policy7.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/project-tenant1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/ingress-gateway6.yaml",
+		"namespace": "main",
+		"successes": 4,
+		"failures": [
+			{
+				"msg": "Deployment istio-ingressgateway must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "istio-ingressgateway must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment istio-ingressgateway but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/knative_serving_0.18.0_22.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/manifests18_57.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node-pod.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node100.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/postgres-conf.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secret542.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment13.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorKubelet2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/settings.k8s.io.v1alpha1.PodPreset.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/sharding.kustomization.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment4.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment54.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install17_33.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-applicationset-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-applicationset-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-applicationset-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-applicationset-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/loadtest_template_psm_proxied_prebuilt_all_languages.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus_vm5_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment47.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install36_46.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/kubernetes-serviceMonitorKubeControllerManager4.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorKubelet6.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod_baseline4.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/scope.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secret.kiada-tls2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment11.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/k8ssandra_29.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubeconfig28.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubevirt-operator_7.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus_vm4_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/promethues4_2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secrets-configuration_3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/statefulset-my-rabbitmq1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install131_49.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-repo-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-repo-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-repo-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-repo-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/kube-apiserver-availability.rules1.yaml",
+		"namespace": "main",
+		"successes": 14
+	},
+	{
+		"filename": "./small/kube-fieldforge.clusterserviceversion.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mainnet.expect_5.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node87.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment.after_roundtrip.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment23.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment.after_roundtrip1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install133_47.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-repo-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-repo-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-repo-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-repo-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/kubernetes-serviceMonitorApiserver5.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/service-ca-deployment_7.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/sofa-mesh-demo_5.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubeconfig-unit.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kustomization2668.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node108.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node42.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment30.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install13_45.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-repo-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-repo-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-repo-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-repo-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/policy8.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/resource792_51.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secret.kiada-tls1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/invalid_contexts_required.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorKubelet7.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/role898.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment49.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/linkerd-edge-20.10.11_62.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment linkerd-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment linkerd-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "linkerd-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment linkerd-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/pod_restricted7.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorApiserver11.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/linkerd-edge-20.10.11_71.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment linkerd-web",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment linkerd-web must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "linkerd-web must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment linkerd-web but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/prometheus_vm3_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/state41.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/ingressgateway_k8s_settings.golden_1.yaml",
+		"namespace": "main",
+		"successes": 4,
+		"failures": [
+			{
+				"msg": "Deployment istio-ingressgateway-custom must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "istio-ingressgateway-custom must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment istio-ingressgateway-custom but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/kube-gateway-ambient-redirect_2.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment default-istio",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment default-istio must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "default-istio must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment default-istio but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/kubewell-ingress-operator.clusterserviceversion.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node26.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/postfix-mastercf.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus35_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install39_41.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-applicationset-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-applicationset-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-applicationset-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-applicationset-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/kustomization2641.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/linkerd-edge-20.10.1_80.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment linkerd-tap",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment linkerd-tap must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "linkerd-tap must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment linkerd-tap but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/metrics310_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/statefulset380.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment12.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment6.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install36_41.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-applicationset-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-applicationset-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-applicationset-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-applicationset-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorKubeControllerManager5.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus66_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/invalid_user_clientkey_both.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mariadb_node3-configmap.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node13.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/server-tls-secret.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubevirt-operator8_7.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mlquickstarts10.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mysql-ha-read-write-separation_3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mysql6_2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node112.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus310_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment26.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/linkerd-edge-20.10.1_66.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment linkerd-destination",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment linkerd-destination must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "linkerd-destination must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment linkerd-destination but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/node78.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secret.sops145_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/state12.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment51.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install138_49.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorApiserver.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorApiserver10.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/nginx-deployment31.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/nginx-deployment9.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node44.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node92.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/role188.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/invalid_context_namespace_length.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorKubeControllerManager6.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/loadtest_template_psm_proxyless_basic_all_languages.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/redis-cluster2_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/sealed-secret24.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment.after_roundtrip.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/invalid_user_impersonating.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetes-serviceMonitorKubelet4.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorKubeControllerManager10.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod_restricted.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/policies4_7.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/invalid_contexts_duplicate.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubevirt-operator1_7.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/nextcloud-cm-subdir1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/outline-sealedsecret.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod_baseline9.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus_vm_tls2_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/rendered_12.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/settings.k8s.io.v1alpha1.PodPreset4.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install13_41.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Found deployment argocd-applicationset-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			},
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-applicationset-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-applicationset-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-applicationset-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/node101.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/policies4_8.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/shrek-cm1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment18.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment5.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install53_50.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/kafka17_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubeless-v1.0.7_6.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubevirt-operator-v1.3.1_7.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mlquickstarts1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus_component-render_manifest.golden_19.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/settings.k8s.io.v1alpha1.PodPreset.after_roundtrip1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/helmrelease927.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorApiserver13.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/manifest96_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod_restricted14.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod_restricted8.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/private-chain.expect_3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pull-request-comment1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment28.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install36_45.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-repo-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-repo-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-repo-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-repo-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/invalid_contexts_context.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubelet.servicemonitor2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kustomization6843.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/manifest402_9.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment docker-mailserver",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment docker-mailserver must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "docker-mailserver must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment docker-mailserver but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/namespace-install4_40.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node33.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/release180_39.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/init17.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorKubeControllerManager11.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorKubelet3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mlquickstarts13.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/release302.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secret.kiada-tls15.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secrets-configuration_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/statefulset-expected-scan.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubelet.servicemonitor3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/namespace-install1_41.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/nss-managed-bedrock-core-role.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment48.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install13_47.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install127_43.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-applicationset-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-applicationset-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-applicationset-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-applicationset-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/install145_49.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-repo-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-repo-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-repo-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-repo-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorKubelet10.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/manifest221_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/netbox-startup-configmap1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node34.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node4.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorApiserver3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/netbox-deployment.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment netbox",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment netbox must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "netbox must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment netbox but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/pod873.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pods-with-outdated-secret-data1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/state13.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment17.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/KIADA1_2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetes-serviceMonitorApiserver.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorKubeControllerManager3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kustomization389.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/nextcloud1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus79_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/settings.k8s.io.v1alpha1.PodPreset.after_roundtrip.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubevirt-operator3_7.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kube_apiserver_service_monitor.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kustomization4917.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/loadtest_template_basic_all_languages.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node106.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus_vm_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment33.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment34.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetes-serviceMonitorApiserver2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubevirt-operator6_7.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mlquickstarts14.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/neko-deployment.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment neko",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment neko must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "neko must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment neko but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/pull-request-comment2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secret.kiada-tls8.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment8.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install128_49.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kratos_deployment1.yaml",
+		"namespace": "main",
+		"successes": 3,
+		"failures": [
+			{
+				"msg": "Found deployment kratos but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment kratos must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "kratos must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/kserve1_9.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kyverno-generate-role1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment46.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install127_49.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubelet.servicemonitor8.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetes-serviceMonitorKubeControllerManager.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubevirt-operator4_7.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/networking.amazon-vpc-routed-eni-k8s-1.161_6.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node43.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/peer0-org1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/rosa-hcp-deprovision2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install53_45.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Found deployment argocd-applicationset-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			},
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-applicationset-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-applicationset-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-applicationset-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/jwtchecker.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kiada-stable-and-canary_5.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubeconfig4.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node56.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secrets-configuration_2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/StatefulSet-argocd-application-controller.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/statefulset379.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetes30.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/manifest367_67.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod_restricted4.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus215_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment22.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment41.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/invalid_cluster_proxyurl_scheme.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mysql-statefulset9.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node57.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/postgres_statefulset.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/replicationcontroller-configauditreport-expected.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/resource793_45.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-applicationset-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-applicationset-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-applicationset-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-applicationset-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment16.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install122_40.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-applicationset-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-applicationset-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-applicationset-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-applicationset-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/install53_49.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-repo-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-repo-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-repo-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-repo-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/kubernetes-serviceMonitorApiserver4.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus203_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/sealed-secrets-prod_3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kustomization2068.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mlquickstarts2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/knative_serving_0.18.0_21.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node116.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node98.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/rbac132_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/server-tls-secret1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/sofa-mesh-demo_2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/sonar1_12.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install14_41.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-applicationset-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-applicationset-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-applicationset-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-applicationset-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/invalid_current_context.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/invalid_users_name.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetes-manifest.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod_baseline8.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/resource792_50.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorKubelet12.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node115.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/ollama-pod.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/paperless-secret.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/replicationcontroller-expected-scan.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kube-apiserver-burnrate.rules5.yaml",
+		"namespace": "main",
+		"successes": 14
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorApiserver9.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/linkerd-edge-20.10.1_59.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment linkerd-identity",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment linkerd-identity must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "linkerd-identity must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment linkerd-identity but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/ll_3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus211_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus_vm_tls5_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/sealed-secret21.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/sonar_12.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/init18.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install51_45.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-repo-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-repo-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-repo-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-repo-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/loadtest_template_psm_proxied_basic_all_languages.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mysql1_2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pull-request-comment.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment15.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kong-conf4.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubelet.servicemonitor11.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorKubeControllerManager8.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/linkerd-edge-20.10.1_62.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment linkerd-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment linkerd-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "linkerd-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment linkerd-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/multi-container-pod16.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mysql-statefulset2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod_initContainerStatuses.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/invalid_cluster_certificate_both.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubelet.servicemonitor6.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/lgtm1_29.yaml",
+		"namespace": "main",
+		"successes": 3,
+		"failures": [
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment lgtm-grafana must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "lgtm-grafana must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment lgtm-grafana but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/linkerd-edge-20.10.11_66.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment linkerd-destination",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment linkerd-destination must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "linkerd-destination must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment linkerd-destination but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/mysql-statefulset6.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/otel3_3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus280_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/scripts-cm1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install30_45.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-repo-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-repo-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-repo-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-repo-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorKubelet.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mysql-statefulset4.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node99.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod_restricted3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetes-serviceMonitorKubeControllerManager1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/manifest367_64.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mariadb-operator_16.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/namespace-install1_36.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-applicationset-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-applicationset-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-applicationset-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-applicationset-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/namespace-install4_34.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-applicationset-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-applicationset-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-applicationset-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-applicationset-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/node104.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prom-configmap.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus293_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install33_45.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-repo-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-repo-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-repo-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-repo-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/kraven-org-production-tls.sops.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorKubeControllerManager9.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/neko-service.yaml",
+		"namespace": "main",
+		"successes": 6,
+		"warnings": [
+			{
+				"msg": "Found service neko but services are not allowed",
+				"metadata": {
+					"query": "data.main.warn"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/resource793_51.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/stale-secrets-watch.clusterserviceversion.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/linkerd-edge-20.10.1_71.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment linkerd-web",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment linkerd-web must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "linkerd-web must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment linkerd-web but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/pod-configauditreport-expected.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod-expected-scan.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod_restricted5.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus162_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/resource792_49.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-repo-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-repo-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-repo-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-repo-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/secret.sops111.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node90.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secret.kiada-tls12.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment31.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment52.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment7.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment10.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install128_48.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/install30_41.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-applicationset-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-applicationset-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-applicationset-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-applicationset-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/kubernetes-serviceMonitorKubelet5.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kustomization4251.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node114.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/project-tenant.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/manifest367_63.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mysql-statefulset5.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node102.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubeless-v1.0.72_6.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorApiserver2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorKubeControllerManager1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node10.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node86.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node89.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/patch-globalrole-workspace-manager.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod_restricted12.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/ingressgateway_k8s_settings.golden.yaml",
+		"namespace": "main",
+		"successes": 4,
+		"failures": [
+			{
+				"msg": "Found deployment istio-ingressgateway but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			},
+			{
+				"msg": "Deployment istio-ingressgateway must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "istio-ingressgateway must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/install29_47.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kiada-ssl_2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node82.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod_restricted9.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus226.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secret.kiada-tls6.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/state21.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install37_46.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/node84.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod_baseline5.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/reverse-proxy-certificate.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secret1150.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/linkerd-edge-20.10.11_73.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment linkerd-proxy-injector",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment linkerd-proxy-injector must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "linkerd-proxy-injector must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment linkerd-proxy-injector but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/mysql-statefulset7.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus-configmap5.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/release307.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment14.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/init13.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorApiserver8.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/manifests18_22.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/my-tls-secret.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus128_6.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus225_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/quality-definition-resizings.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment25.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/init8.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install17_37.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/install1_36.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Found deployment argocd-repo-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			},
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-repo-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-repo-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-repo-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/install30_47.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubelet.servicemonitor1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mlquickstarts.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node91.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/release428.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install51_41.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-applicationset-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-applicationset-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-applicationset-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-applicationset-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/job-expected-scan.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/nginx-config49.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/profile-demo89.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/settings.k8s.io.v1alpha1.PodPreset2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/statefulset219.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/statefulset381.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment35.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install53_51.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/manifests68.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/open_3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment45.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/invalid_clusters_name.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kustomization9533.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node_v1alpha1_relay_2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/private-chain.expect_14.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/rendered_11.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/server-mp-secret.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment27.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install39_47.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorApiserver7.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mlquickstarts9.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/netbox-startup-configmap.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod_baseline12.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install133_43.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-applicationset-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-applicationset-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-applicationset-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-applicationset-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/install138_43.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-applicationset-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-applicationset-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-applicationset-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-applicationset-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/install51_47.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorKubeControllerManager12.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorKubelet1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/linkerd-edge-20.10.11_59.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment linkerd-identity",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment linkerd-identity must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "linkerd-identity must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment linkerd-identity but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/manual-sa_2.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment default-istio",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment default-istio must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "default-istio must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment default-istio but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/node9.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/init9.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/invalid_context_user.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/linkerd-edge-20.10.1_54.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/manifest367_65.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/profile-demo88.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment10.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment44.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kustomization9992.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mainnet2.expect_7.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/manifest367_62.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mlquickstarts6.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secret.kiada-tls11.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/statefulset378.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment32.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install14_47.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install29_46.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/linkerd-edge-20.10.1_77.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment linkerd-sp-validator",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment linkerd-sp-validator must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "linkerd-sp-validator must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment linkerd-sp-validator but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/prometheus-deployment18_2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/server-secret10.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/invalid_context_user_missing.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/k8ssandra1_29.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/local-storage7.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mongo-exported1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mysql-statefulset3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/namespace-install1_40.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-repo-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-repo-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-repo-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-repo-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/node29.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node95.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/hivems-postgresql-stateful.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install29_41.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-applicationset-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-applicationset-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-applicationset-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-applicationset-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/install37_45.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-repo-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-repo-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-repo-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-repo-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/invalid_clusters_duplicate.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetes-serviceMonitorKubelet1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorApiserver5.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kustomization5713.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/peer0-org2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/httpd-configmap.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install1_33.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-applicationset-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-applicationset-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-applicationset-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-applicationset-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/kratos_deployment.yaml",
+		"namespace": "main",
+		"successes": 3,
+		"failures": [
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment kratos must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "kratos must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment kratos but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/memcached-operator.clusterserviceversion.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mlquickstarts7.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node80.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod-total17.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod_restricted6.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/ingress-nginx-controller5.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kustomization2679.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/linkerd-edge-20.10.1_96.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment linkerd-prometheus",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment linkerd-prometheus must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "linkerd-prometheus must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment linkerd-prometheus but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/node45.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/policies4_4.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/postgres_configmap.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus266_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/promethues2_2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/k8s-monitoring.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/manifest385_10.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus-config-map.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus216_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/resource793_49.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-repo-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-repo-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-repo-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-repo-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/sealedsecret-tls-crt.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secure-ingress-step2_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment24.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install17_36.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-repo-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-repo-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-repo-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-repo-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/invalid_contexts_name.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod_baseline3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secure-app1_3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/shrek-cm.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment43.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/helmrelease941.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/init14.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kube-apiserver-availability.rules5.yaml",
+		"namespace": "main",
+		"successes": 14
+	},
+	{
+		"filename": "./small/mlquickstarts12.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/namespace-install4_39.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/prometheus_vm1_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/rendered_15.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/state42.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install128_43.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-applicationset-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-applicationset-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-applicationset-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-applicationset-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/install145_51.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node23.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus144_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus205_3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment55.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kiada-ssl.kiada-test2-namespace1_2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/linkerd-edge-20.10.1_88.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment linkerd-grafana",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment linkerd-grafana must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "linkerd-grafana must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment linkerd-grafana but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/node51.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/operator.clusterserviceversion.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install33_46.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/kraven-org-staging-tls.sops.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetes-serviceMonitorKubeControllerManager2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/namespace-install1_42.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pods-with-expired-certificates.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus7_6.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install127_47.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-repo-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-repo-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-repo-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-repo-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/install34_45.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-repo-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-repo-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-repo-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-repo-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/install39_45.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-repo-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-repo-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-repo-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-repo-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/pod_restricted1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus113_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus124_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/sealed-secret9.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secrets379.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/invalid_context_cluster.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetes-serviceMonitorKubeControllerManager3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node20.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node94.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod_baseline.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod_baseline14.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod_restricted13.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secret.kiada-tls14.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorApiserver12.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorKubelet5.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mysql-statefulset13.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node105.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node35.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/oidc-apps-controller-registration.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/opentelemetrycollector2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/sealed-secrets-keypair.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install17_38.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/invalid_context_cluster_missing.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/linkerd-edge-20.10.11_54.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/manifest97_10.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/policies4_5.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/policy9.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/role-tenant.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/sealed-secret15.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/httpd-cm.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install33_41.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-applicationset-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-applicationset-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-applicationset-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-applicationset-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/mysql-statefulset11.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/oidc-apps-controller-registration1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secret-oauth.sops.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/statefulset440.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install133_49.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kustomization4004.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/oracle-database-operator_14.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pull-request-comment3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/statefulset-my-rabbitmq.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/k8s.rules5.yaml",
+		"namespace": "main",
+		"successes": 14
+	},
+	{
+		"filename": "./small/linkerd-edge-20.10.11_88.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment linkerd-grafana",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment linkerd-grafana must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "linkerd-grafana must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment linkerd-grafana but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/prometheus_vm_tls1_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/resource793_50.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/state32.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/hydra_deployment1.yaml",
+		"namespace": "main",
+		"successes": 3,
+		"failures": [
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment hydra must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "hydra must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment hydra but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/install138_48.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Found deployment argocd-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			},
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/node38.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node53.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node6.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus61.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/quay2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/rosa-hcp-provision1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install39_46.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/kafka-persistent1_4.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mainnet2.expect_6.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node37.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node46.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/statefulset389.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/invalid_user_certificate_both.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kube-apiserver-burnrate.rules1.yaml",
+		"namespace": "main",
+		"successes": 14
+	},
+	{
+		"filename": "./small/networking.amazon-vpc-routed-eni-k8s-1.16_6.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/policy6.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secret.kiada-tls7.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secrets-configuration.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install122_45.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/kube-prometheus-helm.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorKubeControllerManager2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node22.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/ingress1753.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/init16.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kiada-ssl.kiada-test2-namespace_2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubeconfig27.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubelet.servicemonitor10.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubelet.servicemonitor9.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorApiserver4.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mongo-exported.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/invidious-postgresql-init-configmap.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/KIADA_2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetes-serviceMonitorApiserver3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node25.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod_baseline6.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment56.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install131_45.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-applicationset-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-applicationset-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-applicationset-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-applicationset-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/newrelic-agent-operator.clusterserviceversion.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node77.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/replicaset-configauditreport-expected.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/resource792_45.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-applicationset-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-applicationset-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-applicationset-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-applicationset-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/server_config_map.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/hydra_deployment.yaml",
+		"namespace": "main",
+		"successes": 3,
+		"failures": [
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment hydra must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "hydra must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment hydra but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/init12.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/invalid_cluster_server.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubeless-v1.0.73_6.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubelet.servicemonitor.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubelet.servicemonitor5.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus206_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus231_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install145_50.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/nextcloud4_4.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment nextcloud",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment nextcloud must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "nextcloud must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment nextcloud but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/pod_baseline11.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus135_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secrets456.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/state2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/init15.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install138_47.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-repo-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-repo-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-repo-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-repo-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/node41.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus37_6.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorKubeControllerManager4.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kustomization6162.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus-configmap4.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/reactsealedsecret.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment40.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/httpd-configmap1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubeconfig8.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorKubeControllerManager7.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kustomization1447.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment29.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/invalid_users_duplicate.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/settings.k8s.io.v1alpha1.PodPreset1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/invalid_cluster_proxyurl.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubeless-v1.0.8.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubevirt-operator2_7.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/metrics3_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod_restricted2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment20.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/hwameistor_templates_local-storage_11.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install29_45.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-repo-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-repo-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-repo-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-repo-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/install37_41.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-applicationset-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-applicationset-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-applicationset-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-applicationset-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/kubeless-v1.0.71_6.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubelet.servicemonitor7.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/nextcloud-cm-subdir.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node49.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secret.kiada-tls9.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/hivems-hive-metastore-stateful.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kustomization3707.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kustomization9222.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mariadb_node2-configmap.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node97.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/project-tenant2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/state22.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/state4.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install34_46.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/k8s-dev.sealedsecret.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod_baseline15.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus290_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus_vm_tls4_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secret.kiada-tls13.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secret.kiada-tls3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetes-serviceMonitorApiserver1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorApiserver1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorKubelet8.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/linkerd-edge-20.10.11_77.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment linkerd-sp-validator",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment linkerd-sp-validator must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "linkerd-sp-validator must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment linkerd-sp-validator but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/linkerd-edge-20.10.1_73.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment linkerd-proxy-injector",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment linkerd-proxy-injector must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "linkerd-proxy-injector must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment linkerd-proxy-injector but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/install127_48.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/promethues_2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/integration-grafana-logs.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetes-serviceMonitorKubelet.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorKubelet13.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/rosa-hcp-provision2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/sealed-secret25.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment.after_roundtrip1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment21.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/job-configauditreport-expected.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubeconfig26.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubevirt-operator5_7.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/loadtest_template_prebuilt_all_languages.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/state11.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment39.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorApiserver6.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kustomization2702.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/merge-probers.yaml",
+		"namespace": "main",
+		"successes": 2,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment hello",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment hello must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "hello must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment hello but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/policy10.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus_vm_tls3_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/role-tenant1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/sealed-secret11.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install1_37.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/kubernetes-serviceMonitorKubeControllerManager5.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node83.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/settings.k8s.io.v1alpha1.PodPreset3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install33_47.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install36_47.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install37_47.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/linkerd-edge-20.10.11_80.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment linkerd-tap",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment linkerd-tap must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "linkerd-tap must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment linkerd-tap but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/nextcloud1_4.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment nextcloud",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment nextcloud must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "nextcloud must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment nextcloud but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/node54.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod_restricted15.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/statefulset449.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/infrastructure-labels-annotations_2.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Found deployment default-istio but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			},
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment default-istio",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment default-istio must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "default-istio must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/init10.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install122_46.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install145_45.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-applicationset-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-applicationset-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-applicationset-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-applicationset-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/kubelet-servicemonitor.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mlquickstarts3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/rosa-hcp-deprovision1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install128_47.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-repo-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-repo-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-repo-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-repo-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorKubelet9.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/metrics31_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/opentelemetrycollector.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/sealed-secrets-dev_3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/state31.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install34_41.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-applicationset-controller",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-applicationset-controller must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-applicationset-controller must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-applicationset-controller but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorKubelet11.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node88.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/nssf-configmap1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod_baseline2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod_baseline7.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus270_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus5_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install122_44.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-repo-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-repo-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-repo-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-repo-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/install13_46.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/install1_38.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node40.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pod_restricted11.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus_vm_tls_1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/scope1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secret.kiada-tls10.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubelet.servicemonitor4.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mariadb_node1-configmap.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/prometheus_config.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/settings.k8s.io.v1alpha1.PodPreset6.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/ibm_cp4a_cr_production_workflow.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kiada-stable-and-canary1_5.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment19.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment53.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1alpha1.VolumeAttachment.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetes-serviceMonitorKubelet3.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node111.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kubernetes-serviceMonitorKubelet2.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/nextcloud4.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/rosa-hcp-deprovision.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secret.kiada-tls4.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secret.kiada-tls5.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/replicaset-expected-scan.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/rosa-hcp-provision.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secret.sops155.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/storage.k8s.io.v1.VolumeAttachment9.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/kustomization1009.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/local-lan-vernal-dev-tls.sealedsecret.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mysql20.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pp-o11y-full1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/sealed-secret13.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/secret-tls19.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/settings.k8s.io.v1alpha1.PodPreset8.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/install30_46.yaml",
+		"namespace": "main",
+		"successes": 1,
+		"failures": [
+			{
+				"msg": "Containers must not run as root",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must not run as root in Deployment argocd-server",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Containers must provide app label for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Deployment argocd-server must provide app/release labels for pod selectors",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "argocd-server must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "Found deployment argocd-server but deployments are not allowed",
+				"metadata": {
+					"details": {},
+					"query": "data.main.violation"
+				}
+			}
+		]
+	},
+	{
+		"filename": "./small/kubernetesControlPlane-serviceMonitorKubeControllerManager13.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/mlquickstarts8.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/pods-with-expired-certificates1.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/invalid_context_namespace_format.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/loadtest_template_psm_proxyless_prebuilt_all_languages.yaml",
+		"namespace": "main",
+		"successes": 7
+	},
+	{
+		"filename": "./small/node81.yaml",
+		"namespace": "main",
+		"successes": 7
+	}
+]
