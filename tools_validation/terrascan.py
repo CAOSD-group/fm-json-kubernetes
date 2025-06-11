@@ -36,44 +36,35 @@ for filename in os.listdir(RESULTS_DIR):
             print(f"Error de JSON en {filename}")
             continue
 
-    # Extraer violaciones y errores de escaneo
+    # Extraer violaciones
     violations = data.get("results", {}).get("violations", [])
-    scan_errors = data.get("results", {}).get("scan_errors", [])
 
     # Agrupar violaciones por archivo
     violated_by_file = defaultdict(list)
     for v in violations:
-        file_name = v.get("file", "unknown")
+        file_name = os.path.basename(v.get("file", "unknown"))
         rule_name = v.get("rule_name", "unknown")
         violated_by_file[file_name].append(rule_name)
 
-    # Archivos con errores de escaneo
-    errored_files = set()
-    for err in scan_errors:
-        msg = err.get("errMsg", "")
-        # Si el mensaje contiene nombre de archivo, extraerlo
-        if "file '" in msg:
-            path = msg.split("file '")[-1].split("'")[0]
-            errored_files.add(os.path.basename(path))
-        else:
-            # Si no, puede que tengamos solo directorio u otro texto, opcionalmente se puede agregar un identificador genérico
-            errored_files.add("scan_error_generic")
+    # Leer la lista de archivos procesados en el batch
+    batch_file_list = f"batch_{batch_id[-2:]}"  # Asume que batch_id es como "batch_aa", "batch_ab", etc.
+    if not os.path.exists(batch_file_list):
+        print(f"Archivo de batch no encontrado: {batch_file_list}")
+        continue
 
-    # Conjunto de todos los archivos afectados
-    all_files = set(violated_by_file.keys()) | errored_files
+    with open(batch_file_list, "r", encoding="utf-8") as bf:
+        all_files_in_batch = [os.path.basename(line.strip()) for line in bf if line.strip()]
 
-    # Calcular tiempo promedio por archivo en este batch (dividir tiempo total batch por cantidad de archivos)
+    # Calcular tiempo promedio
     avg_time_per_file = 0
-    total_files_in_batch = max(len(all_files), 1)  # para evitar división por cero
-    avg_time_per_file = round(batch_times.get(batch_id, 0) / total_files_in_batch, 2)
+    total_files = len(all_files_in_batch)
+    avg_time_per_file = round(batch_times.get(batch_id, 0) / total_files, 2) if total_files else 0
 
-    # Construir filas para CSV
-    for fname in all_files:
-        is_valid = "false"
-        failed_rules = violated_by_file.get(fname, [])
-        if fname in errored_files:
-            failed_rules.append("scan_error")
-        rows.append([fname, is_valid, avg_time_per_file, ";".join(failed_rules)])
+    for fname in all_files_in_batch:
+        if fname in violated_by_file:
+            rows.append([fname, "false", avg_time_per_file, ";".join(violated_by_file[fname])])
+        else:
+            rows.append([fname, "true", avg_time_per_file, ""])
 
 # Guardar CSV
 with open(CSV_OUTPUT, "w", newline="", encoding="utf-8") as f:

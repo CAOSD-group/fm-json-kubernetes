@@ -1,0 +1,14 @@
+batch_aa,3802
+batch_aa,851
+batch_aa,924
+batch_aa,941
+batch_aa,941
+batch_aa,913
+batch_aa,869
+batch_aa,29519
+batch_ab,21985
+batch_ac,3891
+batch_aa,888
+batch_aa,30582
+batch_ab,21808
+batch_ac,3903
