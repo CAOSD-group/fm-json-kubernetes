@@ -17,11 +17,15 @@ split -l $BATCH_SIZE all_yaml_files.txt batch_
 for batch_file in batch_*; do
   batch_id=$(basename "$batch_file")
   output_file="$RESULTS_DIR/${batch_id}.txt"
+  #expected_list="$RESULTS_DIR/${batch_id}_expected.txt"
 
-  # Ejecuta Trivy por cada archivo del batch individualmente
   mkdir -p tmp_tf_files
-  while read -r yaml_file; do
-    cp "$yaml_file" tmp_tf_files/
+  #echo "Procesando lote $batch_id" # > "$expected_list"
+
+  while read -r yaml_path; do
+    fname=$(basename "$yaml_path")
+    cp "$yaml_path" "tmp_tf_files/$fname"
+    #echo "$fname" >> "$expected_list"
   done < "$batch_file"
 
   echo "Procesando lote: $batch_id"
@@ -32,10 +36,8 @@ for batch_file in batch_*; do
   end_time=$(date +%s%3N)
   duration_ms=$((end_time - start_time))
   echo "$batch_id,$duration_ms" >> "$TIMING_FILE"
-  
-  # Limpiar directorio temporal
-  rm -rf tmp_tf_files
 
+  rm -rf tmp_tf_files
   echo "Lote $batch_id completado → Resultado en: $output_file"
 done
 
