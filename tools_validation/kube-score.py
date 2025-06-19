@@ -1,40 +1,82 @@
+import os
+import csv
 from pathlib import Path
 from collections import defaultdict
-import csv
 
-# Rutas fijas (puedes modificarlas directamente aquí si cambias carpetas)
-input_dir = Path("./results_kube-score")
-yaml_dir = Path("./manifests_yamls")
-csv_output = './results/kube-score/validation_results.csv'
-results = defaultdict(lambda: {"valid": True, "findings": []})
+RESULTS_DIR = "./results_kube-score"
+YAML_DIR = "./small"
+CSV_OUTPUT = "./results/kube-score/validation_results01.csv"
+TIMING_FILE = os.path.join(RESULTS_DIR, "batch_times.txt")
 
-# Recorrer todos los txt de resultados
-for txt_file in input_dir.glob("*.txt"):
-    current_file = None
+Path(CSV_OUTPUT).parent.mkdir(parents=True, exist_ok=True)
+
+# Leer tiempos por lote
+batch_times = {}
+if os.path.exists(TIMING_FILE):
+    with open(TIMING_FILE, encoding="utf-8") as f:
+        for line in f:
+            batch_id, time_str = line.strip().split(",")
+            batch_times[batch_id] = int(time_str)
+
+# Almacena resultados por archivo
+results = defaultdict(lambda: {"valid": True, "issues": [], "avg_time": 0})
+current_file = None
+batch_file_map = defaultdict(list)
+
+# Asociar archivos a su batch
+for batch_file in os.listdir(RESULTS_DIR):
+    if batch_file.endswith(".txt"):
+        batch_id = batch_file.replace(".txt", "")
+        with open(os.path.join(RESULTS_DIR, batch_file), encoding="utf-8") as f:
+            for line in f:
+                if line.startswith("### path="):
+                    fname = os.path.basename(line.strip().split("=", 1)[1])
+                    batch_file_map[batch_id].append(fname)
+
+# Calcular duración por archivo y analizar resultados
+for txt_file in Path(RESULTS_DIR).glob("*.txt"):
+    batch_id = txt_file.stem
+    files_in_batch = batch_file_map.get(batch_id, [])
+    avg_time = round(batch_times.get(batch_id, 0) / len(files_in_batch), 2) if files_in_batch else 0
+
     with open(txt_file, encoding="utf-8") as f:
         for line in f:
             line = line.strip()
-            if line.startswith("path="):
-                current_file = Path(line.split("=", 1)[1]).name
-            elif line.startswith("[CRITICAL]") or line.startswith("[WARNING]"):
-                if current_file:
-                    results[current_file]["valid"] = False
-                    results[current_file]["findings"].append(line)
+            if line.startswith("### path="):
+                current_file = os.path.basename(line.split("=", 1)[1])
+                results[current_file]["avg_time"] = avg_time
+                continue
+            if current_file and (
+                "Failed to parse" in line or
+                line.startswith("[CRITICAL]") or
+                line.startswith("[WARNING]")
+            ):
+                results[current_file]["valid"] = False
+                results[current_file]["issues"].append(line)
 
-# Marcar como válidos los manifiestos que no aparecen en los resultados
-all_yaml_files = {file.name for file in yaml_dir.rglob("*.yaml")}
-
-for yaml_file in all_yaml_files:
-    if yaml_file not in results:
-        results[yaml_file] = {"valid": True, "findings": []}
+# Asegurar que todos los YAML estén representados
+yaml_files = {f.name for f in Path(YAML_DIR).rglob("*.yaml")}
+for fname in yaml_files:
+    if fname not in results:
+        results[fname] = {"valid": True, "issues": [], "avg_time": avg_time}
 
 # Guardar CSV
-with open(csv_output, "w", newline="", encoding="utf-8") as csvfile:
-    writer = csv.writer(csvfile)
-    writer.writerow(["file", "valid", "issues"])
-    for file_name, info in sorted(results.items()):
-        writer.writerow([
-            file_name,
-            info["valid"],
-            "; ".join(info["findings"])
+with open(CSV_OUTPUT, "w", newline="", encoding="utf-8") as f:
+    writer = csv.writer(f)
+    writer.writerow(["file", "valid", "avg_validation_time_ms", "issues"])
+    for fname, info in sorted(results.items()):
+        writer.writerow([  
+            fname,
+            str(info["valid"]).lower(),
+            info["avg_time"],
+            "; ".join(info["issues"])
         ])
+    writer.writerow([])
+    writer.writerow(["TOTAL_VALID", sum(1 for r in results.values() if r["valid"])])
+    writer.writerow(["TOTAL_INVALID", sum(1 for r in results.values() if not r["valid"])])
+
+# Resumen en consola
+print("\n RESUMEN VALIDATION kube-score")
+print(f"Total files analizados: {len(results)}")
+print(f"  Valids (True): {sum(1 for r in results.values() if r['valid'])}")
+print(f" Invalids (False): {sum(1 for r in results.values() if not r['valid'])}")

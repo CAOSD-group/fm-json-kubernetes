@@ -5,6 +5,7 @@ from pathlib import Path
 # Configuraciones
 RESULTS_DIR = "./results_trivy"
 YAML_DIR = "./small"
+#YAML_DIR ="../scriptJsonToUvl/yamls_agrupation/yamls-tools-files"
 CSV_OUTPUT = "./results/trivy/validation_results.csv"
 TIMING_FILE = os.path.join(RESULTS_DIR, "batch_times.txt")
 

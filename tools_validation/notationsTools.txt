@@ -1,5 +1,30 @@
 Pruebas sobre validacion de las herramientas.
+Sobre el folder de archivos yamls_complete: 227.020k
+
+0º Herramienta yaml-json: True = 211.836 ,False = 11.299
+1º Kube-linter: True = 1625 ,False = 163 --
+2º Kube-score: True = 1176 ,False = 612 --
+3º Kyverno: True = 1196, False = 592 --
+4º OPA Gatekeeper: Sin un conjunto de politicas claras
+5º Kubeconform: True = 1200, False = 588 --
+6º Kubevious[DEPRECATED]:
+7º Polaris: True = 1155, False = 633 --
+8º Datree: [DEPRECATED] desde el Junio de 2023
+9º ConfigLint: Sin actualizaciones desde Junio de 2020
+10º: Conftest: True = 1529, False = 259 -- Revisar politicas... Comprobar nuevas agregadas en policy_conftest
+11º Terrascan: True = 83.712, False = 143.307 ---
+12º Trivy: True = 82.857, False = 144.176 ---
+
+
+
+
+
+
+
+Pruebas sobre validacion de las herramientas.
 Sobre el folder de archivos small: 1788
+
+0º Herramienta yaml-json = 
 1º Kube-linter: True = 1625 ,False = 163
 2º Kube-score: True = 1176 ,False = 612
 3º Kyverno: True = 1196, False = 592
@@ -10,7 +35,8 @@ Sobre el folder de archivos small: 1788
 8º Datree: [DEPRECATED] desde el Junio de 2023
 9º ConfigLint: Sin actualizaciones desde Junio de 2020
 10º: Conftest: True = 1529, False = 259
-10º Terrascan: 
+11º Terrascan: True = 1208, False = 580
+12º Trivy: True = 1079, False = 710
 
 Referencias URL:
 
@@ -37,6 +63,13 @@ Descarga del ejecutable desde: https://github.com/kyverno/kyverno/releases
 Politicas por defecto y usadas: https://kyverno.io/policies/?policytypes=validate
 Repo politicas: https://github.com/kyverno/policies?tab=readme-ov-file
 
+:: Resumen de resultados bastante "escueto" solo se muestran errores en las politicas no cumplidas pero no con los archivos que fallan ni cuantos fallan o no.
+Resumen orientado a politicas pero no a validacion de archivos.
+Esto provoca que se tenga que realizar la "validacion" archivo x archivo lo cual aumenta bastante el tiempo de procesamiento. En las pruebas se han registrado
+batch_aa,4304723
+batch_ab,4227982
+batch_ac,4204199
+Que son mas de 1h.
 **Gatekeeper
 La herramienta a ver ahora es Gatekeeper, como en la anterior se ha descargado el ejecutable del CLI directamente para evaluar los ficheros YAML localmente. En este caso
 se llama gator CLI.
@@ -145,10 +178,72 @@ Se usa la opcion -i para definir el tipo de archivos que se van a validar
 Ejecucion archivo solo:
 .\terrascan.exe scan -f manifests_yamls\pod.yaml -i k8s -o json
 
+https://runterrascan.io/docs/_print/#scanning
+Funcionas basicas de scaneo
+Posibles reglas aqui: https://github.com/tenable/terrascan/tree/master/pkg/policies/opa/rego/k8s/kubernetes_namespace
+
+
 ** Trivy:
 https://github.com/aquasecurity/trivy
-
+Trivy is a comprehensive and versatile security scanner. Trivy has scanners that look for security issues, and targets where it can find those issues.
+Quizás la herramienta mas completa y valorada de las que se han visto...
 https://trivy.dev/latest/getting-started/installation/
-Instalacion:
+Instalacion: https://github.com/aquasecurity/trivy/releases/tag/v0.63.0
 
 https://trivy.dev/latest/getting-started/
+
+Se supone que las missconfigurations para realizar los escaneres se encuentran en https://github.com/aquasecurity/defsec/tree/master
+que es un motor de políticas llamado Defsec, escritas en Rego, el repositorio
+"Sources" de las politicas:
+https://trivy.dev/v0.29.2/docs/misconfiguration/policy/builtin/
+https://trivy.dev/v0.29.2/docs/misconfiguration/scanning/
+
+Los archivos con 0 en el tiempo de procesamiento es porque la herramienta omitio directamente su escaneo y se agregaron de manera manual, config483.yaml,true,0,0
+** Kube-bench
+https://github.com/aquasecurity/kube-bench
+
+Descartado porque esta diseñado para escanear los clusteres en tiempo de ejecucion
+
+
+Ejecucion de batchs erronea en
+Lote batch_kx completado → Resultado en: ./results_polaris-cli/batch_kx.json
+ Error de JSON en batch_am.json
+ Error de JSON en batch_ax.json
+ Error de JSON en batch_ba.json
+ Error de JSON en batch_bb.json
+ Error de JSON en batch_bf.json
+ Error de JSON en batch_br.json
+ Error de JSON en batch_bw.json
+ Error de JSON en batch_cf.json
+ Error de JSON en batch_cm.json
+ Error de JSON en batch_cw.json
+ Error de JSON en batch_cx.json
+ Error de JSON en batch_de.json
+ Error de JSON en batch_di.json
+ Error de JSON en batch_eg.json
+ Error de JSON en batch_ej.json
+ Error de JSON en batch_ek.json
+ Error de JSON en batch_el.json
+ Error de JSON en batch_ew.json
+ Error de JSON en batch_ez.json
+ Error de JSON en batch_fv.json
+ Error de JSON en batch_fw.json
+ Error de JSON en batch_fz.json
+ Error de JSON en batch_gl.json
+ Error de JSON en batch_gm.json
+ Error de JSON en batch_gn.json
+ Error de JSON en batch_go.json
+ Error de JSON en batch_gp.json
+ Error de JSON en batch_gq.json
+ Error de JSON en batch_gr.json
+ Error de JSON en batch_gw.json
+ Error de JSON en batch_ho.json
+ Error de JSON en batch_hp.json
+ Error de JSON en batch_ic.json
+ Error de JSON en batch_io.json
+ Error de JSON en batch_iq.json
+ Error de JSON en batch_js.json
+ Error de JSON en batch_jy.json
+ Error de JSON en batch_ka.json
+ Error de JSON en batch_kb.json
+ CSV generado: ./results/polaris-cli/validation_results02.csv

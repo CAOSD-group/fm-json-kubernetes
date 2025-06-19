@@ -2,67 +2,84 @@ from pathlib import Path
 from collections import defaultdict
 import csv
 import re
-# Rutas fijas (puedes modificarlas directamente aquí si cambias carpetas)
-input_dir = Path("./results_kyverno")
-yaml_dir = Path("./small")
-csv_output = './results/kyverno/validation_results.csv'
 
-results = defaultdict(lambda: {"valid": True, "failures": []})
+input_dir = Path("./results_kyverno_parallel01")
+#yaml_dir = Path("./small")
+yaml_dir = Path("../scriptJsonToUvl/yamls_agrupation/yamls-tools-files")
+csv_output = './results/kyverno/validation_results01.csv'
+timing_file = input_dir / "batch_times.txt"
 
-# Expresión regular para capturar la línea final
-#summary_re = re.compile(r"pass:\s*(\d+),\s*fail:\s*(\d+),\s*warn:\s*(\d+),\s*error:\s*(\d+),\s*skip:\s*(\d+)")
+results = defaultdict(lambda: {"valid": True, "failures": [], "avg_time": 0})
 
-# Regex
-file_marker = re.compile(r"^##### FILE: (.+) #####$")
+file_marker = re.compile(r"^##### FILE: (.+) #####")
 summary_re = re.compile(r"pass:\s*(\d+),\s*fail:\s*(\d+),\s*warn:\s*(\d+),\s*error:\s*(\d+),\s*skip:\s*(\d+)", re.IGNORECASE)
 
-# Procesamos todos los archivos batch de resultados
-for result_file in input_dir.rglob("*.txt"):
-    with open(result_file, encoding="utf-8") as f:
+# Cargar tiempos por batch
+batch_times = {}
+if timing_file.exists():
+    with open(timing_file, encoding="utf-8") as f:
+        for line in f:
+            batch_id, time_str = line.strip().split(",")
+            batch_times[batch_id] = int(time_str)
+
+# Asociar archivos con sus respectivos batch
+file_to_batch = {}
+
+for result_file in input_dir.rglob("batch_*.txt"):
+    batch_id = result_file.stem
+    with open(result_file, encoding="utf-8", errors="replace") as f:
         current_file = None
         for line in f:
             line = line.strip()
-
-            # Detecta nuevo archivo
-            file_match = file_marker.match(line)
-            if file_match:
-                current_file = file_match.group(1)
+            match = file_marker.match(line)
+            if match:
+                current_file = match.group(1)
+                file_to_batch[current_file] = batch_id
                 continue
 
             if current_file is None:
                 continue
 
-            # Guarda errores específicos
             if "validation error" in line.lower() or "validation failure" in line.lower():
                 results[current_file]["valid"] = False
                 results[current_file]["failures"].append(line)
 
-            # Detecta resumen final
             summary = summary_re.search(line)
-            if summary and int(summary.group(2)) > 0:  # fail > 0
+            if summary and int(summary.group(2)) > 0:
                 results[current_file]["valid"] = False
 
-# Agrega archivos válidos no reportados
+# Agregar archivos válidos no mencionados
 all_yaml_files = {file.name for file in yaml_dir.rglob("*.yaml")}
 for yaml_file in all_yaml_files:
     if yaml_file not in results:
-        results[yaml_file] = {"valid": True, "failures": []}
+        results[yaml_file] = {"valid": True, "failures": [], "avg_time": 0}
+    if yaml_file not in file_to_batch:
+        file_to_batch[yaml_file] = None
 
-# Cuenta
-true_count = 0
-false_count = 0
+# Asignar tiempos promedios correctos
+batch_file_counts = defaultdict(int)
+for fname, batch in file_to_batch.items():
+    if batch:
+        batch_file_counts[batch] += 1
 
-# Escribe el CSV
-with open(csv_output, "w", newline="", encoding="utf-8") as csvfile:
-    writer = csv.writer(csvfile)
-    writer.writerow(["file", "valid", "issues"])
+for fname, batch in file_to_batch.items():
+    if batch and batch in batch_times and batch_file_counts[batch] > 0:
+        avg = round(batch_times[batch] / batch_file_counts[batch], 2)
+        results[fname]["avg_time"] = avg
 
-    for file_name, info in sorted(results.items()):
-        is_valid = info["valid"]
-        issues = "; ".join(info["failures"])
+# Generar CSV
+true_count = false_count = 0
+Path(csv_output).parent.mkdir(parents=True, exist_ok=True)
 
-        writer.writerow([file_name, is_valid, issues])
+with open(csv_output, "w", newline="", encoding="utf-8") as f:
+    writer = csv.writer(f)
+    writer.writerow(["file", "valid", "avg_validation_time_ms", "issues"])
 
+    for fname in sorted(results.keys()):
+        is_valid = results[fname]["valid"]
+        issues = "; ".join(results[fname]["failures"])
+        avg_time = results[fname]["avg_time"]
+        writer.writerow([fname, str(is_valid).lower(), avg_time, issues])
         if is_valid:
             true_count += 1
         else:
@@ -72,7 +89,6 @@ with open(csv_output, "w", newline="", encoding="utf-8") as csvfile:
     writer.writerow(["TOTAL_VALID", true_count])
     writer.writerow(["TOTAL_INVALID", false_count])
 
-# Reporte final por consola
-print(f"✅ Archivos válidos (True): {true_count}")
-print(f"❌ Archivos inválidos (False): {false_count}")
-print(f"📄 Resultados guardados en: {csv_output}")
+print(f" Archivos válidos (True): {true_count}")
+print(f" Archivos inválidos (False): {false_count}")
+print(f" Resultados guardados en: {csv_output}")

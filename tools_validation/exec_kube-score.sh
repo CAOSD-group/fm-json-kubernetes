@@ -1,26 +1,49 @@
 #!/bin/bash
 
-INPUT_DIR="./manifests_yamls" #small
+INPUT_DIR="./small"  # o tu ruta real
 RESULTS_DIR="./results_kube-score"
-BATCH_SIZE=1000
+BATCH_SIZE=800
+TIMING_FILE="$RESULTS_DIR/batch_times.txt"
 
 mkdir -p "$RESULTS_DIR"
+rm -f "$TIMING_FILE"
 
-# Lista todos los YAML y los guarda en un archivo temporal
-find "$INPUT_DIR" -type f \( -name '*.yaml' -o -name '*.yml' \) > all_yaml_files.txt
+# Listar todos los YAML
+find "$INPUT_DIR" -type f \( -name "*.yaml" -o -name "*.yml" \) > all_yaml_files.txt
 
-# Divide en lotes de 1000
-split -l "$BATCH_SIZE" all_yaml_files.txt batch_
+# Dividir en lotes
+split -l $BATCH_SIZE all_yaml_files.txt batch_
 
-# Ejecutar kube-linter por lote
+# Procesar cada lote
 for batch_file in batch_*; do
   batch_id=$(basename "$batch_file")
-  mapfile -t files < "$batch_file"
-  ./kube-score/kube-score.exe score "${files[@]}" > "$RESULTS_DIR/$batch_id.txt"
-  #xargs -a "$batch_file" /c/Users/CAOSD/go/bin/kube-linter lint --format json >> "$RESULTS_DIR/$batch_id.json"
-  echo "Procesado lote $batch_id con ${#files[@]} archivos"
+  output_file="$RESULTS_DIR/${batch_id}.txt"
+
+  mkdir -p tmp_kube_files
+  while read -r yaml_path; do
+    fname=$(basename "$yaml_path")
+    cp "$yaml_path" "tmp_kube_files/$fname"
+  done < "$batch_file"
+
+  echo " Procesando lote: $batch_id"
+  start_time=$(date +%s%3N)
+
+  # Procesar todos los archivos del lote con kube-score
+  for f in tmp_kube_files/*.yaml; do
+    [ -e "$f" ] || continue
+    echo "### path=$f" >> "$output_file"
+    ./kube-score.exe score "$f" >> "$output_file" 2>/dev/null
+  done
+
+  end_time=$(date +%s%3N)
+  duration_ms=$((end_time - start_time))
+  echo "$batch_id,$duration_ms" >> "$TIMING_FILE"
+
+  rm -rf tmp_kube_files
+  echo " Lote $batch_id completado → $output_file"
 done
 
+# Ejecutar análisis en Python
 python kube-score.py
 
 # Limpieza

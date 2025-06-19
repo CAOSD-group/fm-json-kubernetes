@@ -2,6 +2,7 @@
 
 INPUT_DIR="./small"
 RESULTS_DIR="./results_polaris-cli"
+# INPUT_DIR="../scriptJsonToUvl/yamls_agrupation/yamls-tools-files"
 BATCH_SIZE=800
 TIMING_FILE="$RESULTS_DIR/batch_times.txt"
 

@@ -2951,3 +2951,403 @@ Confs con el numero comprobadas correctas. Pero el tiempo de generacion de confi
 01-assert54_2.json,True,25,1152,0.03204,4247.297,Todas las Configuraciones validas
 
 El de validacion si se ajusta a mas de 2 hrs..
+
+005-deployment_1.json -- 612 confs: omitir archivos con muchas confs para realizar las pruebas mas rapido
+
+
+Archivo previo a ese genero 5832 configs...
+
+Configuración 5814:  -> Válida: True
+Configuración 5815:  -> Válida: True
+Configuración 5816:  -> Válida: True
+Configuración 5817:  -> Válida: True
+Configuración 5818:  -> Válida: True
+Configuración 5819:  -> Válida: True
+Configuración 5820:  -> Válida: True
+Configuración 5821:  -> Válida: True
+Configuración 5822:  -> Válida: True
+Configuración 5823:  -> Válida: True
+Configuración 5824:  -> Válida: True
+Configuración 5825:  -> Válida: True
+Configuración 5826:  -> Válida: True
+Configuración 5827:  -> Válida: True
+Configuración 5828:  -> Válida: True
+Configuración 5829:  -> Válida: True
+Configuración 5830:  -> Válida: True
+Configuración 5831:  -> Válida: True
+Configuración 5832:  -> Válida: True
+Procesando archivo: ..\generateConfigs\outputs_json_mappeds10\01-config-node-local-dns_4.json
+Configuración 1:  -> Válida: True
+Configuración 2:  -> Válida: True
+Procesando archivo: ..\generateConfigs\outputs_json_mappeds10\01-configmap.json
+
+
+
+Archivo, configs... Tº valid no exacto...
+01-config-node-local-dns_3.json,True,66,5832,0.08101,16.4727,Todas las Configuraciones validas
+
+
+01-config-node-local-dns_3.json,True,66,5832,0.09205,68122.4528,Todas las Configuraciones validas
+
+
+Conjunto de los siguientes errores hay un error de declaracion en la propiead "priority"
+
+Segun se muestra en los esquemas, la propiedad que da prioridad es "versionPriority" no "priotiy"... esta se usa para otros objetos
+
+Error desconocido en archivo apiservice-template.json: Error: the element "priority" is not present in the FM model.
+Error desconocido en archivo apiservice-template1.json: Error: the element "priority" is not present in the FM model.
+Error desconocido en archivo apiservice-template10.json: Error: the element "priority" is not present in the FM model.
+Error desconocido en archivo apiservice-template11.json: Error: the element "priority" is not present in the FM model.
+Error desconocido en archivo apiservice-template13.json: Error: the element "priority" is not present in the FM model.
+Error desconocido en archivo apiservice-template14.json: Error: the element "priority" is not present in the FM model.
+Error desconocido en archivo apiservice-template15.json: Error: the element "priority" is not present in the FM model.
+Error desconocido en archivo apiservice-template16.json: Error: the element "priority" is not present in the FM model.
+Error desconocido en archivo apiservice-template17.json: Error: the element "priority" is not present in the FM model.
+Error desconocido en archivo apiservice-template18.json: Error: the element "priority" is not present in the FM model.
+Error desconocido en archivo apiservice-template2.json: Error: the element "priority" is not present in the FM model.
+Error desconocido en archivo apiservice-template3.json: Error: the element "priority" is not present in the FM model.
+Error desconocido en archivo apiservice-template4.json: Error: the element "priority" is not present in the FM model.
+Error desconocido en archivo apiservice-template5.json: Error: the element "priority" is not present in the FM model.
+Error desconocido en archivo apiservice-template6.json: Error: the element "priority" is not present in the FM model.
+Error desconocido en archivo apiservice-template7.json: Error: the element "priority" is not present in the FM model.
+Error desconocido en archivo apiservice-template8.json: Error: the element "priority" is not present in the FM model.
+Error desconocido en archivo apiservice-template9.json: Error: the element "priority" is not present in the FM model.
+
+
+Todos los errores relacionados con que el feature no esta presente en el modelo es porque no use la ultima version de mapeo y no estan omitidos features que no deberian de aparecer porque se quitaron...
+
+
+
+Error desconocido en archivo admissionregistration.k8s.io.v1.ValidatingAdmissionPolicyBinding.json: Error: the element "io_k8s_api_admissionregistration_v1_ValidatingAdmissionPolicyBinding_spec_validationActions_StringValue" is not present in the FM model.
+Error desconocido en archivo admissionregistration.k8s.io.v1.ValidatingAdmissionPolicyBinding1.json: Error: the element "io_k8s_api_admissionregistration_v1_ValidatingAdmissionPolicyBinding_spec_validationActions_StringValue" is not present in the FM model.
+Error desconocido en archivo admissionregistration.k8s.io.v1.ValidatingAdmissionPolicyBinding2.json: Error: the element "io_k8s_api_admissionregistration_v1_ValidatingAdmissionPolicyBinding_spec_validationActions_StringValue" is not present in the FM model.
+Error desconocido en archivo admissionregistration.k8s.io.v1.ValidatingAdmissionPolicyBinding3.json: Error: the element "io_k8s_api_admissionregistration_v1_ValidatingAdmissionPolicyBinding_spec_validationActions_StringValue" is not present in the FM model.
+Error desconocido en archivo admissionregistration.k8s.io.v1.ValidatingAdmissionPolicyBinding4.json: Error: the element "io_k8s_api_admissionregistration_v1_ValidatingAdmissionPolicyBinding_spec_validationActions_StringValue" is not present in the FM model.
+Error desconocido en archivo admissionregistration.k8s.io.v1.ValidatingAdmissionPolicyBinding5.json: Error: the element "io_k8s_api_admissionregistration_v1_ValidatingAdmissionPolicyBinding_spec_validationActions_StringValue" is not present in the FM model.
+Error desconocido en archivo admissionregistration.k8s.io.v1.ValidatingAdmissionPolicyBinding6.json: Error: the element "io_k8s_api_admissionregistration_v1_ValidatingAdmissionPolicyBinding_spec_validationActions_StringValue" is not present in the FM model.
+Error desconocido en archivo admissionregistration.k8s.io.v1.ValidatingAdmissionPolicyBinding7.json: Error: the element "io_k8s_api_admissionregistration_v1_ValidatingAdmissionPolicyBinding_spec_validationActions_StringValue" is not present in the FM model.
+Error desconocido en archivo admissionregistration.k8s.io.v1.ValidatingAdmissionPolicyBinding8.json: Error: the element "io_k8s_api_admissionregistration_v1_ValidatingAdmissionPolicyBinding_spec_validationActions_StringValue" is not present in the FM model.
+Error desconocido en archivo admissionregistration.k8s.io.v1.ValidatingAdmissionPolicyBinding9.json: Error: the element "io_k8s_api_admissionregistration_v1_ValidatingAdmissionPolicyBinding_spec_validationActions_StringValue" is not present in the FM model.
+
+
+Al referirse al apiVersion no esta presente en el modelo, se refiere a que en data no hay una declaracion de sus propiedades donde se pueda reflejar las propiedades agregadas. Data o RawExtension es un objeto sin propiedades que se usa para definir extensiones en versiones externas.
+
+apiVersion: apps/v1
+data:
+  apiVersion: example.com/v1
+  kind: CustomType
+  spec:
+    replicas: 1
+  status:
+    available: 1
+kind: ControllerRevision
+metadata:
+Error desconocido en archivo apps.v1.ControllerRevision.after_roundtrip1.json: Error: the element "apiVersion" is not present in the FM model.
+Error desconocido en archivo apps.v1.ControllerRevision.json: Error: the element "apiVersion" is not present in the FM model.
+Error desconocido en archivo apps.v1.ControllerRevision1.json: Error: the element "apiVersion" is not present in the FM model.
+Error desconocido en archivo apps.v1.ControllerRevision10.json: Error: the element "apiVersion" is not present in the FM model.
+Error desconocido en archivo apps.v1.ControllerRevision11.json: Error: the element "apiVersion" is not present in the FM model.
+Error desconocido en archivo apps.v1.ControllerRevision12.json: Error: the element "apiVersion" is not present in the FM model.
+Error desconocido en archivo apps.v1.ControllerRevision13.json: Error: the element "apiVersion" is not present in the FM model.
+Error desconocido en archivo apps.v1.ControllerRevision14.json: Error: the element "apiVersion" is not present in the FM model.
+Error desconocido en archivo apps.v1.ControllerRevision15.json: Error: the element "apiVersion" is not present in the FM model.
+Error desconocido en archivo apps.v1.ControllerRevision16.json: Error: the element "apiVersion" is not present in the FM model.
+Error desconocido en archivo apps.v1.ControllerRevision17.json: Error: the element "apiVersion" is not present in the FM model.
+Error desconocido en archivo apps.v1.ControllerRevision18.json: Error: the element "apiVersion" is not present in the FM model.
+Error desconocido en archivo apps.v1.ControllerRevision19.json: Error: the element "apiVersion" is not present in the FM model.
+
+
+
+Errores por "name" tambien se dan porque la prop no esta presente en los esquemas...
+
+_resources solo tiene:
+io_k8s_api_apps_v1_DaemonSet_spec_template_spec_volumes_ephemeral_volumeClaimTemplate_spec_resources:
+
+    "io.k8s.api.core.v1.VolumeResourceRequirements": {
+      "description": "VolumeResourceRequirements describes the storage resource requirements for a volume.",
+      "properties": {
+        "limits": {
+          "additionalProperties": {
+            "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
+          },
+          "description": "Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/",
+          "type": "object"
+        },
+        "requests": {
+          "additionalProperties": {
+            "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
+          },
+          "description": "Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. Requests cannot exceed Limits. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/",
+          "type": "object"
+        }
+      },
+      "type": "object"
+
+Error desconocido en archivo apps.v1.DaemonSet1.json: Error: the element "name" is not present in the FM model.
+Error desconocido en archivo apps.v1.DaemonSet13.json: Error: the element "18" is not present in the FM model.
+Error desconocido en archivo apps.v1.DaemonSet19.json: Error: the element "name" is not present in the FM model.
+Error desconocido en archivo apps.v1.DaemonSet2.json: Error: the element "name" is not present in the FM model.
+Error desconocido en archivo apps.v1.DaemonSet22.json: Error: the element "name" is not present in the FM model.
+
+Procesando archivo: ..\generateConfigs\outputs_json_mappeds10\argo-cd.v2.10.6_34.json
+Configuración 1 (única validada): -> Válida: True
+Procesando archivo: ..\generateConfigs\outputs_json_mappeds10\argo-cd.v2.10.6_35.json
+Configuración 1 (única validada): -> Válida: True
+Procesando archivo: ..\generateConfigs\outputs_json_mappeds10\argo-cd.v2.10.6_36.json
+Configuración 1 (única validada): -> Válida: True
+Procesando archivo: ..\generateConfigs\outputs_json_mappeds10\argo-cd.v2.10.6_37.json
+Configuración 1 (única validada): -> Válida: True
+Procesando archivo: ..\generateConfigs\outputs_json_mappeds10\argo-cd.v2.10.6_38.json
+Configuración 1 (única validada): -> Válida: True
+Procesando archivo: ..\generateConfigs\outputs_json_mappeds10\argo-cd.v2.10.6_39.json
+Configuración 1 (única validada): -> Válida: True
+Procesando archivo: ..\generateConfigs\outputs_json_mappeds10\argo-cd.v2.10.6_4.json
+Configuración 1 (única validada): -> Válida: True
+Procesando archivo: ..\generateConfigs\outputs_json_mappeds10\argo-cd.v2.10.6_40.json
+Configuración 1 (única validada): -> Válida: True
+Procesando archivo: ..\generateConfigs\outputs_json_mappeds10\argo-cd.v2.10.6_41.json
+Configuración 1 (única validada): -> Válida: True
+Procesando archivo: ..\generateConfigs\outputs_json_mappeds10\argo-cd.v2.10.6_42.json
+Configuración 1 (única validada): -> Válida: True
+Procesando archivo: ..\generateConfigs\outputs_json_mappeds10\argo-cd.v2.10.6_43.json
+Configuración 1 (única validada): -> Válida: True
+Procesando archivo: ..\generateConfigs\outputs_json_mappeds10\argo-cd.v2.10.6_44.json
+
+
+
+Nueva ejecucion saturada en la obtencion de las configuraciones. Se ha obtenido un pico de mas de 11 millones de configuraciones en el archivo: argo-cd.v2.10.6_44
+
+Por lo tanto, se ha parado la obtencion de configuraciones. Se limitara la obtencion para no superar un umbral de configuraciones...
+
+
+Se ha definido un numero maximo de generacion de configuraciones en 10k para no aumentar demasiado el tiempo de carga y demas a la calcular el numero y tiempo de carga de los ficheros.
+
+
+Me sorprende que antes se pudo validar argo-cd.v2.10.6_42.json y con la nueva implementacion haya superado los 10k de configs, cuantas se habian calculado antes?
+Se ha probado a 500k y las supera, 1millon supone mucha carga para realizar la prueba ahora mismo...
+
+
+Paron de la ejecucion del csv first 03: 18.431
+
+Finalizacion de la validacion total:
+
+Ultimo feature validado:
+__test-docker-no-seccontext--image1.json,True,20,1,0.01348,2.9223,Todas las Configuraciones validas
+
+True: 194354, False: 10733, Error:58462
+Total: 226.168
+
+
+
+Ajuste de quitar mandatory + alternate por ser un array de Valores o Seleccion. Que ocurria en:
+
+							io_k8s_api_core_v1_Service_spec_clusterIPs cardinality [1..*] {doc 'ClusterIPs is a list of IP addresses assigned to this service, and are usually assigned randomly  If an address is specified manually, is in-range (as per system configuration), and is not in use, it will be allocated to the service; otherwise creation of the service will fail This field may not be changed through updates unless the type field is also being changed to ExternalName (which requires this field to be empty) or the type field is being changed from ExternalName (in which case this field may optionally be specified, as describe above)  Valid values are None, empty string (), or a valid IP address  Setting this to None makes a headless service (no virtual IP), which is useful when direct endpoint connections are preferred and proxying is not required  Only applies to types ClusterIP, NodePort, and LoadBalancer If this field is specified when creating a Service of type ExternalName, creation will fail This field will be wiped when updating a Service to type ExternalName  If this field is not specified, it will be initialized from the clusterIP field  If this field is specified, clients must ensure that clusterIPs[0] and clusterIP have the same valueThis field may hold a maximum of two entries (dual-stack IPs, in either order) These IPs must correspond to the values of the ipFamilies field Both clusterIPs and ipFamilies are governed by the ipFamilyPolicy field More info: https:_kubernetesio/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies'}
+								mandatory
+									String io_k8s_api_core_v1_Service_spec_clusterIPs_StringValue {doc 'Added String mandatory for complete structure Array in the model The modified is not in json but provide represents, Array of Strings: StringValue'}
+								alternative
+									io_k8s_api_core_v1_Service_spec_clusterIPs_None {doc 'Specific value: None'}
+									io_k8s_api_core_v1_Service_spec_clusterIPs_headless_service {doc 'Specific value: headless_service'}
+
+Para que se quede con:
+							io_k8s_api_core_v1_Service_spec_clusterIPs cardinality [1..*] {doc 'ClusterIPs is a list of IP addresses assigned to this service, and are usually assigned randomly  If an address is specified manually, is in-range (as per system configuration), and is not in use, it will be allocated to the service; otherwise creation of the service will fail This field may not be changed through updates unless the type field is also being changed to ExternalName (which requires this field to be empty) or the type field is being changed from ExternalName (in which case this field may optionally be specified, as describe above)  Valid values are None, empty string (), or a valid IP address  Setting this to None makes a headless service (no virtual IP), which is useful when direct endpoint connections are preferred and proxying is not required  Only applies to types ClusterIP, NodePort, and LoadBalancer If this field is specified when creating a Service of type ExternalName, creation will fail This field will be wiped when updating a Service to type ExternalName  If this field is not specified, it will be initialized from the clusterIP field  If this field is specified, clients must ensure that clusterIPs[0] and clusterIP have the same valueThis field may hold a maximum of two entries (dual-stack IPs, in either order) These IPs must correspond to the values of the ipFamilies field Both clusterIPs and ipFamilies are governed by the ipFamilyPolicy field More info: https:_kubernetesio/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies'}
+								alternative
+									io_k8s_api_core_v1_Service_spec_clusterIPs_None {doc 'Specific value: None'}
+									io_k8s_api_core_v1_Service_spec_clusterIPs_headless_service
+
+
+
+                
+** Revision constraints que generan Falses en la validacion.
+
+	io_k8s_api_apps_v1_Deployment_spec_template_spec_tolerations_operator_Exists => io_k8s_api_apps_v1_Deployment_spec_template_spec_tolerations_value
+
+  (io_k8s_api_storage_v1_CSIStorageCapacity_nodeTopology_matchExpressions_operator_In | io_k8s_api_storage_v1_CSIStorageCapacity_nodeTopology_matchExpressions_operator_NotIn => io_k8s_api_storage_v1_CSIStorageCapacity_nodeTopology_matchExpressions_values) | (io_k8s_api_storage_v1_CSIStorageCapacity_nodeTopology_matchExpressions_operator_Exists |io_k8s_api_storage_v1_CSIStorageCapacity_nodeTopology_matchExpressions_operator_DoesNotExist => !io_k8s_api_storage_v1_CSIStorageCapacity_nodeTopology_matchExpressions_values)
+	(io_k8s_api_storage_v1_CSIStorageCapacityList_items_nodeTopology_matchExpressions_operator_In | io_k8s_api_storage_v1_CSIStorageCapacityList_items_nodeTopology_matchExpressions_operator_NotIn => io_k8s_api_storage_v1_CSIStorageCapacityList_items_nodeTopology_matchExpressions_values) | (io_k8s_api_storage_v1_CSIStorageCapacityList_items_nodeTopology_matchExpressions_operator_Exists |io_k8s_api_storage_v1_CSIStorageCapacityList_items_nodeTopology_matchExpressions_operator_DoesNotExist => !io_k8s_api_storage_v1_CSIStorageCapacityList_items_nodeTopology_matchExpressions_values)
+	
+Error para la lógica que implicaba generar Falses sobre archivos que deberian de ser True:
+def extract_constraints_operator(description, feature_key): Funcion donde se trataba este caso y se realiza de forma errone, deberia de ser al reves para cumplir con la descripcion.
+        uvl_rule = f"{feature_without_lastProperty}_operator_{required_value} => {feature_key}"
+	      io_k8s_api_apps_v1_Deployment_spec_template_spec_tolerations_operator_Exists => io_k8s_api_apps_v1_Deployment_spec_template_spec_tolerations_value
+        Cambiado a:
+	      io_k8s_api_apps_v1_Deployment_spec_template_spec_tolerations_operator_Exists => !io_k8s_api_apps_v1_Deployment_spec_template_spec_tolerations_value
+
+Como se puede entender sobre y segun la descripcion:
+
+        "value": {
+          "description": "Value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string.",
+          "type": "string"
+        }
+
+
+Reglas que se implican en el archivo 0-dep-vn1.yaml
+	io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_ports_containerPort > 0 & io_k8s_api_apps_v1_Deployment_spec_template_spec_containers_ports_containerPort < 65536
+
+        "template": {
+          "$ref": "#/definitions/io.k8s.api.core.v1.PodTemplateSpec",
+          "description": "Template describes the pods that will be created. The only allowed template.spec.restartPolicy value is \"Always\"."
+        }
+	(io_k8s_api_apps_v1_Deployment_spec_template => io_k8s_api_apps_v1_Deployment_spec_template_spec_restartPolicy_Always & !io_k8s_api_apps_v1_Deployment_spec_template_spec_restartPolicy_Never & !io_k8s_api_apps_v1_Deployment_spec_template_spec_restartPolicy_OnFailure)
+  Se cambia por:
+	(io_k8s_api_apps_v1_Deployment_spec_template_spec_restartPolicy_Always => io_k8s_api_apps_v1_Deployment_spec_template) & (!io_k8s_api_apps_v1_Deployment_spec_template_spec_restartPolicy_OnFailure) & (!io_k8s_api_apps_v1_Deployment_spec_template_spec_restartPolicy_Never)
+
+        "restartPolicy": {
+          "description": "Restart policy for all containers within the pod. One of Always, OnFailure, Never. In some contexts, only a subset of those values may be permitted. Default to Always. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy",
+          "type": "string"
+        },
+
+
+											io_k8s_api_apps_v1_Deployment_spec_template_spec_tolerations cardinality [1..*] {doc 'If specified, the pod_s tolerations'}
+												optional
+													io_k8s_api_apps_v1_Deployment_spec_template_spec_tolerations_effect {doc 'Effect indicates the taint effect to match Empty means match all taint effects When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute'}
+														alternative
+															io_k8s_api_apps_v1_Deployment_spec_template_spec_tolerations_effect_PreferNoSchedule {doc 'Specific value: PreferNoSchedule'}
+															io_k8s_api_apps_v1_Deployment_spec_template_spec_tolerations_effect_NoExecute {doc 'Specific value: NoExecute'}
+															io_k8s_api_apps_v1_Deployment_spec_template_spec_tolerations_effect_NoSchedule {doc 'Specific value: NoSchedule'}
+													String io_k8s_api_apps_v1_Deployment_spec_template_spec_tolerations_key {doc 'Key is the taint key that the toleration applies to Empty means match all taint keys If the key is empty, operator must be Exists; this combination means to match all values and all keys'}
+													io_k8s_api_apps_v1_Deployment_spec_template_spec_tolerations_operator {doc 'Operator represents a key_s relationship to the value Valid operators are Exists and Equal Defaults to Equal Exists is equivalent to wildcard for value, so that a pod can tolerate all taints of a particular category'}
+														alternative
+															io_k8s_api_apps_v1_Deployment_spec_template_spec_tolerations_operator_Exists {doc 'Specific value: Exists'}
+															io_k8s_api_apps_v1_Deployment_spec_template_spec_tolerations_operator_Equal {default, doc 'Specific value: Equal'}
+													Integer io_k8s_api_apps_v1_Deployment_spec_template_spec_tolerations_tolerationSeconds {doc 'TolerationSeconds represents the period of time the toleration (which must be of effect NoExecute, otherwise this field is ignored) tolerates the taint By default, it is not set, which means tolerate the taint forever (do not evict) Zero and negative values will be treated as 0 (evict immediately) by the system'}
+													io_k8s_api_apps_v1_Deployment_spec_template_spec_tolerations_value {abstract, doc 'Value is the taint value the toleration matches to If the operator is Exists, the value should be empty, otherwise just a regular string'}
+														mandatory
+															String io_k8s_api_apps_v1_Deployment_spec_template_spec_tolerations_value_nameStr
+
+Otro caso del template se modifica tambien porque se seguia la misma logica erronea:
+
+        "template": {
+          "$ref": "#/definitions/io.k8s.api.core.v1.PodTemplateSpec",
+          "description": "Describes the pod that will be created when executing a job. The only allowed template.spec.restartPolicy values are \"Never\" or \"OnFailure\". More info: https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/"
+        },
+
+Finalmente obtenido: 
+(io_k8s_api_batch_v1_JobSpec_template_spec_restartPolicy_Never | io_k8s_api_batch_v1_JobSpec_template_spec_restartPolicy_OnFailure  => io_k8s_api_batch_v1_JobSpec_template) & (!io_k8s_api_batch_v1_JobSpec_template_spec_restartPolicy_Always)
+
+
+Mas constraints relacionadas:
+io_k8s_api_core_v1_ReplicationController_spec_template
+
+
+Errores de log donde aparece Error: the element "apiVersion" is not present in the FM model
+
+Los controller tienen doble ApiVersion. El primero, y otro dentro de propiedades que no tienen apiVersion. Mal definidos.
+En daemonon pone api también pero los errores son por varias propiedades que no se encuentran en los esquemas. Se empieza por una y el mapeo
+ya no se realiza correctamente.
+Error app-secret33.json
+io_k8s_api_core_v1_Secret
+Diferencia entre apps_v1_Secret vs core_v1_Secret ?
+
+Secret pertenece únicamente a core/v1, no a apps/v1
+En Kubernetes, el recurso Secret siempre ha sido parte del grupo core (también conocido como grupo vacío).
+
+Su apiVersion correcta es v1, no apps/v1. apps/v1 se utiliza para otros recursos...
+
+Lo mismo ocurre para el otro archivo 
+app1_podeContainer.json
+Se declara el Namespace como apps/v1 y es del grupo core.v1...
+
+    "io.k8s.api.core.v1.Namespace": {
+      "description"
+
+Los otros errores son por propiedades que no aparecen en los esquemas y se mencionan en las configuraciones yaml.
+
+
+
+Falses por el Number / Integer que se le asigna al valor y luego no se puede representar en uvl. Se deberia de cambiar a String?
+
+01-default-memory-cpu_1.json
+io_k8s_api_core_v1_LimitRange_spec_limits_defaultRequest cardinality [1..*] {doc 'DefaultRequest is the default resource requirement request value by resource name if resource request is omitted'}
+  alternative
+    String io_k8s_api_core_v1_LimitRange_spec_limits_defaultRequest_asString {doc 'Sub-feature added of type String'}
+    Integer io_k8s_api_core_v1_LimitRange_spec_limits_defaultRequest_asNumber
+
+  
+"io_k8s_api_core_v1_LimitRange_spec_limits_defaultRequest": [
+    {
+        "io_k8s_api_core_v1_LimitRange_spec_limits_defaultRequest_asString": "memory:256Mi"
+    },
+    {
+        "io_k8s_api_core_v1_LimitRange_spec_limits_defaultRequest_asNumber": "cpu:0.5"
+    }
+
+** Errores detectados en la generacion de configuraciones:
+
+(flamapyenv02) PS C:\Users\CAOSD\projects\scriptJsonToUvl\getValidConfig> py .\configurationJSON01.py
+Configuraciones que hay:    4
+Configuration 1: {'io_k8s_api_core_v1_LimitRange_apiVersion': 'v1', 'io_k8s_api_core_v1_LimitRange_kind': 'LimitRange', 'io_k8s_api_core_v1_LimitRange_metadata': True,
+ 'io_k8s_api_core_v1_LimitRange_metadata_name': 'limit-range-memory-cpu', 'io_k8s_api_core_v1_LimitRange_metadata_namespace': 'ns-dev', 'io_k8s_api_core_v1_LimitRange_spec': True,
+  'io_k8s_api_core_v1_LimitRange_spec_limits': True, 'io_k8s_api_core_v1_LimitRange_spec_limits_default_asString': 'memory:512Mi', 'io_k8s_api_core_v1_LimitRange_spec_limits_defaultRequest_asString': 'memory:256Mi',
+   'io_k8s_api_core_v1_LimitRange_spec_limits_defaultRequest_asNumber': 'memory:256Mi', 'io_k8s_api_core_v1_LimitRange_spec_limits_type': 'Container', 'io_k8s_api_core_v1_LimitRange_spec_limits_default': True, 'io_k8s_api_core_v1_LimitRange_spec_limits_defaultRequest': True}
+
+Al generar las configs se mezclan los valores entre los asString, asNumber...
+
+
+
+** Comprobando diferencias entre resultado global y uno parcial 3_11 con las restricciones "arregladas"
+
+Pasan de "Error" a False
+2-binding.json,False,11,1,0.01563,1.5053,Alguna Configuracion invalida
+2-binding1.json,False,
+
+Revisado hasta el 1035 del 3_11 que es el 956 en el 3_10.
+Hay diferencia xq muchos archivos que daban Error ahora dan False directamente
+
+
+archivos analizados: 3-daemonset y 3-daemonset3
+
+	io_k8s_api_apps_v1_DaemonSet_spec_updateStrategy_type_RollingUpdate => io_k8s_api_apps_v1_DaemonSet_spec_updateStrategy_rollingUpdate
+
+
+Aparentenmente no parece un error sino una aplicacion correcta de la logida de la descripcion y su correspondiente traduccion a una regla uvl
+
+    "io.k8s.api.apps.v1.DaemonSetUpdateStrategy": {
+      "description": "DaemonSetUpdateStrategy is a struct used to control the update strategy for a DaemonSet.",
+      "properties": {
+        "rollingUpdate": {
+          "$ref": "#/definitions/io.k8s.api.apps.v1.RollingUpdateDaemonSet",
+          "description": "Rolling update config params. Present only if type = \"RollingUpdate\"."
+        },
+        "type": {
+          "description": "Type of daemon set update. Can be \"RollingUpdate\" or \"OnDelete\". Default is RollingUpdate.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+
+Segun indica la descripcion rollingUpdate esta presente solo type es "RollingUpdate" y en este caso no se cumple...
+
+        "io_k8s_api_apps_v1_DaemonSet_spec": {
+            "io_k8s_api_apps_v1_DaemonSet_spec_updateStrategy": {
+                "io_k8s_api_apps_v1_DaemonSet_spec_updateStrategy_type": {
+                    "io_k8s_api_apps_v1_DaemonSet_spec_updateStrategy_type_RollingUpdate": true
+                }
+            },
+Si se agregase el feature io_k8s_api_apps_v1_DaemonSet_spec_updateStrategy_rollingUpdate, se mantendria el True de la validacion del archivo.
+
+
+fix:
+** Errores detectados en la generacion de configuraciones:
+Se va a cambiar los "number" por string para que haya compatibilidad directamente. Se pierde diversidad pero se vuelve mas estable, como uvl no soporta float por el momento, no se perdería mucha logica...
+Bastaria con cambiar el type del para definir como String los tipos de dato Number.
+Pendiente de preguntar para cambiar las cosas en el modelo, csv de mapeo y mapeo de archivos.
+                aux_description_sub_feature = f"Sub-feature added of type {option_type_data}"
+
+                sub_feature = {
+                    'name': f"{sanitized_name}_as{option_type_data} {{doc '{aux_description_sub_feature}'}}", ##  ## quizas mas adelante definir una descr personalizada para el sub_feature
+                    'type': 'alternative',  # Por defecto, se añade como alternative
+                    'description': aux_description_sub_feature,
+                    'sub_features': [],
+                    'type_data': self.sanitize_type_data(option_type_data)
+                }
+
+
+Nuevo analisis completo con todas las resctricciones.
+** Revisar resumen final del script get... numeros raros jeje
+PS C:\Users\CAOSD\projects\scriptJsonToUvl> py .\AAtester.py
+Total archivos: 226.217
+Cantidad de filas con valid=True: 212108
+Cantidad de filas con valid=False: 11747
+Cantidad de filas con valid=False: 2362
+Cantidad archivos en total: 226217
+Cantidad de filas con Valid=Invalid...: 55816

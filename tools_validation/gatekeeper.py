@@ -75,6 +75,6 @@ with open(csv_output, "w", newline="", encoding="utf-8") as csvfile:
     writer.writerow(["TOTAL_INVALID", false_count])
 
 # Reporte final por consola
-print(f"✅ Archivos válidos (True): {true_count}")
-print(f"❌ Archivos inválidos (False): {false_count}")
-print(f"📄 Resultados guardados en: {csv_output}")
+print(f" Archivos válidos (True): {true_count}")
+print(f" Archivos inválidos (False): {false_count}")
+print(f" Resultados guardados en: {csv_output}")

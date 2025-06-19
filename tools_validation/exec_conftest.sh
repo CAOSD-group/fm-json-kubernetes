@@ -1,6 +1,7 @@
 #!/bin/bash
 
 INPUT_DIR="./small"
+INPUT_DIR="../scriptJsonToUvl/yamls_agrupation/yamls-tools-files"
 POLICY_DIR="./policy"
 RESULTS_DIR="./results_conftest"
 BATCH_SIZE=800
