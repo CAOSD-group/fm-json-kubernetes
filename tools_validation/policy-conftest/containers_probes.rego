@@ -1,13 +1,17 @@
-# Validar que los contenedores tengan un 'livenessProbe'
-deny[msg] {
+package main
+
+deny contains msg if {
     input.kind == "Pod"
-    not input.spec.containers[_].livenessProbe
-    msg = "Pod containers must have a livenessProbe"
+    some i
+    container := input.spec.containers[i]
+    not container.livenessProbe
+    msg := "Pod containers must have a livenessProbe"
 }
 
-# Validar que los contenedores tengan un 'readinessProbe'
-deny[msg] {
+deny contains msg if {
     input.kind == "Pod"
-    not input.spec.containers[_].readinessProbe
-    msg = "Pod containers must have a readinessProbe"
+    some i
+    container := input.spec.containers[i]
+    not container.readinessProbe
+    msg := "Pod containers must have a readinessProbe"
 }

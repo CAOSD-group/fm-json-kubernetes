@@ -1,9 +1,8 @@
 #!/bin/bash
 
-INPUT_DIR="./small"
-INPUT_DIR="../scriptJsonToUvl/yamls_agrupation/yamls-tools-files"
-POLICY_DIR="./policy"
-RESULTS_DIR="./results_conftest"
+INPUT_DIR="./yamls-tools-files"
+POLICY_DIR="./policy-conftest"
+RESULTS_DIR="./results_conftest01"
 BATCH_SIZE=800
 TIMING_FILE="$RESULTS_DIR/batch_times.txt"
 
@@ -23,22 +22,23 @@ for batch_file in batch_*; do
   echo "Procesando lote: $batch_id"
   start_time=$(date +%s%3N)
 
-  # Crea un archivo temporal con los YAML de este lote
-  batch_list=$(mktemp)
+  # Crear directorio temporal y copiar archivos del lote
+  mkdir -p tmp_batch
   while read -r yaml_file; do
-    echo "$yaml_file"
-  done < "$batch_file" > "$batch_list"
+    cp "$yaml_file" tmp_batch/
+  done < "$batch_file"
 
-  # Ejecutar Conftest
-  ./conftest.exe test $(cat "$batch_list") --policy "$POLICY_DIR" --output json > "$output_file"
+  # Ejecutar Conftest en el directorio temporal
+  ./conftest.exe test tmp_batch --policy "$POLICY_DIR" --output json > "$output_file" 2>/dev/null
+
+  # Limpiar directorio temporal
+  rm -rf tmp_batch
 
   end_time=$(date +%s%3N)
   duration_ms=$((end_time - start_time))
   echo "$batch_id,$duration_ms" >> "$TIMING_FILE"
 
   echo "Lote $batch_id completado → Resultado en: $output_file"
-
-  rm "$batch_list"
 done
 
 # Ejecuta el análisis en Python

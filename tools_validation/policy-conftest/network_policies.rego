@@ -1,11 +1,13 @@
-deny[msg] {
+package main
+
+deny contains msg if {
     input.kind == "NetworkPolicy"
     not input.spec.podSelector
-    msg = "NetworkPolicy must define a podSelector"
+    msg := "NetworkPolicy must define a podSelector"
 }
 
-deny[msg] {
+deny contains msg if {
     input.kind == "NetworkPolicy"
     not input.spec.ingress
-    msg = "NetworkPolicy must define ingress rules"
+    msg := "NetworkPolicy must define ingress rules"
 }

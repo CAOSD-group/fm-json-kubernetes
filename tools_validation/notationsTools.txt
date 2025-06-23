@@ -35,6 +35,8 @@ Sobre el folder de archivos small: 1788
 8º Datree: [DEPRECATED] desde el Junio de 2023
 9º ConfigLint: Sin actualizaciones desde Junio de 2020
 10º: Conftest: True = 1529, False = 259
+10-1º: Conftest01: True = 1485, False = 303
+
 11º Terrascan: True = 1208, False = 580
 12º Trivy: True = 1079, False = 710
 

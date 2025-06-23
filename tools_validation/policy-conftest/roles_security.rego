@@ -1,11 +1,17 @@
-deny[msg] {
+package main
+
+deny contains msg if {
     input.kind == "RoleBinding"
-    input.subjects[_].kind != "ServiceAccount"
-    msg = "RoleBinding must reference ServiceAccount"
+    some i
+    subject := input.subjects[i]
+    not subject.kind == "ServiceAccount"
+    msg := "RoleBinding must reference ServiceAccount"
 }
 
-deny[msg] {
+deny contains msg if {
     input.kind == "Role"
-    input.rules[_].verbs[_] == "all"
-    msg = "Role should not allow all verbs"
+    some i
+    rule := input.rules[i]
+    rule.verbs[_] == "*"
+    msg := "Role should not allow all verbs"
 }

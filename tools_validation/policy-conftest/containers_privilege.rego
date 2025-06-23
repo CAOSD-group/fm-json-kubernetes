@@ -1,13 +1,17 @@
-# Validar que los contenedores no se ejecuten como root
-deny[msg] {
+package main
+
+deny contains msg if {
     input.kind == "Pod"
-    input.spec.containers[_].securityContext.runAsUser == 0
-    msg = "Containers must not run as root"
+    some i
+    container := input.spec.containers[i]
+    container.securityContext.runAsUser == 0
+    msg := "Containers must not run as root"
 }
 
-# Validar que el Pod tenga 'runAsNonRoot' configurado en su securityContext
-deny[msg] {
+deny contains msg if {
     input.kind == "Pod"
-    not input.spec.containers[_].securityContext.runAsNonRoot
-    msg = "Containers must specify runAsNonRoot as true"
+    some i
+    container := input.spec.containers[i]
+    not container.securityContext.runAsNonRoot
+    msg := "Containers must specify runAsNonRoot as true"
 }
