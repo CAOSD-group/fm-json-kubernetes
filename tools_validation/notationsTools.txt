@@ -2,16 +2,16 @@ Pruebas sobre validacion de las herramientas.
 Sobre el folder de archivos yamls_complete: 227.020k
 
 0º Herramienta yaml-json: True = 211.836 ,False = 11.299
-1º Kube-linter: True = 1625 ,False = 163 --
+1º Kube-linter: True = 98091 ,False = 128928 ---
 2º Kube-score: True = 1176 ,False = 612 --
-3º Kyverno: True = 1196, False = 592 --
+3º Kyverno: True = 1196, False = 592 -- ERROR EN EL PROCESAMIENTO -- No se han guardado ni los resultados...
 4º OPA Gatekeeper: Sin un conjunto de politicas claras
 5º Kubeconform: True = 1200, False = 588 --
 6º Kubevious[DEPRECATED]:
 7º Polaris: True = 1155, False = 633 --
 8º Datree: [DEPRECATED] desde el Junio de 2023
 9º ConfigLint: Sin actualizaciones desde Junio de 2020
-10º: Conftest: True = 1529, False = 259 -- Revisar politicas... Comprobar nuevas agregadas en policy_conftest
+10º: Conftest: True = 117.098, False = 109.121 ---
 11º Terrascan: True = 83.712, False = 143.307 ---
 12º Trivy: True = 82.857, False = 144.176 ---
 
@@ -25,7 +25,7 @@ Pruebas sobre validacion de las herramientas.
 Sobre el folder de archivos small: 1788
 
 0º Herramienta yaml-json = 
-1º Kube-linter: True = 1625 ,False = 163
+1º Kube-linter: True = 1189 ,False = 599
 2º Kube-score: True = 1176 ,False = 612
 3º Kyverno: True = 1196, False = 592
 4º OPA Gatekeeper: Sin un conjunto de politicas claras
