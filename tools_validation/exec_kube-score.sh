@@ -1,14 +1,16 @@
 #!/bin/bash
 
-INPUT_DIR="./small"  # o tu ruta real
+INPUT_DIR="./yamls-tools-files"
+#INPUT_DIR="./small"  # Cambia según tu ruta real
 RESULTS_DIR="./results_kube-score"
 BATCH_SIZE=800
 TIMING_FILE="$RESULTS_DIR/batch_times.txt"
 
+
 mkdir -p "$RESULTS_DIR"
 rm -f "$TIMING_FILE"
 
-# Listar todos los YAML
+# Listar todos los YAML y guardarlos
 find "$INPUT_DIR" -type f \( -name "*.yaml" -o -name "*.yml" \) > all_yaml_files.txt
 
 # Dividir en lotes
@@ -25,10 +27,9 @@ for batch_file in batch_*; do
     cp "$yaml_path" "tmp_kube_files/$fname"
   done < "$batch_file"
 
-  echo " Procesando lote: $batch_id"
+  echo "Procesando lote: $batch_id"
   start_time=$(date +%s%3N)
 
-  # Procesar todos los archivos del lote con kube-score
   for f in tmp_kube_files/*.yaml; do
     [ -e "$f" ] || continue
     echo "### path=$f" >> "$output_file"
@@ -40,7 +41,7 @@ for batch_file in batch_*; do
   echo "$batch_id,$duration_ms" >> "$TIMING_FILE"
 
   rm -rf tmp_kube_files
-  echo " Lote $batch_id completado → $output_file"
+  echo "Lote $batch_id completado → $output_file"
 done
 
 # Ejecutar análisis en Python
