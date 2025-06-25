@@ -1,10 +1,10 @@
 #!/bin/bash
 
-INPUT_DIR="./small"
-#INPUT_DIR="../scriptJsonToUvl/yamls_agrupation/yamls-tools-files"
-RESULTS_DIR="./results_kubeconform"
-BATCH_SIZE=800
-TIMING_FILE="./results_kubeconform/batch_times.txt"
+#INPUT_DIR="./small"
+INPUT_DIR="../scriptJsonToUvl/yamls_agrupation/yamls-tools-files"
+RESULTS_DIR="./results_kubeconform01"
+BATCH_SIZE=200
+TIMING_FILE="./results_kubeconform01/batch_times.txt"
 
 mkdir -p "$RESULTS_DIR"
 
