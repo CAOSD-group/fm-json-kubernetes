@@ -2,8 +2,10 @@
 
 INPUT_DIR="./small"
 RESULTS_DIR="./results_gatekeeper"
-POLICIES_DIR="./gatekeeper-library/library/general/"
-BATCH_SIZE=1000
+#POLICIES_DIR="./gatekeeper-library/library/general/block-endpoint-edit-default-role"
+POLICIES_DIR="./policies_gatekeeper/general_custom"
+
+BATCH_SIZE=800
 
 mkdir -p "$RESULTS_DIR"
 
@@ -32,7 +34,7 @@ for batch_file in batch_*; do
 
   done < "$batch_file"
 
-  echo "✅ Lote $batch_id completado → Resultado en: $output_file"
+  echo "Lote $batch_id completado → Resultado en: $output_file"
 done
 
 # Ejecuta el procesamiento final en Python

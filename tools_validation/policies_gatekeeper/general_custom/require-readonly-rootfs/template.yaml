@@ -1,0 +1,19 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: readonlyrootfs
+spec:
+  crd:
+    spec:
+      names:
+        kind: ReadOnlyRootFS
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package readonlyrootfs
+
+        deny[{"msg": msg}] {
+          container := input.review.object.spec.containers[_]
+          not container.securityContext.readOnlyRootFilesystem
+          msg := sprintf("Container '%s' must set readOnlyRootFilesystem: true.", [container.name])
+        }
