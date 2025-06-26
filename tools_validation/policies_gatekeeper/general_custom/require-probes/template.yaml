@@ -12,13 +12,13 @@ spec:
       rego: |
         package k8srequiredprobes
 
-        deny[{"msg": msg}] {
+        violation[{"msg": msg}] {
           container := input.review.object.spec.containers[_]
           not container.livenessProbe
           msg := sprintf("Container '%s' must define a livenessProbe", [container.name])
         }
 
-        deny[{"msg": msg}] {
+        violation[{"msg": msg}] {
           container := input.review.object.spec.containers[_]
           not container.readinessProbe
           msg := sprintf("Container '%s' must define a readinessProbe", [container.name])

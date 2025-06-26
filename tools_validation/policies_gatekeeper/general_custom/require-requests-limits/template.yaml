@@ -12,19 +12,19 @@ spec:
       rego: |
         package k8srequiredresources
 
-        deny[{"msg": msg}] {
+        violation[{"msg": msg}] {
           container := input.review.object.spec.containers[_]
           not container.resources.requests.cpu
           msg := sprintf("Container '%s' must set resource requests.cpu", [container.name])
         }
 
-        deny[{"msg": msg}] {
+        violation[{"msg": msg}] {
           container := input.review.object.spec.containers[_]
           not container.resources.requests.memory
           msg := sprintf("Container '%s' must set resource requests.memory", [container.name])
         }
 
-        deny[{"msg": msg}] {
+        violation[{"msg": msg}] {
           container := input.review.object.spec.containers[_]
           not container.resources.limits.memory
           msg := sprintf("Container '%s' must set resource limits.memory", [container.name])

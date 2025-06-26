@@ -25,7 +25,7 @@ spec:
           not input.review.object.metadata.labels[label]
         }
 
-        deny[{"msg": msg}] {
+        violation[{"msg": msg}] {
           label := missing_labels[_]
           msg := sprintf("Missing required label: %s", [label])
         }

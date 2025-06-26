@@ -20,9 +20,9 @@ spec:
       rego: |
         package allowedcapabilities
 
-        deny[{"msg": msg}] {
+        violation[{"msg": msg}] {
           container := input.review.object.spec.containers[_]
           cap := container.securityContext.capabilities.add[_]
-          not cap in input.parameters.allowedCapabilities
+          not contains(input.parameters.allowedCapabilities, cap)
           msg := sprintf("Capability %s is not allowed in container '%s'", [cap, container.name])
         }

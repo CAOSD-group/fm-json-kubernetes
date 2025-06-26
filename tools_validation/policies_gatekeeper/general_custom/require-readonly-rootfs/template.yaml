@@ -12,7 +12,7 @@ spec:
       rego: |
         package readonlyrootfs
 
-        deny[{"msg": msg}] {
+        violation[{"msg": msg}] {
           container := input.review.object.spec.containers[_]
           not container.securityContext.readOnlyRootFilesystem
           msg := sprintf("Container '%s' must set readOnlyRootFilesystem: true.", [container.name])
