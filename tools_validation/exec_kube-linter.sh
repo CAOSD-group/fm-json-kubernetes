@@ -1,33 +1,57 @@
 #!/bin/bash
 
-INPUT_DIR="./small"
-RESULTS_DIR="./results_kubeLinter_json"
+INPUT_DIR="../scriptJsonToUvl/yamls_agrupation/yamls-tools-files"
+#INPUT_DIR="./small"
+RESULTS_DIR="./results_kubeLinter01"
 BATCH_SIZE=800
 TIMING_FILE="$RESULTS_DIR/batch_times.txt"
 
 mkdir -p "$RESULTS_DIR"
+rm -f "$TIMING_FILE"
 
-# Lista todos los YAML y los guarda en un archivo temporal
-find "$INPUT_DIR" -type f \( -name '*.yaml' \) > all_yaml_files.txt ## -o -name '*.yml' 
+# Listar todos los YAML
+find "$INPUT_DIR" -type f -name "*.yaml" > all_yaml_files.txt
 
-# Divide en lotes de 1000
+# Verificación
+total_files=$(wc -l < all_yaml_files.txt)
+echo "Total YAMLs detectados: $total_files"
+
+# Dividir en lotes
 split -l "$BATCH_SIZE" all_yaml_files.txt batch_
 
-# Ejecutar kube-linter por lote
+# Procesar cada lote
 for batch_file in batch_*; do
   batch_id=$(basename "$batch_file")
-  mapfile -t files < "$batch_file"
-  #start_time=$(date +%s) ## Start time counter
-  start_time=$(date +%s%3N) # milisegundos
-  kube-linter lint "${files[@]}" --format json > "$RESULTS_DIR/$batch_id.json"
+  output_file="$RESULTS_DIR/${batch_id}.json"
+
+  echo "Procesando lote: $batch_id"
+  start_time=$(date +%s%3N)
+
+  TMP_DIR=$(mktemp -d)
+  while read -r yaml_file; do
+    [ -f "$yaml_file" ] && cp "$yaml_file" "$TMP_DIR/"
+  done < "$batch_file"
+
+  file_count=$(find "$TMP_DIR" -type f -name "*.yaml" | wc -l)
+  if [ "$file_count" -eq 0 ]; then
+    echo "{}" > "$output_file"
+    echo "$batch_id,0" >> "$TIMING_FILE"
+    rm -rf "$TMP_DIR"
+    continue
+  fi
+
+  # Ejecutar kube-linter
+  kube-linter lint "$TMP_DIR" --format json > "$output_file" 2>/dev/null
+
   end_time=$(date +%s%3N)
-  #end_time=$(date +%s) ## End time counter
   duration_ms=$((end_time - start_time))
   echo "$batch_id,$duration_ms" >> "$TIMING_FILE"
-  #xargs -a "$batch_file" /c/Users/CAOSD/go/bin/kube-linter lint --format json >> "$RESULTS_DIR/$batch_id.json"
-  echo "Procesado lote $batch_id con ${#files[@]} archivos"
+
+  echo "Lote $batch_id completado → Resultado: $output_file"
+  rm -rf "$TMP_DIR"
 done
 
+# Ejecutar análisis en Python
 python kube-linter.py
 
 # Limpieza

@@ -3,7 +3,7 @@
 #INPUT_DIR="./small"
 INPUT_DIR="../scriptJsonToUvl/yamls_agrupation/yamls-tools-files"
 RESULTS_DIR="./results_kubeconform01"
-BATCH_SIZE=200
+BATCH_SIZE=300
 TIMING_FILE="./results_kubeconform01/batch_times.txt"
 
 mkdir -p "$RESULTS_DIR"

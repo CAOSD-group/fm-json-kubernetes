@@ -2,21 +2,20 @@ Pruebas sobre validacion de las herramientas.
 Sobre el folder de archivos yamls_complete: 227.020k
 
 0º Herramienta yaml-json: True = 211.836 ,False = 11.299
-1º Kube-linter: True = 98091 ,False = 128928 ---
-2º Kube-score: True = 1176 ,False = 612 --
+1º Kube-linter: True = 98.091 ,False = 128928 --- 227.019
+2º Kube-score: True = 70.969 ,False = 156.050 --- 227.019
 3º Kyverno: True = 1196, False = 592 -- ERROR EN EL PROCESAMIENTO -- No se han guardado ni los resultados...
-4º OPA Gatekeeper: Sin un conjunto de politicas claras
-5º Kubeconform: True = 1200, False = 588 --
+4º OPA Gatekeeper: Sin un conjunto de politicas claras -- En proceso
+5º Kubeconform: True = 223118, False = 3901 --- 227019 --- Comprobar el funcionamiento
 6º Kubevious[DEPRECATED]:
-7º Polaris: True = 1155, False = 633 --
+7º Polaris: True = 90285, False = 136600 --- 226.885
 8º Datree: [DEPRECATED] desde el Junio de 2023
-9º ConfigLint: Sin actualizaciones desde Junio de 2020
-10º: Conftest: True = 117.098, False = 109.121 ---
-11º Terrascan: True = 83.712, False = 143.307 ---
-12º Trivy: True = 82.857, False = 144.176 ---
-
-
-
+9º Config-Lint: Sin actualizaciones desde Junio de 2020
+10º Conftest: True = 117.098, False = 109.121 --- 226.219
+11º Terrascan: True = 83.712, False = 143.307 --- 227.019
+12º Trivy: True = 82.857, False = 144.176 --- 227.033
+13º Checkov:
+14º kubernetes-validate:
 
 
 
@@ -129,6 +128,8 @@ unificados, siendo imposible comprobar que fallos corresponden a cada archivo o 
 ****Pendiente:
 Modificar salida del json para que solo se muestren los false" // Probar, demasiadas lineas para 1,8k de archivos => 200k
 
+Se completaron los resultados con json invalidos con el uso de un script secundario para evaluar los batchs corregidos con errores de {}
+
 ** Datree:  
 
 https://github.com/datreeio/datree
@@ -159,11 +160,15 @@ https://github.com/open-policy-agent/conftest/releases
 
 Politicas de ejemplo para kubernetes:
 https://github.com/open-policy-agent/conftest/tree/master/examples/kubernetes/policy
+
+
 ** Checkov:
+https://github.com/bridgecrewio/checkov
+is a static code analysis tool for infrastructure as code (IaC) and also a software composition analysis (SCA) tool for images and open source packages.
+
 
 ** Terrascan:
 https://github.com/tenable/terrascan
-Terrascan is a static code analyzer for Infrastructure as Code
 Terrascan is a static code analyzer for Infrastructure as Code. It can be installed and run in a number of different ways, and is most commonly used in automated pipelines
 to identify policy violations before insecure infrastructure is provisioned
 Opciones terrascan
@@ -205,6 +210,19 @@ Los archivos con 0 en el tiempo de procesamiento es porque la herramienta omitio
 https://github.com/aquasecurity/kube-bench
 
 Descartado porque esta diseñado para escanear los clusteres en tiempo de ejecucion
+
+** Copper:
+https://github.com/cloud66-oss/copper
+Herramienta sin updates desde hace mas de 5 años..
+
+** kubernetes-validate:
+https://github.com/willthames/kubernetes-validate
+
+Schemas validation 
+
+pip install kubernetes-validate
+** Kubeval:
+Deprecated
 
 
 Ejecucion de batchs erronea en
@@ -249,3 +267,8 @@ Lote batch_kx completado → Resultado en: ./results_polaris-cli/batch_kx.json
  Error de JSON en batch_ka.json
  Error de JSON en batch_kb.json
  CSV generado: ./results/polaris-cli/validation_results02.csv
+
+
+ Procesado lote batch_bi con 300 archivos
+./exec_kubeconform.sh: line 23: /c/Users/CAOSD/AppData/Local/Microsoft/WinGet/Packages/YannHamon.kubeconform_Microsoft.Winget.Source_8wekyb3d8bbwe/kubeconform: Argument list too long
+Procesado lote batch_bj con 300 archivos
