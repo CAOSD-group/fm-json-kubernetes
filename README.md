@@ -1,7 +1,7 @@
-## Table of Contents
+# Table of Contents
 
 - [Table of Contents](#table-of-contents)
-- [fm-json-kubernetes](#fm-json-kubernetes)
+- [k8sJsontoUvl](#k8sJsontoUvl)
   - [Description](#description)
   - [How to use it](#how-to-use-it)
   - [Using the scripts](#using-the-scripts)
@@ -13,9 +13,11 @@
 
 ---
 
+# k8sJsontoUvl
+
 ## Description
 
-**fm-json-kubernetes** is an automated pipeline for extracting a variability model from Kubernetes’ OpenAPI JSON schemas. It produces a [UVL (Universal Variability Language)](https://universal-variability-language.github.io/) feature model representing configuration options and their constraints.
+**k8sJsontoUvl** is an automated pipeline for extracting a variability model from Kubernetes’ OpenAPI JSON schemas. It produces a [UVL (Universal Variability Language)](https://universal-variability-language.github.io/) feature model representing configuration options and their constraints.
 
 The pipeline includes:
 - Schema parsing and property mapping
@@ -69,7 +71,7 @@ In Windows: .\env\Scripts\Activate
 pip install -r requirements.txt
 
 
-### Exectuion
+### Execution
 
 To obtain the Kubernetes JSON schema. You can use the included script:
 ./scriptJsonToUvl/scriptGetRepoVersion.sh
