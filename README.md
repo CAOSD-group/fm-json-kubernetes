@@ -1,46 +1,132 @@
-# fm-json-kubernetes
+# Table of Contents
 
-El proyecto tiene como objetivo convertir cualquier versión de los esquemas de Kubernetes en un feature model UVL. 
+- [Table of Contents](#table-of-contents)
+- [k8sJsontoUvl](#k8sJsontoUvl)
+  - [Description](#description)
+  - [How to use it](#how-to-use-it)
+  - [Using the scripts](#using-the-scripts)
+    - [Requirements](#requirements)
+    - [Download and install](#download-and-install)
+    - [Execution](#execution)- [Execution](#execution)
+  - [Architecture and repository structure](#architecture-and-repository-structure)
+  - [References and third-party tools](#references-and-third-party-tools)
 
-En la carpeta scriptJsonToUvl se encuentran los siguientes archivos:
+---
 
-- ~~analisisScript.py: es un archivo en desarrollo que busca poder mapear las descripciones filtradas de los features a restricciones o constraints válidas en el modelo.~~
-- analisisScriptNpl.py: es una versión del primer script en la que se añade NPL o Tratamiento del Lenguaje Natural para tratar de mejorar la obtención de las restricciones de las descripciones.
-- analisisScriptNpl01.py: es una nueva versión del fichero anterior, se aplican ya todos los casos implementados y probados. Es el fichero principal para obtener las constraints y sigue en desarrollo. Se diferencian los casos por el tipo de dato que manejan y diferencias entre las descripciones y los nombres de los features. (En desarrollo)
-- ~~conver0SinDatos.py: es una versión del archivo base de conversión que omite el Tipo de datos de los features (String, Boolean, Integer) para poder analizarlo con flamapy.~~
-- ~~convert0.py: archivo base de la conversión que mantiene una funcionalidad testeada y robusta. Esta se actualiza cuando los cambios estan probados y validados en convert01Large.py.~~
-- ~~convert01Large.py: esta es la versión principal de desarrollo que se esta usando para desarrollar el script. Esta versión es la mas avanzada y donde se suelen subir las actualizaciones y cambios, difiere de las demás en que aquí se extienden las referencias, se están añadiendo funciones para manejar constraints y más...~~
-- ~~convert02Short.py: esta es una versión paralela a la anterior que no extiende tanto las referencias y trata de evitar la repetición de referencias que ya han sido procesadas.~~
-- descripcionesManuales.txt: es este fichero de texto se están añadiendo manualmente las descripcciones que tienen restricciones, valores o dependencias para tener nota de las posibles conversiones a realizar en un futuro.
-- descriptions_01.json: archivo en formato json con las descripciones filtradas del script base, de aquí se extraen las descripciones en los analisis*. están divididas por grupos con el nombre del feature y el tipo de dato que se describe.
-- getNumberFiles.py: fichero de prueba para comprobar cuantos archivos tiene cada carpeta obtenida de la versión de kubernetes-json-schema.
-- kubernetes_combined_01_constraints.uvl: resultado de la conversión de los esquemas json de kubernetes. Este es el feature model actual que sigue en proceso de añadir las constraints restantes (7651 sin contar las restricciones).
-- kubernetes_combined_01_original.uvl: feature model original con la primera versión obtenida (5712 lineas)
-- kubernetes_combined_01.uvl: feature model actual y más avanzado, 76.075 líneas. (En desarrollo)
-- restrictions02.txt: archivo de prueba donde se obtienen las restricciones "automaticamente" (En desarrollo)
-- scriptGetRepoVersion.sh: script para obtener una versión específica de [kubernetes-json-schema](https://github.com/yannh/kubernetes-json-schema/tree/master) 
+# k8sJsontoUvl
 
-En la carpeta v.30.2 se encuentran los siguientes archivos:
+## Description
 
-- _definitions.json_: es el archivo principal de los esquemas de Kubernetes donde se concentran todos los esquemas repartidos en los miles de archivos individuales de cada versión de Kubernetes. Se usa este archivo como base para construir el modelo uvl y corresponde a la versión V.30.2.
+**k8sJsontoUvl** is an automated pipeline for extracting a variability model from Kubernetes’ OpenAPI JSON schemas. It produces a [UVL (Universal Variability Language)](https://universal-variability-language.github.io/) feature model representing configuration options and their constraints.
+
+The pipeline includes:
+- Schema parsing and property mapping
+- Rule-based constraint generation
+- UVL model synthesis
+- YAML-to-feature mapping and configuration validation using [Flamapy](https://www.flamapy.org/)
+
+It is designed for research, analysis, and validation scenarios where formal modeling of complex system configurations (like Kubernetes) is required.
+
+---
+
+## How to use it
+
+The usage involves two main steps:
+1. Obtain a version of the Kubernetes `_definitions.json` schema (e.g., using the `scriptGetRepoVersion.sh`)
+2. Run the main conversion script to generate the `.uvl` feature model
+
+YAML configurations can then be mapped and validated against the model.
+
+## Using the scripts
+
+### Requirements
+
+- [Python 3.9+](https://www.python.org/)
+- [Flamapy](https://www.flamapy.org/)
+- Git (to clone schema versions)
+- Bash or PowerShell for script execution
+
+---
+
+### Download and install
+
+1. Install [Python 3.9+](https://www.python.org/)
+
+2. Clone this repository and enter the project folder:
+git clone https://github.com/your-user/fm-json-kubernetes
+cd fm-json-kubernetes
+
+3. Create a virtual environment:
+
+python -m venv env
+
+4. Activate the environment:
+
+In Linux: source env/bin/activate
+
+In Windows: .\env\Scripts\Activate
+
+5. Install the dependencies:
+
+pip install -r requirements.txt
 
 
-# Funcionamiento del programa: 
+### Execution
 
-En la siguiente imagen se puede observar de manera visual como se relacionan los archivos.
+To obtain the Kubernetes JSON schema. You can use the included script:
+./scriptJsonToUvl/scriptGetRepoVersion.sh
 
+Edit the line inside to specify the version (e.g., v1.30.2).
+
+The convert0.py script is the entry point operation for...
+Run the main feature model generator with:
+
+python scriptJsonToUvl/convert01Large.py
+
+Make sure to configure the correct path to the _definitions.json file at the bottom of the script:
+
+python
+definitions_file = '../kubernetes-json-v1.30.2/v1.30.2/_definitions.json'
+
+
+#### Output files:
+
+
+kubernetes_combined_02.uvl: Final synthesized feature model
+
+descriptions_01.json: File containing grouped and parsed feature descriptions
+
+
+## Architecture and repository structure
+
+The overall workflow is visualized below:
 
 ![Schema updated](https://github.com/user-attachments/assets/4d97bee9-67b7-4c47-8b32-a040f17d2dd1)
 
-# ¿Cómo usar el programa?
+Pipeline stages:
 
-De momento el uso del programa es sencillo, consta de 2 pasos y son los siguientes:
+convert01Large.py: Parses JSON schemas and builds the UVL model
 
-1. Obtener una versión de kubernetes-json. Esto se puede realizar mediante el fichero [scriptGetRepoVersion.sh](https://github.com/CAOSD-group/fm-json-kubernetes/blob/main/scriptJsonToUvl/scriptGetRepoVersion.sh) o descargarse el archivo _definitions.json de la versión que se desee convertir. Si se realiza con la primera opción lo único que habría que modificar es la línea "echo "v1.30.2" >> .git/info/sparse-checkout" con el nombre de la carpeta que contiene la versión deseada. Este script crea un repositorio local con el contenido de la carpeta especificada. Se puede ejecutar directamente con Git Bash y el comando "./scriptGetRepoVersion.sh" o línea por línea desde el cmd o PowerShell. También se puede probar con la versión usada para el desarrollo de este proyecto en la carpeta [v.30.2](https://github.com/CAOSD-group/fm-json-kubernetes/tree/main/v.30.2).
+mappingUVC.csv: CSV mapping between YAML keys and UVL features
 
-2. Ejecutar el script [convert01.py](https://github.com/CAOSD-group/fm-json-kubernetes/blob/main/scriptJsonToUvl/convert01.py). Este es el script en desarrollo más avanzado y completo por el momento. La ejecución es simple usando Python con el comando "python .\convert01.py", el único detalle es comprobar la ruta relativa asociada al archivo _definitions.json que se menciona al final del fichero "definitions_file = '../kubernetes-json-v1.30.2/v1.30.2/_definitions.json'", asignando la ruta apropiada en cada caso.
+mappingYAMLJSON.py: Converts YAMLs to JSON candidates for validation
 
-Tras realizar estos pasos se obtiene el archivo con el modelo kubernetes_combined_01.uvl.
+getStatisticsValid.py + valid_config.py: Run validation and generate result CSVs
+
+Key folders:
+
+/scriptJsonToUvl/: Main scripts and utilities
+
+/v.30.2/: Example Kubernetes schema inputs
+
+/resources/: Images, diagrams, and result data
 
 
-El proyecto sigue en desarrollo y con mucho margen de mejora...
+
+## References and third-party software
+
+Flamapy: SPL analysis and validation framework
+
+Universal Variability Language (UVL)
+
+Kubernetes JSON Schemas
