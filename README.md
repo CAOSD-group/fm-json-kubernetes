@@ -132,9 +132,10 @@ The overall workflow is visualized below:
 
 ### Key folders
 
-- `/scriptJsonToUvl/`: Scripts and main utilities.
-- `/v.30.2/`: Example Kubernetes schema inputs.
-- `/resources/`: Images, diagrams, and result data.
+- `/scripts/`: Scripts and main utilities.
+- `/evaluation/`: Results data of evaluations.
+- `/variability_model/`: Feature models results and diagrams,.
+- `/resources/`: Example Kubernetes schema inputs.
 
 ---
 
