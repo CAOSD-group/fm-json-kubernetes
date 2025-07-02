@@ -53,23 +53,32 @@ YAML configurations can then be mapped and validated against the model.
 1. Install [Python 3.9+](https://www.python.org/)
 
 2. Clone this repository and enter the project folder:
-git clone https://github.com/your-user/fm-json-kubernetes
-cd fm-json-kubernetes
-
+  ```bash
+  git clone https://github.com/your-user/fm-json-kubernetes
+  cd fm-json-kubernetes
+  ```
 3. Create a virtual environment:
 
-python -m venv env
+  ```bash
+  python -m venv env
+  ```
 
 4. Activate the environment:
 
-In Linux: source env/bin/activate
-
-In Windows: .\env\Scripts\Activate
+  - **Linux:**
+    ```bash
+    source env/bin/activate
+    ```
+  - **Windows:**
+    ```powershell
+    .\env\Scripts\Activate
+    ```
 
 5. Install the dependencies:
 
-pip install -r requirements.txt
-
+  ```bash
+  pip install -r requirements.txt
+  ```
 
 ### Execution
 
