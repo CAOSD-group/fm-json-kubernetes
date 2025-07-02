@@ -82,29 +82,39 @@ YAML configurations can then be mapped and validated against the model.
 
 ### Execution
 
-To obtain the Kubernetes JSON schema. You can use the included script:
-./scriptJsonToUvl/scriptGetRepoVersion.sh
 
-Edit the line inside to specify the version (e.g., v1.30.2).
+To obtain the Kubernetes JSON schema, use the included script:
 
-The convert0.py script is the entry point operation for...
-Run the main feature model generator with:
+```bash
+./scripts/scriptGetRepoVersion.sh
+```
 
-python scriptJsonToUvl/convert01Large.py
+> ⚙️ Modify the version by changing the line:
+> ```bash
+> echo "v1.30.2" >> .git/info/sparse-checkout
+> ```
 
-Make sure to configure the correct path to the _definitions.json file at the bottom of the script:
+Or dowload manually from https://github.com/yannh/kubernetes-json-schema
 
-python
-definitions_file = '../kubernetes-json-v1.30.2/v1.30.2/_definitions.json'
+Then run the main feature model generator:
 
+```bash
+python scripts/convert01.py
+```
+
+Make sure to update the path to the `_definitions.json` file at the bottom of the script:
+
+```python
+definitions_file = './resources/kubernetes-json-v1.30.2/_definitions.json'
+```
 
 #### Output files:
 
 
-kubernetes_combined_02.uvl: Final synthesized feature model
+- `kubernetes_combined_04.uvl`: Final synthesized feature model.
+- `descriptions_01.json`: Grouped and parsed feature descriptions used for constraint generation.
 
-descriptions_01.json: File containing grouped and parsed feature descriptions
-
+---
 
 ## Architecture and repository structure
 
@@ -112,30 +122,28 @@ The overall workflow is visualized below:
 
 ![Schema updated](https://github.com/user-attachments/assets/4d97bee9-67b7-4c47-8b32-a040f17d2dd1)
 
-Pipeline stages:
 
-convert01Large.py: Parses JSON schemas and builds the UVL model
+### Pipeline stages
 
-mappingUVC.csv: CSV mapping between YAML keys and UVL features
+- `convert01.py`: Parses JSON schemas and builds the UVL model.
+- `mappingUVL.csv`: Maps YAML keys to UVL features.
+- `mappingYAMLJSON.py`: Converts YAML files into JSON candidates for validation.
+- `getStatisticsValid.py` & `valid_config.py` & `configuration01.py` : Run validation, configuration and generate result summaries.
 
-mappingYAMLJSON.py: Converts YAMLs to JSON candidates for validation
+### Key folders
 
-getStatisticsValid.py + valid_config.py: Run validation and generate result CSVs
+- `/scriptJsonToUvl/`: Scripts and main utilities.
+- `/v.30.2/`: Example Kubernetes schema inputs.
+- `/resources/`: Images, diagrams, and result data.
 
-Key folders:
-
-/scriptJsonToUvl/: Main scripts and utilities
-
-/v.30.2/: Example Kubernetes schema inputs
-
-/resources/: Images, diagrams, and result data
-
-
+---
 
 ## References and third-party software
 
-Flamapy: SPL analysis and validation framework
+- [**Flamapy**](https://www.flamapy.org/): SPL analysis and validation framework  
+- [**UVL: Universal Variability Language**](https://universal-variability-language.github.io/)  
+- [**Kubernetes JSON Schemas**](https://github.com/yannh/kubernetes-json-schema)
 
-Universal Variability Language (UVL)
+---
 
-Kubernetes JSON Schemas
+_This project is in active development. Future improvements include more robust constraint integration, validation visualization, and support for additional formats._
