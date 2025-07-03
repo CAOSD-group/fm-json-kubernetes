@@ -1,8 +1,0 @@
-Error desconocido en archivo 01-cluster-ip3_1.json: Error: the element "protocal" is not present in the FM model.
-Error desconocido en archivo 01-cluster-ip_1.json: Error: the element "protocal" is not present in the FM model.
-Error desconocido en archivo 01-ClusterIP2.json: Error: the element "container" is not present in the FM model.
-Error desconocido en archivo 01-workload_1.json: Error: the element "template" is not present in the FM model.
-Error desconocido en archivo 015-daemonSet.json: Error: the element "volumes" is not present in the FM model.
-Error desconocido en archivo 02-3.ClusterIP_Replicas.json: Error: the element "replicas" is not present in the FM model.
-Error desconocido en archivo 02-3.ClusterIP_Replicas1.json: Error: the element "replicas" is not present in the FM model.
-Error desconocido en archivo 02-Deployment5.json: Error: the element "matchLables" is not present in the FM model.
