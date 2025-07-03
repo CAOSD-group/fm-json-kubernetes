@@ -15,6 +15,8 @@
 
 # k8sJsontoUvl
 
+![Overview of the conversion process](resources/k8sJsontoUvl_overview.PNG)
+
 ## Description
 
 **k8sJsontoUvl** is an automated pipeline for extracting a variability model from Kubernetes’ OpenAPI JSON schemas. It produces a [UVL (Universal Variability Language)](https://universal-variability-language.github.io/) feature model representing configuration options and their constraints.
@@ -43,7 +45,7 @@ YAML configurations can then be mapped and validated against the model.
 
 - [Python 3.9+](https://www.python.org/)
 - [Flamapy](https://www.flamapy.org/)
-- Git (to clone schema versions)
+- Git
 - Bash or PowerShell for script execution
 
 ---
