@@ -9,8 +9,8 @@ import gc
 import shutil
 
 # Ruta base donde están los buckets clasificados por tamaño
-yaml_base_directory = './yamls_agrupation' ## tester
-csv_kinds_versions = './generateConfigs/kinds_versions_detected.csv'
+yaml_base_directory = '../../resources/yamls_agrupation' ## Add zip of files?
+csv_kinds_versions = '../../resources/mapping_csv/generateConfigs/kinds_versions_detected.csv'
 # Buckets válidos
 buckets = ['tiny', 'small', 'medium', 'large', 'huge']
 

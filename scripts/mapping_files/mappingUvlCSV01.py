@@ -3,9 +3,8 @@
 import re
 import csv
 
-uvl_model_path = './kubernetes_combined_04.uvl' ## Anterior V. './kubernetes_combined_02_2.uvl'
-#uvl_model_path = './kubernetes_combined_part01.uvl'
-#uvl_model_path = './kubernetes-mapped-v1.32/kubernetes_combined_02_V32_part01.uvl'
+uvl_model_path = '../../kubernetes_combined_04.uvl' ## Anterior V. './kubernetes_combined_02_2.uvl'
+
 
 # Procesar el modelo para extraer los datos en las columnas
 csv_data = []
