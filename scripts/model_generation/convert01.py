@@ -5,7 +5,7 @@ import re
 from collections import deque
 
 # Importar el procesador de restricciones
-#from restrictions_processor import process_restrictions
+from analisisScript01 import generar_constraintsDef
 ##global feature_aux_original_type
 #from analisisScriptNpl01conMain import generar_constraintsDef
 class SchemaProcessor:
@@ -461,15 +461,6 @@ class SchemaProcessor:
             if default_full_name != '':
                 return default_full_name, default_bool
                 
-        """aux_full_name = full_name
-        if '{default' in full_name:
-            full_name = full_name.replace('}', '')##.replace('{', '')
-            full_name = f"{full_name}, doc '{cleaned_description}'}}" ## despues name: f"{full_name} {{doc, '{cleaned_description}'}}"
-            print(full_name)
-        elif 'abs__' in full_name:
-            print("Creo que no me tendria que ejecutar")
-        else:
-            full_name = aux_full_name"""
         return full_name, default_bool
 
     def update_type_data(self, full_name, feature_type_data, description): ## sino probar con full_name
@@ -745,7 +736,6 @@ class SchemaProcessor:
                         full_name = full_name.replace(" cardinality [1..*]", "") ## Agregado para omitir el cardinality cuando no corresponde...
 
                         if type_data_items == 'string' and not bool_added_value:
-                            bool_added_strVal = True
                             aux_description_string_items = f"Added String mandatory for complete structure Array in the model The modified is not in json but provide represents, Array of Strings: StringValue"
                             feature['sub_features'].append({
                                 'name': f"{full_name}_StringValue {{doc '{aux_description_string_items}'}}", ## RefName Aparte {full_name}_{ref_name}
@@ -1083,24 +1073,10 @@ def generate_uvl_from_definitions(definitions_file, output_file, descriptions_fi
                 #print(f"Procesando oneOf en {schema_name}")
                 oneOf_feature = processor.process_oneOf(schema['oneOf'], processor.sanitize_name(schema_name), type_feature='optional')
                 if oneOf_feature:
-                    uvl_output += properties_to_uvl([oneOf_feature], indent=3) ## Quizas cambiar la estructura general para las referencias a oneOf
-                    #uvl_output += f"\t\t\t{type_str_feature} {processor.sanitize_name(schema_name)}\n"
-                    #uvl_output += f"\t\t\t\toptional\n"
-                    #nameSubfeatures = oneOf_feature['sub_features']
-                """
-                    for nameSubfeature in nameSubfeatures:
-                        names = nameSubfeature['name']
-                        type_data = nameSubfeature['type_data']
-                        if type_data == 'Number':
-                            type_data = 'Integer'
-                        uvl_output += f"\t\t\t\t\t{type_data} {names}\n"
-                        print(names)
-                """
+                    uvl_output += properties_to_uvl([oneOf_feature], indent=3) 
             else:
                 uvl_output += f"\t\t\t{processor.sanitize_name(schema_name)} {{doc '{cleaned_description}'}}\n" # {type_str_feature+' '} ## Omitiendo Bool
                 #print("Schemas sin propiedades:",schema_name)
-            #print(schema_name)
-            #print(count2)
 
     # Guardar el archivo UVL generado
     with open(output_file, 'w', encoding='utf-8') as f:
@@ -1114,34 +1090,20 @@ def generate_uvl_from_definitions(definitions_file, output_file, descriptions_fi
     processor.save_constraints(output_file)
 
 # Rutas de archivo relativas
-#definitions_file = '../kubernetes-json-schema/v1.30.4/_definitions.json'
-#definitions_file = '../kubernetes-json-v1.30.0/v1.30.0/_definitions.json'
-definitions_file = './kubernetes-json-v1.30.2/v1.30.2/_definitions.json'
-#definitions_file = './kubernetes-json-schema-v1.32.0/v1.32.0/_definitions.json' ## V mas actual estable
+definitions_file = '../../resources/kubernetes-json-v1.30.2/_definitions.json'
+output_file = '../../variability_model/kubernetes_combined_04.uvl'
+descriptions_file = '../../resources/model_generation/descriptions_01.json'
 
-output_file = './kubernetes_combined_04.uvl'
-#output_file = './kubernetes-mapped-v1.32/kubernetes_combined_02_V32.uvl'  ## V mas actual estable
 
-#output_file = './Modelo-v.1.30.0/kubernetes_combined_02_30_0.uvl'
-## kubernetes-mapped-v1.32
-descriptions_file = './descriptions_01.json'
-#descriptions_file = './kubernetes-mapped-v1.32/descriptions_01.json'  ## V mas actual estable
-# descriptions_file = './Modelo-v.1.30.0/descriptions_01_v30_0.json'
-#restrictions_output_file = './Modelo-v.1.30.0/restrictions02_30_0.txt'
 
 # Generar archivo UVL y guardar descripciones
 generate_uvl_from_definitions(definitions_file, output_file, descriptions_file)
 
-
-"""# Generar las restricciones y agregarlas al archivo UVL generado
-# Este paso se hace después de la generación del modelo y descripciones
-generar_constraintsDef(descriptions_file, restrictions_output_file)
-
-# Añadir las restricciones al archivo UVL generado
-with open(output_file, 'a', encoding='utf-8') as f_out, open(restrictions_output_file, 'r', encoding='utf-8') as f_restrictions:
-    #f_out.write("\n# Restricciones UVL generadas\n")
-    #f_out.write(f"\t{f_restrictions.read()}")
-    for restrict in f_restrictions:
-        f_out.write(f"\t{restrict}")"""
+# Generar las restricciones UVL y agregarlas al final del archivo
+restrictions = generar_constraintsDef(descriptions_file)
+with open(output_file, 'a', encoding='utf-8') as f_out:
+    f_out.write("\nconstraints\n")
+    for restrict in restrictions:
+        f_out.write(f"\t{restrict}\n")
 
 print(f"Modelo UVL y restricciones guardados en {output_file}")

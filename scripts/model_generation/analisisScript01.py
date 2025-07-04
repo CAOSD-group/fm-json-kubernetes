@@ -616,41 +616,38 @@ def convert_to_uvl_constraints(feature_key, description, type_data):
     return uvl_rule
 
 # Ruta del archivo JSON
-json_file_path = './descriptions_01.json'
-output_file_path = './restrictions03_11.txt'
+json_file_path = '../../resources/model_generation/descriptions_01.json'
+output_file_path = '../../resources/model_generation/all_restrictions.txt'
 
-#json_file_path = './kubernetes-mapped-v1.32/descriptions_01.json'
-#output_file_path = './kubernetes-mapped-v1.32/restrictions02.txt'
+def generar_constraintsDef(json_file_path):
+    global count
+    features = load_json_features(json_file_path)
+    uvl_rules = []
 
+    if 'restrictions' in features:
+        for restriction in features['restrictions']:
+            if isinstance(restriction, dict) and 'feature_name' in restriction and 'description' in restriction and 'type_data' in restriction:
+                feature_key = restriction['feature_name']
+                desc = restriction['description']
+                type_data = restriction['type_data']
+                uvl_rule = convert_to_uvl_constraints(feature_key, desc, type_data)
+                if uvl_rule:
+                    uvl_rules.append(uvl_rule)
+            else:
+                print(f"Formato inesperado en la restricción: {restriction}")
+    else:
+        print("Error. Restricciones vacías o nulas")
 
-# Cargar datos
-features = load_json_features(json_file_path)
+    print(f"Hay {count} descripciones que no se pudieron transformar en restricciones UVL.")
+    return uvl_rules
 
-# Aplicar la conversión a las descripciones de restricciones
-uvl_rules = {}
-if 'restrictions' in features:
-    for restriction in features['restrictions']:
-        # Asegurarse de que restriction es un diccionario y tiene las claves necesarias
-        if isinstance(restriction, dict) and 'feature_name' in restriction and 'description' in restriction and 'type_data' in restriction:
-            feature_key = restriction['feature_name']
-            desc = restriction['description']
-            type_data = restriction['type_data']
-            # Aplicar conversión para cada descripción de restricción
-            uvl_rule = convert_to_uvl_constraints(feature_key, desc, type_data)
-            if uvl_rule:  # Solo agregar reglas válidas
-                if 'restrictions' not in uvl_rules:
-                    uvl_rules['restrictions'] = []
-                uvl_rules['restrictions'].append(f"{uvl_rule}")
-        else:
-            print(f"Formato inesperado en la restricción: {restriction}")
-else:
-    print("Error. Restricciones vacias o nulas")
+if __name__ == "__main__":
+    # Generar restricciones
+    restrictions = generar_constraintsDef(json_file_path)
 
-# Escribir las reglas UVL generadas en el archivo de salida
-with open(output_file_path, 'w', encoding='utf-8') as f:
-    for rule in uvl_rules['restrictions']:
-        f.write(f"{rule}\n")
-        print(rule)
-
-print(f"UVL output saved to {output_file_path}")
-print(f"Hay {count} descripciones que no se pudieron transformar en restricciones UVL.")
+    # Guardarlas en el archivo
+    with open(output_file_path, 'w', encoding='utf-8') as f:
+        for rule in restrictions:
+            f.write(f"{rule}\n")
+            print(rule)
+    print(f"UVL output saved to {output_file_path}")
