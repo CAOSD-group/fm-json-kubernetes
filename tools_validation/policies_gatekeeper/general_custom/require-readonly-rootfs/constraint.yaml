@@ -1,9 +1,0 @@
-apiVersion: constraints.gatekeeper.sh/v1beta1
-kind: ReadOnlyRootFS
-metadata:
-  name: require-readonly-rootfs
-spec:
-  match:
-    kinds:
-      - apiGroups: [""]
-        kinds: ["Pod"]

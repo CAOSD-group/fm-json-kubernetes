@@ -1,9 +1,0 @@
-apiVersion: constraints.gatekeeper.sh/v1beta1
-kind: DisallowPrivileged
-metadata:
-  name: disallow-privileged
-spec:
-  match:
-    kinds:
-      - apiGroups: [""]
-        kinds: ["Pod"]

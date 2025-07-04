@@ -1,6 +1,0 @@
-file,valid,avg_validation_time_ms,failed_checks
-.cmp_1.yaml,true,193.0,
-.cmp_2.yaml,false,193.0,readOnlyFileSystem;imageWithoutDigest;CpulimitsCheck;privilegeEscalationCheck;imageWithLatestTag;secCompProfile;securityContextUsed;nolivenessProbe;CpuRequestsCheck;MemorylimitsCheck;noReadinessProbe;runAsNonRootCheck;MemoryRequestsCheck;containersAsHighUID
-0-dashboard_10.yaml,true,193.0,
-00_claims.yaml,true,193.0,
-pod.yaml,false,193.0,readOnlyFileSystem;appArmorProfile;imageWithoutDigest;CpulimitsCheck;privilegeEscalationCheck;secCompProfile;securityContextUsed;nolivenessProbe;CpuRequestsCheck;MemorylimitsCheck;noReadinessProbe;runAsNonRootCheck;MemoryRequestsCheck

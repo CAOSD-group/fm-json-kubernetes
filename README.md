@@ -130,13 +130,13 @@ The overall workflow is visualized below:
 - `convert01.py`: Parses JSON schemas and builds the UVL model.
 - `mappingUVL.csv`: Maps YAML keys to UVL features.
 - `mappingYAMLJSON.py`: Converts YAML files into JSON candidates for validation.
-- `getStatisticsValid.py` & `valid_config.py` & `configuration01.py` : Run validation, configuration and generate result summaries.
+- `getStatisticsValid.py`: Run validation, configuration and generate result summaries.
 
 ### Key folders
 
 - `/scripts/`: Scripts and main utilities.
 - `/evaluation/`: Results data of evaluations.
-- `/variability_model/`: Feature models results and diagrams,.
+- `/variability_model/`: Feature models results and diagrams.
 - `/resources/`: Example Kubernetes schema inputs.
 
 ---
