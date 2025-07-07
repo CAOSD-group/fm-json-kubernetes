@@ -3,9 +3,9 @@ from collections import defaultdict
 import csv
 import re
 # Rutas fijas (puedes modificarlas directamente aquí si cambias carpetas)
-input_dir = Path("./results_gatekeeper")
-yaml_dir = Path("./small")
-csv_output = './results/gatekeeper/validation_results.csv'
+input_dir = Path("../../resources/results_data_tools/results_gatekeeper")
+yaml_dir = Path("../../resources/yamls_agrupation/small")
+csv_output = '../../evaluation/validation_results_gator_final.csv'
 
 results = defaultdict(lambda: {"valid": True, "failures": []})
 
@@ -36,12 +36,6 @@ for result_file in input_dir.rglob("*.txt"):
             if violation_re.search(line):
                 results[current_file]["valid"] = False
                 results[current_file]["failures"].append(line)
-
-            """# Detecta resumen final
-            summary = summary_re.search(line)
-            if summary and int(summary.group(2)) > 0:  # fail > 0
-                results[current_file]["valid"] = False"""
-
 # Agrega archivos válidos no reportados
 all_yaml_files = {file.name for file in yaml_dir.rglob("*.yaml")}
 for yaml_file in all_yaml_files:

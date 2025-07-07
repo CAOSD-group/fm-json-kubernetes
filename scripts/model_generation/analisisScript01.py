@@ -1,12 +1,27 @@
+"""
+This module extracts and generates UVL (Universal Variability Language) constraints
+based on natural language descriptions from Kubernetes schema features.
+
+It supports analysis of descriptions for types like Boolean, Integer, String,
+and applies rules such as "required when", "must be empty if", mutual exclusivity,
+minimum values, and other constraints commonly found in Kubernetes specifications.
+
+The extracted constraints are used to generate logic rules suitable for feature modeling tools.
+
+Typical usage:
+    python analisisScript01.py
+
+Dependencies:
+    - Input JSON file with feature descriptions and metadata.
+    - Outputs a plain text file with extracted UVL constraints.
+"""
+
 import json
 import re
-# import spacy ## Omitted temporally
 
-# Cargar el modelo de NLP
-#nlp = spacy.load("en_core_web_sm")
-count = 0  # Contador de descripciones sin regla válida
+count = 0  # Number to count the number of descriptions invalids
 
-# Diccionario para convertir "zero" y "one"
+# Dict to convert "zero" y "one"
 word_to_num = {
     "zero": 0,
     "one": 1
@@ -14,43 +29,57 @@ word_to_num = {
 
 # Función para cargar las características desde el archivo JSON
 def load_json_features(file_path):
+    """
+    Load feature descriptions from a JSON file.
+
+    Args:
+        file_path (str): Path to the JSON file.
+
+    Returns:
+        dict: Parsed JSON content.
+    """
+
     with open(file_path, 'r', encoding='utf-8') as file:
         return json.load(file)
-## Funcion para extraer valores de minimos en texto o sueltos
 
-# Función para convertir texto numérico a número entero
 def convert_word_to_num(word):
+    """
+    Convert a word representation of a number to its integer form.
+
+    Args:
+        word (str): The word to convert (e.g., "zero", "one").
+
+    Returns:
+        int or None: Corresponding integer or None if unknown.
+    """
     return word_to_num.get(word.lower(), None)
 
 def extract_constraints_template_onlyAllowed(description, feature_key):
     """
-    Genera restricciones UVL para template.spec.restartPolicy basadas en los valores que se permiten segun las descripciones
-    
-    Maneja dos casos:
-    1. Un único valor permitido: "Always".
-    2. Dos valores permitidos: "Never" o "OnFailure".
-    
+    Extract constraints for `template.spec.restartPolicy` based on descriptions.
+
     Args:
-        description (str): Descripción de la característica.
-        feature_key (str): Nombre de la característica.
+        description (str): Natural language description.
+        feature_key (str): Feature name key.
 
     Returns:
-        str: Restricción UVL generada.
+        str: UVL constraint string.
+
+    Raises:
+        ValueError: If expected patterns are not matched.
     """
+
     template_spec_policy_pattern01 = re.compile(r'(?<=The only allowed template.spec.restartPolicy value is\s)\"([A-Za-z]+)\"', re.IGNORECASE) ## Entre parentesis añade las comillas dobles tambien
     template_spec_policies_pattern02 = re.compile(r'\"([A-Za-z]+)\"') ## expresión que captura los valores que vienen entre comillas: caso 2
-    #uvl_rule =""
     feature_with_spec = f"{feature_key}_spec_restartPolicy"
     
-    if 'value is' in description: ### Caso en el que solo hay un único valor posible para template.spec.restartPolicy: Always
+    if 'value is' in description:
         policy_match = template_spec_policy_pattern01.search(description)
         if not policy_match:
             raise ValueError(f"No se encontró un valor único en la descripción: {description}")
         policy_Always = f"{feature_with_spec}_{policy_match.group(1)}"
-        ## Se definen los otros 2 casos posibles de valores. No estan presentes en las descripciones que se obtienen por lo que se agregan directamente
         policy_OnFailure = f"{feature_with_spec}_OnFailure"
         policy_Never = f"{feature_with_spec}_Never" 
-        #return f"({feature_key} => {policy_Always} & !{policy_Never} & !{policy_OnFailure})"
         return f"({policy_Always} => {feature_key}) & (!{policy_Never}) & (!{policy_OnFailure})"
 
     elif 'values are' in description: ### Caso en el que hay 2 valores posibles para template.spec.restartPolicy: Never y OnFailure
@@ -59,15 +88,22 @@ def extract_constraints_template_onlyAllowed(description, feature_key):
         if len(policies_match) < 2:
             raise ValueError(f"Se esperaban al menos dos valores en la descripción: {description}")
         allowed_policies = [f"{feature_with_spec}_{policy}" for policy in policies_match]
-        #return f"({feature_key} => {' | '.join(allowed_policies)}) & !{policies_Always}"
         return f"({' | '.join(allowed_policies)}  => {feature_key}) & (!{policies_Always})" ## New case correct
     
     # Si no se cumple ninguno de los casos
     raise ValueError(f"Descripción inesperada para {feature_key}: {description}")
 
 def extract_constraints_string_oneOf(description, feature_key):
-    """ Función que trata restricciones de tipo String, en ellas: La primera obtiene restricciones en base al tipo del tipo de petición que defina el campo kind (String). Al no tener
-    definido los tipos en su descripción no se los ha insertado como Booleans pero si se usa para aplicar la coincidencia y activación de los otros campos, 10 constraints. """
+    """
+    Extract constraints for string fields that indicate exclusive selection.
+
+    Args:
+        description (str): Description indicating a one-of rule.
+        feature_key (str): Feature identifier.
+
+    Returns:
+        str: UVL constraint.
+    """
 
     uvl_rule = ""
     feature_without_lastProperty = feature_key.rsplit('_', 1)[0]
@@ -91,7 +127,16 @@ def extract_constraints_string_oneOf(description, feature_key):
     else:
         return "El conjunto esta vacio"
 def extract_constraints_multiple_conditions(description, feature_key):
-    """ Función que trata restricciones 'complejas' con varias condiciones lógicas o featues involucrados. Primero se desarrollo una en la que se decían los valores que no debían de ser, por otro lado"""
+    """
+    Extract logical constraints involving multiple conditions.
+
+    Args:
+        description (str): Feature description.
+        feature_key (str): Feature identifier.
+
+    Returns:
+        str: UVL constraint.
+    """
 
     conditions_pattern = re.compile(r'\b(Approved|Denied|Failed)\b')
     type_notbe_pattern = re.compile(r'(?<=conditions may not be\s)\"([A-Za-z]+)\"\s+or\s+\"([A-Za-z]+)\"')
@@ -124,20 +169,24 @@ def extract_constraints_multiple_conditions(description, feature_key):
         f" & !({action_lifecycle_exec} & {action_lifecycle_httpGet})" \
         f" & !({action_lifecycle_exec} & {action_lifecycle_sleep})" \
         f" & !({action_lifecycle_httpGet} & {action_lifecycle_sleep})" \
-        f" & !{feature_key}" ## No es valido para este feature: encadena varios dead features por parte de otras restricciones de rangos _...tpcSocket_port...
-
-        #if feature_without_lastProperty.endswith('LifecycleHandler'):
-        #    uvl_rule += f" & !{feature_key}"
+        f" & !{feature_key}"
 
     if uvl_rule is not None:
-        return uvl_rule.strip() ### Devolver restricciones y eliminar las lineas en blanco
+        return uvl_rule.strip()
     else:
         return "El conjunto esta vacio"
 
 def extract_constraints_primary_or(description, feature_key):
-    """ Función que extrae las restricciones de las descripciones que contienen "Exactly one of" en las descripciones generales de los features. Pero en este caso el programa
-    esta diseñado para no coger estas descripciones de primer nivel por evitar incongruencias. De ese modo, se realizarán las inserciones de las constraints de manera más especifica
-    usando las descripciones y palabras para obtener los features involucrados en las descripciones de los features de primer nivel."""
+    """
+    Extract constraints that express "Exactly one of" or similar logic.
+
+    Args:
+        description (str): Description of mutual exclusive logic.
+        feature_key (str): Feature identifier.
+
+    Returns:
+        str: UVL constraint.
+    """
 
     uvl_rule = ""
     feature_without_lastProperty = feature_key.rsplit('_', 1)[0]
@@ -164,7 +213,17 @@ def extract_constraints_primary_or(description, feature_key):
         return "El conjunto esta vacio"
 
 def extract_constraints_least_one(description, feature_key):
-    """ Función que extrae las restricciones de las descripciones que contienen "Exactly one of, a least one of, at least one of", basadas en la constraint de que al menos un feature debe de ser seleccionado """
+    """
+    Extract constraints requiring at least one feature to be enabled.
+
+    Args:
+        description (str): Feature description with least one condition.
+        feature_key (str): Feature identifier.
+
+    Returns:
+        str: UVL constraint.
+    """
+
     least_one_pattern01 = re.compile(r'(?<=a least one of\s)(\w+)\s+or\s+(\w+)', re.IGNORECASE) #  Expresión regular para obtener los 2 valores precedidos por "a least one of" y separados por un "or"
     exactly_least_one_pattern02 = re.compile(r'(?<=Exactly one of\s)`(\w+)`\s+or\s+`(\w+)`', re.IGNORECASE) #  Expresión regular para los valores precedidos por "Exactly..." y que se encuentren bajo comillas invertidas separados por un "or" (8, url, service)
     at_least_one_pattern01 = re.compile(r'(?<=At least one of\s)`(\w+)`\s+and\s+`(\w+)`', re.IGNORECASE) #  Expresión regular para los valores precedidos por "At..." y que se encuentran como en el anterior, bajo comillas invertidas y separadas por un "and"
@@ -200,8 +259,17 @@ def extract_constraints_least_one(description, feature_key):
 
 
 def extract_constraints_operator(description, feature_key):
-    """ Función que extrae las restricciones de las descripciones que contienen "If the operator is" con posibles valores y opciones de selección de features"""
-    # Expresión regular para "Requires (X, Y) when feature is up" ## Se ha definido el orden de seleccion del feature o no por las expresiones "non-empty, empty. Si hubiese variacion se tendria en cuenta para la selección"
+    """
+    Extract constraints based on operator usage (e.g., Exists, In).
+
+    Args:
+        description (str): Description involving operators.
+        feature_key (str): Feature identifier.
+
+    Returns:
+        str: UVL constraint.
+    """
+    # Regular expression for “Requires (X, Y) when feature is up” ## The order of feature selection or not is defined by the expressions "non-empty, empty. If there is any variation it will be taken into account for the selection".
     operator_is_pattern01 = re.compile(r'If the operator is\s+(\w+)\s+or\s+(\w+)', re.IGNORECASE) #  Expresión regular para obtener todos los pares (X,Y) de las descripcciones con "If the operator is"
     operator_if_pattern02 = re.compile(r'If the operator is\s+(\w+)') # Expresion para las restricciones que solo tienen un único valor
 
@@ -211,13 +279,13 @@ def extract_constraints_operator(description, feature_key):
 
     print("Operator 01",operator_match01)
 
-    # Inicializar las variables para almacenar los valores de las restricciones
+    # Initialize the variables to store the values of the restrictions
     required_value = None
 
     if operator_match01 and 'is Exists,' not in description:
-        # Capturar la propiedad y el valor de "Required when"
-        type_property01 = operator_match01[0] # Captura los primeros valores del par "In or NotIn"
-        type_property02 = operator_match01[1] # Captura los primeros valores del par "Exists or DoesNotExist"
+        # Capture the property and the value of “Required when”.
+        type_property01 = operator_match01[0] # Captures the first values of the pair "In or NotIn"
+        type_property02 = operator_match01[1] # Captures the first values of the pair "Exists or DoesNotExist".
         print("Required 01", type_property01)
         print("Required 02", type_property02)
 
@@ -226,14 +294,13 @@ def extract_constraints_operator(description, feature_key):
             type_property05 = operator_match01[2]
             uvl_rule += f"| ({feature_without_lastProperty}_operator_{type_property05[0]} |{feature_without_lastProperty}_operator_{type_property05[1]} => {feature_key})"
 
-    elif 'is Exists' in description: ## Caso en el que solo hay un valor y se usa una captura diferente (32 descripciones)
+    elif 'is Exists' in description: ## Case in which there is only one value and a different capture is used (32 descriptions).
         print(f"CASO ERRONEO DE VALIDACION")
         operator_match02 = operator_if_pattern02.search(description)
         print(f"MATCHES: {operator_match02}")
         required_value = operator_match02.group(1)
         print(f"REQUIRED: {required_value}")
         uvl_rule = f"{feature_without_lastProperty}_operator_{required_value} => !{feature_key}"
-        print(f"Deberia de ser al reves no? {uvl_rule}  {description}")
 
     if uvl_rule is not None:
         return uvl_rule
@@ -241,7 +308,16 @@ def extract_constraints_operator(description, feature_key):
         return "El conjunto esta vacio"
 
 def extract_constraints_os_name(description, feature_key):
-    """ Metodo para extraer las restricciones que definen el posible uso de features o no en base al sistema operativo que se seleccione: windows o linux"""
+    """
+    Extract OS-specific constraints for Windows/Linux settings.
+
+    Args:
+        description (str): Description referring to `spec.os.name`.
+        feature_key (str): Feature identifier.
+
+    Returns:
+        str: UVL constraint.
+    """
 
     osName_pattern = re.compile(r'(?<=Note that this field cannot be set when spec.os.name is\s)([a-zA-Z\s,]+)(?=\.)', re.IGNORECASE) # re.compile(r'\`([A-Za-z]+)\`')
     uvl_rule =""
@@ -250,8 +326,8 @@ def extract_constraints_os_name(description, feature_key):
     print("Los SO son: ",osName_match)
     list_anothers = ['_v1_Container_securityContext_', '_v1_EphemeralContainer_securityContext_', '_PodSecurityContext_', '_v1_SecurityContext_']
 
-    if osName_match and '_template_spec_' in feature_key: ## Dependiendo de que grupo pertenece el feature_os_name es distinto, grupo principal de 1247 features
-        match = re.search(r'^(.*?_template_spec)', feature_key) #(r'^(.*?_template_spec)')
+    if osName_match and '_template_spec_' in feature_key: # Depending on which group the feature_os_name belongs to, the main group of 1247 features is different.
+        match = re.search(r'^(.*?_template_spec)', feature_key)
 
         if match:
             feature_without0 = match.group(1)
@@ -259,12 +335,12 @@ def extract_constraints_os_name(description, feature_key):
         else:
             print("ERROR EN EL MATCH DE feature_key")
 
-        name_obtained = osName_match.group(1) ## Obtener el nombre del patron obtenido
+        name_obtained = osName_match.group(1) # Obtain the name of the patron
 
         uvl_rule = f"{feature_without0}_{path_osName}_{name_obtained} => !{feature_key}"
 
-    elif osName_match and '_Pod_spec_' in feature_key: ## Caso del segundo grupo, _Pod_spec_, 43 features
-        match = re.search(r'^(.*?_Pod_spec)', feature_key) #(r'^(.*?_template_spec)')
+    elif osName_match and '_Pod_spec_' in feature_key: ## Case of second group, _Pod_spec_, 43 features
+        match = re.search(r'^(.*?_Pod_spec)', feature_key)
 
         if match:
             feature_without0 = match.group(1)
@@ -272,37 +348,36 @@ def extract_constraints_os_name(description, feature_key):
         else:
             print("ERROR EN EL SEGUNDO MATCH DE feature_key")
 
-        name_obtained = osName_match.group(1) ## Obtener el nombre del patron obtenido
+        name_obtained = osName_match.group(1)
         uvl_rule = f"{feature_without0}_{path_osName}_{name_obtained} => !{feature_key}"
 
 
-    elif osName_match and '_PodList_items_spec_' in feature_key: ## Caso del tercer grupo, _PodList_items_spec_, 43 features
+    elif osName_match and '_PodList_items_spec_' in feature_key: ## Case of third group, _PodList_items_spec_, 43 features
         
         match = re.search(r'^(.*?_PodList_items_spec)', feature_key) #(r'^(.*?_template_spec)')
         feature_without0 = match.group(1)
         name_obtained = osName_match.group(1) ## Obtener el nombre del patron obtenido
         uvl_rule = f"{feature_without0}_{path_osName}_{name_obtained} => !{feature_key}"
 
-    elif osName_match and '_core_v1_PodSpec_' in feature_key: ## Caso del cuarto grupo, _core_v1_PodSpec, 43 features
+    elif osName_match and '_core_v1_PodSpec_' in feature_key: ## Case of fouth group, _core_v1_PodSpec, 43 features
 
         match = re.search(r'^(.*?_core_v1_PodSpec)', feature_key) #(r'^(.*?_template_spec)')
 
         feature_without0 = match.group(1)
-        name_obtained = osName_match.group(1) ## Obtener el nombre del patron obtenido
+        name_obtained = osName_match.group(1)
         uvl_rule = f"{feature_without0}_{path_osName}_{name_obtained} => !{feature_key}"
 
     elif osName_match and '_PodTemplateSpec_spec_' in feature_key: ## Caso del quinto grupo, _PodTemplateSpec_spec_, 43 features
 
         match = re.search(r'^(.*?_PodTemplateSpec_spec)', feature_key) #(r'^(.*?_template_spec)')
         feature_without0 = match.group(1)
-        name_obtained = osName_match.group(1) ## Obtener el nombre del sistema operativo
+        name_obtained = osName_match.group(1)
         uvl_rule = f"{feature_without0}_{path_osName}_{name_obtained} => !{feature_key}"
 
-    elif osName_match and any(pattern in feature_key for pattern in list_anothers): ## Caso del grupo sin feature spec: grupo general
+    elif osName_match and any(pattern in feature_key for pattern in list_anothers): ## Case of group without spec feature: general group
 
         predefined_feature_os = "io_k8s_api_core_v1_PodSpec_os_name"        
-        name_obtained = osName_match.group(1) ## Obtener el nombre del patron obtenido
-
+        name_obtained = osName_match.group(1)
         uvl_rule = f"{predefined_feature_os}_{name_obtained} => !{feature_key}"
 
     if uvl_rule is not None:
@@ -312,16 +387,25 @@ def extract_constraints_os_name(description, feature_key):
 
 
 def extract_constraints_mutualy_exclusive(description, feature_key):
-    """ Metodo para extraer las restricciones de exclusion mutua encontradas en _name y _selector"""
-    ## Para este caso hay 12 descript que no se acceden porque no hace falta al tener en cada par la misma ref, con procesar una equivale a las 2
+    """
+    Extract mutual exclusion constraints between two features.
 
+    Args:
+        description (str): Natural language description.
+        feature_key (str): Feature base name.
+
+    Returns:
+        str: UVL mutual exclusion constraint.
+    """
+    # For this case there are 12 descriptors that are not accessed because it is not necessary to have the same ref in each pair, processing one is equivalent to the 2.
+    
     exclusive_pattern = re.compile(r'\`([A-Za-z]+)\`')
     uvl_rule =""
     exclusive_match = exclusive_pattern.findall(description)
     feature_without_lastProperty = feature_key.rsplit('_', 1)[0]
 
     if exclusive_match:
-        type_property01 = exclusive_match[0] ## Hay valores repetidos pero solo se acceden a los 2 primeros
+        type_property01 = exclusive_match[0] # There are repeated values but only the first 2 values are accessible.
         type_property02 = exclusive_match[1]
         uvl_rule = f"({feature_without_lastProperty}_{type_property01} => !{feature_without_lastProperty}_{type_property02}) & ({feature_without_lastProperty}_{type_property02} => !{feature_without_lastProperty}_{type_property01})"
     
@@ -330,29 +414,35 @@ def extract_constraints_mutualy_exclusive(description, feature_key):
     else:
         print("UVL RULE ESTA VACÍO")
 
-## Función para convertir constraints strings y requires 
+## Function to convert constraints strings and requires 
 def extract_constraints_if(description, feature_key): 
-    """ Metodo para extraer las restricciones "generales" de only if type, Must be set if type is, This field MUST be empty if: relacionadas con _RollingUpdate, _Localhost, _Limited, _Exempt"""
+    """
+    Extract "only if" or "must be set if" type constraints.
+
+    Args:
+        description (str): Description indicating conditional rules.
+        feature_key (str): Feature name.
+
+    Returns:
+        str: UVL constraint.
+    """
 
     only_if_pattern = re.compile(r'\"([A-Za-z]+)\"')
-    ##if_exempt_pattern = re.compile(r'\"([A-Za-z]+)\"')
-    #only_if_pattern = re.compile(r'\"([^\"]+)\"')
 
     uvl_rule =""
     if_match = only_if_pattern.search(description)
     feature_without_lastProperty = feature_key.rsplit('_', 1)[0]
 
-    if if_match and 'exempt' not in feature_key: ### Trata de las descipciones con el patrón "Must be set if type is"
-        value_obtained = if_match.group(1) ## Obtener el valor del patron obtenido
+    if if_match and 'exempt' not in feature_key: # It deals with desciptions with the pattern “Must be set if type is”.
+        value_obtained = if_match.group(1)
         if 'Must be set if type is' in description or 'Must be set if and only if type' in description or 'may be non-empty only if' in description: ## Agregado nuevo conjunto may be non-empty only if (10)
             uvl_rule = f"{feature_without_lastProperty}_type_{value_obtained} <=> {feature_key}"
         else:
-            ## Division entre los tipos por si solo se puede acceder al feature si el tipo es el concretado
-            uvl_rule = f"{feature_without_lastProperty}_type_{value_obtained} => {feature_key}" ## No se si haria falta los 2 #### PARTE QUIZAS REDUNDANTE(Preguntar): | (!{feature_without_lastProperty}_type_{value_obtained} => !{feature_key})
+            ## Division between the types if the feature can only be accessed if the type is the concrete one
+            uvl_rule = f"{feature_without_lastProperty}_type_{value_obtained} => {feature_key}"
 
-    elif 'exempt' in feature_key: ### Trata de las descripciones con el patrón "This field MUST be empty if:"
+    elif 'exempt' in feature_key: ### Treat descriptions with the pattern “This field MUST be empty if:”
         exempt_match = only_if_pattern.findall(description)
-        #exempt_match = set(exempt_match) ## hay valores repetidos pero solo se acceden a los 2 primeros
         print("Lo que captura el patron", exempt_match)
         type_property01 = exempt_match[0] # Limited
         type_property02 = exempt_match[1] # Exempt
@@ -366,26 +456,26 @@ def extract_constraints_if(description, feature_key):
         return "No hay ninguna coincidencia con los patrones y descripciones"
 
 def extract_constraints_required_when(description, feature_key):
-    # Expresión regular para "Required when X is set to Y"
+    # Regular expression for “Required when X is set to Y”.
     required_when_pattern = re.compile(r'Required when\s+(\w+)\s+is\s+set\s+to\s+"([^"]+)"', re.IGNORECASE)
-    # Expresión regular para "Must be unset when X is set to Y"
+    # Regular expression for "Must be unset when X is set to Y"
     must_be_unset_pattern = re.compile(r'must be unset when\s+(\w+)\s+is\s+set\s+to\s+"([^"]+)"', re.IGNORECASE)
-    # Expresión regular para "Required when `X` is set to `Y`"
+    # Regular expression for "Required when `X` is set to `Y`"
     required_when_pattern_strategy = re.compile(r'Required when\s+`(\w+)`\s+is\s+set\s+to\s+`?\"?([^\"`]+)\"?`?', re.IGNORECASE)
 
     uvl_rule = ""
     feature_without_lastProperty = feature_key.rsplit('_', 1)[0]
-    # Buscar coincidencias para "Required when"
+    # Search matches for "Required when".
     required_match = required_when_pattern.search(description)
     unset_match = must_be_unset_pattern.search(description)
     when_match = required_when_pattern_strategy.search(description)
 
-    # Inicializar las variables para almacenar los valores de las restricciones
+    # Initializing the variables to store the values of the constraintss
     required_property, required_value = None, None
     unset_property, unset_value = None, None
 
     if  required_match and unset_match:
-        # Capturar la propiedad y el valor de "Required when"
+        # Capture the property and the value of “Required when”.
         required_property = required_match.group(1)
         required_value = required_match.group(2)
         print(f"COINCIDENCIA REQUERIDA: {required_property} = {required_value}")
@@ -396,11 +486,11 @@ def extract_constraints_required_when(description, feature_key):
         uvl_rule += f" & !({feature_without_lastProperty}_{unset_property}_{unset_value})"
 
     elif when_match and not required_match and not unset_match:
-        value_property = when_match.group(1)  # Captura la propiedad (strategy o scope)
-        value_default = when_match.group(2)  # Captura el valor (Webhook o Namespace)
-        # Ajusta el feature_key según tu formato
+        value_property = when_match.group(1)  # Capture the property (strategy o scope)
+        value_default = when_match.group(2)  # Capture the value (Webhook o Namespace)
+        # Adjust feature_key according to your format
         feature_without_lastProperty = feature_key.rsplit('_', 1)[0]
-        # Genera la regla UVL para "Required when"
+        # Generates the UVL rule for "Required when".
         uvl_rule = f"{feature_without_lastProperty}_{value_property}_{value_default} => {feature_key}"
 
     if uvl_rule is not None:
@@ -410,8 +500,19 @@ def extract_constraints_required_when(description, feature_key):
 
 
 def extract_minimum_value(description, feature_key):
-    """ Funcion para extraer las restricciones del valor minimo que expresan varios patrones en algunas descripciones. Se basa en usar los patrones y expresiones para capturar los enteros que delimitan y 
-    forman parte de un rango. También se ha añadido un rango por el momento**"""
+    """
+    Extract minimum value constraints from descriptions.
+
+    Args:
+        description (str): Feature description with value hints.
+        feature_key (str): Feature identifier.
+
+    Returns:
+        str: UVL constraint.
+
+    Raises:
+        ValueError: If no matching pattern is found.
+    """
 
     value_minimum_pattern = re.compile(r'(?<=Minimum value is\s)(\d+)')
     value_text_pattern = re.compile(r'(?<=minimum valid value for expirationSeconds is\s)(\d+)')
@@ -436,63 +537,65 @@ def extract_minimum_value(description, feature_key):
         
     if uvl_rule is not None:
         return uvl_rule ## 1426
-    # Si no se cumple ninguno de los casos
+    # If none of the cases are met
     raise ValueError(f"Descripción inesperada para {feature_key}: {description}")
 
-
-# Función para extraer límites si están presentes en la descripción
 def extract_bounds(description):
-    #doc = nlp(description)
+    """
+    Extract numeric bounds (min, max) and type flags from description.
+
+    Args:
+        description (str): Description to parse.
+
+    Returns:
+        tuple: (min_bound, max_bound, is_port_number, is_other_number)
+    """
+
     min_bound = None
     max_bound = None
     is_port_number = False
     is_other_number = False
 
-    # Expresiones para detectar intervalos de la forma "0 < x < 65536", "1-65535 inclusive", y "Number must be in the range 1 to 65535"
-    range_pattern = re.compile(r'(\d+)\s*<\s*\w+\s*<\s*(\d+)')
+    # Expressions to detect intervals of the form "0 < x < 65536", "1-65535 inclusive", y "Number must be in the range 1 to 65535"    range_pattern = re.compile(r'(\d+)\s*<\s*\w+\s*<\s*(\d+)')
     inclusive_range_pattern = re.compile(r'(\d+)\s*-\s*(\d+)\s*\(inclusive\)')
     range_text_pattern = re.compile(r'Number\s+must\s+be\s+in\s+the\s+range\s+(\d+)\s+to\s+(\d+)', re.IGNORECASE)
-    #range_text_pattern = re.compile(r'(?<=Number must be in the range)\s*(\d+)\s*to\s*(\d+)(?=\.)', re.IGNORECASE)
-    must_be = re.compile(r'must be greater than(?: or equal to)? (\w+)',re.IGNORECASE) ## Caso especial en el que puede ser igual a cero (?: or equal to)?
+    must_be = re.compile(r'must be greater than(?: or equal to)? (\w+)',re.IGNORECASE) ## Special case in which it can be equal to zero (?: or equal to)?
     less_than_pattern = re.compile(r'less than or equal to (\d+)', re.IGNORECASE)
-    #must_be_range = re.compile(r'must be greater than or equal to (\d+)\sand\sless than or equal to(\d+)')
-
-    ### Adicion restriccion con palabras: must be between
+    # Addition restriction with words: must be between
     between_text_pattern = re.compile(r'must\s+be\s+between\s+(\d+)\s+and\s+(\d+)', re.IGNORECASE)
-
     ## Minimum value is
 
-    # Detectar si la descripción menciona puertos válidos
+    # Detect if the description mentions valid ports
     if "valid port number" in description.lower():
         is_port_number = True
 
-    # Traducir palabras numéricas a números enteros dentro de la descripción
+    # Translate numeric words to whole numbers within the description
     description = description.lower()
     for word, num in word_to_num.items():
-        description = description.replace(word, str(num))  # Reemplazar palabras por sus equivalentes numéricos
+        description = description.replace(word, str(num))  # Replace words with their numeric equivalents
 
-    # Detectar rangos con "< x <" (ej. 0 < x < 65536)
+    # Detect ranges with "< x <" (e.g. 0 < x < 65536)
     range_match = range_pattern.search(description)
     if range_match:
         min_bound = int(range_match.group(1))
         max_bound = int(range_match.group(2))
         return min_bound, max_bound, is_port_number, is_other_number
 
-    # Detectar rangos con "1-65535 inclusive"
+    # Detect ranges with "1-65535 inclusive"
     inclusive_match = inclusive_range_pattern.search(description)
     if inclusive_match:
         min_bound = int(inclusive_match.group(1))
         max_bound = int(inclusive_match.group(2))
         return min_bound, max_bound, is_port_number, is_other_number
 
-    # Detectar rangos de la forma "Number must be in the range 1 to 65535"
+    # Detect ranges of the form "Number must be in the range 1 to 65535"
     range_text_match = range_text_pattern.search(description)
     if range_text_match:
         min_bound = int(range_text_match.group(1))
         max_bound = int(range_text_match.group(2))
         return min_bound, max_bound, is_port_number, is_other_number
         
-    # Detectar rangos de la forma "must be between 0 and 100" y "...1 and 30". El rango 1-30 son segundos y el rango 0-100 representa "niveles" de prioridad. Tot: 22 restric
+    # Detect ranges of the form "must be between 0 and 100" y "...1 and 30". The range 1-30 is seconds and the range 0-100 represents priority “levels”. Total: 22 restric
     between_text_match = between_text_pattern.search(description) 
     if between_text_match:
         min_bound = int(between_text_match.group(1))
@@ -505,49 +608,52 @@ def extract_bounds(description):
     less_than_match = less_than_pattern.search(description)
 
     if greater_than_match:
-        # Convertir si es una palabra numérica
+        # Convert if it is a numeric word
         min_bound = int(greater_than_match.group(1)) if greater_than_match.group(1).isdigit() else convert_word_to_num(greater_than_match.group(1))
         is_other_number = True
 
     if less_than_match:
-        # Convertir si es una palabra numérica
+        # Convert if it is a numeric word
         max_bound = int(less_than_match.group(1)) if less_than_match.group(1).isdigit() else convert_word_to_num(less_than_match.group(1))
-        max_bound = max_bound + 1 ## Para tener en cuenta el equal to 
+        max_bound = max_bound + 1 # To take into account the equal to 
         is_other_number = True
 
     return min_bound, max_bound, is_port_number, is_other_number
     
-# Función para convertir descripciones en reglas UVL
 def convert_to_uvl_constraints(feature_key, description, type_data):
+    """
+    Convert a feature description and type into a UVL constraint.
+
+    Args:
+        feature_key (str): The feature key name.
+        description (str): Natural language description.
+        type_data (str): Data type ("Boolean", "Integer", etc.).
+
+    Returns:
+        str or None: UVL constraint or None if not matched.
+    """
+
     global count
     
-    # Verificar si la descripción es una lista
+    # Check if the description is a list
     if isinstance(description, list):
         description = " ".join(
             " ".join(sublist) if isinstance(sublist, list) else str(sublist) 
             for sublist in description
         )
     elif not isinstance(description, str):
-        # Si no es una cadena, omitir la descripción
+        # If not a string, omit the description
         print(f"No hay descripcion de texto para: {feature_key}")
         return None
 
-    #doc = nlp(description)
-    uvl_rule = None  # Inicializar como None para descripciones sin reglas válidas
-    #count_requireds = 0
-    # Extraer límites si están presentes
+    uvl_rule = None  # Initialize as None for descriptions without valid rules
+    # Extract limits if present
     min_bound, max_bound, is_port_number, is_other_number = extract_bounds(description)
-    #min_bound01, is_other_number = extract_min_max(description)
-    # Ajustar los patrones para generar sintaxis UVL válida según el tipo de datos
+    # Adjust patterns to generate valid UVL syntax according to data type
     if type_data == "Boolean" or type_data == "boolean":
-        #if any(tok.lemma_ == "slice" and tok.text in description for tok in doc):
-        #    print("")
-        #elif "empty" in description: 
-        #    uvl_rule = f"!{feature_key}"
         if "Number must be in the range" in description:
             feature_without_lastProperty = feature_key.rsplit('_', 1)[0]
             uvl_rule = f"{feature_without_lastProperty} => ({feature_key}_asInteger > 1 & {feature_key}_asInteger < 65535) | ({feature_key}_asString == 'IANA_SVC_NAME')" ## Ver como añadir ese formato
-            #uvl_rule = f"{feature_key} => ({feature_key}_asInteger > 1 & {feature_key}_asInteger < 65535) | ({feature_key}_asString == 'IANA_SVC_NAME')" ## Ver como añadir ese formato
         elif "required when" in description or 'Required when' in description:
             const = extract_constraints_required_when(description, feature_key)
             uvl_rule = const
@@ -565,22 +671,18 @@ def convert_to_uvl_constraints(feature_key, description, type_data):
             constraint = extract_constraints_operator(description, feature_key)
             uvl_rule = constraint
         elif "a least one of" in description or "Exactly one of" in description or "At least one of" in description:
-            constraint = extract_constraints_least_one(description, feature_key) ## Probando sin
-            print("CONSTRAINT ES ")
+            constraint = extract_constraints_least_one(description, feature_key)
             uvl_rule = constraint
         elif "resource access request" in description or "succeededIndexes specifies" in description or "Represents the requirement on the container" in description or "ResourceClaim object in the same namespace as this pod" in description or "datasetUUID is" in description:
             uvl_rule = extract_constraints_primary_or(description, feature_key)
-            print("NADA")
         elif "conditions may not be" in description or "Details about a waiting" in description or "TCPSocket is NOT" in description:
             constraint = extract_constraints_multiple_conditions(description, feature_key)
-            print("conditions may not be execute?")
             uvl_rule = constraint
         elif "template.spec.restartPolicy" in description in description:
             uvl_rule = extract_constraints_template_onlyAllowed(description, feature_key)
-            print(f"Reglas modificadas: {uvl_rule}")
     elif type_data == "Integer" or type_data == "integer":
         if is_port_number:
-            # Si es un número de puerto, asegurarse de usar los límites de puerto
+            # If it is a port number, make sure to use the port limits
             min_bound = 1 if min_bound is None else min_bound
             max_bound = 65535 if max_bound is None else max_bound
             uvl_rule = f"{feature_key} > {min_bound} & {feature_key} < {max_bound}"
@@ -594,11 +696,6 @@ def convert_to_uvl_constraints(feature_key, description, type_data):
             uvl_rule = extract_minimum_value(description, feature_key)
             if "in the range" in description:
                 print("LA REGLA ES, ", uvl_rule)
-        #if is_other_number:  ## posible uso para diferenciar casos especificos mas adelante
-        #    # Si es un número de puerto, asegurarse de usar los límites de puerto
-        #    min_bound = 0 if min_bound is None else min_bound
-        #    max_bound = 1800 if max_bound is None else max_bound
- 
     elif type_data == "" or type_data == "string":
         if 'conditions may not be' in description:
             constraint = extract_constraints_multiple_conditions(description, feature_key)
@@ -609,17 +706,26 @@ def convert_to_uvl_constraints(feature_key, description, type_data):
             print("It works?")
             uvl_rule = constraint
 
-    # Si no hay coincidencia, incrementamos el contador de reglas no válidas
-    if uvl_rule is None:
+    if uvl_rule is None: # If there is no match, we increment the invalid rules counter.
         count += 1
 
     return uvl_rule
 
-# Ruta del archivo JSON
+# Routes of files
 json_file_path = '../../resources/model_generation/descriptions_01.json'
 output_file_path = '../../resources/model_generation/all_restrictions.txt'
 
 def generar_constraintsDef(json_file_path):
+    """
+    Generate UVL constraints from a JSON file and return them.
+
+    Args:
+        json_file_path (str): Path to the JSON with feature metadata.
+
+    Returns:
+        list: List of UVL constraint strings.
+    """
+
     global count
     features = load_json_features(json_file_path)
     uvl_rules = []
@@ -642,10 +748,10 @@ def generar_constraintsDef(json_file_path):
     return uvl_rules
 
 if __name__ == "__main__":
-    # Generar restricciones
+    # Main manual for get a file in txt with all the constraints uvl
     restrictions = generar_constraintsDef(json_file_path)
 
-    # Guardarlas en el archivo
+    # Save the constraints in the file
     with open(output_file_path, 'w', encoding='utf-8') as f:
         for rule in restrictions:
             f.write(f"{rule}\n")

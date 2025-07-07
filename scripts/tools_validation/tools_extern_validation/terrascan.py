@@ -5,8 +5,8 @@ from pathlib import Path
 from collections import defaultdict
 
 # Configuraciones
-RESULTS_DIR = "./results_terrascan"
-CSV_OUTPUT = "./results/terrascan/validation_results02.csv"
+RESULTS_DIR = "../../resources/results_data_tools/results_terrascan"
+CSV_OUTPUT = "../../evaluation/validation_results_terrascan_final.csv"
 TIMING_FILE = os.path.join(RESULTS_DIR, "batch_times.txt")
 
 # Crear directorio para CSV si no existe

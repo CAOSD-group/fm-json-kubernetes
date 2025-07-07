@@ -4,11 +4,11 @@ import os
 from pathlib import Path
 from collections import defaultdict
 
-json_dir = "./results_kubeLinter01"
-csv_output = './results/kube-linter/validation_results02_aux.csv'
+json_dir = "../../resources/results_data_tools/results_kubeLinter01"
+csv_output = '../../evaluation/validation_results_kubeLinter_final.csv'
 timing_file = os.path.join(json_dir, "batch_times.txt")
 #input_dir = "./small"
-input_dir = "../scriptJsonToUvl/yamls_agrupation/yamls-tools-files"
+input_dir = "../../resources/yamls_agrupation/yamls-tools-files"
 
 Path(csv_output).parent.mkdir(parents=True, exist_ok=True)
 

@@ -130,11 +130,6 @@ class ConfigurationJSON(TextToModel):
                         # Agregamos un solo bloque combinado
                         blocks.append(combined_block)
                         base_config[key] = True
-
-                        """elif all(isinstance(x, (str, int, float, bool)) for x in value):
-                            # Lista de valores simples
-                            blocks.append([{key: v} for v in value])
-                            base_config[key] = True"""
         
         elif isinstance(data, list):
             print(f"Data es list")
@@ -185,12 +180,7 @@ class ConfigurationJSON(TextToModel):
         
 if __name__ == '__main__':
 
-    #path_json = '../generateConfigs/outputs_json_tester/1-metallb5_5.json' ## scriptJsonToUvl/generateConfigs/outputs_json_mappeds/example_deployment02.json
-
-    path_json = '../generateConfigs/outputs_json_tester_invalid/01-default-memory-cpu_1.json'
-    
-    #print(f'Configuration: {configurations}')
-    #print(configuration.elements)
+    path_json = '../../resources/generateConfigs/outputs_json_tester_invalid/01-default-memory-cpu_1.json'
 
     # Imprimir todas las configuraciones generadas
     #if len(configurations) > 1:

@@ -7,7 +7,7 @@
   - [Using the scripts](#using-the-scripts)
     - [Requirements](#requirements)
     - [Download and install](#download-and-install)
-    - [Execution](#execution)- [Execution](#execution)
+    - [Execution](#execution)
   - [Architecture and repository structure](#architecture-and-repository-structure)
   - [References and third-party tools](#references-and-third-party-tools)
 
@@ -101,7 +101,7 @@ Or dowload manually from https://github.com/yannh/kubernetes-json-schema
 Then run the main feature model generator:
 
 ```bash
-python scripts/convert01.py
+python scripts/model_generation/convert01.py
 ```
 
 Make sure to update the path to the `_definitions.json` file at the bottom of the script:

@@ -3,8 +3,8 @@ import json
 import csv
 from pathlib import Path
 
-results_dir = "./results_polaris-cli"
-csv_output = './results/polaris-cli/validation_results02.csv'
+results_dir = "../../resources/results_data_tools/results_polaris-cli"
+csv_output = '../../evaluation/validation_results_polaris-cli_final.csv'
 timing_file = os.path.join(results_dir, "batch_times.txt")
 
 
@@ -67,10 +67,3 @@ with open(csv_output, "w", newline="", encoding="utf-8") as f:
     writer.writerows(rows)
 
 print(f" CSV generado: {csv_output}")
-
-"""# Totales
-writer.writerow([])
-writer.writerow(["VÁLIDOS", "INVÁLIDOS", "TOTAL", "", ""])
-valid_count = sum(1 for r in results.values() if r["valid"])
-total = len(results)
-writer.writerow([valid_count, total - valid_count, total, "", ""])"""

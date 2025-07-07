@@ -1,16 +1,27 @@
+"""
+This script processes YAML manifest files by categorizing them into size-based buckets
+and filtering out malformed or custom resource definitions (CRDs).
+
+The processed files are then copied into appropriately named output directories.
+
+Usage:
+    Run this script after downloading Kubernetes manifest YAMLs to classify and organize them.
+
+Directories:
+    input_dir: Path to raw YAMLs.
+    output_dir: Path where categorized YAMLs will be saved.
+"""
+
 import os
 import shutil
 import yaml
 from datetime import datetime
 from hashlib import md5
 
-input_dir = '../kubernetes_fm/scripts/download_manifests/YAMLs02'
-#input_dir = './generateConfigs/files_yamls'
-##input_dir = '../files_yamls_dowload/yamls-tester'
+input_dir = '../kubernetes_fm/scripts/download_manifests/YAMLs02' ## Process
+output_dir = '../resources/yamls_agrupation'
 
-output_dir = './yamls_agrupation' ## /tester
-
-# Clasificación por tamaño: 0-5 kb, 5-25 kb...
+# Definitions of size groups: 0-5 kb, 5-25 kb...
 buckets = {
     'tiny': (0, 5 * 1024), 
     'small': (5 * 1024, 25 * 1024),
@@ -20,27 +31,60 @@ buckets = {
 }
 used_names = set()
 
-# Crea todas las carpetas necesarias
 def prepare_output_dirs():
+    """
+    Create output directories for each size bucket and special categories.
+
+    This includes folders for errors, missing API/kind, and custom resources.
+    """
     for bucket in list(buckets.keys()) + ['errores', 'no_apiversion_kind', 'custom_resources']:
         os.makedirs(os.path.join(output_dir, bucket), exist_ok=True)
 
-# Detecta contenido inválido
 def has_invalid_content(content):
-        return '{{' in content or '}}' in content or '#@' in content
+    """
+    Check if the content contains patterns indicating invalid templating.
 
-# Detecta CRDs o recursos personalizados
+    Args:
+        content (str): The YAML file content.
+
+    Returns:
+        bool: True if invalid patterns are found.
+    """
+    return '{{' in content or '}}' in content or '#@' in content
+
 def is_custom_resource(doc):
-        return doc.get('kind') == 'CustomResourceDefinition' ## Si kind coincide con el tipo CRD se descarta
+    """
+    Determine if a YAML document represents a CustomResourceDefinition (CRD).
+
+    Args:
+        doc (dict): Parsed YAML document.
+
+    Returns:
+        bool: True if the document is a CRD.
+    """
+    return doc.get('kind') == 'CustomResourceDefinition'
 
 
-# Genera nombre único, si hay coincidencia se agrega una generacion por hash
 def get_unique_name(dest_folder, fname, index, content):
+    """
+    Generate a unique file name for storing processed YAML documents.
 
-    base, ext = os.path.splitext(fname) ## Separa el nombre base de la extension
+    If the name already exists, a hash of the content is appended.
+
+    Args:
+        dest_folder (str): Target directory.
+        fname (str): Original file name.
+        index (int): Document index in multi-doc files.
+        content (str): Content used to generate a hash if needed.
+
+    Returns:
+        str: A unique file name.
+    """
+
+    base, ext = os.path.splitext(fname) # Separates the base name from the extension
     fname_modify = f"{base}_{index}{ext}" if index > 0 else f"{base}{ext}"
 
-    if fname_modify in used_names: ## Se comprueba si el candidato ya esta en la lista global
+    if fname_modify in used_names: ## Check if the candidate is already on the global list.
         hash_id = md5(content.encode()).hexdigest()[:8]
         fname_modify = f"{base}_{hash_id}_{index}{ext}" if index > 0 else f"{base}_{hash_id}{ext}"
 
@@ -49,8 +93,17 @@ def get_unique_name(dest_folder, fname, index, content):
 
     return fname_modify
 
-# Determina bucket de tamaño
 def get_size_bucket(content):
+    """
+    Determine the size category for a YAML document based on byte size.
+
+    Args:
+        content (str): YAML content as string.
+
+    Returns:
+        str: One of the predefined size bucket names.
+    """
+
     ## size_bytes = len(content.encode('utf-8'))
     size_bytes = len(content.encode('utf-8'))
     for bucket_name, (min_b, max_b) in buckets.items():
@@ -59,6 +112,16 @@ def get_size_bucket(content):
     return 'huge'
     
 def has_valid_api_and_kind(doc):
+    """
+    Validate that the YAML document has both apiVersion and kind defined.
+
+    Args:
+        doc (dict): Parsed YAML document.
+
+    Returns:
+        bool: True if both fields are present and non-null.
+    """
+
     return (
         isinstance(doc, dict) and
         bool(doc.get('apiVersion')) and
@@ -67,8 +130,16 @@ def has_valid_api_and_kind(doc):
         doc.get('kind') != 'N/A'
     )
 def main():
+    """
+    Main processing routine. Iterates over input YAML files, parses them,
+    checks for issues or CRDs, categorizes them, and writes logs.
+
+    Raises:
+        Exceptions are caught and logged individually per file.
+    """
+
     prepare_output_dirs()
-    log_file_path = os.path.join(output_dir, 'preprocess_log.txt') ## Usar normalizacion? os.path.normpath
+    log_file_path = os.path.join(output_dir, 'preprocess_log.txt')
 
     total_files = 0
     total_files_declarations = 0
@@ -89,19 +160,19 @@ def main():
             try:
                 with open(src_path, 'r', encoding='utf-8') as yaml_file:
                     raw_content = yaml_file.read()
-                    # Verificación de templating
+                    # Verification of templating
                 if has_invalid_content(raw_content):
                     shutil.copy(src_path, os.path.join(output_dir, 'errores', fname))
                     log.write(f"[TEMPLATE OMITIDO] {fname} contiene templating → omitido\n")
                     continue
-                # Separación por documentos YAML estándar
+                # Separation by standard YAML documents
                 yaml_documents = list(yaml.safe_load_all(raw_content))
 
                 if not yaml_documents:
                     log.write(f"[VACÍO] {fname}\n")
                     continue
 
-                #  Caso 1: solo un documento válido → copiar
+                #  Case 1: only one valid document → copy
                 if len(yaml_documents) == 1:
                     doc = yaml_documents[0]
                     content = yaml.dump(doc, sort_keys=False)
@@ -129,7 +200,7 @@ def main():
                     log.write(f"[OK] {fname} (único) → {bucket}\n")
                     continue
 
-                #  Caso 2: múltiples documentos → procesar individualmente
+                #  Case 2: multiple documents → process individually
                 for i, doc in enumerate(yaml_documents):
                     total_files_declarations += 1
 
@@ -137,8 +208,8 @@ def main():
                     bucket = get_size_bucket(content)
                     unique_name = get_unique_name(os.path.join(output_dir, bucket), fname, i, content)
 
-                    if not isinstance(doc, dict): ## Omision de archivos vacíos o sin contenido: solo comentarios etc
-                        with open(os.path.join(output_dir, 'errores', unique_name), 'w', encoding='utf-8') as f: ## Agregado para guardar archivos con los errores...
+                    if not isinstance(doc, dict): ## Omission of empty files or files with no content: only comments etc
+                        with open(os.path.join(output_dir, 'errores', unique_name), 'w', encoding='utf-8') as f: ## Added for sabe files with errors...
                             f.write(content)                        
                         log.write(f"[INVALIDO] Documento vacío o no mapeable en {fname}, índice {i}\n")
                         errores += 1

@@ -1,8 +1,7 @@
 #!/bin/bash
 
-#INPUT_DIR="./small"
-INPUT_DIR="../scriptJsonToUvl/yamls_agrupation/yamls-tools-files"
-RESULTS_DIR="./results_terrascan"
+INPUT_DIR="../../resources/yamls_agrupation/yamls-tools-files"
+RESULTS_DIR="../../resources/results_data_tools/results_terrascan"
 BATCH_SIZE=800
 TIMING_FILE="$RESULTS_DIR/batch_times.txt"
 

@@ -28,7 +28,7 @@ Each YAML input results in a JSON output that maintains:
 
 ## Mapping to CSV
 
-- The `mappingUVC.csv` file links model features to their corresponding property names in YAML configurations.
+- The `mappingUvlCsv.csv` file links model features to their corresponding property names in YAML configurations.
 - This is created using a dedicated Python script that scans the model and establishes feature-to-key mappings.
 - The goal is to translate real-world YAML values into interpretable feature selections.
 
@@ -66,6 +66,7 @@ To support wider real-world use:
 - **Large-scale YAML validation** is optimized by batch processing and caching known kinds and versions.
 - A reference CSV of allowed `(apiVersion, kind)` combinations is generated to identify unsupported files.
 - Files with unsupported combinations are moved to a separate folder and marked as invalid automatically.
-- In the future, support for custom schema extensions may be added by extending the mapping model.
 
 ---
+
+_In the future, support for custom schema extensions may be added by extending the mapping model._

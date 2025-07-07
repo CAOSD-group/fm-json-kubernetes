@@ -10,9 +10,7 @@ from flamapy.metamodels.pysat_metamodel.operations import PySATSatisfiableConfig
 from configurationJSON01 import ConfigurationJSON ## clase Reader JSON
 
 
-FM_PATH = '../kubernetes_combined_04.uvl'
-##FM_PATH = '../kubernetes_combined_04.uvl'
-
+FM_PATH = '../../variability_model/kubernetes_combined_04.uvl'
 
 def get_all_parents(feature: Feature) -> list[str]:
     parent = feature.get_parent()
@@ -46,18 +44,6 @@ def complete_configuration(configuration: Configuration, fm_model: FeatureModel)
         configs_elements.update(children)
         configs_elements.update(parents)
     return Configuration(configs_elements)
-
-
-"""def valid_config(configuration: list[str], fm_model: FeatureModel, sat_model: PySATModel) -> bool: ## En vez de pasarle (configuration: list[str] le pasamos la lista del JSON que generamos en la Conf del JSON
-    #Given a list of features representing a configuration, checks whether the configuration ## modificar valid para poder pasarle mi lista por parametro
-    #is satisfiable (valid) according to the provided SAT model.
-    config = Configuration(elements={e: True for e in configuration})
-    config = complete_configuration(config, fm_model)
-    config.set_full(True)
-    satisfiable_op = PySATSatisfiableConfiguration()
-    satisfiable_op.set_configuration(config)
-    return satisfiable_op.execute(sat_model).get_result(), config.get_selected_elements()"""
-
 
 def valid_config_version_json(configuration_json: Configuration, fm_model: FeatureModel, sat_model: PySATModel) -> bool: ## En vez de pasarle (configuration: list[str] le pasamos la lista del JSON que generamos en la Conf del JSON
     """Given a list of features representing a configuration, checks whether the configuration ## modificar valid para poder pasarle mi lista por parametro
@@ -94,37 +80,18 @@ if __name__ == '__main__':
     #fm_model = UVLReader(FM_PATH).transform()
     #sat_model = FmToPysat(fm_model).transform()
 
-    # You need the configuration as a list of features
-    #elements = ['Pizza', 'Topping', 'Mozzarella', 'Dough', 'Sicilian', 'Size', 'Normal']
-    #path_json = '../generateConfigs/outputs_json_tester_invalid/01-default-memory-cpu_1.json'
-   
+    # You need the configuration as a list of features   
     """configuration_reader = ConfigurationJSON(path_json)
     configurations = configuration_reader.transform()
 
     ##elements = listJson
     for i, config in enumerate(configurations):
         #configuration = configuration_reader.transform()
+        # Call the valid operation
         valid, complete_config = valid_config_version_json(config, fm_model, sat_model)
         #if valid == False:
         #    print("FALSE GENERAL ")
+        # Output the result
         print(f"CONF VALID? {valid} \n")
 
         print(f'Configuration {i+1}: {config.elements}  {valid}')"""
-
-    # Call the valid operation
-    #valid, complete_config = valid_config(elements, fm_model, sat_model)
-
-
-    # Output the result
-    #print(f'Valid? {valid}')
-    #print(f"Conf completa {complete_config}")
-
-    # Another example of a partial configuration
-    #elements = ['Mozzarella', 'Sicilian', 'Big']
-    #valid = valid_config(elements, fm_model, sat_model)
-    #print(f'Valid? {valid}')
-
-    # Another example of a invalid configuration
-    #elements = ['Topping', 'Mozzarella', 'Dough', 'Sicilian', 'Size']
-    #valid = valid_config(elements, fm_model, sat_model)
-    #print(f'Valid? {valid}')

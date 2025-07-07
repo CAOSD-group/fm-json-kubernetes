@@ -3,10 +3,9 @@ from collections import defaultdict
 import csv
 import re
 
-input_dir = Path("./results_kyverno")
-#yaml_dir = Path("./small")
-yaml_dir = Path("../scriptJsonToUvl/yamls_agrupation/yamls-tools-files")
-csv_output = './results/kyverno/validation_results01.csv'
+input_dir = Path("../../resources/results_data_tools/results_kyverno")
+yaml_dir = Path("../../resources/yamls_agrupation/yamls-tools-files")
+csv_output = '../../evaluation/validation_results_kyverno_final.csv'
 timing_file = input_dir / "batch_times.txt"
 
 results = defaultdict(lambda: {"valid": True, "failures": [], "avg_time": 0})

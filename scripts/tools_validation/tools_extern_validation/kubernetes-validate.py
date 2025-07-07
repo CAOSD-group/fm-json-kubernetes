@@ -3,10 +3,10 @@ import csv
 from pathlib import Path
 from collections import defaultdict
 
-RESULTS_DIR = Path("./results_kubernetes-validate01")
-YAML_DIR = Path("../scriptJsonToUvl/yamls_agrupation/yamls-tools-files")
+RESULTS_DIR = Path("../../resources/results_data_tools/results_kubernetes-validate01")
+YAML_DIR = Path("../../resources/yamls_agrupation/yamls-tools-files")
 #YAML_DIR = Path("./yamls-tools-files")
-CSV_OUTPUT = Path("./results/kubernetes-validate/validation_results01.csv")
+CSV_OUTPUT = Path("../../evaluation/validation_results_kubernetes-validate_final.csv")
 TIMING_FILE = RESULTS_DIR / "batch_times.txt"
 
 CSV_OUTPUT.parent.mkdir(parents=True, exist_ok=True)

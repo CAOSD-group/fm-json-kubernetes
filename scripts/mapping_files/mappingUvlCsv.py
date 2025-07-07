@@ -3,8 +3,7 @@
 import re
 import csv
 
-uvl_model_path = '../../kubernetes_combined_04.uvl' ## Anterior V. './kubernetes_combined_02_2.uvl'
-
+uvl_model_path = '../../variability_model/kubernetes_combined_04.uvl'
 
 # Procesar el modelo para extraer los datos en las columnas
 csv_data = []
@@ -14,7 +13,6 @@ csv_data = []
 ## io_k8s_api_core_v1_Pod_spec_containers_env_valueFrom_resourceFieldRef_divisor, Pod_spec_containers_env_valueFrom_resourceFieldRef_divisor, divisor,
 
 ### Dict para guardar cada apiVersion y kind de los que se examinen del modelo.
-#dict_apiVersion_Kind = {} ## Dict para guardar version y kind de los features o list
 kinds_versions_set = set()
 no_kinds_versions = []
 
@@ -96,31 +94,23 @@ with open(uvl_model_path, encoding="utf-8") as uvl_model:
         ####
         # Obtener las partes del feature
         split_feature = feature.split("_")
-        #print(f"El feature del archivo es: {feature}")
-        #midle = "_".join(split_feature[3:])  # Omitir las partes repetitivas (ejemplo)
-        ### feature_aux_midle = re.search(r"[A-Z].*", feature)
-        #print(f"El match del feature Midle es: {feature_aux_midle}")
         midle_row = feature_aux_midle.group(0)
-        #print(midle_row)
         turned_row = split_feature[-1] if split_feature else ""    
         # Valor: se deja vacio o se asigna el valor si es un feature agregado que contiene el valor asignado
         value_row = turned_row if "Specific value" in line else value_row ## Se define el valor y se asigna el Valor si se encuentran las palabras clave en la documentación
-        #print(f"VALORES: {feature}  {midle_row} {turned_row}    {value_row}")
         # Agregar al CSV
         csv_data.append([feature, midle_row, turned_row, value_row])
 
 print(f"AUX Y NO KIND ENCONTRADOS:  {no_kinds_versions}")
 
-output_file_csv = './generateConfigs/kubernetes_mapping_features02-3.csv'
-#output_file_csv = './kubernetes-mapped-v1.32/kubernetes_mapping_features01.csv'
-output_file_kinds_versions = './generateConfigs/kinds_versions_detected.csv'
+output_file_csv = '../../resources/mapping_csv/kubernetes_mapping_properties_features.csv'
+output_file_kinds_versions = '../../resources/mapping_csv/kinds_versions_detected.csv'
 ##str_ouput_rows = "Feature, Midle, Turned, Value"
 
 with open(output_file_csv, mode="w", newline="") as csv_file:
     writer = csv.writer(csv_file)
     writer.writerow(["Feature", "Midle", "Turned", "Value"])  ## [str_ouput_rows] # Encabezado writer.writerow(["Feature, Midle, Turned, Value"])
     writer.writerows(csv_data)
-##generate_csv_from_uvl = (uvl_model_path)
 
 with open(output_file_kinds_versions, mode="w", newline="") as apis_file:
     writer = csv.writer(apis_file)

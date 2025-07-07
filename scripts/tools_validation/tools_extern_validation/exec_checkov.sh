@@ -1,7 +1,7 @@
 #!/bin/bash
 
-INPUT_DIR="../scriptJsonToUvl/yamls_agrupation/yamls-tools-files"
-RESULTS_DIR="./results_checkov1"
+INPUT_DIR="../../resources/yamls_agrupation/yamls-tools-files"
+RESULTS_DIR="../../resources/results_data_tools/results_checkov1"
 BATCH_SIZE=300
 TIMING_FILE="$RESULTS_DIR/batch_times.txt"
 

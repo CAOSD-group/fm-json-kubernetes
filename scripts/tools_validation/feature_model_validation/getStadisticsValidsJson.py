@@ -8,12 +8,12 @@ import time  # Libreria para calcular los tiempos de procesamiento
 import os
 import csv
 
-FM_PATH = '../kubernetes_combined_04.uvl'
+FM_PATH = '../../variability_model/kubernetes_combined_04.uvl'
 ##JSON_DIR = '../generateConfigs/outputs-json-tester'
 ##JSON_DIR = '../generateConfigs/outputs_json_mappeds09'
 #JSON_DIR = '../generateConfigs/outputs_no_validkinds_versions'
 
-json_base_directory = '../generateConfigs' ## Pendiente unificar salida de invalidKindsVersions a la misma carpeta donde se generen los json
+json_base_directory = '../../resources/generateConfigs' ## Pendiente unificar salida de invalidKindsVersions a la misma carpeta donde se generen los json
 json_folders = ['outputs_json_mappeds11', 'invalidKindsVersions01' ] ## Arr con los 2 paths de directorios a revisar
 #JSON_DIR_INVALIDAS_KINDS_VERSIONS = '../yamls_agrupation/tester/invalidKindsVersions'
 
