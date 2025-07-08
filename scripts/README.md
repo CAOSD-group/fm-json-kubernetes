@@ -1,4 +1,4 @@
 ## Submodules
-- [Mapping Process](./mapping_files/README.md)
-- [Validation Workflow](./tools_validation/README.md)
-- [FM generation](../fm-json-kubernetes/README.md)
+- [Mapping files](./mapping_files/README.md)
+- [Model generation](../README.md)
+- [Tools validation](./tools_validation/README.md)

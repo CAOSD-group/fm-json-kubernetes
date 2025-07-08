@@ -27,7 +27,6 @@ word_to_num = {
     "one": 1
 }
 
-# Función para cargar las características desde el archivo JSON
 def load_json_features(file_path):
     """
     Load feature descriptions from a JSON file.
@@ -69,8 +68,8 @@ def extract_constraints_template_onlyAllowed(description, feature_key):
         ValueError: If expected patterns are not matched.
     """
 
-    template_spec_policy_pattern01 = re.compile(r'(?<=The only allowed template.spec.restartPolicy value is\s)\"([A-Za-z]+)\"', re.IGNORECASE) ## Entre parentesis añade las comillas dobles tambien
-    template_spec_policies_pattern02 = re.compile(r'\"([A-Za-z]+)\"') ## expresión que captura los valores que vienen entre comillas: caso 2
+    template_spec_policy_pattern01 = re.compile(r'(?<=The only allowed template.spec.restartPolicy value is\s)\"([A-Za-z]+)\"', re.IGNORECASE) # In brackets add the double quotation marks as well.
+    template_spec_policies_pattern02 = re.compile(r'\"([A-Za-z]+)\"') ## Expression that captures the values enclosed in quotation marks: case 2
     feature_with_spec = f"{feature_key}_spec_restartPolicy"
     
     if 'value is' in description:
@@ -82,15 +81,15 @@ def extract_constraints_template_onlyAllowed(description, feature_key):
         policy_Never = f"{feature_with_spec}_Never" 
         return f"({policy_Always} => {feature_key}) & (!{policy_Never}) & (!{policy_OnFailure})"
 
-    elif 'values are' in description: ### Caso en el que hay 2 valores posibles para template.spec.restartPolicy: Never y OnFailure
-        policies_match = template_spec_policies_pattern02.findall(description) # Se obtienen los valores del caso de las descripciones
+    elif 'values are' in description: ### Case in which there are 2 possible values for template.spec.restartPolicy: Never and OnFailure
+        policies_match = template_spec_policies_pattern02.findall(description) # The values of the case are obtained from the descriptions
         policies_Always = f"{feature_with_spec}_Always"
         if len(policies_match) < 2:
             raise ValueError(f"Se esperaban al menos dos valores en la descripción: {description}")
         allowed_policies = [f"{feature_with_spec}_{policy}" for policy in policies_match]
         return f"({' | '.join(allowed_policies)}  => {feature_key}) & (!{policies_Always})" ## New case correct
     
-    # Si no se cumple ninguno de los casos
+    # If none of the cases are met
     raise ValueError(f"Descripción inesperada para {feature_key}: {description}")
 
 def extract_constraints_string_oneOf(description, feature_key):
@@ -108,7 +107,7 @@ def extract_constraints_string_oneOf(description, feature_key):
     uvl_rule = ""
     feature_without_lastProperty = feature_key.rsplit('_', 1)[0]
 
-    if 'indicates which one of' in description: ## Se usa la descripción del kind para tener el feature string de los tipos que pueden ser los otros campos. Se interpreta como que solo uno de los campos puede ser seleccionado (10)
+    if 'indicates which one of' in description: # The description of the kind is used to have the feature string of the types that can be the other fields. It is interpreted as meaning that only one of the fields can be selected (10).
         print("No SE EJECUTA?")
         kind_authentication_group = f"{feature_without_lastProperty}_group"
         kind_authentication_serviceAccount = f"{feature_without_lastProperty}_serviceAccount"
@@ -120,10 +119,10 @@ def extract_constraints_string_oneOf(description, feature_key):
         f" & !({kind_authentication_group} & {kind_authentication_serviceAccount})" \
         f" & !({kind_authentication_serviceAccount} & {kind_authentication_User})" \
         f" & !({kind_authentication_group} & {kind_authentication_User})" 
-        ## Se agregan las condiciones para que solo pueda ser cogido uno a la vez. No esta del todo claro segun la descrip. Pero se puede presuponer
+        # Conditions are added so that only one can be caught at a time. It is not entirely clear from the description. But it can be assumed
 
     if uvl_rule is not None:
-        return uvl_rule.strip() ### Devolver restricciones y eliminar las lineas en blanco
+        return uvl_rule.strip() # Return restrictions and remove blank lines
     else:
         return "El conjunto esta vacio"
 def extract_constraints_multiple_conditions(description, feature_key):
@@ -143,24 +142,23 @@ def extract_constraints_multiple_conditions(description, feature_key):
 
     uvl_rule = ""
     feature_without_lastProperty = feature_key.rsplit('_', 1)[0]
-    if 'conditions may not be' in description: ## Restriccion que... (4) ## MODIFICADO
+    if 'conditions may not be' in description: # (4)
         type_match = type_notbe_pattern.search(description)
         type01 = type_match.group(1)    
         type02 = type_match.group(2)
         types_notbe = f"!{feature_key}_{type01} & !{feature_key}_{type02}"
         conditions_match = conditions_pattern.findall(description)
         uvl_rule += f"{feature_without_lastProperty} => ({feature_without_lastProperty}_type_{conditions_match[0]} | {feature_without_lastProperty}_type_{conditions_match[1]} | {feature_without_lastProperty}_type_{conditions_match[2]}) => {types_notbe}"
-    elif 'Details about a waiting' in description: ## Solo se procesara una de las descripciones y se introduciran los otros features estaticamente. Al ser 3 valores y no haber una descrip con estas se agregaran los otros 2 manualmente...
-        ## waiting {default} // feature_key {default} ## Funcion que define el estado de un contenedor con 3 posibles opciones. Solo se puede seleccionar una (21)
-        print("No SE EJECUTA?")
+    elif 'Details about a waiting' in description: # Only one of the descriptions will be processed and the other features will be introduced statically. As there are 3 values and there is no description with these, the other 2 will be added manually...
+        # Function that defines the status of a container with 3 possible options. Only one can be selected (21)
         container_state01 = f"{feature_without_lastProperty}_running"
         container_state02 = f"{feature_without_lastProperty}_terminated"
         uvl_rule += f"{feature_without_lastProperty} => ({feature_key} => !{container_state01} & !{container_state02})" \
         f" & ({container_state01} => !{feature_key} & !{container_state02})" \
         f" & ({container_state02} => !{feature_key} & !{container_state01})"
-        uvl_rule += f"& (!{container_state01} & !{container_state02} => {feature_key})" ### Regla por defecto, si no hay otro seleccionado, se selecciona por defecto waiting..
-    elif 'TCPSocket is NOT' in description: ## Restricciones sin patron, no viene definido en las descr de los sub-features involucrados (175)
-        """ Nuevo grupo basado en la descrip: sin patron, descripcion principal: lifecycleHandler defines a specific action that should be taken in a lifecycle hook. One and only one of the fields, except TCPSocket must be specified. """
+        uvl_rule += f"& (!{container_state01} & !{container_state02} => {feature_key})" # Default rule, if no other is selected, default waiting... is selected.
+    elif 'TCPSocket is NOT' in description: ## Restrictions without pattern, not defined in the descriptions of the sub-features involved (175)
+        """ New group based on description: no pattern, main description: lifecycleHandler defines a specific action to be taken in a lifecycle hook. One and only one of the fields, except TCPSocket must be specified. """
         action_lifecycle_exec = f"{feature_without_lastProperty}_exec"
         action_lifecycle_httpGet =f"{feature_without_lastProperty}_httpGet"
         action_lifecycle_sleep = f"{feature_without_lastProperty}_sleep"
@@ -235,18 +233,18 @@ def extract_constraints_least_one(description, feature_key):
     exactly_match01 = exactly_least_one_pattern02.search(description)
     at_least_match01 = at_least_one_pattern01.search(description)
 
-    if a_least_match01: ## Si hay coincidencia con la primera expresión se agrega la regla/constraint definida
+    if a_least_match01: ## If there is a match with the first expression, the defined rule/constraint is added.
         value01 = a_least_match01.group(1)
         value02 = a_least_match01.group(2)
 
         uvl_rule = f"{feature_without_lastProperty} => {feature_without_lastProperty}_{value01} | {feature_without_lastProperty}_{value02}"
-    elif exactly_match01: ## Si hay coincidencia con la segunda expresión se agrega la constraint definida
+    elif exactly_match01: ## If there is a match with the second expression the defined constraint is added
         print("Comprobacion02", exactly_match01)
         value01 = exactly_match01.group(1)
         value02 = exactly_match01.group(2)
 
         uvl_rule = f"{feature_without_lastProperty} => ({feature_without_lastProperty}_{value01} | {feature_without_lastProperty}_{value02}) & !({feature_without_lastProperty}_{value01} & {feature_without_lastProperty}_{value02})"
-    elif at_least_match01: ## Si hay coincidencia con la tercera expresión se agrega la constraint definida
+    elif at_least_match01: ## If there is a match with the third expression the defined constraint is added
         value01 = at_least_match01.group(1)
         value02 = at_least_match01.group(2)
 
@@ -356,7 +354,7 @@ def extract_constraints_os_name(description, feature_key):
         
         match = re.search(r'^(.*?_PodList_items_spec)', feature_key) #(r'^(.*?_template_spec)')
         feature_without0 = match.group(1)
-        name_obtained = osName_match.group(1) ## Obtener el nombre del patron obtenido
+        name_obtained = osName_match.group(1) # Obtain the name of the obtained pattern
         uvl_rule = f"{feature_without0}_{path_osName}_{name_obtained} => !{feature_key}"
 
     elif osName_match and '_core_v1_PodSpec_' in feature_key: ## Case of fouth group, _core_v1_PodSpec, 43 features
@@ -367,7 +365,7 @@ def extract_constraints_os_name(description, feature_key):
         name_obtained = osName_match.group(1)
         uvl_rule = f"{feature_without0}_{path_osName}_{name_obtained} => !{feature_key}"
 
-    elif osName_match and '_PodTemplateSpec_spec_' in feature_key: ## Caso del quinto grupo, _PodTemplateSpec_spec_, 43 features
+    elif osName_match and '_PodTemplateSpec_spec_' in feature_key: # Case of the fifth group, _PodTemplateSpec_spec_, 43 features
 
         match = re.search(r'^(.*?_PodTemplateSpec_spec)', feature_key) #(r'^(.*?_template_spec)')
         feature_without0 = match.group(1)
@@ -443,11 +441,8 @@ def extract_constraints_if(description, feature_key):
 
     elif 'exempt' in feature_key: ### Treat descriptions with the pattern “This field MUST be empty if:”
         exempt_match = only_if_pattern.findall(description)
-        print("Lo que captura el patron", exempt_match)
         type_property01 = exempt_match[0] # Limited
         type_property02 = exempt_match[1] # Exempt
-        print("Valores exempt capturados", exempt_match)
-        print(f"{type_property01}, tipo2: {type_property02}")
         uvl_rule = f"({feature_without_lastProperty}_type_{type_property01} => !{feature_key}) | ({feature_without_lastProperty}_type_{type_property02} => {feature_key})" ### Aqui se especifican los 2 casos
         
     if uvl_rule is not None:
@@ -478,7 +473,6 @@ def extract_constraints_required_when(description, feature_key):
         # Capture the property and the value of “Required when”.
         required_property = required_match.group(1)
         required_value = required_match.group(2)
-        print(f"COINCIDENCIA REQUERIDA: {required_property} = {required_value}")
         uvl_rule = f"{feature_without_lastProperty}_{required_property}_{required_value} => {feature_key}"
         
         unset_property = unset_match.group(1)

@@ -1,77 +1,69 @@
-#### Archivo que busca mapear los features de un modelo UVL a CSV. #####
+"""
+This script parses a UVL (Universal Variability Language) model file and generates
+a CSV mapping of feature paths. The output helps in analyzing feature naming structure
+and extracting information like API version, kind, and specific value types.
+
+It outputs:
+- A CSV listing features with hierarchical metadata (middle, turned, value)
+- A CSV of unique (apiVersion, kind) combinations found in the model
+
+Usage:
+    Run the script after a UVL model has been generated to extract and organize feature information.
+"""
 
 import re
 import csv
 
 uvl_model_path = '../../variability_model/kubernetes_combined_04.uvl'
 
-# Procesar el modelo para extraer los datos en las columnas
+# Process the model to extract the data in the columns.
 csv_data = []
 ### Rows: Feature, Midle, Turned, Value
-## Example: From this feature: io_k8s_apimachinery_pkg_apis_meta_v1_APIVersions_serverAddressByClientCIDRs, we add in the ros:
+## Example: From this feature: io_k8s_apimachinery_pkg_apis_meta_v1_APIVersions_serverAddressByClientCIDRs, we add in the rows:
 ## io_k8s_apimachinery_pkg_apis_meta_v1_APIVersions_serverAddressByClientCIDRs, APIVersions_serverAddressByClientCIDRs, serverAddressByClientCIDRs,
 ## io_k8s_api_core_v1_Pod_spec_containers_env_valueFrom_resourceFieldRef_divisor, Pod_spec_containers_env_valueFrom_resourceFieldRef_divisor, divisor,
 
-### Dict para guardar cada apiVersion y kind de los que se examinen del modelo.
+### Dict to store each apiVersion and kind of those examined from the model.
 kinds_versions_set = set()
 no_kinds_versions = []
 
 elementos_sin_version_o_kind = []
 
-# Leer el archivo UVL línea por línea
+# Read the UVL file line by line
 with open(uvl_model_path, encoding="utf-8") as uvl_model:
     for line in uvl_model:
-        # Limpiar línea y dividir por espacios
-        # Limpiar línea
+        # Clear line
         line = line.strip()
-        ## Se omiten/saltan las lineas que contienen mandatory, optional, alternative, namespace, features... 
-        #if not re.match(r"^(String|Integer|io_k8s_)", line):   ## Alternativa de salto de expresiones que no interesan
-        #    continue
-        value_row = "-" if "cardinality" in line else "" ## Se le asigna el guión para determinar si un feature es un array
-        if not line.startswith(("String", "Boolean", "Integer", "io_k8s_")): # Saltar líneas que no sean features, se definen por esos 4 tipos: String, Integer o encabezado por io.. Boolean
-            if line.startswith("constraints"): ## se omite la lectura de las constraints. 
-                print(f"Linea que omite todo: {line}")
-                break   ## Se usa break porque el unico punto posible donde se empieza por 'constraints' es al declarar las restricciones
+        value_row = "-" if "cardinality" in line else "" ## The script is assigned to determine if a feature is an array.
+        if not line.startswith(("String", "Boolean", "Integer", "io_k8s_")): # Skip lines that are not features, are defined by these 4 types: String, Integer or headed by io.. Boolean
+            if line.startswith("constraints"): ## the reading of the constraints is omitted.
+                break   ## Break is used because the only possible place to start with 'constraints' is when declaring constraints.
             continue
 
-        #parts = line.split("namespace").split("features").split("Kubernetes")
-        #print(line)
         if "cardinality" in line:
             line_feature = line.split("cardinality")[0]
         else:
             line_feature = line.split("{")[0]
-        print(line_feature)
-        # Determinar si la línea contiene un tipo explícito
+        # Determine if the line contains an explicit type
         parts = line_feature.split()
-        #print(f"Las partes divididas son: {parts}")
-        if len(parts) >= 2: # Si hay tipo explícito de dato (String o Integer), extraer el nombre del feature
+        if len(parts) >= 2: # If there is an explicit data type (String or Integer), extract the name of the feature
             feature = parts[1]
         else:
-            # Si no hay tipo de dato explícito, se asume que la primera parte de las partes es el feature
+            # If there is no explicit data type, it is assumed that the first part of the parts is feature
             feature = parts[0]
-        #value_row = "-" if "cardinality" in line else "" ## Se le asigna el guión para determinar si un feature es un array
-        ### Adicion prueba obtencion version y kind
+        ## Additional proof of version and kind
         feature_aux_midle = re.search(r"[A-Z].*", feature)
 
         if not feature_aux_midle:
-            print(f"Feature aux midle sin:  {feature}")
             elementos_sin_version_o_kind.add(feature)
-        kind = feature_aux_midle.group(0).split('_')[0] ## Se obtiene solo el el Kind
-        print(f"Kind del feature:    {kind}")
-        #version_aux = feature.split(f"{kind}")[0]
+        kind = feature_aux_midle.group(0).split('_')[0] ## You get only the Kind
         version_aux = feature.split(kind)[0]
-        print(f"La version cortada es: {version_aux}")
         api_version = version_aux.split('_')[-2]
-        print(f"La version del feature es: {api_version}")
-        group = feature.split("_")[3] ## Se obtiene el group sin la extension de io.k8s...
-        print(f"El group del feature es: {group}")
+        group = feature.split("_")[3] ## You get the group without the io.k8s extension...
         if not version_aux or not api_version:
             no_kinds_versions.add((version_aux, kind))
-        if (api_version, kind) not in kinds_versions_set: #and kind not in kinds_versions_set
-            #dict_apiVersion_Kind [api_version] = kind
+        if (api_version, kind) not in kinds_versions_set:
             kinds_versions_set.add((api_version, kind))
-            print(f"Version agregada:   {api_version}   kind:   {kind}" )
-            #print(f"Ya agregado {kinds_versions_set}" )
         if feature_aux_midle:
             kind = feature_aux_midle.group(0).split('_')[0]
             version_aux = feature.split(kind)[0]
@@ -88,33 +80,27 @@ with open(uvl_model_path, encoding="utf-8") as uvl_model:
         else:
             print(f"⚠ No se pudo extraer kind de: {feature}")
             elementos_sin_version_o_kind.append(feature)
-        #else:
-        #    print(f"Ya agregado {kinds_versions_set}" )
 
-        ####
-        # Obtener las partes del feature
+        # Obtain the parts of the feature
         split_feature = feature.split("_")
         midle_row = feature_aux_midle.group(0)
         turned_row = split_feature[-1] if split_feature else ""    
-        # Valor: se deja vacio o se asigna el valor si es un feature agregado que contiene el valor asignado
-        value_row = turned_row if "Specific value" in line else value_row ## Se define el valor y se asigna el Valor si se encuentran las palabras clave en la documentación
-        # Agregar al CSV
+        # Value: leave empty or assign the value if it is an aggregate feature containing the assigned value.
+        value_row = turned_row if "Specific value" in line else value_row ## The value is defined and the Value is assigned if the keywords are found in the documentation.
+        # Add to CSV
         csv_data.append([feature, midle_row, turned_row, value_row])
-
-print(f"AUX Y NO KIND ENCONTRADOS:  {no_kinds_versions}")
 
 output_file_csv = '../../resources/mapping_csv/kubernetes_mapping_properties_features.csv'
 output_file_kinds_versions = '../../resources/mapping_csv/kinds_versions_detected.csv'
-##str_ouput_rows = "Feature, Midle, Turned, Value"
 
 with open(output_file_csv, mode="w", newline="") as csv_file:
     writer = csv.writer(csv_file)
-    writer.writerow(["Feature", "Midle", "Turned", "Value"])  ## [str_ouput_rows] # Encabezado writer.writerow(["Feature, Midle, Turned, Value"])
+    writer.writerow(["Feature", "Midle", "Turned", "Value"])  ## [str_ouput_rows] # Header writer.writerow(["Feature, Midle, Turned, Value"])
     writer.writerows(csv_data)
 
 with open(output_file_kinds_versions, mode="w", newline="") as apis_file:
     writer = csv.writer(apis_file)
-    writer.writerow(["Version", "Kind"]) ## "Group",
+    writer.writerow(["Version", "Kind"])
     for version, kind in sorted(kinds_versions_set):
         writer.writerow([version, kind])
 

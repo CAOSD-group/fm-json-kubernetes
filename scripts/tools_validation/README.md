@@ -30,6 +30,32 @@ Scripts included:
 
 ### 1. Tool Execution
 
+To use the external tools, we recommend the following environment setup.
+
+1. Create a virtual environment:
+
+  ```bash
+  python -m venv envToolsValidation
+  ```
+
+2. Activate the environment:
+
+  - **Linux:**
+    ```bash
+    source envToolsValidation/bin/activate
+    ```
+  - **Windows:**
+    ```powershell
+    .\envToolsValidation\Scripts\Activate
+    ```
+
+3. Install the dependencies:
+
+  ```bash
+  pip install -r requirements_tools_validation.txt
+  ```
+
+
 YAML files (located in `/yamls_complete/`, ~227K files) are validated using CLI tools, one at a time or in batch mode.
 
 Some tools require:

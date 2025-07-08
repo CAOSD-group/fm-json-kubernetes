@@ -45,15 +45,23 @@ def complete_configuration(configuration: Configuration, fm_model: FeatureModel)
         configs_elements.update(parents)
     return Configuration(configs_elements)
 
-def valid_config_version_json(configuration_json: Configuration, fm_model: FeatureModel, sat_model: PySATModel) -> bool: ## En vez de pasarle (configuration: list[str] le pasamos la lista del JSON que generamos en la Conf del JSON
-    """Given a list of features representing a configuration, checks whether the configuration ## modificar valid para poder pasarle mi lista por parametro
-    is satisfiable (valid) according to the provided SAT model."""
-    #print("Before completion:", configuration_json.get_selected_elements())
+def valid_config_version_json(configuration_json: Configuration, fm_model: FeatureModel, sat_model: PySATModel) -> bool: ## Instead of passing it (configuration: list[str] we pass the JSON list we generated in the JSON Conf
+    """
+    Check if a configuration is valid (satisfiable) according to the SAT model.
+
+    Args:
+        configuration_json (Configuration): Configuration to validate.
+        fm_model (FeatureModel): The feature model.
+        sat_model (PySATModel): The SAT-based feature model.
+
+    Returns:
+        tuple: (bool indicating validity, list of selected feature names)
+    """
+    
     config = complete_configuration(configuration_json, fm_model)
-    #print("After completion:", config.get_selected_elements())
     config.set_full(True)
     satisfiable_op = PySATSatisfiableConfiguration() 
-    satisfiable_op.set_configuration(config) ## Se usa un Solver SAT
+    satisfiable_op.set_configuration(config)
     return satisfiable_op.execute(sat_model).get_result(), config.get_selected_elements()
 
 def inizialize_model(model_path):

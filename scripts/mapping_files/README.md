@@ -9,6 +9,7 @@ This module contains the scripts and logic to map YAML configurations into UVL f
 - [Overview](#overview)
 - [Mapping to CSV](#mapping-to-csv)
 - [YAML to JSON Conversion](#yaml-to-json-conversion)
+- [Obtaining Real YAML Files](#obtaining-real-yaml-files)
 - [Implementation Notes](#implementation-notes)
 - [Known Issues and Adaptations](#known-issues-and-adaptations)
 
@@ -23,6 +24,16 @@ From the generated UVL model, a **CSV mapping file** is created. This file acts 
 Each YAML input results in a JSON output that maintains:
 - The original structure and values.
 - A one-to-one mapping between YAML keys and UVL features.
+
+---
+
+## Obtaining Real YAML Files
+
+To acquire the set of real-world Kubernetes YAML configurations used in this module, follow the extraction instructions from the companion project:
+
+👉 [kubernetes_fm - Extracting Real Configurations of Kubernetes from GitHub Repositories](https://github.com/CAOSD-group/kubernetes_fm?tab=readme-ov-file#extracting-real-configurations-of-kubernetes-from-github-repositories)
+
+This external pipeline automates the collection of manifests directly from public GitHub repositories, filtered and prepared for further processing.
 
 ---
 
