@@ -5,12 +5,10 @@ from flamapy.metamodels.fm_metamodel.models import FeatureModel, Feature
 from flamapy.metamodels.fm_metamodel.transformations import UVLReader
 from flamapy.metamodels.pysat_metamodel.models import PySATModel
 from flamapy.metamodels.pysat_metamodel.transformations import FmToPysat
-from flamapy.metamodels.pysat_metamodel.operations import PySATSatisfiableConfiguration
+from flamapy.metamodels.pysat_metamodel.operations import (PySATSatisfiable, PySATSatisfiableConfiguration)
 
 from configurationJSON01 import ConfigurationJSON ## clase Reader JSON
-
-
-FM_PATH = '../../variability_model/kubernetes_combined_04.uvl'
+FM_PATH = "../../../variability_model/kubernetes_combined_04.uvl"
 
 def get_all_parents(feature: Feature) -> list[str]:
     parent = feature.get_parent()
@@ -85,10 +83,17 @@ def main(configuration, fm_model, sat_model, cardinality):
 
 if __name__ == '__main__':
     # You need the model in SAT
-    #fm_model = UVLReader(FM_PATH).transform()
+    fm_model = UVLReader(FM_PATH).transform()
     #sat_model = FmToPysat(fm_model).transform()
 
-    # You need the configuration as a list of features   
+    # You need the configuration as a list of features
+    # Transform the feature model to propositional logic (SAT model)
+    sat_model = FmToPysat(fm_model).transform()
+
+    # Check if the model is valid
+    valid = PySATSatisfiable().execute(sat_model).get_result()
+    print(f'Valid?: {valid}')
+    
     """configuration_reader = ConfigurationJSON(path_json)
     configurations = configuration_reader.transform()
 

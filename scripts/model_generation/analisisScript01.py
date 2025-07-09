@@ -267,7 +267,7 @@ def extract_constraints_operator(description, feature_key):
     Returns:
         str: UVL constraint.
     """
-    # Regular expression for “Requires (X, Y) when feature is up” ## The order of feature selection or not is defined by the expressions "non-empty, empty. If there is any variation it will be taken into account for the selection".
+    # Regular expression for "Requires (X, Y) when feature is up" ## The order of feature selection or not is defined by the expressions "non-empty, empty. If there is any variation it will be taken into account for the selection".
     operator_is_pattern01 = re.compile(r'If the operator is\s+(\w+)\s+or\s+(\w+)', re.IGNORECASE) #  Expresión regular para obtener todos los pares (X,Y) de las descripcciones con "If the operator is"
     operator_if_pattern02 = re.compile(r'If the operator is\s+(\w+)') # Expresion para las restricciones que solo tienen un único valor
 
@@ -281,7 +281,7 @@ def extract_constraints_operator(description, feature_key):
     required_value = None
 
     if operator_match01 and 'is Exists,' not in description:
-        # Capture the property and the value of “Required when”.
+        # Capture the property and the value of "Required when".
         type_property01 = operator_match01[0] # Captures the first values of the pair "In or NotIn"
         type_property02 = operator_match01[1] # Captures the first values of the pair "Exists or DoesNotExist".
         print("Required 01", type_property01)
@@ -431,7 +431,7 @@ def extract_constraints_if(description, feature_key):
     if_match = only_if_pattern.search(description)
     feature_without_lastProperty = feature_key.rsplit('_', 1)[0]
 
-    if if_match and 'exempt' not in feature_key: # It deals with desciptions with the pattern “Must be set if type is”.
+    if if_match and 'exempt' not in feature_key: # It deals with desciptions with the pattern "Must be set if type is".
         value_obtained = if_match.group(1)
         if 'Must be set if type is' in description or 'Must be set if and only if type' in description or 'may be non-empty only if' in description: ## Agregado nuevo conjunto may be non-empty only if (10)
             uvl_rule = f"{feature_without_lastProperty}_type_{value_obtained} <=> {feature_key}"
@@ -439,7 +439,7 @@ def extract_constraints_if(description, feature_key):
             ## Division between the types if the feature can only be accessed if the type is the concrete one
             uvl_rule = f"{feature_without_lastProperty}_type_{value_obtained} => {feature_key}"
 
-    elif 'exempt' in feature_key: ### Treat descriptions with the pattern “This field MUST be empty if:”
+    elif 'exempt' in feature_key: ### Treat descriptions with the pattern "This field MUST be empty if:"
         exempt_match = only_if_pattern.findall(description)
         type_property01 = exempt_match[0] # Limited
         type_property02 = exempt_match[1] # Exempt
@@ -451,7 +451,7 @@ def extract_constraints_if(description, feature_key):
         return "No hay ninguna coincidencia con los patrones y descripciones"
 
 def extract_constraints_required_when(description, feature_key):
-    # Regular expression for “Required when X is set to Y”.
+    # Regular expression for "Required when X is set to Y".
     required_when_pattern = re.compile(r'Required when\s+(\w+)\s+is\s+set\s+to\s+"([^"]+)"', re.IGNORECASE)
     # Regular expression for "Must be unset when X is set to Y"
     must_be_unset_pattern = re.compile(r'must be unset when\s+(\w+)\s+is\s+set\s+to\s+"([^"]+)"', re.IGNORECASE)
@@ -470,7 +470,7 @@ def extract_constraints_required_when(description, feature_key):
     unset_property, unset_value = None, None
 
     if  required_match and unset_match:
-        # Capture the property and the value of “Required when”.
+        # Capture the property and the value of "Required when".
         required_property = required_match.group(1)
         required_value = required_match.group(2)
         uvl_rule = f"{feature_without_lastProperty}_{required_property}_{required_value} => {feature_key}"
@@ -551,6 +551,7 @@ def extract_bounds(description):
     is_other_number = False
 
     # Expressions to detect intervals of the form "0 < x < 65536", "1-65535 inclusive", y "Number must be in the range 1 to 65535"    range_pattern = re.compile(r'(\d+)\s*<\s*\w+\s*<\s*(\d+)')
+    range_pattern = re.compile(r'(\d+)\s*<\s*\w+\s*<\s*(\d+)')
     inclusive_range_pattern = re.compile(r'(\d+)\s*-\s*(\d+)\s*\(inclusive\)')
     range_text_pattern = re.compile(r'Number\s+must\s+be\s+in\s+the\s+range\s+(\d+)\s+to\s+(\d+)', re.IGNORECASE)
     must_be = re.compile(r'must be greater than(?: or equal to)? (\w+)',re.IGNORECASE) ## Special case in which it can be equal to zero (?: or equal to)?
@@ -589,7 +590,7 @@ def extract_bounds(description):
         max_bound = int(range_text_match.group(2))
         return min_bound, max_bound, is_port_number, is_other_number
         
-    # Detect ranges of the form "must be between 0 and 100" y "...1 and 30". The range 1-30 is seconds and the range 0-100 represents priority “levels”. Total: 22 restric
+    # Detect ranges of the form "must be between 0 and 100" y "...1 and 30". The range 1-30 is seconds and the range 0-100 represents priority "levels". Total: 22 restric
     between_text_match = between_text_pattern.search(description) 
     if between_text_match:
         min_bound = int(between_text_match.group(1))

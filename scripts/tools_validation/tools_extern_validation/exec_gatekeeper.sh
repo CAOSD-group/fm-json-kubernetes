@@ -1,9 +1,9 @@
 #!/bin/bash
 
-INPUT_DIR="../../resources/yamls_agrupation/yamls-tools-files"
-RESULTS_DIR="../../resources/results_data_tools/results_gatekeeper"
+INPUT_DIR="../../../resources/yamls_agrupation/yamls-tools-files"
+RESULTS_DIR="../../../resources/results_data_tools/results_gatekeeper"
 #POLICIES_DIR="./gatekeeper-library/library/general/block-endpoint-edit-default-role"
-POLICIES_DIR="../../resources/policies_tools/policies_gatekeeper/general_custom"
+POLICIES_DIR="../../../resources/policies_tools/policies_gatekeeper/general_custom"
 
 BATCH_SIZE=800
 

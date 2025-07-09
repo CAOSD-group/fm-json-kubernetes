@@ -29,8 +29,8 @@ import csv
 from pathlib import Path
 from collections import defaultdict
 
-json_dir = Path('../../resources/results_data_tools/results_kubeconform02')
-csv_output = '../../evaluation/validation_results_kubeconform_final.csv'
+json_dir = Path('../../../resources/results_data_tools/results_kubeconform02')
+csv_output = '../../../evaluation/validation_results_kubeconform_final.csv'
 timing_file = json_dir / "batch_times.txt"
 
 results = defaultdict(lambda: {

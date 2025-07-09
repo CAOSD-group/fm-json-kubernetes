@@ -8,9 +8,9 @@ import time  # Libreria para calcular los tiempos de procesamiento
 import os
 import csv
 
-FM_PATH = '../../variability_model/kubernetes_combined_04.uvl'
+FM_PATH = '../../../variability_model/kubernetes_combined_04.uvl'
 
-json_base_directory = '../../resources/generateConfigs'
+json_base_directory = '../../../resources/generateConfigs'
 json_folders = ['outputs_json_mappeds', 'invalidKindsVersions01' ]
 
 ERROR_LOG_FILE = "error_log_mappeds03_11_3.txt"

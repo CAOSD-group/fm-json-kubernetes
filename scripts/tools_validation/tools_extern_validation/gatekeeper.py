@@ -3,9 +3,9 @@ from collections import defaultdict
 import csv
 import re
 # Rutas fijas (puedes modificarlas directamente aquí si cambias carpetas)
-input_dir = Path("../../resources/results_data_tools/results_gatekeeper")
-yaml_dir = Path("../../resources/yamls_agrupation/small")
-csv_output = '../../evaluation/validation_results_gator_final.csv'
+input_dir = Path("../../../resources/results_data_tools/results_gatekeeper")
+yaml_dir = Path("../../../resources/yamls_agrupation/small")
+csv_output = '../../../evaluation/validation_results_gator_final.csv'
 
 results = defaultdict(lambda: {"valid": True, "failures": []})
 

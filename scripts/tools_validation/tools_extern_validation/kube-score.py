@@ -29,9 +29,9 @@ import csv
 from pathlib import Path
 from collections import defaultdict
 
-RESULTS_DIR = "../../resources/results_data_tools/results_kube-score"
-YAML_DIR="../../resources/yamls_agrupation/yamls-tools-files"
-CSV_OUTPUT = "../../evaluation/validation_results_kube-score_final.csv"
+RESULTS_DIR = "../../../resources/results_data_tools/results_kube-score"
+YAML_DIR="../../../resources/yamls_agrupation/yamls-tools-files"
+CSV_OUTPUT = "../../../evaluation/validation_results_kube-score_final.csv"
 TIMING_FILE = os.path.join(RESULTS_DIR, "batch_times.txt")
 
 Path(CSV_OUTPUT).parent.mkdir(parents=True, exist_ok=True)

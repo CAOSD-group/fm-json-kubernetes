@@ -1,8 +1,8 @@
 #!/bin/bash
 
-INPUT_DIR="../../resources/yamls_agrupation/yamls-tools-files"
-RESULTS_DIR="../../resources/results_data_tools/results_kyverno"
-POLICIES_DIR="../../resources/policies_tools/policies_kyverno/best-practices"
+INPUT_DIR="../../../resources/yamls_agrupation/yamls-tools-files"
+RESULTS_DIR="../../../resources/results_data_tools/results_kyverno"
+POLICIES_DIR="../../../resources/policies_tools/policies_kyverno/best-practices"
 BATCH_SIZE=300
 TIMING_FILE="$RESULTS_DIR/batch_times.txt"
 

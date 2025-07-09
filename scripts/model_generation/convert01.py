@@ -199,7 +199,7 @@ class SchemaProcessor:
             # Captures values between escaped or unescaped quotation marks
             re.compile(r'\\?["\'](.*?)\\?["\']'), ## Ex: A value of `\"Exempt\"`...
 
-            re.compile(r'-\s*[\'"]?([a-zA-Z/.\s]+[a-zA-Z])[\'"]?\s*:', re.IGNORECASE), # Pattern that captures values preceded by a hyphen and ending with a colon: # Expression to be modified in the future to avoid capturing “prefixed_keys” (captures long phrases without being displayed but...)
+            re.compile(r'-\s*[\'"]?([a-zA-Z/.\s]+[a-zA-Z])[\'"]?\s*:', re.IGNORECASE), # Pattern that captures values preceded by a hyphen and ending with a colon: # Expression to be modified in the future to avoid capturing "prefixed_keys" (captures long phrases without being displayed but...)
             
             re.compile(r'(?<=Valid values are:)[\s\S]*?(?=\.)'),
             re.compile(r'(?<=Possible values are:)[\s\S]*?(?=\.)'),
@@ -254,7 +254,7 @@ class SchemaProcessor:
         for pattern in value_patterns:
             matches = pattern.findall(description)
             for match in matches:
-                split_values = re.split(r',\s*|\s+or\s+|\sor|or\s|\s+and\s+|and\s', match)  # Make sure that “or” is surrounded by spaces.
+                split_values = re.split(r',\s*|\s+or\s+|\sor|or\s|\s+and\s+|and\s', match)  # Make sure that "or" is surrounded by spaces.
                 for v in split_values:
                     v = v.strip()
                     v = v.replace('*', 'estrella') # Replace '*' for "estrella", * invalid in uvl
@@ -280,7 +280,7 @@ class SchemaProcessor:
         if not values or len(values) == 1:
             return None
         
-        if case_not_none == values: ## We want to omit “_type_None” in the model.
+        if case_not_none == values: ## We want to omit "type_None" in the model.
             values.remove('None')
         elif case_not_policies == values: ## If there are more cases generalize the functionality to an auxiliary with the parameters
             list_policies_to_delete = {'Ready', 'True', 'Running'} ## Set of elements to be deleted from the values. They are added by the general regex "/"/
@@ -320,16 +320,16 @@ class SchemaProcessor:
         return default_value
 
     def contains_non_ascii(self, text): ## Searching for ascii characters in the docs
-    """
-    Identify non-ASCII characters and specific special characters within the input text.
+        """
+        Identify non-ASCII characters and specific special characters within the input text.
 
-    Args:
-        text (str): The text to analyze.
+        Args:
+            text (str): The text to analyze.
 
-    Returns:
-        tuple: A set of non-ASCII characters and a set of special characters found
-               (specifically carriage return `\\r` and newline `\\n`).
-    """
+        Returns:
+            tuple: A set of non-ASCII characters and a set of special characters found
+                (specifically carriage return `\\r` and newline `\\n`).
+        """
         non_ascii_chars = {c for c in text if ord(c) > 127}  # Caracters searching > 127
         special_chars = {'\r', '\n'}  # List of specific caracters to be deleted
         found_specials = {c for c in text if c in special_chars}  # Detect \r y \n
@@ -423,7 +423,7 @@ class SchemaProcessor:
                 sanitized_name = full_name.replace(" cardinality [1..*]", "") ## Addendum to remove cardinality from name inheritance
 
                 if ' {default ' in sanitized_name: ## Part added to avoid adding the {default X} as part of the name for some sub-features generating an error: feature_name_{default X}_asType
-                    sanitized_name = re.sub(r'\s*\{.*?\}', '', sanitized_name) # All content inside the square brackets and the space ## sanitized_name = re.sub(r'\s* “default”, ‘’, sanitized_name) is deleted
+                    sanitized_name = re.sub(r'\s*\{.*?\}', '', sanitized_name) # All content inside the square brackets and the space ## sanitized_name = re.sub(r'\s* "default", ‘’, sanitized_name) is deleted
                 # Create subfeature with appropriate name
                 aux_description_sub_feature = f"Sub-feature added of type {option_type_data}"
 
@@ -483,7 +483,6 @@ class SchemaProcessor:
                 matches = pattern.search(description)
                 if matches:
                     default = matches.group(1)
-                    if 'true' == default or 'false' == default:
                     default_integer = default
                     if default_integer == '0644':
                         default_integer = 644
@@ -1127,12 +1126,12 @@ def generate_uvl_from_definitions(definitions_file, output_file, descriptions_fi
     processor.save_descriptions(descriptions_file)
     
     # Save the restrictions in the UVL file
-    processor.save_constraints(output_file)
+    ### processor.save_constraints(output_file) ## Duplicated method to write constraints
 
 # Relative file paths
-definitions_file = '../../resources/kubernetes-json-v1.30.2/_definitions.json'
-output_file = '../../variability_model/kubernetes_combined_04.uvl'
-descriptions_file = '../../resources/model_generation/descriptions_01.json'
+definitions_file = "../../resources/kubernetes-json-v1.30.2/_definitions.json"
+output_file = "../../variability_model/kubernetes_combined_04-1.uvl"
+descriptions_file = "../../resources/model_generation/descriptions_01-1.json"
 
 
 
@@ -1142,7 +1141,7 @@ generate_uvl_from_definitions(definitions_file, output_file, descriptions_file)
 # Generate UVL constraints and add them to the end of the file
 restrictions = generar_constraintsDef(descriptions_file)
 with open(output_file, 'a', encoding='utf-8') as f_out:
-    f_out.write("\nconstraints\n")
+    f_out.write("constraints\n")
     for restrict in restrictions:
         f_out.write(f"\t{restrict}\n")
 

@@ -1,0 +1,10 @@
+flamapy-fw~=2.0.1
+flamapy-fm~=2.0.0
+python-sat~=0.1.7.dev1
+
+[dev]
+pytest
+pytest-mock
+prospector
+mypy
+coverage

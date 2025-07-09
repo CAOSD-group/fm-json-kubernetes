@@ -29,8 +29,8 @@ import json
 import csv
 from pathlib import Path
 
-results_dir = "../../resources/results_data_tools/results_polaris-cli"
-csv_output = '../../evaluation/validation_results_polaris-cli_final.csv'
+results_dir = "../../../resources/results_data_tools/results_polaris-cli"
+csv_output = '../../../evaluation/validation_results_polaris-cli_final.csv'
 timing_file = os.path.join(results_dir, "batch_times.txt")
 
 

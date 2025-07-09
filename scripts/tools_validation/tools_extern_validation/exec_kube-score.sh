@@ -1,7 +1,7 @@
 #!/bin/bash
 
-INPUT_DIR="../../resources/yamls_agrupation/yamls-tools-files"
-RESULTS_DIR="../../resources/results_data_tools/results_kube-score"
+INPUT_DIR="../../../resources/yamls_agrupation/yamls-tools-files"
+RESULTS_DIR="../../../resources/results_data_tools/results_kube-score"
 BATCH_SIZE=800
 TIMING_FILE="$RESULTS_DIR/batch_times.txt"
 

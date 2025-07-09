@@ -201,7 +201,7 @@ class ConfigurationJSON(TextToModel):
         
 if __name__ == '__main__':
 
-    path_json = '../../resources/generateConfigs/outputs_json_mappeds/01-default-memory-cpu_1.json'
+    path_json = '../../../resources/generateConfigs/outputs_json_mappeds/01-default-memory-cpu_1.json'
 
     # Imprimir todas las configuraciones generadas    
     """configuration_reader = ConfigurationJSON(path_json)
