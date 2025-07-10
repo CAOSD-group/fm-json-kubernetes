@@ -40,7 +40,7 @@ jobs:
       - name: ✅ Validate UVL model
         run: |
           source env/bin/activate
-          python scripts/ci/validate_model.py ${{ github.event.inputs.version }}
+          python scripts/ci/valid_model.py ${{ github.event.inputs.version }}
 
       - name: 📤 Upload UVL + log
         uses: actions/upload-artifact@v4
