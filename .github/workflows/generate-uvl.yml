@@ -42,6 +42,11 @@ jobs:
           source env/bin/activate
           python scripts/ci/valid_model.py ${{ github.event.inputs.version }}
 
+      - name: 🔍 Compare with previous version
+        run: |
+          source env/bin/activate
+          python scripts/ci/compare_models.py ${{ github.event.inputs.version }}
+          
       - name: 📤 Upload UVL + log
         uses: actions/upload-artifact@v4
         with:
@@ -49,3 +54,10 @@ jobs:
           path: |
             variability_model/ci_k8s_models/${{ github.event.inputs.version }}/kubernetes_combined.uvl
             variability_model/ci_k8s_models/${{ github.event.inputs.version }}/validation_log.txt
+
+      - name: 📤 Upload changelog HTML
+        uses: actions/upload-artifact@v4
+        with:
+          name: changelog-${{ github.event.inputs.version }}
+          path: variability_model/ci_k8s_models/diffs/*
+
