@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=v1.33.0
+VERSION=$1
 
 if [ -z "$VERSION" ]; then
   echo "❌ ERROR: You must provide a Kubernetes version (e.g. v1.30.2)"
