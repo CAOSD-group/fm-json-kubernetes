@@ -12,7 +12,7 @@ def extract_features_constraints(uvl_path):
     constraints = set(str(c) for c in model.get_constraints())
     return features, constraints
 
-def generate_outputs(current, previous, diff_dir, current_version, previous_version):
+def generate_outputs(current, previous, diff_dir, current_version, previous_version, REPO_ROOT):
     norm_current_constraints = {normalize_constraint(c): c for c in current['constraints']}
     norm_previous_constraints = {normalize_constraint(c): c for c in previous['constraints']}
 
@@ -29,7 +29,7 @@ def generate_outputs(current, previous, diff_dir, current_version, previous_vers
     md_path = diff_dir / "changelog.md"
     html_path = diff_dir / "changelog.html"
 
-    ### Markdown
+    # Markdown changelog
     with md_path.open("w", encoding="utf-8") as f:
         f.write(f"# 🔄 Feature Model Changes: {previous_version} → {current_version}\n\n")
         f.write("| 🔍 Type        | ➕ Added | ➖ Removed |\n")
@@ -49,7 +49,7 @@ def generate_outputs(current, previous, diff_dir, current_version, previous_vers
         for con in removed_constraints:
             f.write(f"- `{con}`\n")
 
-    ### HTML con collapsibles
+    # HTML changelog
     with html_path.open("w", encoding="utf-8") as f:
         f.write(f"""<html><head><meta charset="utf-8">
 <title>Changelog {current_version}</title>
@@ -85,6 +85,25 @@ code {{ font-family: monospace; background-color: #f9f9f9; padding: 2px 4px; bor
 
     print(f"✅ Changelog saved to:\n- {md_path}\n- {html_path}")
 
+    # 📤 Copy HTML to /docs/ for GitHub Pages
+    docs_output = REPO_ROOT / "docs" / f"{current_version}_vs_{previous_version}.html"
+    shutil.copyfile(html_path, docs_output)
+    print(f"🌐 Copied HTML to: {docs_output}")
+
+    # 📚 Update index.html with all changelogs
+    index_path = REPO_ROOT / "docs" / "index.html"
+    all_changelogs = sorted(REPO_ROOT.joinpath("docs").glob("v*_vs_*.html"), reverse=True)
+
+    with index_path.open("w", encoding="utf-8") as idx:
+        idx.write("<html><head><title>Changelog Index</title></head><body>")
+        idx.write("<h1>📘 Feature Model Changelogs</h1><ul>")
+        for changelog in all_changelogs:
+            name = changelog.name.replace(".html", "")
+            idx.write(f'<li><a href="{changelog.name}">{name}</a></li>')
+        idx.write("</ul></body></html>")
+
+    print(f"📘 Index updated: {index_path}")
+
 def main():
     if len(sys.argv) < 2:
         print("❌ Provide current version (e.g. v1.32.2)")
@@ -116,7 +135,7 @@ def main():
         current_data['features'], current_data['constraints'] = extract_features_constraints(current_path)
         previous_data['features'], previous_data['constraints'] = extract_features_constraints(previous_path)
         diff_dir = base_dir / "diffs" / f"{current_version}_vs_{previous_version}"
-        generate_outputs(current_data, previous_data, diff_dir, current_version, previous_version)
+        generate_outputs(current_data, previous_data, diff_dir, current_version, previous_version, REPO_ROOT)
     except Exception as e:
         print(f"❌ Error: {e}")
         sys.exit(1)
