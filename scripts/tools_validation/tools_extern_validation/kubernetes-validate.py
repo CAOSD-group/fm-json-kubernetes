@@ -1,12 +1,38 @@
+"""
+External Tool Validation Wrapper
+
+This script is part of the External Tool Validation Framework, which automates the
+execution of third-party tools to validate Kubernetes YAML configuration files.
+
+General behavior:
+- Iterate over YAML files in a directory
+- Run a specific CLI tool for validation
+- Capture and log results
+- Optionally format the output as JSON or CSV
+
+Each tool wrapper handles CLI flags, output parsing, and error management for the
+corresponding validator. All results are later aggregated using a summary script.
+
+For full documentation and benchmarking results, see the README.md file
+included in this module.
+
+Tool handled:
+
+Tool: kubernetes-validate
+URL: https://pypi.org/project/kubernetes-validate/
+Purpose: Lightweight JSON Schema validation for Kubernetes manifests.
+Notes: Python-based; useful for integration with internal tools.
+"""
+
 import os
 import csv
 from pathlib import Path
 from collections import defaultdict
 
-RESULTS_DIR = Path("./results_kubernetes-validate01")
-YAML_DIR = Path("../scriptJsonToUvl/yamls_agrupation/yamls-tools-files")
+RESULTS_DIR = Path("../../../resources/results_data_tools/results_kubernetes-validate01")
+YAML_DIR = Path("../../../resources/yamls_agrupation/yamls-tools-files")
 #YAML_DIR = Path("./yamls-tools-files")
-CSV_OUTPUT = Path("./results/kubernetes-validate/validation_results01.csv")
+CSV_OUTPUT = Path("../../../evaluation/validation_results_kubernetes-validate_final.csv")
 TIMING_FILE = RESULTS_DIR / "batch_times.txt"
 
 CSV_OUTPUT.parent.mkdir(parents=True, exist_ok=True)

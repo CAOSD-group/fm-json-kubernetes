@@ -1,10 +1,36 @@
+"""
+External Tool Validation Wrapper
+
+This script is part of the External Tool Validation Framework, which automates the
+execution of third-party tools to validate Kubernetes YAML configuration files.
+
+General behavior:
+- Iterate over YAML files in a directory
+- Run a specific CLI tool for validation
+- Capture and log results
+- Optionally format the output as JSON or CSV
+
+Each tool wrapper handles CLI flags, output parsing, and error management for the
+corresponding validator. All results are later aggregated using a summary script.
+
+For full documentation and benchmarking results, see the README.md file
+included in this module.
+
+Tool handled:
+
+Tool: kubeconform
+URL: https://github.com/yannh/kubeconform
+Purpose: Schema validation of Kubernetes manifests using JSON schemas.
+Notes: Fast, strict, supports local schemas.
+"""
+
 import json
 import csv
 from pathlib import Path
 from collections import defaultdict
 
-json_dir = Path('results_kubeconform02')
-csv_output = './results/kubeconform/validation_results03.csv'
+json_dir = Path('../../../resources/results_data_tools/results_kubeconform02')
+csv_output = '../../../evaluation/validation_results_kubeconform_final.csv'
 timing_file = json_dir / "batch_times.txt"
 
 results = defaultdict(lambda: {

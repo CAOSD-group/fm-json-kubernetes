@@ -1,8 +1,7 @@
 #!/bin/bash
 
-INPUT_DIR="../scriptJsonToUvl/yamls_agrupation/yamls-tools-files"
-#INPUT_DIR="./yamls-tools-files"
-RESULTS_DIR="./results_kubernetes-validate01"
+INPUT_DIR="../../../resources/yamls_agrupation/yamls-tools-files"
+RESULTS_DIR="./../../resources/results_data_tools/results_kubernetes-validate01"
 BATCH_SIZE=200
 TIMING_FILE="$RESULTS_DIR/batch_times.txt"
 VERSION="1.30"

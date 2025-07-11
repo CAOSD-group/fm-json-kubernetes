@@ -1,0 +1,2 @@
+[console_scripts]
+flamapy = flamapy.commands:flamapy_cli

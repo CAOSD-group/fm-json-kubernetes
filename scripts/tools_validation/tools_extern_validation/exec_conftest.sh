@@ -1,9 +1,8 @@
 #!/bin/bash
 
-INPUT_DIR="./small"
-INPUT_DIR="../scriptJsonToUvl/yamls_agrupation/yamls-tools-files"
-POLICY_DIR="./policy"
-RESULTS_DIR="./results_conftest"
+INPUT_DIR="../../../resources/yamls_agrupation/yamls-tools-files"
+POLICY_DIR="../../../resources/policies_tools/policy-conftest/policy"
+RESULTS_DIR="../../../resources/results_data_tools/results_conftest"
 BATCH_SIZE=800
 TIMING_FILE="$RESULTS_DIR/batch_times.txt"
 

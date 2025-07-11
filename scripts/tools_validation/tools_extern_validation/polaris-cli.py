@@ -1,10 +1,36 @@
+"""
+External Tool Validation Wrapper
+
+This script is part of the External Tool Validation Framework, which automates the
+execution of third-party tools to validate Kubernetes YAML configuration files.
+
+General behavior:
+- Iterate over YAML files in a directory
+- Run a specific CLI tool for validation
+- Capture and log results
+- Optionally format the output as JSON or CSV
+
+Each tool wrapper handles CLI flags, output parsing, and error management for the
+corresponding validator. All results are later aggregated using a summary script.
+
+For full documentation and benchmarking results, see the README.md file
+included in this module.
+
+Tool handled:
+
+Tool: Polaris CLI
+URL: https://github.com/FairwindsOps/polaris
+Purpose: Audit Kubernetes manifests for best practices and configuration issues.
+Notes: Requires specific flags for CLI summary output.
+"""
+
 import os
 import json
 import csv
 from pathlib import Path
 
-results_dir = "./results_polaris-cli"
-csv_output = './results/polaris-cli/validation_results02.csv'
+results_dir = "../../../resources/results_data_tools/results_polaris-cli"
+csv_output = '../../../evaluation/validation_results_polaris-cli_final.csv'
 timing_file = os.path.join(results_dir, "batch_times.txt")
 
 
@@ -67,10 +93,3 @@ with open(csv_output, "w", newline="", encoding="utf-8") as f:
     writer.writerows(rows)
 
 print(f" CSV generado: {csv_output}")
-
-"""# Totales
-writer.writerow([])
-writer.writerow(["VÁLIDOS", "INVÁLIDOS", "TOTAL", "", ""])
-valid_count = sum(1 for r in results.values() if r["valid"])
-total = len(results)
-writer.writerow([valid_count, total - valid_count, total, "", ""])"""

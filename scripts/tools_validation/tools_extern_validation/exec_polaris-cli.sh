@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ## INPUT_DIR="./small" # small
-INPUT_DIR="../scriptJsonToUvl/yamls_agrupation/yamls-tools-files"
-RESULTS_DIR="./results_polaris-cli"
+INPUT_DIR="../../../resources/yamls_agrupation/yamls-tools-files"
+RESULTS_DIR="../../../resources/results_data_tools/results_polaris-cli"
 BATCH_SIZE=800
 TIMING_FILE="$RESULTS_DIR/batch_times.txt"
 

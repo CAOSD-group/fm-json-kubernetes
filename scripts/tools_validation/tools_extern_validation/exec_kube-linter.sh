@@ -1,8 +1,33 @@
 #!/bin/bash
 
-INPUT_DIR="../scriptJsonToUvl/yamls_agrupation/yamls-tools-files"
-#INPUT_DIR="./small"
-RESULTS_DIR="./results_kubeLinter01"
+# External Tool Validation Batch Runner
+#
+# This script executes one or more external Kubernetes validation tools
+# (e.g., kube-score, kube-linter, kyverno) against YAML files in batch mode.
+#
+# Usage:
+#   ./validate_tools.sh /path/to/yaml/files /path/to/output
+#
+# Parameters:
+#   $1  - Input directory containing YAML manifests
+#   $2  - Output directory for tool results
+#
+# Behavior:
+#   - Iterates over all *.yaml/*.yml files
+#   - Runs selected tools via CLI
+#   - Captures stdout/stderr per tool
+#   - Aggregates outputs into a summary
+#
+# Requirements:
+#   - Tools must be installed and accessible in PATH
+#   - Python environment used for output processing
+#
+# Output:
+#   - Raw tool outputs (text or JSON)
+#   - Consolidated CSV via Python script
+
+INPUT_DIR="../../../resources/yamls_agrupation/yamls-tools-files"
+RESULTS_DIR="../../../resources/results_data_tools/results_kubeLinter01"
 BATCH_SIZE=800
 TIMING_FILE="$RESULTS_DIR/batch_times.txt"
 

@@ -1,12 +1,37 @@
+"""
+External Tool Validation Wrapper
+
+This script is part of the External Tool Validation Framework, which automates the
+execution of third-party tools to validate Kubernetes YAML configuration files.
+
+General behavior:
+- Iterate over YAML files in a directory
+- Run a specific CLI tool for validation
+- Capture and log results
+- Optionally format the output as JSON or CSV
+
+Each tool wrapper handles CLI flags, output parsing, and error management for the
+corresponding validator. All results are later aggregated using a summary script.
+
+For full documentation and benchmarking results, see the README.md file
+included in this module.
+
+Tool handled:
+
+Tool: Trivy
+URL: https://github.com/aquasecurity/trivy
+Purpose: Kubernetes and container security scanner.
+Notes: YAML validation must be configured; results filtered from Trivy’s full output.
+"""
+
 import os
 import csv
 from pathlib import Path
 
 # Configuraciones
-RESULTS_DIR = "./results_trivy01"
-#YAML_DIR = "./small"
-YAML_DIR ="../scriptJsonToUvl/yamls_agrupation/yamls-tools-files"
-CSV_OUTPUT = "./results/trivy/validation_results02.csv"
+RESULTS_DIR = "../../../resources/results_data_tools/results_trivy01"
+YAML_DIR ="../../../resources/yamls_agrupation/yamls-tools-files"
+CSV_OUTPUT = "../../../evaluation/validation_results_trivy_final.csv"
 TIMING_FILE = os.path.join(RESULTS_DIR, "batch_times.txt")
 
 Path(CSV_OUTPUT).parent.mkdir(parents=True, exist_ok=True)
