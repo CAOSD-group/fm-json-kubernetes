@@ -80,7 +80,7 @@ Each YAML file is tracked with:
 - **Tool used**
 - **Batch ID (if applicable)**
 
-> Results are exported in `results_external_validation.csv` (or similar).
+> Results are exported in `resources/results_external_validation.csv` (or similar).
 
 ---
 
