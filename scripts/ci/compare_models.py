@@ -1,6 +1,7 @@
 import sys
 from pathlib import Path
 from flamapy.metamodels.fm_metamodel.transformations import UVLReader
+import shutil
 
 def normalize_constraint(c: str) -> str:
     return c.replace(" ", "").replace("\t", "").replace("¬", "not").replace("!", "not").lower()
