@@ -1,0 +1,61 @@
+Traduccion de reglas y politicas de seguridad k8s a uvl::
+
+Politicas y reglas obtenidas de herramientas externas.
+
+
+Descripcion del objetivo:
+
+Este proyecto tiene como objetivo unificar las reglas de seguridad estática utilizadas en Kubernetes (provenientes de herramientas como Kyverno, Checkov, Trivy o las recomendaciones del CIS Benchmark) en un modelo declarativo común basado en UVL (Universal Validation Language).
+
+La validación se realiza de forma estática, sobre manifiestos YAML de Kubernetes antes del despliegue, utilizando los JSON Schemas oficiales de Kubernetes como referencia estructural:
+https://github.com/yannh/kubernetes-json-schema
+
+Objetivo principal:
+Establecer un catálogo de constraints en UVL que reflejen las buenas prácticas y controles de seguridad usados por las principales herramientas de análisis estático.
+
+Traducir reglas existentes (Kyverno, CIS Benchmark, Checkov) a UVL para facilitar su evaluación unificada.
+
+
+Alcance actual:
+
+Modelado estático de objetos Kubernetes (Pod, Deployment, Role, etc.)
+
+Traducción manual y estructurada de reglas de seguridad a constraints en UVL
+
+Estructura organizada por dominio: seguridad de contenedores, RBAC, redes, volúmenes, etc.
+
+Herramienta	Formato	Ubicación	Comentario
+
+OPA / Gatekeeper	Rego (lógica declarativa)	GitHub: https://github.com/open-policy-agent/gatekeeper-library, organizadas por categoría
+Kyverno	YAML,	https://github.com/kyverno/policies	Muy legibles y reutilizables
+Kubescape	JSON Schema / Control Definitions,	https://github.com/kubescape/kubescape	Basadas en frameworks como NSA, MITRE
+Trivy	Parcial (para IaC)	JSON/YAML	Trivy misconfiguration policies	Muy útiles para YAML y Terraform
+Checkov	Python (reglas personalizadas) / JSON	Checkov policies	Bien documentadas, pero más técnicas
+Kube-bench	YAML por sección (CIS Benchmark), https://github.com/aquasecurity/kube-bench/tree/main/cfg	Basadas en estándares oficiales
+
+
+
+
+
+Enlaces relevantes de politicas de seguridad:
+https://kyverno.io/policies/?policytypes=validate
+https://cloud.google.com/kubernetes-engine/enterprise/policy-controller/docs/how-to/using-nsa-cisa-k8s-v1.2?hl=es-419
+https://media.defense.gov/2022/Aug/29/2003066362/-1/-1/0/CTR_KUBERNETES_HARDENING_GUIDANCE_1.2_20220829.PDF
+
+https://open-policy-agent.github.io/gatekeeper-library/website/pspintro
+https://open-policy-agent.github.io/gatekeeper-library/website/validation/privileged-containers/
+Concuerdan politicas:
+5.2.2 Minimize the admission of privileged containers (Manual)
+https://kyverno.io/policies/pod-security/restricted/require-run-as-nonroot/require-run-as-nonroot/
+
+  !io_k8s_api_core_v1_Pod_spec_containers_securityContext_privileged
+
+  io_k8s_api_core_v1_Pod_spec_containers_securityContext_privileged == false
+
+
+Politicas kyverno revisadas:
+https://kyverno.io/policies/?policytypes=validate
+https://kyverno.io/policies/pod-security/restricted/require-run-as-nonroot/require-run-as-nonroot/
+https://kyverno.io/policies/pod-security/restricted/require-run-as-non-root-user/require-run-as-non-root-user/
+https://kyverno.io/policies/pod-security-cel/restricted/require-run-as-non-root-user/require-run-as-non-root-user/
+https://kyverno.io/policies/pod-security/baseline/disallow-privileged-containers/disallow-privileged-containers/
