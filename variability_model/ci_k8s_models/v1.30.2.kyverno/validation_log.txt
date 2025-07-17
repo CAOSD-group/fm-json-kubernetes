@@ -1,0 +1,2 @@
+Valid?: True
+WARNING:root:Namespaces are not meningful for Flama.This model has the following namespaces: kyverno_io 
