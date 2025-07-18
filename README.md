@@ -56,7 +56,7 @@ YAML configurations can then be mapped and validated against the model.
 
 2. Clone this repository and enter the project folder:
   ```bash
-  git clone https://github.com/your-user/fm-json-kubernetes
+  git clone https://github.com/CAOSD-group/fm-json-kubernetes.git
   cd fm-json-kubernetes
   ```
 3. Create a virtual environment:
