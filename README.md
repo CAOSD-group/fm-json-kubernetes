@@ -116,6 +116,12 @@ definitions_file = './resources/kubernetes-json-v1.30.2/_definitions.json'
 - `kubernetes_combined_04.uvl`: Final synthesized feature model.
 - `descriptions_01.json`: Grouped and parsed feature descriptions used for constraint generation.
 
+
+#### Dataset of files extracted:
+
+- `YAMLs02.rar`: Original YAMLs dowloaded that we use for the validation configs. Link to drive files: https://drive.google.com/file/d/1VLjsEPAsJ5GcadK7FpKCZQgDt2_5C16z/view?usp=sharing
+- `outputs_json_mappeds11`: Final mapping of the configs from the YAMLs files in the enviroment of the Feature Model. Link to drive: https://drive.google.com/file/d/1bf3VYn3mHPKW-qlAhR-JTodPqsY2qvfH/view?usp=sharing
+
 ---
 
 ## Architecture and repository structure
