@@ -9,11 +9,15 @@
     - [Download and install](#download-and-install)
     - [Execution](#execution)
   - [Architecture and repository structure](#architecture-and-repository-structure)
+  - [Validation data and supplementary material](#validation-data-and-supplementary-material)
   - [References and third-party tools](#references-and-third-party-tools)
 
 ---
 
 # k8sJsontoUvl
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17879567.svg)](https://doi.org/10.5281/zenodo17879567)
+
+Repository for the project **Automated Synthesis of Kubernetes Variability from OpenAPI Schemas**
 
 ![Overview of the conversion process](resources/k8sJsontoUvl_overview.PNG)
 
@@ -117,11 +121,6 @@ definitions_file = './resources/kubernetes-json-v1.30.2/_definitions.json'
 - `descriptions_01.json`: Grouped and parsed feature descriptions used for constraint generation.
 
 
-#### Dataset of files extracted:
-
-- `YAMLs02.rar`: Original YAMLs dowloaded that we use for the validation configs. Link to drive files: https://drive.google.com/file/d/1VLjsEPAsJ5GcadK7FpKCZQgDt2_5C16z/view?usp=sharing
-- `outputs_json_mappeds11`: Final mapping of the configs from the YAMLs files in the enviroment of the Feature Model. Link to drive: https://drive.google.com/file/d/1bf3VYn3mHPKW-qlAhR-JTodPqsY2qvfH/view?usp=sharing
-
 ---
 
 ## Architecture and repository structure
@@ -144,6 +143,22 @@ The overall workflow is visualized below:
 - `/evaluation/`: Results data of evaluations.
 - `/variability_model/`: Feature models results and diagrams.
 - `/resources/`: Example Kubernetes schema inputs.
+
+---
+
+## Validation data and supplementary material
+
+Due to GitHub storage limitations, the large dataset containing the original configuration files (manifests) used for validation is hosted permanently on Zenodo.
+To reproduce the experiments described, follow these steps:
+
+1.  **Download** the dataset from Zenodo:
+    * **DOI:** [10.5281/zenodo.17879567](https://doi.org/10.5281/zenodo.17879567)
+    * **Format:** `.zip` archive
+2.  Use the script `premappingYaml01` for filter the manifests
+3.  Use the script `mappingYAMLJSON.py` for convert the YAMLs files into a configuration JSON with compatibility with the Feature Model
+
+We obtained a complete dataset of files with total compatibily with the FM of Kubernetes 
+
 
 ---
 
