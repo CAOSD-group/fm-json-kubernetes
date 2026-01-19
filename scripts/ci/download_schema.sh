@@ -9,8 +9,8 @@ fi
 
 echo "📥 Downloading _definitions.json for version $VERSION..."
 
-OUT_DIR="../../resources/ci_k8s_schemas/kubernetes-json-$VERSION"
-#OUT_DIR="resources/ci_k8s_schemas/kubernetes-json-$VERSION"
+#OUT_DIR="../../resources/ci_k8s_schemas/kubernetes-json-$VERSION"
+OUT_DIR="resources/ci_k8s_schemas/kubernetes-json-$VERSION"
 mkdir -p "$OUT_DIR"
 
 URL="https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/$VERSION/_definitions.json"
