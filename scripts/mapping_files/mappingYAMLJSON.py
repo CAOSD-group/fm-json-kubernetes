@@ -735,7 +735,7 @@ os.makedirs(output_json_dir, exist_ok=True)  # Create the folder if it does not 
 #output_data = []
 file_count = {}  # To handle multiple documents
 # CSV file path
-csv_file_path = '../../respurces/mapping_csv/kubernetes_mapping_properties_features.csv'
+csv_file_path = '../../resources/mapping_csv/kubernetes_mapping_properties_features.csv'
 csv_dict = load_features_csv(csv_file_path)
 
 for filename, index, yaml_data, simple_props, hierarchical_props, key_value_pairs, root_info in yaml_data_list:    

@@ -69,7 +69,7 @@ class SchemaProcessor:
 
         # Defining feature sections with specific configurations for compatibility with # os.name constraints
         self.special_features_config = [ '_template_spec_', '_Pod_spec_', '_PodList_items_spec_', '_core_v1_PodSpec_', '_PodTemplateSpec_spec_', '_v1_PodSecurityContext_'
-                                       , '_v1_Container_securityContext_', '_v1_EphemeralContainer_securityContext_', '_v1_SecurityContext_']
+                                        , '_v1_Container_securityContext_', '_v1_EphemeralContainer_securityContext_', '_v1_SecurityContext_']
         
         # Here you can add more special feature configurations
 
